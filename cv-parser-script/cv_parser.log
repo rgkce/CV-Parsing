@@ -2808,3 +2808,1620 @@
 2026-04-01 21:46:55,137  [INFO]    Output     : C:\Users\rumeysagokce\Desktop\cv_parser_project\output\final_dataset.json
 2026-04-01 21:46:55,137  [INFO]    (check cv_parser.log for column-layout details)
 2026-04-01 21:46:55,138  [INFO]  ============================================================
+2026-04-03 22:19:49,434  [INFO]  Found 58 PDF(s) and 8 DOCX(s) — 66 files total.
+2026-04-03 22:19:49,507  [INFO]  Processing: abdullah soylu.pdf
+2026-04-03 22:19:49,508  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:49,637  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:49,637  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:49,637  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:49,638  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:49,638  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,209  [INFO]    [done] abdullah soylu.pdf → format=pdf, lang=tr, photo=True, chars=1052
+2026-04-03 22:19:50,210  [INFO]  Processing: ahmet berat bulduk.pdf
+2026-04-03 22:19:50,210  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:50,414  [INFO]    [layout] TABLE layout detected — page 1 of 'ahmet berat bulduk.pdf'
+2026-04-03 22:19:50,426  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,427  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,427  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,432  [INFO]    [done] ahmet berat bulduk.pdf → format=pdf, lang=tr, photo=True, chars=3585
+2026-04-03 22:19:50,433  [INFO]  Processing: alihan tekin.pdf
+2026-04-03 22:19:50,433  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:50,510  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'alihan tekin.pdf'
+2026-04-03 22:19:50,511  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 22:19:50,520  [INFO]    [fallback] Recovered 40 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:19:50,520  [INFO]    [fallback] Recovered 46 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:19:50,521  [INFO]    [fallback] Recovered 9 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:19:50,521  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,531  [INFO]    [done] alihan tekin.pdf → format=pdf, lang=en, photo=True, chars=1618
+2026-04-03 22:19:50,531  [INFO]  Processing: ayse gunes.pdf
+2026-04-03 22:19:50,531  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:50,548  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:19:50,551  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:19:50,554  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:19:50,556  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:19:50,606  [INFO]    [layout] TABLE layout detected — page 1 of 'ayse gunes.pdf'
+2026-04-03 22:19:50,616  [INFO]    [fallback] Recovered 9 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:19:50,616  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,617  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,617  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,622  [INFO]    [done] ayse gunes.pdf → format=pdf, lang=tr, photo=True, chars=2937
+2026-04-03 22:19:50,622  [INFO]  Processing: ayten ceyda cetinkaya.pdf
+2026-04-03 22:19:50,622  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:50,744  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,744  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,745  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,745  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,745  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,751  [INFO]    [done] ayten ceyda cetinkaya.pdf → format=pdf, lang=tr, photo=False, chars=1449
+2026-04-03 22:19:50,751  [INFO]  Processing: berkay sengul.pdf
+2026-04-03 22:19:50,751  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:50,768  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:19:50,770  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:19:50,773  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:19:50,774  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:19:50,776  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:19:50,779  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:19:50,782  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:19:50,932  [INFO]    [fallback] Recovered 2 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:19:50,933  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:50,933  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.30 (lines=2)
+2026-04-03 22:19:50,941  [INFO]    [done] berkay sengul.pdf → format=pdf, lang=en, photo=False, chars=2003
+2026-04-03 22:19:50,941  [INFO]  Processing: bilal sarikavak.pdf
+2026-04-03 22:19:50,941  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:51,176  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'bilal sarikavak.pdf'
+2026-04-03 22:19:51,177  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 22:19:51,181  [INFO]    [fallback] Recovered 37 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:19:51,181  [INFO]    [fallback] Recovered 32 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:19:51,181  [INFO]    [fallback] Recovered 50 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:19:51,181  [INFO]    [fallback] Recovered 19 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:19:51,182  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:51,188  [INFO]    [done] bilal sarikavak.pdf → format=pdf, lang=tr, photo=True, chars=3009
+2026-04-03 22:19:51,189  [INFO]  Processing: bora ozmen.pdf
+2026-04-03 22:19:51,189  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:51,325  [INFO]    [fallback] Recovered 2 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:19:51,326  [INFO]    [fallback] Recovered 30 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:19:51,326  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-03 22:19:51,333  [INFO]    [done] bora ozmen.pdf → format=pdf, lang=en, photo=False, chars=2837
+2026-04-03 22:19:51,334  [INFO]  Processing: burcu kuzucu.pdf
+2026-04-03 22:19:51,334  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:51,475  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:51,476  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:51,476  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:51,476  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:51,476  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:51,483  [INFO]    [done] burcu kuzucu.pdf → format=pdf, lang=tr, photo=True, chars=1325
+2026-04-03 22:19:51,483  [INFO]  Processing: cem korkmaz.pdf
+2026-04-03 22:19:51,484  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:51,772  [INFO]    [fallback] Recovered 45 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:19:51,773  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:51,773  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:51,773  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:51,773  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:51,779  [INFO]    [done] cem korkmaz.pdf → format=pdf, lang=tr, photo=True, chars=2818
+2026-04-03 22:19:51,779  [INFO]  Processing: cem tatlıdil.pdf
+2026-04-03 22:19:51,780  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:53,208  [INFO]    [layout] TABLE layout detected — page 1 of 'cem tatlıdil.pdf'
+2026-04-03 22:19:53,220  [INFO]    [fallback] Recovered 4 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:19:53,221  [INFO]    [fallback] Recovered 4 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:19:53,221  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,221  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,221  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.48 (lines=4)
+2026-04-03 22:19:53,221  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.48 (lines=4)
+2026-04-03 22:19:53,230  [INFO]    [done] cem tatlıdil.pdf → format=pdf, lang=en, photo=False, chars=3515
+2026-04-03 22:19:53,230  [INFO]  Processing: cetin yuceyurt.pdf
+2026-04-03 22:19:53,230  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:53,375  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,375  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,376  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,376  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,376  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,382  [INFO]    [done] cetin yuceyurt.pdf → format=pdf, lang=tr, photo=True, chars=2984
+2026-04-03 22:19:53,383  [INFO]  Processing: ebubekir bayazit.pdf
+2026-04-03 22:19:53,383  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:53,484  [INFO]    [fallback] Recovered 33 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:19:53,484  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,484  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,485  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,485  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,490  [INFO]    [done] ebubekir bayazit.pdf → format=pdf, lang=tr, photo=True, chars=1928
+2026-04-03 22:19:53,490  [INFO]  Processing: emre celik.pdf
+2026-04-03 22:19:53,490  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:53,617  [INFO]    [layout] TABLE layout detected — page 1 of 'emre celik.pdf'
+2026-04-03 22:19:53,627  [INFO]    [fallback] Recovered 5 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:19:53,627  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,627  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,627  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,628  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,633  [INFO]    [done] emre celik.pdf → format=pdf, lang=tr, photo=True, chars=2047
+2026-04-03 22:19:53,633  [INFO]  Processing: emre mutlu.pdf
+2026-04-03 22:19:53,633  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:53,813  [INFO]    [layout] TABLE layout detected — page 1 of 'emre mutlu.pdf'
+2026-04-03 22:19:53,829  [INFO]    [fallback] Recovered 35 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:19:53,829  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,830  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:53,835  [INFO]    [done] emre mutlu.pdf → format=pdf, lang=tr, photo=True, chars=3345
+2026-04-03 22:19:53,836  [INFO]  Processing: esabil comal.pdf
+2026-04-03 22:19:53,836  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:54,018  [INFO]    [layout] TABLE layout detected — page 1 of 'esabil comal.pdf'
+2026-04-03 22:19:54,192  [INFO]    [layout] TABLE layout detected — page 2 of 'esabil comal.pdf'
+2026-04-03 22:19:54,380  [INFO]    [layout] TABLE layout detected — page 3 of 'esabil comal.pdf'
+2026-04-03 22:19:54,399  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,399  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,399  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,400  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,400  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,407  [INFO]    [done] esabil comal.pdf → format=pdf, lang=tr, photo=True, chars=9733
+2026-04-03 22:19:54,407  [INFO]  Processing: fatma ersoy.pdf
+2026-04-03 22:19:54,407  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:54,536  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,536  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,536  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,537  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,542  [INFO]    [done] fatma ersoy.pdf → format=pdf, lang=tr, photo=False, chars=1465
+2026-04-03 22:19:54,542  [INFO]  Processing: fatmanur paysan.pdf
+2026-04-03 22:19:54,542  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:54,636  [INFO]    [fallback] Recovered 10 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:19:54,636  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,636  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,636  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,637  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,641  [INFO]    [done] fatmanur paysan.pdf → format=pdf, lang=tr, photo=False, chars=922
+2026-04-03 22:19:54,642  [INFO]  Processing: fevzi cosgun.pdf
+2026-04-03 22:19:54,642  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:54,792  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,792  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,792  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,792  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,793  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:54,798  [INFO]    [done] fevzi cosgun.pdf → format=pdf, lang=tr, photo=False, chars=1660
+2026-04-03 22:19:54,799  [INFO]  Processing: furkan guner.pdf
+2026-04-03 22:19:54,799  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:55,188  [INFO]    [layout] TABLE layout detected — page 1 of 'furkan guner.pdf'
+2026-04-03 22:19:55,297  [INFO]    [layout] TABLE layout detected — page 2 of 'furkan guner.pdf'
+2026-04-03 22:19:55,492  [INFO]    [fallback] Recovered 46 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:19:55,492  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,492  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,492  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,503  [INFO]    [done] furkan guner.pdf → format=pdf, lang=mixed, photo=True, chars=6553
+2026-04-03 22:19:55,504  [INFO]  Processing: furkan karakurt.pdf
+2026-04-03 22:19:55,504  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:55,598  [INFO]    [layout] TABLE layout detected — page 1 of 'furkan karakurt.pdf'
+2026-04-03 22:19:55,648  [INFO]    [layout] TABLE layout detected — page 2 of 'furkan karakurt.pdf'
+2026-04-03 22:19:55,661  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,661  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,662  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,662  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,672  [INFO]    [done] furkan karakurt.pdf → format=pdf, lang=tr, photo=True, chars=5494
+2026-04-03 22:19:55,673  [INFO]  Processing: gizem kilinc.pdf
+2026-04-03 22:19:55,673  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:55,799  [INFO]    [fallback] Recovered 31 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:19:55,799  [INFO]    [fallback] Recovered 15 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:19:55,800  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,800  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,800  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,806  [INFO]    [done] gizem kilinc.pdf → format=pdf, lang=tr, photo=False, chars=2553
+2026-04-03 22:19:55,806  [INFO]  Processing: gokdeniz can.pdf
+2026-04-03 22:19:55,807  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:55,875  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'gokdeniz can.pdf'
+2026-04-03 22:19:55,875  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 22:19:55,917  [INFO]    [fallback] Recovered 5 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:19:55,918  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,918  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,918  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,923  [INFO]    [done] gokdeniz can.pdf → format=pdf, lang=tr, photo=True, chars=3252
+2026-04-03 22:19:55,924  [INFO]  Processing: gul koc.pdf
+2026-04-03 22:19:55,924  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:55,977  [INFO]    [fallback] Recovered 4 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:19:55,977  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,977  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,977  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,978  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.48 (lines=4)
+2026-04-03 22:19:55,978  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:55,982  [INFO]    [done] gul koc.pdf → format=pdf, lang=tr, photo=False, chars=486
+2026-04-03 22:19:55,982  [INFO]  Processing: görkem tolu.pdf
+2026-04-03 22:19:55,982  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:56,075  [INFO]    [fallback] Recovered 12 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:19:56,076  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,076  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,076  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,081  [INFO]    [done] görkem tolu.pdf → format=pdf, lang=tr, photo=True, chars=1105
+2026-04-03 22:19:56,081  [INFO]  Processing: ipek nur sarialp.pdf
+2026-04-03 22:19:56,082  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:56,203  [INFO]    [fallback] Recovered 2 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 22:19:56,204  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.30 (lines=2)
+2026-04-03 22:19:56,210  [INFO]    [done] ipek nur sarialp.pdf → format=pdf, lang=en, photo=True, chars=1482
+2026-04-03 22:19:56,211  [INFO]  Processing: irem celik.pdf
+2026-04-03 22:19:56,211  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:56,317  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,318  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,318  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,318  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,318  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,324  [INFO]    [done] irem celik.pdf → format=pdf, lang=tr, photo=True, chars=1037
+2026-04-03 22:19:56,324  [INFO]  Processing: irem sude uslu.pdf
+2026-04-03 22:19:56,324  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:56,485  [INFO]    [fallback] Recovered 28 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:19:56,485  [INFO]    [fallback] Recovered 35 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:19:56,485  [INFO]    [fallback] Recovered 33 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:19:56,485  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,495  [INFO]    [done] irem sude uslu.pdf → format=pdf, lang=en, photo=True, chars=1720
+2026-04-03 22:19:56,495  [INFO]  Processing: kaan olmez.pdf
+2026-04-03 22:19:56,495  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:56,568  [INFO]    [fallback] Recovered 23 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:19:56,569  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,569  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,569  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,569  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:19:56,575  [INFO]    [done] kaan olmez.pdf → format=pdf, lang=tr, photo=True, chars=1239
+2026-04-03 22:19:56,576  [INFO]  Processing: kadir karakus.pdf
+2026-04-03 22:19:56,576  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:19:56,589  [INFO]    [pdf→ocr] Text too short (0 chars) in 'kadir karakus.pdf' — invoking OCR.
+2026-04-03 22:19:56,589  [INFO]    [ocr] Starting OCR on 'kadir karakus.pdf'
+2026-04-03 22:20:00,217  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-04-03 22:20:00,217  [INFO]    [ocr] Extracted 1178 chars from 'kadir karakus.pdf'
+2026-04-03 22:20:00,224  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:00,224  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:00,224  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:00,224  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:20:00,225  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:00,234  [INFO]    [done] kadir karakus.pdf → format=ocr, lang=tr, photo=True, chars=1148
+2026-04-03 22:20:00,234  [INFO]  Processing: kemal diri.pdf
+2026-04-03 22:20:00,235  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:00,389  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'kemal diri.pdf'
+2026-04-03 22:20:00,390  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 22:20:00,392  [INFO]    [fallback] Recovered 31 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 22:20:00,392  [INFO]    [fallback] Recovered 39 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:20:00,393  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:00,393  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:00,399  [INFO]    [done] kemal diri.pdf → format=pdf, lang=tr, photo=True, chars=1873
+2026-04-03 22:20:00,400  [INFO]  Processing: mehmet deniz mol.pdf
+2026-04-03 22:20:00,400  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:00,580  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'mehmet deniz mol.pdf'
+2026-04-03 22:20:00,581  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 22:20:00,624  [INFO]    [fallback] Recovered 5 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:20:00,625  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:00,625  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:00,625  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:00,630  [INFO]    [done] mehmet deniz mol.pdf → format=pdf, lang=tr, photo=True, chars=4801
+2026-04-03 22:20:00,631  [INFO]  Processing: mehmet emre arican.pdf
+2026-04-03 22:20:00,631  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:00,770  [INFO]    [layout] TABLE layout detected — page 1 of 'mehmet emre arican.pdf'
+2026-04-03 22:20:00,877  [INFO]    [fallback] Recovered 7 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:20:00,877  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:00,890  [INFO]    [done] mehmet emre arican.pdf → format=pdf, lang=tr, photo=False, chars=4536
+2026-04-03 22:20:00,890  [INFO]  Processing: muhammed fatih ulasli.pdf
+2026-04-03 22:20:00,890  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:01,045  [INFO]    [fallback] Recovered 8 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 22:20:01,045  [INFO]    [fallback] Recovered 44 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:20:01,045  [INFO]    [fallback] Recovered 8 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:20:01,046  [INFO]    [fallback] Recovered 31 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:20:01,053  [INFO]    [done] muhammed fatih ulasli.pdf → format=pdf, lang=en, photo=True, chars=1972
+2026-04-03 22:20:01,054  [INFO]  Processing: muhammed furkan ozcan mekatronik.pdf
+2026-04-03 22:20:01,054  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:01,350  [INFO]    [fallback] Recovered 27 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:20:01,350  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:01,350  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:01,350  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:01,356  [INFO]    [done] muhammed furkan ozcan mekatronik.pdf → format=pdf, lang=tr, photo=True, chars=2844
+2026-04-03 22:20:01,356  [INFO]  Processing: muhammed furkan ozcan.pdf
+2026-04-03 22:20:01,357  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:01,372  [INFO]    [pdf→ocr] Text too short (0 chars) in 'muhammed furkan ozcan.pdf' — invoking OCR.
+2026-04-03 22:20:01,372  [INFO]    [ocr] Starting OCR on 'muhammed furkan ozcan.pdf'
+2026-04-03 22:20:03,622  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-04-03 22:20:03,622  [INFO]    [ocr] Extracted 2939 chars from 'muhammed furkan ozcan.pdf'
+2026-04-03 22:20:03,630  [INFO]    [fallback] Recovered 42 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:20:03,630  [INFO]    [fallback] Recovered 21 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:20:03,630  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:03,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:03,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:03,643  [INFO]    [done] muhammed furkan ozcan.pdf → format=ocr, lang=tr, photo=True, chars=2916
+2026-04-03 22:20:03,644  [INFO]  Processing: muhammet dogan.pdf
+2026-04-03 22:20:03,644  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:03,750  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:03,750  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:03,750  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:03,750  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:20:03,751  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:03,756  [INFO]    [done] muhammet dogan.pdf → format=pdf, lang=tr, photo=True, chars=1009
+2026-04-03 22:20:03,756  [INFO]  Processing: nilsu ak 1.pdf
+2026-04-03 22:20:03,756  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:03,858  [INFO]    [fallback] Recovered 13 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:20:03,858  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:03,858  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:03,859  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:20:03,864  [INFO]    [done] nilsu ak 1.pdf → format=pdf, lang=tr, photo=False, chars=1775
+2026-04-03 22:20:03,865  [INFO]  Processing: nilsu ak 2.pdf
+2026-04-03 22:20:03,865  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:04,001  [INFO]    [layout] TABLE layout detected — page 1 of 'nilsu ak 2.pdf'
+2026-04-03 22:20:04,012  [INFO]    [fallback] Recovered 8 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 22:20:04,013  [INFO]    [fallback] Recovered 2 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:20:04,013  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-03 22:20:04,013  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:04,021  [INFO]    [done] nilsu ak 2.pdf → format=pdf, lang=en, photo=True, chars=3294
+2026-04-03 22:20:04,021  [INFO]  Processing: omer bugra karakoc.pdf
+2026-04-03 22:20:04,022  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:04,168  [INFO]    [fallback] Recovered 34 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:20:04,168  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:04,168  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:04,168  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:04,169  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:20:04,174  [INFO]    [done] omer bugra karakoc.pdf → format=pdf, lang=tr, photo=True, chars=1553
+2026-04-03 22:20:04,175  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-03 22:20:04,175  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:06,026  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-03 22:20:06,045  [INFO]    [fallback] Recovered 50 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:20:06,046  [INFO]    [fallback] Recovered 50 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:20:06,046  [INFO]    [fallback] Recovered 50 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:20:06,046  [INFO]    [fallback] Recovered 50 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:20:06,046  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:06,054  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6033
+2026-04-03 22:20:06,054  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-03 22:20:06,055  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:06,210  [INFO]    [fallback] Recovered 1 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:20:06,210  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-03 22:20:06,222  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-03 22:20:06,222  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-03 22:20:06,223  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:06,347  [INFO]    [fallback] Recovered 36 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:20:06,348  [INFO]    [fallback] Recovered 19 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:20:06,348  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:06,348  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:06,348  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:06,353  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2426
+2026-04-03 22:20:06,354  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-03 22:20:06,354  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:06,537  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-03 22:20:06,538  [INFO]  Processing: sametcan venedik.pdf
+2026-04-03 22:20:06,538  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:06,552  [INFO]    [pdf→ocr] Text too short (0 chars) in 'sametcan venedik.pdf' — invoking OCR.
+2026-04-03 22:20:06,552  [INFO]    [ocr] Starting OCR on 'sametcan venedik.pdf'
+2026-04-03 22:20:08,070  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-04-03 22:20:08,070  [INFO]    [ocr] Extracted 1382 chars from 'sametcan venedik.pdf'
+2026-04-03 22:20:08,076  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,076  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,077  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,077  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,094  [INFO]    [done] sametcan venedik.pdf → format=ocr, lang=tr, photo=True, chars=1377
+2026-04-03 22:20:08,094  [INFO]  Processing: sena nur morbel.pdf
+2026-04-03 22:20:08,094  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:08,115  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:20:08,120  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:20:08,121  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:20:08,124  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:20:08,387  [INFO]    [layout] TABLE layout detected — page 1 of 'sena nur morbel.pdf'
+2026-04-03 22:20:08,438  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,438  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,438  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,438  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,438  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,444  [INFO]    [done] sena nur morbel.pdf → format=pdf, lang=tr, photo=True, chars=3624
+2026-04-03 22:20:08,444  [INFO]  Processing: senem naz yurt.pdf
+2026-04-03 22:20:08,445  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:08,592  [INFO]    [fallback] Recovered 39 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:20:08,592  [INFO]    [fallback] Recovered 38 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:20:08,592  [INFO]    [fallback] Recovered 18 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:20:08,593  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,598  [INFO]    [done] senem naz yurt.pdf → format=pdf, lang=en, photo=False, chars=4098
+2026-04-03 22:20:08,599  [INFO]  Processing: suat bilgay.pdf
+2026-04-03 22:20:08,599  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:08,750  [INFO]    [fallback] Recovered 4 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:20:08,751  [INFO]    [fallback] Recovered 6 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:20:08,751  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,751  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.48 (lines=4)
+2026-04-03 22:20:08,764  [INFO]    [done] suat bilgay.pdf → format=pdf, lang=en, photo=True, chars=4127
+2026-04-03 22:20:08,764  [INFO]  Processing: sudenaz boyali.pdf
+2026-04-03 22:20:08,764  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:08,898  [INFO]    [layout] TABLE layout detected — page 1 of 'sudenaz boyali.pdf'
+2026-04-03 22:20:08,905  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,906  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,906  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:08,911  [INFO]    [done] sudenaz boyali.pdf → format=pdf, lang=tr, photo=True, chars=1196
+2026-04-03 22:20:08,911  [INFO]  Processing: tugba zengin.pdf
+2026-04-03 22:20:08,911  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:09,145  [INFO]    [fallback] Recovered 44 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 22:20:09,145  [INFO]    [fallback] Recovered 46 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:20:09,146  [INFO]    [fallback] Recovered 41 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:20:09,146  [INFO]    [fallback] Recovered 49 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:20:09,146  [INFO]    [fallback] Recovered 43 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:20:09,155  [INFO]    [done] tugba zengin.pdf → format=pdf, lang=en, photo=True, chars=3090
+2026-04-03 22:20:09,155  [INFO]  Processing: vedat acat.pdf
+2026-04-03 22:20:09,156  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:09,274  [INFO]    [layout] TABLE layout detected — page 1 of 'vedat acat.pdf'
+2026-04-03 22:20:09,280  [INFO]    [fallback] Recovered 5 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 22:20:09,280  [INFO]    [fallback] Recovered 11 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:20:09,281  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:09,286  [INFO]    [done] vedat acat.pdf → format=pdf, lang=tr, photo=True, chars=2051
+2026-04-03 22:20:09,287  [INFO]  Processing: yuksel cosgun Backend.pdf
+2026-04-03 22:20:09,287  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:09,455  [INFO]    [done] yuksel cosgun Backend.pdf → format=pdf, lang=en, photo=True, chars=2447
+2026-04-03 22:20:09,455  [INFO]  Processing: yuksel cosgun DEVOPS-CLOUD.pdf
+2026-04-03 22:20:09,456  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:09,624  [INFO]    [done] yuksel cosgun DEVOPS-CLOUD.pdf → format=pdf, lang=en, photo=True, chars=2601
+2026-04-03 22:20:09,624  [INFO]  Processing: yuksel cosgun ML Data.pdf
+2026-04-03 22:20:09,625  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:09,777  [INFO]    [done] yuksel cosgun ML Data.pdf → format=pdf, lang=en, photo=True, chars=2250
+2026-04-03 22:20:09,777  [INFO]  Processing: yuksel cosgun Mobile.pdf
+2026-04-03 22:20:09,778  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:09,932  [INFO]    [done] yuksel cosgun Mobile.pdf → format=pdf, lang=en, photo=True, chars=2333
+2026-04-03 22:20:09,933  [INFO]  Processing: yuksel cosgun QA Automation.pdf
+2026-04-03 22:20:09,933  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:10,165  [INFO]    [done] yuksel cosgun QA Automation.pdf → format=pdf, lang=en, photo=True, chars=2184
+2026-04-03 22:20:10,166  [INFO]  Processing: yuksel cosgun Resume.pdf
+2026-04-03 22:20:10,166  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:10,323  [INFO]    [done] yuksel cosgun Resume.pdf → format=pdf, lang=en, photo=True, chars=2259
+2026-04-03 22:20:10,324  [INFO]  Processing: zeliha ayca aydemir .pdf
+2026-04-03 22:20:10,325  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:20:10,411  [INFO]    [fallback] Recovered 1 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:20:10,411  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,411  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-03 22:20:10,418  [INFO]    [done] zeliha ayca aydemir .pdf → format=pdf, lang=en, photo=False, chars=1335
+2026-04-03 22:20:10,419  [INFO]  Processing: arda gungor.docx
+2026-04-03 22:20:10,419  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:20:10,451  [INFO]    [docx] Extracted 2440 chars from 'arda gungor.docx'
+2026-04-03 22:20:10,455  [INFO]    [fallback] Recovered 30 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:20:10,455  [INFO]    [fallback] Recovered 30 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:20:10,455  [INFO]    [fallback] Recovered 6 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:20:10,456  [INFO]    [fallback] Recovered 30 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:20:10,456  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,466  [INFO]    [done] arda gungor.docx → format=docx, lang=tr, photo=True, chars=2437
+2026-04-03 22:20:10,466  [INFO]  Processing: ayse soydal.docx
+2026-04-03 22:20:10,466  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:20:10,486  [INFO]    [docx] Extracted 3147 chars from 'ayse soydal.docx'
+2026-04-03 22:20:10,489  [INFO]    [fallback] Recovered 14 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:20:10,490  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,490  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,490  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,499  [INFO]    [done] ayse soydal.docx → format=docx, lang=tr, photo=False, chars=2717
+2026-04-03 22:20:10,500  [INFO]  Processing: aziz ekren.docx
+2026-04-03 22:20:10,500  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:20:10,520  [INFO]    [docx] Extracted 1902 chars from 'aziz ekren.docx'
+2026-04-03 22:20:10,523  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,523  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,534  [INFO]    [done] aziz ekren.docx → format=docx, lang=en, photo=False, chars=1877
+2026-04-03 22:20:10,534  [INFO]  Processing: emine dogan.docx
+2026-04-03 22:20:10,534  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:20:10,551  [INFO]    [docx] Extracted 1977 chars from 'emine dogan.docx'
+2026-04-03 22:20:10,554  [INFO]    [fallback] Recovered 29 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:20:10,554  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,554  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,555  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,555  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,563  [INFO]    [done] emine dogan.docx → format=docx, lang=tr, photo=True, chars=2013
+2026-04-03 22:20:10,563  [INFO]  Processing: ilteris cansiz.docx
+2026-04-03 22:20:10,563  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:20:10,588  [INFO]    [docx] Extracted 1702 chars from 'ilteris cansiz.docx'
+2026-04-03 22:20:10,591  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,591  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,591  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,591  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,592  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,599  [INFO]    [done] ilteris cansiz.docx → format=docx, lang=tr, photo=True, chars=1660
+2026-04-03 22:20:10,600  [INFO]  Processing: mina demirci.docx
+2026-04-03 22:20:10,600  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:20:10,712  [INFO]    [docx] Extracted 4235 chars from 'mina demirci.docx'
+2026-04-03 22:20:10,718  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,718  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,719  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,719  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,719  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,794  [INFO]    [done] mina demirci.docx → format=docx, lang=tr, photo=True, chars=4276
+2026-04-03 22:20:10,795  [INFO]  Processing: ufuk yuceyurt.docx
+2026-04-03 22:20:10,795  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:20:10,814  [INFO]    [docx] Extracted 3450 chars from 'ufuk yuceyurt.docx'
+2026-04-03 22:20:10,817  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,817  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,817  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,817  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,827  [INFO]    [done] ufuk yuceyurt.docx → format=docx, lang=tr, photo=True, chars=1686
+2026-04-03 22:20:10,827  [INFO]  Processing: yagiz tokgoz.docx
+2026-04-03 22:20:10,828  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:20:10,846  [INFO]    [docx] Extracted 2191 chars from 'yagiz tokgoz.docx'
+2026-04-03 22:20:10,848  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,848  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:20:10,860  [INFO]    [done] yagiz tokgoz.docx → format=docx, lang=en, photo=False, chars=1915
+2026-04-03 22:20:10,865  [INFO]  ============================================================
+2026-04-03 22:20:10,866  [INFO]  DONE — 66 files processed
+2026-04-03 22:20:10,866  [INFO]    ✓ Success  : 66
+2026-04-03 22:20:10,866  [INFO]    ✗ Failed   : 0
+2026-04-03 22:20:10,866  [INFO]    ~ OCR used : 3
+2026-04-03 22:20:10,866  [INFO]    Output     : C:\Users\rumeysagokce\Desktop\cv_parser_project\output\final_dataset.json”
+2026-04-03 22:20:10,866  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-03 22:20:10,866  [INFO]  ============================================================
+2026-04-03 22:36:42,066  [INFO]  Found 58 PDF(s) and 8 DOCX(s) — 66 files total.
+2026-04-03 22:36:42,074  [INFO]  Processing: abdullah soylu.pdf
+2026-04-03 22:36:42,074  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:42,190  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,190  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,190  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,191  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,191  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,349  [INFO]    [done] abdullah soylu.pdf → format=pdf, lang=tr, photo=True, chars=1052
+2026-04-03 22:36:42,349  [INFO]  Processing: ahmet berat bulduk.pdf
+2026-04-03 22:36:42,350  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:42,554  [INFO]    [layout] TABLE layout detected — page 1 of 'ahmet berat bulduk.pdf'
+2026-04-03 22:36:42,567  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,567  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,567  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,572  [INFO]    [done] ahmet berat bulduk.pdf → format=pdf, lang=tr, photo=True, chars=3585
+2026-04-03 22:36:42,573  [INFO]  Processing: alihan tekin.pdf
+2026-04-03 22:36:42,573  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:42,631  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'alihan tekin.pdf'
+2026-04-03 22:36:42,631  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 22:36:42,641  [INFO]    [fallback] Recovered 40 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:42,641  [INFO]    [fallback] Recovered 46 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:42,642  [INFO]    [fallback] Recovered 9 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:42,642  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,650  [INFO]    [done] alihan tekin.pdf → format=pdf, lang=en, photo=True, chars=1618
+2026-04-03 22:36:42,650  [INFO]  Processing: ayse gunes.pdf
+2026-04-03 22:36:42,650  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:42,657  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:42,660  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:42,663  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:42,665  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:42,714  [INFO]    [layout] TABLE layout detected — page 1 of 'ayse gunes.pdf'
+2026-04-03 22:36:42,724  [INFO]    [fallback] Recovered 9 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:42,724  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,724  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,724  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,730  [INFO]    [done] ayse gunes.pdf → format=pdf, lang=tr, photo=True, chars=2937
+2026-04-03 22:36:42,730  [INFO]  Processing: ayten ceyda cetinkaya.pdf
+2026-04-03 22:36:42,730  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:42,838  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,838  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,838  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,838  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,839  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:42,844  [INFO]    [done] ayten ceyda cetinkaya.pdf → format=pdf, lang=tr, photo=False, chars=1449
+2026-04-03 22:36:42,845  [INFO]  Processing: berkay sengul.pdf
+2026-04-03 22:36:42,845  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:42,851  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:42,853  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:42,856  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:42,857  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:42,859  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:42,862  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:42,864  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:43,009  [INFO]    [fallback] Recovered 2 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:36:43,009  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:43,009  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.30 (lines=2)
+2026-04-03 22:36:43,016  [INFO]    [done] berkay sengul.pdf → format=pdf, lang=en, photo=False, chars=2003
+2026-04-03 22:36:43,017  [INFO]  Processing: bilal sarikavak.pdf
+2026-04-03 22:36:43,017  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:43,234  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'bilal sarikavak.pdf'
+2026-04-03 22:36:43,234  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 22:36:43,238  [INFO]    [fallback] Recovered 37 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:43,238  [INFO]    [fallback] Recovered 32 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:43,238  [INFO]    [fallback] Recovered 50 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:43,238  [INFO]    [fallback] Recovered 19 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:36:43,238  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:43,246  [INFO]    [done] bilal sarikavak.pdf → format=pdf, lang=tr, photo=True, chars=3009
+2026-04-03 22:36:43,246  [INFO]  Processing: bora ozmen.pdf
+2026-04-03 22:36:43,246  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:43,372  [INFO]    [fallback] Recovered 2 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:43,373  [INFO]    [fallback] Recovered 30 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:36:43,373  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-03 22:36:43,381  [INFO]    [done] bora ozmen.pdf → format=pdf, lang=en, photo=False, chars=2837
+2026-04-03 22:36:43,382  [INFO]  Processing: burcu kuzucu.pdf
+2026-04-03 22:36:43,382  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:43,512  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:43,512  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:43,512  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:43,512  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:43,512  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:43,519  [INFO]    [done] burcu kuzucu.pdf → format=pdf, lang=tr, photo=True, chars=1325
+2026-04-03 22:36:43,519  [INFO]  Processing: cem korkmaz.pdf
+2026-04-03 22:36:43,519  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:43,802  [INFO]    [fallback] Recovered 45 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:43,802  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:43,803  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:43,803  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:43,803  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:43,809  [INFO]    [done] cem korkmaz.pdf → format=pdf, lang=tr, photo=True, chars=2818
+2026-04-03 22:36:43,809  [INFO]  Processing: cem tatlıdil.pdf
+2026-04-03 22:36:43,809  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:45,078  [INFO]    [layout] TABLE layout detected — page 1 of 'cem tatlıdil.pdf'
+2026-04-03 22:36:45,089  [INFO]    [fallback] Recovered 4 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:45,090  [INFO]    [fallback] Recovered 4 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:45,090  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,090  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,090  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.48 (lines=4)
+2026-04-03 22:36:45,090  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.48 (lines=4)
+2026-04-03 22:36:45,098  [INFO]    [done] cem tatlıdil.pdf → format=pdf, lang=en, photo=False, chars=3515
+2026-04-03 22:36:45,099  [INFO]  Processing: cetin yuceyurt.pdf
+2026-04-03 22:36:45,099  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:45,233  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,233  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,233  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,233  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,234  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,240  [INFO]    [done] cetin yuceyurt.pdf → format=pdf, lang=tr, photo=True, chars=2984
+2026-04-03 22:36:45,241  [INFO]  Processing: ebubekir bayazit.pdf
+2026-04-03 22:36:45,241  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:45,341  [INFO]    [fallback] Recovered 33 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:45,341  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,341  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,341  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,342  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,347  [INFO]    [done] ebubekir bayazit.pdf → format=pdf, lang=tr, photo=True, chars=1928
+2026-04-03 22:36:45,347  [INFO]  Processing: emre celik.pdf
+2026-04-03 22:36:45,347  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:45,461  [INFO]    [layout] TABLE layout detected — page 1 of 'emre celik.pdf'
+2026-04-03 22:36:45,471  [INFO]    [fallback] Recovered 5 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:36:45,471  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,471  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,471  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,472  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,477  [INFO]    [done] emre celik.pdf → format=pdf, lang=tr, photo=True, chars=2047
+2026-04-03 22:36:45,478  [INFO]  Processing: emre mutlu.pdf
+2026-04-03 22:36:45,478  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:45,638  [INFO]    [layout] TABLE layout detected — page 1 of 'emre mutlu.pdf'
+2026-04-03 22:36:45,652  [INFO]    [fallback] Recovered 35 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:45,652  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,653  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:45,660  [INFO]    [done] emre mutlu.pdf → format=pdf, lang=tr, photo=True, chars=3345
+2026-04-03 22:36:45,660  [INFO]  Processing: esabil comal.pdf
+2026-04-03 22:36:45,661  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:45,839  [INFO]    [layout] TABLE layout detected — page 1 of 'esabil comal.pdf'
+2026-04-03 22:36:46,003  [INFO]    [layout] TABLE layout detected — page 2 of 'esabil comal.pdf'
+2026-04-03 22:36:46,179  [INFO]    [layout] TABLE layout detected — page 3 of 'esabil comal.pdf'
+2026-04-03 22:36:46,197  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,197  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,198  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,198  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,198  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,204  [INFO]    [done] esabil comal.pdf → format=pdf, lang=tr, photo=True, chars=9733
+2026-04-03 22:36:46,204  [INFO]  Processing: fatma ersoy.pdf
+2026-04-03 22:36:46,205  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:46,318  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,319  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,319  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,319  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,324  [INFO]    [done] fatma ersoy.pdf → format=pdf, lang=tr, photo=False, chars=1465
+2026-04-03 22:36:46,325  [INFO]  Processing: fatmanur paysan.pdf
+2026-04-03 22:36:46,325  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:46,399  [INFO]    [fallback] Recovered 10 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:46,400  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,400  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,400  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,400  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,405  [INFO]    [done] fatmanur paysan.pdf → format=pdf, lang=tr, photo=False, chars=922
+2026-04-03 22:36:46,405  [INFO]  Processing: fevzi cosgun.pdf
+2026-04-03 22:36:46,406  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:46,542  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,542  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,542  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,542  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,543  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:46,548  [INFO]    [done] fevzi cosgun.pdf → format=pdf, lang=tr, photo=False, chars=1660
+2026-04-03 22:36:46,548  [INFO]  Processing: furkan guner.pdf
+2026-04-03 22:36:46,548  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:46,895  [INFO]    [layout] TABLE layout detected — page 1 of 'furkan guner.pdf'
+2026-04-03 22:36:47,005  [INFO]    [layout] TABLE layout detected — page 2 of 'furkan guner.pdf'
+2026-04-03 22:36:47,200  [INFO]    [fallback] Recovered 46 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:47,200  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,200  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,200  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,215  [INFO]    [done] furkan guner.pdf → format=pdf, lang=mixed, photo=True, chars=6553
+2026-04-03 22:36:47,216  [INFO]  Processing: furkan karakurt.pdf
+2026-04-03 22:36:47,216  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:47,294  [INFO]    [layout] TABLE layout detected — page 1 of 'furkan karakurt.pdf'
+2026-04-03 22:36:47,344  [INFO]    [layout] TABLE layout detected — page 2 of 'furkan karakurt.pdf'
+2026-04-03 22:36:47,357  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,357  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,358  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,358  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,366  [INFO]    [done] furkan karakurt.pdf → format=pdf, lang=tr, photo=True, chars=5494
+2026-04-03 22:36:47,367  [INFO]  Processing: gizem kilinc.pdf
+2026-04-03 22:36:47,367  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:47,479  [INFO]    [fallback] Recovered 31 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:47,480  [INFO]    [fallback] Recovered 15 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:47,480  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,480  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,480  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,486  [INFO]    [done] gizem kilinc.pdf → format=pdf, lang=tr, photo=False, chars=2553
+2026-04-03 22:36:47,486  [INFO]  Processing: gokdeniz can.pdf
+2026-04-03 22:36:47,486  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:47,541  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'gokdeniz can.pdf'
+2026-04-03 22:36:47,541  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 22:36:47,584  [INFO]    [fallback] Recovered 5 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:47,585  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,585  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,585  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,590  [INFO]    [done] gokdeniz can.pdf → format=pdf, lang=tr, photo=True, chars=3252
+2026-04-03 22:36:47,590  [INFO]  Processing: gul koc.pdf
+2026-04-03 22:36:47,591  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:47,635  [INFO]    [fallback] Recovered 4 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:47,635  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,636  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,636  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,636  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.48 (lines=4)
+2026-04-03 22:36:47,636  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,641  [INFO]    [done] gul koc.pdf → format=pdf, lang=tr, photo=False, chars=486
+2026-04-03 22:36:47,641  [INFO]  Processing: görkem tolu.pdf
+2026-04-03 22:36:47,641  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:47,726  [INFO]    [fallback] Recovered 12 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:47,727  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,727  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,727  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,732  [INFO]    [done] görkem tolu.pdf → format=pdf, lang=tr, photo=True, chars=1105
+2026-04-03 22:36:47,733  [INFO]  Processing: ipek nur sarialp.pdf
+2026-04-03 22:36:47,733  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:47,844  [INFO]    [fallback] Recovered 2 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 22:36:47,845  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.30 (lines=2)
+2026-04-03 22:36:47,851  [INFO]    [done] ipek nur sarialp.pdf → format=pdf, lang=en, photo=True, chars=1482
+2026-04-03 22:36:47,852  [INFO]  Processing: irem celik.pdf
+2026-04-03 22:36:47,852  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:47,946  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,947  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,947  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,947  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,947  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:47,952  [INFO]    [done] irem celik.pdf → format=pdf, lang=tr, photo=True, chars=1037
+2026-04-03 22:36:47,953  [INFO]  Processing: irem sude uslu.pdf
+2026-04-03 22:36:47,953  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:48,099  [INFO]    [fallback] Recovered 28 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:48,099  [INFO]    [fallback] Recovered 35 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:48,099  [INFO]    [fallback] Recovered 33 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:36:48,099  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:48,107  [INFO]    [done] irem sude uslu.pdf → format=pdf, lang=en, photo=True, chars=1720
+2026-04-03 22:36:48,108  [INFO]  Processing: kaan olmez.pdf
+2026-04-03 22:36:48,108  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:48,159  [INFO]    [fallback] Recovered 23 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:48,159  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:48,159  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:48,160  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:48,160  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:48,166  [INFO]    [done] kaan olmez.pdf → format=pdf, lang=tr, photo=True, chars=1239
+2026-04-03 22:36:48,166  [INFO]  Processing: kadir karakus.pdf
+2026-04-03 22:36:48,166  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:48,169  [INFO]    [pdf→ocr] Text too short (0 chars) in 'kadir karakus.pdf' — invoking OCR.
+2026-04-03 22:36:48,169  [INFO]    [ocr] Starting OCR on 'kadir karakus.pdf'
+2026-04-03 22:36:49,866  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-04-03 22:36:49,866  [INFO]    [ocr] Extracted 1178 chars from 'kadir karakus.pdf'
+2026-04-03 22:36:49,872  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:49,873  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:49,873  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:49,873  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:49,873  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:49,882  [INFO]    [done] kadir karakus.pdf → format=ocr, lang=tr, photo=True, chars=1148
+2026-04-03 22:36:49,883  [INFO]  Processing: kemal diri.pdf
+2026-04-03 22:36:49,883  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:50,025  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'kemal diri.pdf'
+2026-04-03 22:36:50,025  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 22:36:50,028  [INFO]    [fallback] Recovered 31 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 22:36:50,028  [INFO]    [fallback] Recovered 39 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:50,028  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:50,028  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:50,035  [INFO]    [done] kemal diri.pdf → format=pdf, lang=tr, photo=True, chars=1873
+2026-04-03 22:36:50,036  [INFO]  Processing: mehmet deniz mol.pdf
+2026-04-03 22:36:50,036  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:50,205  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'mehmet deniz mol.pdf'
+2026-04-03 22:36:50,205  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 22:36:50,249  [INFO]    [fallback] Recovered 5 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:50,249  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:50,249  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:50,250  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:50,255  [INFO]    [done] mehmet deniz mol.pdf → format=pdf, lang=tr, photo=True, chars=4801
+2026-04-03 22:36:50,255  [INFO]  Processing: mehmet emre arican.pdf
+2026-04-03 22:36:50,255  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:50,370  [INFO]    [layout] TABLE layout detected — page 1 of 'mehmet emre arican.pdf'
+2026-04-03 22:36:50,476  [INFO]    [fallback] Recovered 7 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:50,477  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:50,489  [INFO]    [done] mehmet emre arican.pdf → format=pdf, lang=tr, photo=False, chars=4536
+2026-04-03 22:36:50,489  [INFO]  Processing: muhammed fatih ulasli.pdf
+2026-04-03 22:36:50,490  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:50,632  [INFO]    [fallback] Recovered 8 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 22:36:50,633  [INFO]    [fallback] Recovered 44 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:50,633  [INFO]    [fallback] Recovered 8 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:50,633  [INFO]    [fallback] Recovered 31 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:36:50,640  [INFO]    [done] muhammed fatih ulasli.pdf → format=pdf, lang=en, photo=True, chars=1972
+2026-04-03 22:36:50,641  [INFO]  Processing: muhammed furkan ozcan mekatronik.pdf
+2026-04-03 22:36:50,641  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:50,923  [INFO]    [fallback] Recovered 27 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:50,923  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:50,924  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:50,924  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:50,930  [INFO]    [done] muhammed furkan ozcan mekatronik.pdf → format=pdf, lang=tr, photo=True, chars=2844
+2026-04-03 22:36:50,930  [INFO]  Processing: muhammed furkan ozcan.pdf
+2026-04-03 22:36:50,930  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:50,934  [INFO]    [pdf→ocr] Text too short (0 chars) in 'muhammed furkan ozcan.pdf' — invoking OCR.
+2026-04-03 22:36:50,934  [INFO]    [ocr] Starting OCR on 'muhammed furkan ozcan.pdf'
+2026-04-03 22:36:53,186  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-04-03 22:36:53,186  [INFO]    [ocr] Extracted 2939 chars from 'muhammed furkan ozcan.pdf'
+2026-04-03 22:36:53,194  [INFO]    [fallback] Recovered 42 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:53,194  [INFO]    [fallback] Recovered 21 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:53,195  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,195  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,195  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,204  [INFO]    [done] muhammed furkan ozcan.pdf → format=ocr, lang=tr, photo=True, chars=2916
+2026-04-03 22:36:53,204  [INFO]  Processing: muhammet dogan.pdf
+2026-04-03 22:36:53,205  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:53,292  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,293  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,293  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,293  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,293  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,298  [INFO]    [done] muhammet dogan.pdf → format=pdf, lang=tr, photo=True, chars=1009
+2026-04-03 22:36:53,298  [INFO]  Processing: nilsu ak 1.pdf
+2026-04-03 22:36:53,299  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:53,391  [INFO]    [fallback] Recovered 13 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:53,392  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,392  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,392  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,398  [INFO]    [done] nilsu ak 1.pdf → format=pdf, lang=tr, photo=False, chars=1775
+2026-04-03 22:36:53,398  [INFO]  Processing: nilsu ak 2.pdf
+2026-04-03 22:36:53,398  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:53,523  [INFO]    [layout] TABLE layout detected — page 1 of 'nilsu ak 2.pdf'
+2026-04-03 22:36:53,535  [INFO]    [fallback] Recovered 8 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 22:36:53,535  [INFO]    [fallback] Recovered 2 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:53,535  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-03 22:36:53,535  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,543  [INFO]    [done] nilsu ak 2.pdf → format=pdf, lang=en, photo=True, chars=3294
+2026-04-03 22:36:53,544  [INFO]  Processing: omer bugra karakoc.pdf
+2026-04-03 22:36:53,544  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:53,678  [INFO]    [fallback] Recovered 34 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:36:53,679  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,679  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,679  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,679  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:53,685  [INFO]    [done] omer bugra karakoc.pdf → format=pdf, lang=tr, photo=True, chars=1553
+2026-04-03 22:36:53,685  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-03 22:36:53,686  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:55,536  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-03 22:36:55,561  [INFO]    [fallback] Recovered 50 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:55,562  [INFO]    [fallback] Recovered 50 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:55,562  [INFO]    [fallback] Recovered 50 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:55,562  [INFO]    [fallback] Recovered 50 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:36:55,562  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:55,572  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6033
+2026-04-03 22:36:55,572  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-03 22:36:55,572  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:55,715  [INFO]    [fallback] Recovered 1 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:55,715  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-03 22:36:55,727  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-03 22:36:55,727  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-03 22:36:55,727  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:55,839  [INFO]    [fallback] Recovered 36 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:55,840  [INFO]    [fallback] Recovered 19 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:36:55,840  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:55,840  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:55,840  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:55,845  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2426
+2026-04-03 22:36:55,846  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-03 22:36:55,846  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:56,016  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-03 22:36:56,017  [INFO]  Processing: sametcan venedik.pdf
+2026-04-03 22:36:56,017  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:56,020  [INFO]    [pdf→ocr] Text too short (0 chars) in 'sametcan venedik.pdf' — invoking OCR.
+2026-04-03 22:36:56,020  [INFO]    [ocr] Starting OCR on 'sametcan venedik.pdf'
+2026-04-03 22:36:57,530  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-04-03 22:36:57,530  [INFO]    [ocr] Extracted 1382 chars from 'sametcan venedik.pdf'
+2026-04-03 22:36:57,537  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:57,537  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:57,537  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:57,537  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:57,553  [INFO]    [done] sametcan venedik.pdf → format=ocr, lang=tr, photo=True, chars=1377
+2026-04-03 22:36:57,554  [INFO]  Processing: sena nur morbel.pdf
+2026-04-03 22:36:57,554  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:57,563  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:57,567  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:57,569  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:57,572  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 22:36:57,834  [INFO]    [layout] TABLE layout detected — page 1 of 'sena nur morbel.pdf'
+2026-04-03 22:36:57,885  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:57,885  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:57,885  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:57,885  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:57,886  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:57,891  [INFO]    [done] sena nur morbel.pdf → format=pdf, lang=tr, photo=True, chars=3624
+2026-04-03 22:36:57,891  [INFO]  Processing: senem naz yurt.pdf
+2026-04-03 22:36:57,892  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:58,020  [INFO]    [fallback] Recovered 39 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:58,020  [INFO]    [fallback] Recovered 38 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:58,021  [INFO]    [fallback] Recovered 18 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:58,021  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:58,027  [INFO]    [done] senem naz yurt.pdf → format=pdf, lang=en, photo=False, chars=4098
+2026-04-03 22:36:58,027  [INFO]  Processing: suat bilgay.pdf
+2026-04-03 22:36:58,028  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:58,157  [INFO]    [fallback] Recovered 4 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:58,157  [INFO]    [fallback] Recovered 6 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:58,157  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:58,158  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.48 (lines=4)
+2026-04-03 22:36:58,167  [INFO]    [done] suat bilgay.pdf → format=pdf, lang=en, photo=True, chars=4127
+2026-04-03 22:36:58,168  [INFO]  Processing: sudenaz boyali.pdf
+2026-04-03 22:36:58,168  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:58,295  [INFO]    [layout] TABLE layout detected — page 1 of 'sudenaz boyali.pdf'
+2026-04-03 22:36:58,302  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:58,302  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:58,302  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:58,308  [INFO]    [done] sudenaz boyali.pdf → format=pdf, lang=tr, photo=True, chars=1196
+2026-04-03 22:36:58,308  [INFO]  Processing: tugba zengin.pdf
+2026-04-03 22:36:58,308  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:58,529  [INFO]    [fallback] Recovered 44 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 22:36:58,529  [INFO]    [fallback] Recovered 46 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:58,529  [INFO]    [fallback] Recovered 41 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:58,530  [INFO]    [fallback] Recovered 49 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:58,530  [INFO]    [fallback] Recovered 43 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:36:58,538  [INFO]    [done] tugba zengin.pdf → format=pdf, lang=en, photo=True, chars=3090
+2026-04-03 22:36:58,538  [INFO]  Processing: vedat acat.pdf
+2026-04-03 22:36:58,538  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:58,646  [INFO]    [layout] TABLE layout detected — page 1 of 'vedat acat.pdf'
+2026-04-03 22:36:58,653  [INFO]    [fallback] Recovered 5 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 22:36:58,653  [INFO]    [fallback] Recovered 11 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:36:58,653  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:58,658  [INFO]    [done] vedat acat.pdf → format=pdf, lang=tr, photo=True, chars=2051
+2026-04-03 22:36:58,659  [INFO]  Processing: yuksel cosgun Backend.pdf
+2026-04-03 22:36:58,659  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:58,817  [INFO]    [done] yuksel cosgun Backend.pdf → format=pdf, lang=en, photo=True, chars=2447
+2026-04-03 22:36:58,818  [INFO]  Processing: yuksel cosgun DEVOPS-CLOUD.pdf
+2026-04-03 22:36:58,818  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:58,976  [INFO]    [done] yuksel cosgun DEVOPS-CLOUD.pdf → format=pdf, lang=en, photo=True, chars=2601
+2026-04-03 22:36:58,977  [INFO]  Processing: yuksel cosgun ML Data.pdf
+2026-04-03 22:36:58,977  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:59,120  [INFO]    [done] yuksel cosgun ML Data.pdf → format=pdf, lang=en, photo=True, chars=2250
+2026-04-03 22:36:59,120  [INFO]  Processing: yuksel cosgun Mobile.pdf
+2026-04-03 22:36:59,121  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:59,268  [INFO]    [done] yuksel cosgun Mobile.pdf → format=pdf, lang=en, photo=True, chars=2333
+2026-04-03 22:36:59,269  [INFO]  Processing: yuksel cosgun QA Automation.pdf
+2026-04-03 22:36:59,269  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:59,492  [INFO]    [done] yuksel cosgun QA Automation.pdf → format=pdf, lang=en, photo=True, chars=2184
+2026-04-03 22:36:59,493  [INFO]  Processing: yuksel cosgun Resume.pdf
+2026-04-03 22:36:59,493  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:59,635  [INFO]    [done] yuksel cosgun Resume.pdf → format=pdf, lang=en, photo=True, chars=2259
+2026-04-03 22:36:59,636  [INFO]  Processing: zeliha ayca aydemir .pdf
+2026-04-03 22:36:59,636  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 22:36:59,713  [INFO]    [fallback] Recovered 1 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:59,714  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,714  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-03 22:36:59,721  [INFO]    [done] zeliha ayca aydemir .pdf → format=pdf, lang=en, photo=False, chars=1335
+2026-04-03 22:36:59,722  [INFO]  Processing: arda gungor.docx
+2026-04-03 22:36:59,722  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:36:59,730  [INFO]    [docx] Extracted 2440 chars from 'arda gungor.docx'
+2026-04-03 22:36:59,734  [INFO]    [fallback] Recovered 30 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:59,734  [INFO]    [fallback] Recovered 30 line(s) for empty section 'education' via keyword scan.
+2026-04-03 22:36:59,735  [INFO]    [fallback] Recovered 6 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 22:36:59,735  [INFO]    [fallback] Recovered 30 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 22:36:59,735  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,745  [INFO]    [done] arda gungor.docx → format=docx, lang=tr, photo=True, chars=2437
+2026-04-03 22:36:59,745  [INFO]  Processing: ayse soydal.docx
+2026-04-03 22:36:59,745  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:36:59,753  [INFO]    [docx] Extracted 3147 chars from 'ayse soydal.docx'
+2026-04-03 22:36:59,756  [INFO]    [fallback] Recovered 14 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:59,757  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,757  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,757  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,766  [INFO]    [done] ayse soydal.docx → format=docx, lang=tr, photo=False, chars=2717
+2026-04-03 22:36:59,766  [INFO]  Processing: aziz ekren.docx
+2026-04-03 22:36:59,766  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:36:59,778  [INFO]    [docx] Extracted 1902 chars from 'aziz ekren.docx'
+2026-04-03 22:36:59,780  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,780  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,790  [INFO]    [done] aziz ekren.docx → format=docx, lang=en, photo=False, chars=1877
+2026-04-03 22:36:59,790  [INFO]  Processing: emine dogan.docx
+2026-04-03 22:36:59,791  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:36:59,798  [INFO]    [docx] Extracted 1977 chars from 'emine dogan.docx'
+2026-04-03 22:36:59,801  [INFO]    [fallback] Recovered 29 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 22:36:59,801  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,801  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,801  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,801  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,809  [INFO]    [done] emine dogan.docx → format=docx, lang=tr, photo=True, chars=2013
+2026-04-03 22:36:59,810  [INFO]  Processing: ilteris cansiz.docx
+2026-04-03 22:36:59,810  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:36:59,823  [INFO]    [docx] Extracted 1702 chars from 'ilteris cansiz.docx'
+2026-04-03 22:36:59,826  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,826  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,826  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,826  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,827  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,835  [INFO]    [done] ilteris cansiz.docx → format=docx, lang=tr, photo=True, chars=1660
+2026-04-03 22:36:59,835  [INFO]  Processing: mina demirci.docx
+2026-04-03 22:36:59,835  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:36:59,937  [INFO]    [docx] Extracted 4235 chars from 'mina demirci.docx'
+2026-04-03 22:36:59,942  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,943  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,943  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,943  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 22:36:59,943  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:37:00,020  [INFO]    [done] mina demirci.docx → format=docx, lang=tr, photo=True, chars=4276
+2026-04-03 22:37:00,021  [INFO]  Processing: ufuk yuceyurt.docx
+2026-04-03 22:37:00,021  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:37:00,029  [INFO]    [docx] Extracted 3450 chars from 'ufuk yuceyurt.docx'
+2026-04-03 22:37:00,032  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:37:00,032  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 22:37:00,032  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 22:37:00,032  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:37:00,042  [INFO]    [done] ufuk yuceyurt.docx → format=docx, lang=tr, photo=True, chars=1686
+2026-04-03 22:37:00,042  [INFO]  Processing: yagiz tokgoz.docx
+2026-04-03 22:37:00,042  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 22:37:00,051  [INFO]    [docx] Extracted 2191 chars from 'yagiz tokgoz.docx'
+2026-04-03 22:37:00,053  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 22:37:00,053  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 22:37:00,064  [INFO]    [done] yagiz tokgoz.docx → format=docx, lang=en, photo=False, chars=1915
+2026-04-03 22:37:00,069  [INFO]  ============================================================
+2026-04-03 22:37:00,070  [INFO]  DONE — 66 files processed
+2026-04-03 22:37:00,070  [INFO]    ✓ Success  : 66
+2026-04-03 22:37:00,070  [INFO]    ✗ Failed   : 0
+2026-04-03 22:37:00,070  [INFO]    ~ OCR used : 3
+2026-04-03 22:37:00,070  [INFO]    Output     : C:\Users\rumeysagokce\Desktop\cv_parser_project\output\final_dataset.json
+2026-04-03 22:37:00,071  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-03 22:37:00,071  [INFO]  ============================================================
+2026-04-03 23:03:03,906  [INFO]  Found 58 PDF(s) and 8 DOCX(s) — 66 files total.
+2026-04-03 23:03:03,913  [INFO]  Processing: abdullah soylu.pdf
+2026-04-03 23:03:03,913  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:04,024  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,024  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,024  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,025  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,025  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,026  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,027  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,027  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,027  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,027  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,178  [INFO]    [done] abdullah soylu.pdf → format=pdf, lang=tr, photo=True, chars=1052
+2026-04-03 23:03:04,178  [INFO]  Processing: ahmet berat bulduk.pdf
+2026-04-03 23:03:04,178  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:04,374  [INFO]    [layout] TABLE layout detected — page 1 of 'ahmet berat bulduk.pdf'
+2026-04-03 23:03:04,385  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,385  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,386  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,391  [INFO]    [done] ahmet berat bulduk.pdf → format=pdf, lang=tr, photo=True, chars=3585
+2026-04-03 23:03:04,391  [INFO]  Processing: alihan tekin.pdf
+2026-04-03 23:03:04,391  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:04,447  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'alihan tekin.pdf'
+2026-04-03 23:03:04,447  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 23:03:04,456  [INFO]    [fallback] Recovered 40 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:04,457  [INFO]    [fallback] Recovered 46 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:04,457  [INFO]    [fallback] Recovered 9 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:04,457  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,466  [INFO]    [done] alihan tekin.pdf → format=pdf, lang=en, photo=True, chars=1618
+2026-04-03 23:03:04,466  [INFO]  Processing: ayse gunes.pdf
+2026-04-03 23:03:04,466  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:04,472  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:04,476  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:04,479  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:04,481  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:04,528  [INFO]    [layout] TABLE layout detected — page 1 of 'ayse gunes.pdf'
+2026-04-03 23:03:04,537  [INFO]    [fallback] Recovered 9 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:04,538  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,538  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,538  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,543  [INFO]    [done] ayse gunes.pdf → format=pdf, lang=tr, photo=True, chars=2937
+2026-04-03 23:03:04,544  [INFO]  Processing: ayten ceyda cetinkaya.pdf
+2026-04-03 23:03:04,544  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:04,653  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,654  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,654  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,654  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,654  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,656  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,656  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,656  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,656  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,656  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,662  [INFO]    [done] ayten ceyda cetinkaya.pdf → format=pdf, lang=tr, photo=False, chars=1449
+2026-04-03 23:03:04,663  [INFO]  Processing: berkay sengul.pdf
+2026-04-03 23:03:04,663  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:04,668  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:04,671  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:04,674  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:04,675  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:04,677  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:04,680  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:04,683  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:04,827  [INFO]    [fallback] Recovered 2 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 23:03:04,828  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:04,828  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.30 (lines=2)
+2026-04-03 23:03:04,835  [INFO]    [done] berkay sengul.pdf → format=pdf, lang=en, photo=False, chars=2003
+2026-04-03 23:03:04,835  [INFO]  Processing: bilal sarikavak.pdf
+2026-04-03 23:03:04,835  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:05,045  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'bilal sarikavak.pdf'
+2026-04-03 23:03:05,046  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 23:03:05,049  [INFO]    [fallback] Recovered 37 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:05,050  [INFO]    [fallback] Recovered 32 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:05,050  [INFO]    [fallback] Recovered 50 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:05,050  [INFO]    [fallback] Recovered 19 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 23:03:05,050  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,057  [INFO]    [done] bilal sarikavak.pdf → format=pdf, lang=tr, photo=True, chars=3009
+2026-04-03 23:03:05,057  [INFO]  Processing: bora ozmen.pdf
+2026-04-03 23:03:05,058  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:05,183  [INFO]    [fallback] Recovered 2 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:05,183  [INFO]    [fallback] Recovered 30 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 23:03:05,184  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-03 23:03:05,191  [INFO]    [done] bora ozmen.pdf → format=pdf, lang=en, photo=False, chars=2837
+2026-04-03 23:03:05,192  [INFO]  Processing: burcu kuzucu.pdf
+2026-04-03 23:03:05,192  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:05,321  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,321  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,321  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,321  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,321  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,323  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,323  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,323  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,323  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,323  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,330  [INFO]    [done] burcu kuzucu.pdf → format=pdf, lang=tr, photo=True, chars=1325
+2026-04-03 23:03:05,330  [INFO]  Processing: cem korkmaz.pdf
+2026-04-03 23:03:05,330  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:05,608  [INFO]    [fallback] Recovered 45 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:05,609  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,609  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,609  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,609  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:05,615  [INFO]    [done] cem korkmaz.pdf → format=pdf, lang=tr, photo=True, chars=2818
+2026-04-03 23:03:05,615  [INFO]  Processing: cem tatlıdil.pdf
+2026-04-03 23:03:05,615  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:06,890  [INFO]    [layout] TABLE layout detected — page 1 of 'cem tatlıdil.pdf'
+2026-04-03 23:03:06,901  [INFO]    [fallback] Recovered 4 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:06,902  [INFO]    [fallback] Recovered 4 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:06,902  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:06,902  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:06,902  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.48 (lines=4)
+2026-04-03 23:03:06,903  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.48 (lines=4)
+2026-04-03 23:03:06,911  [INFO]    [done] cem tatlıdil.pdf → format=pdf, lang=en, photo=False, chars=3515
+2026-04-03 23:03:06,911  [INFO]  Processing: cetin yuceyurt.pdf
+2026-04-03 23:03:06,911  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:07,038  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,038  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,039  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,039  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,039  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,042  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,042  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,042  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,042  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,042  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,048  [INFO]    [done] cetin yuceyurt.pdf → format=pdf, lang=tr, photo=True, chars=2984
+2026-04-03 23:03:07,048  [INFO]  Processing: ebubekir bayazit.pdf
+2026-04-03 23:03:07,049  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:07,136  [INFO]    [fallback] Recovered 33 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:07,136  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,136  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,137  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,137  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,142  [INFO]    [done] ebubekir bayazit.pdf → format=pdf, lang=tr, photo=True, chars=1928
+2026-04-03 23:03:07,142  [INFO]  Processing: emre celik.pdf
+2026-04-03 23:03:07,142  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:07,254  [INFO]    [layout] TABLE layout detected — page 1 of 'emre celik.pdf'
+2026-04-03 23:03:07,263  [INFO]    [fallback] Recovered 5 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 23:03:07,264  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,264  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,264  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,264  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,270  [INFO]    [done] emre celik.pdf → format=pdf, lang=tr, photo=True, chars=2047
+2026-04-03 23:03:07,270  [INFO]  Processing: emre mutlu.pdf
+2026-04-03 23:03:07,270  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:07,429  [INFO]    [layout] TABLE layout detected — page 1 of 'emre mutlu.pdf'
+2026-04-03 23:03:07,443  [INFO]    [fallback] Recovered 35 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:07,443  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,444  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,450  [INFO]    [done] emre mutlu.pdf → format=pdf, lang=tr, photo=True, chars=3345
+2026-04-03 23:03:07,450  [INFO]  Processing: esabil comal.pdf
+2026-04-03 23:03:07,451  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:07,626  [INFO]    [layout] TABLE layout detected — page 1 of 'esabil comal.pdf'
+2026-04-03 23:03:07,797  [INFO]    [layout] TABLE layout detected — page 2 of 'esabil comal.pdf'
+2026-04-03 23:03:07,975  [INFO]    [layout] TABLE layout detected — page 3 of 'esabil comal.pdf'
+2026-04-03 23:03:07,994  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,994  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,994  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,995  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:07,995  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,001  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,001  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,001  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,001  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,001  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,007  [INFO]    [done] esabil comal.pdf → format=pdf, lang=tr, photo=True, chars=9733
+2026-04-03 23:03:08,008  [INFO]  Processing: fatma ersoy.pdf
+2026-04-03 23:03:08,008  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:08,125  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,125  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,125  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,125  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,131  [INFO]    [done] fatma ersoy.pdf → format=pdf, lang=tr, photo=False, chars=1465
+2026-04-03 23:03:08,131  [INFO]  Processing: fatmanur paysan.pdf
+2026-04-03 23:03:08,131  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:08,208  [INFO]    [fallback] Recovered 10 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:08,208  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,209  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,209  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,209  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,214  [INFO]    [done] fatmanur paysan.pdf → format=pdf, lang=tr, photo=False, chars=922
+2026-04-03 23:03:08,214  [INFO]  Processing: fevzi cosgun.pdf
+2026-04-03 23:03:08,214  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:08,357  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,358  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,358  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,358  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,358  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,360  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,360  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,360  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,360  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,360  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:08,366  [INFO]    [done] fevzi cosgun.pdf → format=pdf, lang=tr, photo=False, chars=1660
+2026-04-03 23:03:08,367  [INFO]  Processing: furkan guner.pdf
+2026-04-03 23:03:08,367  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:08,727  [INFO]    [layout] TABLE layout detected — page 1 of 'furkan guner.pdf'
+2026-04-03 23:03:08,843  [INFO]    [layout] TABLE layout detected — page 2 of 'furkan guner.pdf'
+2026-04-03 23:03:09,054  [INFO]    [fallback] Recovered 46 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:09,054  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,054  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,054  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,065  [INFO]    [done] furkan guner.pdf → format=pdf, lang=mixed, photo=True, chars=6553
+2026-04-03 23:03:09,066  [INFO]  Processing: furkan karakurt.pdf
+2026-04-03 23:03:09,066  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:09,147  [INFO]    [layout] TABLE layout detected — page 1 of 'furkan karakurt.pdf'
+2026-04-03 23:03:09,201  [INFO]    [layout] TABLE layout detected — page 2 of 'furkan karakurt.pdf'
+2026-04-03 23:03:09,216  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,216  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,216  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,216  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,225  [INFO]    [done] furkan karakurt.pdf → format=pdf, lang=tr, photo=True, chars=5494
+2026-04-03 23:03:09,226  [INFO]  Processing: gizem kilinc.pdf
+2026-04-03 23:03:09,226  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:09,356  [INFO]    [fallback] Recovered 31 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:09,356  [INFO]    [fallback] Recovered 15 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:09,356  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,356  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,357  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,363  [INFO]    [done] gizem kilinc.pdf → format=pdf, lang=tr, photo=False, chars=2553
+2026-04-03 23:03:09,364  [INFO]  Processing: gokdeniz can.pdf
+2026-04-03 23:03:09,364  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:09,427  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'gokdeniz can.pdf'
+2026-04-03 23:03:09,427  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 23:03:09,474  [INFO]    [fallback] Recovered 5 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:09,474  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,475  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,475  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,480  [INFO]    [done] gokdeniz can.pdf → format=pdf, lang=tr, photo=True, chars=3252
+2026-04-03 23:03:09,481  [INFO]  Processing: gul koc.pdf
+2026-04-03 23:03:09,481  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:09,529  [INFO]    [fallback] Recovered 4 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:09,529  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,529  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,530  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,530  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.48 (lines=4)
+2026-04-03 23:03:09,530  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,535  [INFO]    [done] gul koc.pdf → format=pdf, lang=tr, photo=False, chars=486
+2026-04-03 23:03:09,535  [INFO]  Processing: görkem tolu.pdf
+2026-04-03 23:03:09,535  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:09,630  [INFO]    [fallback] Recovered 12 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:09,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,637  [INFO]    [done] görkem tolu.pdf → format=pdf, lang=tr, photo=True, chars=1105
+2026-04-03 23:03:09,637  [INFO]  Processing: ipek nur sarialp.pdf
+2026-04-03 23:03:09,637  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:09,756  [INFO]    [fallback] Recovered 2 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 23:03:09,757  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.30 (lines=2)
+2026-04-03 23:03:09,764  [INFO]    [done] ipek nur sarialp.pdf → format=pdf, lang=en, photo=True, chars=1482
+2026-04-03 23:03:09,765  [INFO]  Processing: irem celik.pdf
+2026-04-03 23:03:09,765  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:09,888  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,888  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,888  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,888  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,888  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,890  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,890  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,891  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,891  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,891  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:09,897  [INFO]    [done] irem celik.pdf → format=pdf, lang=tr, photo=True, chars=1037
+2026-04-03 23:03:09,898  [INFO]  Processing: irem sude uslu.pdf
+2026-04-03 23:03:09,898  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:10,056  [INFO]    [fallback] Recovered 28 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:10,057  [INFO]    [fallback] Recovered 35 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:10,057  [INFO]    [fallback] Recovered 33 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 23:03:10,057  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:10,065  [INFO]    [done] irem sude uslu.pdf → format=pdf, lang=en, photo=True, chars=1720
+2026-04-03 23:03:10,065  [INFO]  Processing: kaan olmez.pdf
+2026-04-03 23:03:10,065  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:10,120  [INFO]    [fallback] Recovered 23 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:10,120  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:10,121  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:10,121  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:10,121  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:10,127  [INFO]    [done] kaan olmez.pdf → format=pdf, lang=tr, photo=True, chars=1239
+2026-04-03 23:03:10,128  [INFO]  Processing: kadir karakus.pdf
+2026-04-03 23:03:10,128  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:10,130  [INFO]    [pdf→ocr] Text too short (0 chars) in 'kadir karakus.pdf' — invoking OCR.
+2026-04-03 23:03:10,131  [INFO]    [ocr] Starting OCR on 'kadir karakus.pdf'
+2026-04-03 23:03:11,931  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-04-03 23:03:11,932  [INFO]    [ocr] Extracted 1178 chars from 'kadir karakus.pdf'
+2026-04-03 23:03:11,939  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:11,939  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:11,939  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:11,939  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:11,940  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:11,941  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:11,941  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:11,941  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:11,942  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:11,942  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:11,950  [INFO]    [done] kadir karakus.pdf → format=ocr, lang=tr, photo=True, chars=1148
+2026-04-03 23:03:11,951  [INFO]  Processing: kemal diri.pdf
+2026-04-03 23:03:11,951  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:12,094  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'kemal diri.pdf'
+2026-04-03 23:03:12,094  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 23:03:12,097  [INFO]    [fallback] Recovered 31 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 23:03:12,097  [INFO]    [fallback] Recovered 39 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:12,097  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:12,098  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:12,105  [INFO]    [done] kemal diri.pdf → format=pdf, lang=tr, photo=True, chars=1873
+2026-04-03 23:03:12,105  [INFO]  Processing: mehmet deniz mol.pdf
+2026-04-03 23:03:12,105  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:12,286  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'mehmet deniz mol.pdf'
+2026-04-03 23:03:12,286  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-03 23:03:12,331  [INFO]    [fallback] Recovered 5 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:12,331  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:12,331  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:12,332  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:12,337  [INFO]    [done] mehmet deniz mol.pdf → format=pdf, lang=tr, photo=True, chars=4801
+2026-04-03 23:03:12,337  [INFO]  Processing: mehmet emre arican.pdf
+2026-04-03 23:03:12,338  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:12,456  [INFO]    [layout] TABLE layout detected — page 1 of 'mehmet emre arican.pdf'
+2026-04-03 23:03:12,581  [INFO]    [fallback] Recovered 7 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:12,582  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:12,593  [INFO]    [done] mehmet emre arican.pdf → format=pdf, lang=tr, photo=False, chars=4536
+2026-04-03 23:03:12,594  [INFO]  Processing: muhammed fatih ulasli.pdf
+2026-04-03 23:03:12,594  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:12,742  [INFO]    [fallback] Recovered 8 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 23:03:12,742  [INFO]    [fallback] Recovered 44 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:12,743  [INFO]    [fallback] Recovered 8 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:12,743  [INFO]    [fallback] Recovered 31 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 23:03:12,750  [INFO]    [done] muhammed fatih ulasli.pdf → format=pdf, lang=en, photo=True, chars=1972
+2026-04-03 23:03:12,751  [INFO]  Processing: muhammed furkan ozcan mekatronik.pdf
+2026-04-03 23:03:12,751  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:13,040  [INFO]    [fallback] Recovered 27 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:13,040  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:13,041  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:13,041  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:13,047  [INFO]    [done] muhammed furkan ozcan mekatronik.pdf → format=pdf, lang=tr, photo=True, chars=2844
+2026-04-03 23:03:13,047  [INFO]  Processing: muhammed furkan ozcan.pdf
+2026-04-03 23:03:13,048  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:13,051  [INFO]    [pdf→ocr] Text too short (0 chars) in 'muhammed furkan ozcan.pdf' — invoking OCR.
+2026-04-03 23:03:13,051  [INFO]    [ocr] Starting OCR on 'muhammed furkan ozcan.pdf'
+2026-04-03 23:03:15,354  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-04-03 23:03:15,355  [INFO]    [ocr] Extracted 2939 chars from 'muhammed furkan ozcan.pdf'
+2026-04-03 23:03:15,362  [INFO]    [fallback] Recovered 42 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:15,362  [INFO]    [fallback] Recovered 21 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:15,362  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,363  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,363  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,373  [INFO]    [done] muhammed furkan ozcan.pdf → format=ocr, lang=tr, photo=True, chars=2916
+2026-04-03 23:03:15,373  [INFO]  Processing: muhammet dogan.pdf
+2026-04-03 23:03:15,373  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:15,462  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,463  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,463  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,463  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,463  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,465  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,465  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,465  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,465  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,465  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,471  [INFO]    [done] muhammet dogan.pdf → format=pdf, lang=tr, photo=True, chars=1009
+2026-04-03 23:03:15,471  [INFO]  Processing: nilsu ak 1.pdf
+2026-04-03 23:03:15,471  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:15,567  [INFO]    [fallback] Recovered 13 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:15,567  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,568  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,568  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,574  [INFO]    [done] nilsu ak 1.pdf → format=pdf, lang=tr, photo=False, chars=1775
+2026-04-03 23:03:15,574  [INFO]  Processing: nilsu ak 2.pdf
+2026-04-03 23:03:15,574  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:15,704  [INFO]    [layout] TABLE layout detected — page 1 of 'nilsu ak 2.pdf'
+2026-04-03 23:03:15,716  [INFO]    [fallback] Recovered 8 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 23:03:15,716  [INFO]    [fallback] Recovered 2 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:15,717  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-03 23:03:15,717  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,725  [INFO]    [done] nilsu ak 2.pdf → format=pdf, lang=en, photo=True, chars=3294
+2026-04-03 23:03:15,725  [INFO]  Processing: omer bugra karakoc.pdf
+2026-04-03 23:03:15,725  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:15,862  [INFO]    [fallback] Recovered 34 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 23:03:15,862  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,862  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,863  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,863  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:15,868  [INFO]    [done] omer bugra karakoc.pdf → format=pdf, lang=tr, photo=True, chars=1553
+2026-04-03 23:03:15,869  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-03 23:03:15,869  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:17,686  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-03 23:03:17,705  [INFO]    [fallback] Recovered 50 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:17,705  [INFO]    [fallback] Recovered 50 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:17,706  [INFO]    [fallback] Recovered 50 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:17,706  [INFO]    [fallback] Recovered 50 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 23:03:17,706  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:17,713  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6033
+2026-04-03 23:03:17,714  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-03 23:03:17,714  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:17,852  [INFO]    [fallback] Recovered 1 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:17,852  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-03 23:03:17,863  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-03 23:03:17,863  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-03 23:03:17,864  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:17,978  [INFO]    [fallback] Recovered 36 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:17,979  [INFO]    [fallback] Recovered 19 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 23:03:17,979  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:17,979  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:17,979  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:17,984  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2426
+2026-04-03 23:03:17,985  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-03 23:03:17,985  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:18,160  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-03 23:03:18,161  [INFO]  Processing: sametcan venedik.pdf
+2026-04-03 23:03:18,161  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:18,163  [INFO]    [pdf→ocr] Text too short (0 chars) in 'sametcan venedik.pdf' — invoking OCR.
+2026-04-03 23:03:18,164  [INFO]    [ocr] Starting OCR on 'sametcan venedik.pdf'
+2026-04-03 23:03:19,669  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-04-03 23:03:19,669  [INFO]    [ocr] Extracted 1382 chars from 'sametcan venedik.pdf'
+2026-04-03 23:03:19,675  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:19,676  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:19,676  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:19,676  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:19,697  [INFO]    [done] sametcan venedik.pdf → format=ocr, lang=tr, photo=True, chars=1377
+2026-04-03 23:03:19,698  [INFO]  Processing: sena nur morbel.pdf
+2026-04-03 23:03:19,698  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:19,707  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:19,711  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:19,713  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:19,716  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-03 23:03:19,982  [INFO]    [layout] TABLE layout detected — page 1 of 'sena nur morbel.pdf'
+2026-04-03 23:03:20,033  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,033  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,033  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,034  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,034  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,037  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,037  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,037  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,037  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,037  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,044  [INFO]    [done] sena nur morbel.pdf → format=pdf, lang=tr, photo=True, chars=3624
+2026-04-03 23:03:20,044  [INFO]  Processing: senem naz yurt.pdf
+2026-04-03 23:03:20,044  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:20,173  [INFO]    [fallback] Recovered 39 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:20,173  [INFO]    [fallback] Recovered 38 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:20,173  [INFO]    [fallback] Recovered 18 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:20,174  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,179  [INFO]    [done] senem naz yurt.pdf → format=pdf, lang=en, photo=False, chars=4098
+2026-04-03 23:03:20,180  [INFO]  Processing: suat bilgay.pdf
+2026-04-03 23:03:20,180  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:20,312  [INFO]    [fallback] Recovered 4 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:20,312  [INFO]    [fallback] Recovered 6 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:20,312  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,313  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.48 (lines=4)
+2026-04-03 23:03:20,323  [INFO]    [done] suat bilgay.pdf → format=pdf, lang=en, photo=True, chars=4127
+2026-04-03 23:03:20,323  [INFO]  Processing: sudenaz boyali.pdf
+2026-04-03 23:03:20,324  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:20,447  [INFO]    [layout] TABLE layout detected — page 1 of 'sudenaz boyali.pdf'
+2026-04-03 23:03:20,454  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,454  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,455  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,459  [INFO]    [done] sudenaz boyali.pdf → format=pdf, lang=tr, photo=True, chars=1196
+2026-04-03 23:03:20,460  [INFO]  Processing: tugba zengin.pdf
+2026-04-03 23:03:20,460  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:20,681  [INFO]    [fallback] Recovered 44 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 23:03:20,681  [INFO]    [fallback] Recovered 46 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:20,682  [INFO]    [fallback] Recovered 41 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:20,682  [INFO]    [fallback] Recovered 49 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:20,682  [INFO]    [fallback] Recovered 43 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 23:03:20,691  [INFO]    [done] tugba zengin.pdf → format=pdf, lang=en, photo=True, chars=3090
+2026-04-03 23:03:20,692  [INFO]  Processing: vedat acat.pdf
+2026-04-03 23:03:20,692  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:20,801  [INFO]    [layout] TABLE layout detected — page 1 of 'vedat acat.pdf'
+2026-04-03 23:03:20,808  [INFO]    [fallback] Recovered 5 line(s) for empty section 'summary' via keyword scan.
+2026-04-03 23:03:20,808  [INFO]    [fallback] Recovered 11 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 23:03:20,808  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:20,816  [INFO]    [done] vedat acat.pdf → format=pdf, lang=tr, photo=True, chars=2051
+2026-04-03 23:03:20,817  [INFO]  Processing: yuksel cosgun Backend.pdf
+2026-04-03 23:03:20,817  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:20,984  [INFO]    [done] yuksel cosgun Backend.pdf → format=pdf, lang=en, photo=True, chars=2447
+2026-04-03 23:03:20,985  [INFO]  Processing: yuksel cosgun DEVOPS-CLOUD.pdf
+2026-04-03 23:03:20,985  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:21,143  [INFO]    [done] yuksel cosgun DEVOPS-CLOUD.pdf → format=pdf, lang=en, photo=True, chars=2601
+2026-04-03 23:03:21,143  [INFO]  Processing: yuksel cosgun ML Data.pdf
+2026-04-03 23:03:21,144  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:21,287  [INFO]    [done] yuksel cosgun ML Data.pdf → format=pdf, lang=en, photo=True, chars=2250
+2026-04-03 23:03:21,288  [INFO]  Processing: yuksel cosgun Mobile.pdf
+2026-04-03 23:03:21,288  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:21,437  [INFO]    [done] yuksel cosgun Mobile.pdf → format=pdf, lang=en, photo=True, chars=2333
+2026-04-03 23:03:21,437  [INFO]  Processing: yuksel cosgun QA Automation.pdf
+2026-04-03 23:03:21,437  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:21,662  [INFO]    [done] yuksel cosgun QA Automation.pdf → format=pdf, lang=en, photo=True, chars=2184
+2026-04-03 23:03:21,662  [INFO]  Processing: yuksel cosgun Resume.pdf
+2026-04-03 23:03:21,663  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:21,808  [INFO]    [done] yuksel cosgun Resume.pdf → format=pdf, lang=en, photo=True, chars=2259
+2026-04-03 23:03:21,809  [INFO]  Processing: zeliha ayca aydemir .pdf
+2026-04-03 23:03:21,809  [INFO]    [method] PDF extraction (column-aware)
+2026-04-03 23:03:21,885  [INFO]    [fallback] Recovered 1 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:21,886  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:21,886  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-03 23:03:21,894  [INFO]    [done] zeliha ayca aydemir .pdf → format=pdf, lang=en, photo=False, chars=1335
+2026-04-03 23:03:21,894  [INFO]  Processing: arda gungor.docx
+2026-04-03 23:03:21,894  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 23:03:21,903  [INFO]    [docx] Extracted 2440 chars from 'arda gungor.docx'
+2026-04-03 23:03:21,906  [INFO]    [fallback] Recovered 30 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:21,907  [INFO]    [fallback] Recovered 30 line(s) for empty section 'education' via keyword scan.
+2026-04-03 23:03:21,907  [INFO]    [fallback] Recovered 6 line(s) for empty section 'skills' via keyword scan.
+2026-04-03 23:03:21,907  [INFO]    [fallback] Recovered 30 line(s) for empty section 'projects' via keyword scan.
+2026-04-03 23:03:21,908  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:21,917  [INFO]    [done] arda gungor.docx → format=docx, lang=tr, photo=True, chars=2437
+2026-04-03 23:03:21,917  [INFO]  Processing: ayse soydal.docx
+2026-04-03 23:03:21,917  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 23:03:21,926  [INFO]    [docx] Extracted 3147 chars from 'ayse soydal.docx'
+2026-04-03 23:03:21,929  [INFO]    [fallback] Recovered 14 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:21,929  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:21,929  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:21,929  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:21,939  [INFO]    [done] ayse soydal.docx → format=docx, lang=tr, photo=False, chars=2717
+2026-04-03 23:03:21,939  [INFO]  Processing: aziz ekren.docx
+2026-04-03 23:03:21,939  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 23:03:21,951  [INFO]    [docx] Extracted 1902 chars from 'aziz ekren.docx'
+2026-04-03 23:03:21,953  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:21,953  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:21,964  [INFO]    [done] aziz ekren.docx → format=docx, lang=en, photo=False, chars=1877
+2026-04-03 23:03:21,964  [INFO]  Processing: emine dogan.docx
+2026-04-03 23:03:21,964  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 23:03:21,972  [INFO]    [docx] Extracted 1977 chars from 'emine dogan.docx'
+2026-04-03 23:03:21,974  [INFO]    [fallback] Recovered 29 line(s) for empty section 'experience' via keyword scan.
+2026-04-03 23:03:21,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:21,975  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:21,975  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:21,975  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:21,983  [INFO]    [done] emine dogan.docx → format=docx, lang=tr, photo=True, chars=2013
+2026-04-03 23:03:21,984  [INFO]  Processing: ilteris cansiz.docx
+2026-04-03 23:03:21,984  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 23:03:22,005  [INFO]    [docx] Extracted 1702 chars from 'ilteris cansiz.docx'
+2026-04-03 23:03:22,007  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,007  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,008  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,008  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,008  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,009  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,010  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,010  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,010  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,010  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,018  [INFO]    [done] ilteris cansiz.docx → format=docx, lang=tr, photo=True, chars=1660
+2026-04-03 23:03:22,019  [INFO]  Processing: mina demirci.docx
+2026-04-03 23:03:22,019  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 23:03:22,121  [INFO]    [docx] Extracted 4235 chars from 'mina demirci.docx'
+2026-04-03 23:03:22,127  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,127  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,128  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,128  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,128  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,131  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,131  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,132  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,132  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,132  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,210  [INFO]    [done] mina demirci.docx → format=docx, lang=tr, photo=True, chars=4276
+2026-04-03 23:03:22,211  [INFO]  Processing: ufuk yuceyurt.docx
+2026-04-03 23:03:22,211  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 23:03:22,220  [INFO]    [docx] Extracted 3450 chars from 'ufuk yuceyurt.docx'
+2026-04-03 23:03:22,222  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,222  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,222  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,223  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,232  [INFO]    [done] ufuk yuceyurt.docx → format=docx, lang=tr, photo=True, chars=1686
+2026-04-03 23:03:22,233  [INFO]  Processing: yagiz tokgoz.docx
+2026-04-03 23:03:22,233  [INFO]    [method] DOCX extraction (table-column-aware)
+2026-04-03 23:03:22,242  [INFO]    [docx] Extracted 2191 chars from 'yagiz tokgoz.docx'
+2026-04-03 23:03:22,244  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,244  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-03 23:03:22,256  [INFO]    [done] yagiz tokgoz.docx → format=docx, lang=en, photo=False, chars=1915
+2026-04-03 23:03:22,261  [INFO]  ============================================================
+2026-04-03 23:03:22,261  [INFO]  DONE — 66 files processed
+2026-04-03 23:03:22,261  [INFO]    ✓ Success  : 66
+2026-04-03 23:03:22,261  [INFO]    ✗ Failed   : 0
+2026-04-03 23:03:22,261  [INFO]    ~ OCR used : 3
+2026-04-03 23:03:22,261  [INFO]    Output     : C:\Users\rumeysagokce\Desktop\cv_parser_project\output\final_dataset.json
+2026-04-03 23:03:22,261  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-03 23:03:22,262  [INFO]  ============================================================
