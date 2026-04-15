@@ -884,7 +884,6 @@ def _extract_single_column(page) -> str:
     This is consistent with the two-column path and avoids character-level
     split artifacts that extract_text() can produce on some PDF encodings.
     """
-    # FIX 2: use word-based extraction (same pipeline as two-column path)
     words = page.extract_words(
         x_tolerance=3,
         y_tolerance=3,
@@ -2068,10 +2067,9 @@ def process_cv(file_path: Path) -> dict:
     # ── Step 6: section extraction ────────────────────────────────────────────
     # Pass debug=True when the PARSER_DEBUG env-var is set so that the debug
     # prints include the filename context from this outer scope.
-    _dbg = bool(os.environ.get("PARSER_DEBUG", ""))
-    if _dbg:
+    if _dbg_early:
         print(f"\n[DEBUG] ── Processing: {file_path.name} ────────────────")
-    sections_raw = extract_sections(cleaned_text, debug=_dbg)
+    sections_raw = extract_sections(cleaned_text, debug=_dbg_early)
 
     # Extract confidence scores (internal quality metadata) — stored separately
     # so the public "sections" dict contains only string values, preserving
@@ -2155,8 +2153,7 @@ def build_dataset(
 
     pdf_files = sorted(pdf_dir.glob("*.pdf")) if pdf_dir.exists() else []
 
-    all_files = pdf_files
-    total = len(all_files)
+    total = len(pdf_files)
 
     if total == 0:
         logger.warning("No CV files found. Check your directory paths.")
@@ -2167,7 +2164,7 @@ def build_dataset(
     dataset: list[dict] = []
     failed_files: list[str] = []
 
-    for file_path in tqdm(all_files, desc="Parsing CVs", unit="file"):
+    for file_path in tqdm(pdf_files, desc="Parsing CVs", unit="file"):
         try:
             record = process_cv(file_path)
             dataset.append(record)
