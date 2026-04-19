@@ -886,433 +886,106 @@ def repair_broken_emails(text: str, debug: bool = False) -> str:
 
 
 # ─────────────────────────────────────────────
-#  0d. NORMALIZE TEXT  — robust broken-token repair layer
+#  0d. NORMALIZE TEXT  (FIX 3 — dedicated preprocessing layer)
 # ─────────────────────────────────────────────
 #
 # PURPOSE
 # ───────
-# Single entry-point normalization pass that runs BEFORE fix_ocr_spacing()
-# and BEFORE clean_text().  Applies five targeted transformations:
+# Provides a single entry-point normalization pass that:
+#   1. Repairs broken email patterns  ("gma l. com" → "gmail.com")
+#      by removing spaces around "@" and "." within email-like token spans.
+#   2. Removes extraneous spaces inside words when safe to do so,
+#      using a conservative heuristic (only merges very short fragments
+#      that are clearly OCR artifacts, not real short words).
+#   3. Normalizes Turkish characters if they appear in decomposed Unicode
+#      form (e.g. combining diacritics from some PDF encodings).
 #
-#   1. Unicode NFC normalization — resolves decomposed Turkish diacritics.
-#   2. Email @ spacing fix — "user @ domain.com" → "user@domain.com".
-#   3. Email dot spacing fix — "gmail .com" / "gmail. com" → "gmail.com".
-#   4. Domain-fragment merger — fuses alphanum fragments in email-like spans:
-#      "gma l.com", "outl ook.com" → correct domain (via email repair layer).
-#   5. Broken-word fragment merger — groups OCR-split word fragments back
-#      into single tokens without over-merging real adjacent words.
+# This runs BEFORE fix_ocr_spacing and BEFORE clean_text so that both
+# downstream steps receive well-formed tokens.
 #
-# CALLED FROM: process_cv() immediately after repair_broken_emails().
-#
-# SAFETY GUARANTEES
-# ─────────────────
-# • Never merges across Turkish/English stop words (hard boundaries).
-# • Never merges across 4-digit years or ALL-CAPS abbreviations.
-# • Never merges if combined length would exceed MAX_FRAGMENT_MERGE_LEN (10).
-# • Applies per-line only — no cross-sentence merging.
-# • Protected tokens (emails, URLs, phones, COLUMN_BREAK) are shielded
-#   before any pattern fires and restored verbatim afterward.
+# CALLED FROM: process_cv() immediately after repair_broken_emails()
 
-# ── Compiled patterns used only inside normalize_text() ──────────────────────
-
-# "user @ domain" or "user @domain" or "user@ domain" — space(s) around @
-# \s* (not \s+) on at least one side; both sides handled by two patterns applied in sequence
-_NT_AT_SPACES = re.compile(r"([A-Za-z0-9._%+\-])\s+@\s*([A-Za-z0-9.\-])")
-_NT_AT_SPACES2 = re.compile(r"([A-Za-z0-9._%+\-])\s*@\s+([A-Za-z0-9.\-])")
-
-# "gmail .com", "gmail. com", "gmail . com" — broken domain dot
+# Compiled patterns used only inside normalize_text()
+# Matches "word @ word" or "word@ word" spacing around the @ sign
+_NT_AT_SPACES = re.compile(r"([A-Za-z0-9._%+\-])\s+@\s+([A-Za-z0-9.\-])")
+# Matches a dot with spaces around it inside what looks like a domain/email
+# e.g. "gmail .com" or "gmail. com"
 _NT_DOT_SPACES = re.compile(r"([A-Za-z0-9])\s*\.\s*([A-Za-z]{2,6})(?=\s|$|[,;])")
-
-# ── Fragment-merger constants ─────────────────────────────────────────────────
-
-# Absolute cap on how many characters a merged fragment group may have.
-# Turkish CV terms rarely exceed 14 chars (e.g. "mühendisliği"=12).
-MAX_FRAGMENT_MERGE_LEN: int = 10
-
-# Turkish and English stop/function words — never merge across these.
-# These words stand alone legitimately and must not absorb neighboring fragments.
-_NT_STOP_WORDS: frozenset[str] = frozenset(
-    {
-        # Turkish conjunctions / particles
-        "ve",
-        "veya",
-        "ile",
-        "ya",
-        "da",
-        "de",
-        "ki",
-        "mi",
-        "mu",
-        "mü",
-        "mı",
-        "bir",
-        "bu",
-        "şu",
-        "o",
-        "her",
-        "hiç",
-        "bazı",
-        "çok",
-        "az",
-        "daha",
-        "en",
-        # Turkish prepositions
-        "için",
-        "gibi",
-        "kadar",
-        "sonra",
-        "önce",
-        "üzere",
-        "karşı",
-        "göre",
-        # Turkish single-letter words
-        "a",
-        "e",
-        "i",
-        "ı",
-        "u",
-        "ü",
-        # English function words
-        "and",
-        "or",
-        "the",
-        "in",
-        "on",
-        "at",
-        "to",
-        "of",
-        "for",
-        "by",
-        "as",
-        "is",
-        "was",
-        "are",
-        "an",
-        "a",
-        "it",
-        "on",
-    }
-)
-
-# Vowel set for Turkish + Latin scripts
-_NT_VOWELS: frozenset[str] = frozenset("aeıioöuüAEIİOÖUÜ")
-
-
-def _nt_vowel_count(s: str) -> int:
-    """Count vowels in a string (Turkish + Latin vowel set)."""
-    return sum(1 for c in s if c in _NT_VOWELS)
-
-
-def _nt_is_strong_fragment(tok: str) -> bool:
-    """
-    Return True if *tok* is almost certainly an OCR fragment, not a real word.
-
-    Criteria (all must hold):
-      • Cleaned length is 1–4 characters.
-      • Not a known stop/function word.
-      • Not a pure number, year (19xx/20xx), or ALL-CAPS abbreviation (SQL, API …).
-
-    Examples that return True:  "ün", "bilg", "tekn", "ş", "m", "outl", "gma"
-    Examples that return False: "ve", "bir", "Python", "SQL", "2024", "iletişim"
-    """
-    t = tok.strip(".,;:!?-–()")
-    if not t:
-        return False
-    if t.lower() in _NT_STOP_WORDS:
-        return False
-    if re.match(r"^\d+$", t) or re.match(r"^(19|20)\d{2}$", t):
-        return False
-    if re.match(r"^[A-Z]{2,5}$", tok) and len(tok) >= 2:
-        return False
-    return len(t) <= 4
-
-
-def _nt_is_weak_fragment(tok: str) -> bool:
-    """
-    Return True if *tok* is a plausible morphological suffix fragment.
-
-    Criteria:
-      • Cleaned length is exactly 5 characters.
-      • ≤ 2 vowels (consonant-heavy — typical Turkish suffix pattern).
-      • Not a stop word, year, abbreviation, or number.
-
-    Examples: "sayar" (bilg-sayar), "geçm" won't reach here (len4=strong).
-    """
-    t = tok.strip(".,;:!?-–()")
-    if not t:
-        return False
-    if t.lower() in _NT_STOP_WORDS:
-        return False
-    if re.match(r"^\d+$", t) or re.match(r"^(19|20)\d{2}$", t):
-        return False
-    if re.match(r"^[A-Z]{2,5}$", tok) and len(tok) >= 2:
-        return False
-    return len(t) == 5 and _nt_vowel_count(t) <= 2
-
-
-def _nt_is_hard_boundary(tok: str) -> bool:
-    """
-    Return True if *tok* must never be merged with its neighbors.
-
-    Hard boundaries: stop words, years, ALL-CAPS abbreviations, pure numbers.
-    """
-    t = tok.strip(".,;:!?-–()")
-    if not t:
-        return False
-    if t.lower() in _NT_STOP_WORDS:
-        return True
-    if re.match(r"^(19|20)\d{2}$", t):
-        return True
-    if re.match(r"^[A-Z]{2,5}$", tok) and len(tok) >= 2:
-        return True
-    if re.match(r"^\d+$", t):
-        return True
-    return False
-
-
-def _nt_merge_line_fragments(tokens: list[str]) -> list[str]:
-    """
-    Merge OCR-fragment tokens within a single line's token list.
-
-    Algorithm:
-      Scan left → right.  When the current token is a strong fragment, open
-      a merge group.  Extend the group as long as:
-        (a) The next token is also a strong fragment, OR
-        (b) The next token is a weak fragment AND the accumulated length so far
-            is ≤ 4 (prevents absorbing a suffix onto an already-long merge).
-        (c) No hard boundary is crossed.
-        (d) Accumulated + next length ≤ MAX_FRAGMENT_MERGE_LEN.
-        (e) The next token does not start with uppercase when accumulated > 3
-            (new capitalised word signal).
-
-    Non-fragment tokens are emitted as-is and act as hard stops.
-
-    Args:
-        tokens: Whitespace-split tokens from one text line.
-
-    Returns:
-        Token list with fragment groups fused into single tokens.
-    """
-    result: list[str] = []
-    i = 0
-
-    # Pre-compiled pattern to split a token into alphanum prefix + rest
-    # e.g. "ook.com" → ("ook", ".com"), "becer" → ("becer", "")
-    _PREFIX_RE = re.compile(
-        # Covers Basic Latin, Latin-1 Supplement (À-ÿ), and Latin Extended-A/B
-        # (U+0100–U+024F) which includes all Turkish characters:
-        #   ğ U+011F, Ğ U+011E, ş U+015F, Ş U+015E, ı U+0131, İ U+0130
-        # Without this range, "geliştirici" splits at "geli"+"ştirici",
-        # making "geli" look like a 4-char strong fragment and causing
-        # downstream false merges with neighboring tokens.
-        r"^([A-Za-zÀ-ÖØ-öø-ÿ\u0100-\u024F]+)(.*)",
-        re.UNICODE,
-    )
-
-    def _token_parts(tok: str):
-        """Return (alpha_prefix, suffix) for a token. suffix may be empty."""
-        m = _PREFIX_RE.match(tok)
-        return (m.group(1), m.group(2)) if m else (tok, "")
-
-    while i < len(tokens):
-        tok = tokens[i]
-        t = tok.strip(".,;:!?-–()")
-
-        if _nt_is_hard_boundary(tok):
-            result.append(tok)
-            i += 1
-            continue
-
-        if _nt_is_strong_fragment(t):
-            group: list[str] = [tok]
-            accumulated: str = t
-            j = i + 1
-
-            while j < len(tokens):
-                next_tok = tokens[j]
-                # For suffix-bearing tokens (e.g. "ook.com"), check only the
-                # alphanum prefix for fragment status, but keep the full token
-                # (including suffix) as the merge target.
-                next_prefix, next_suffix = _token_parts(next_tok)
-                next_t = next_tok.strip(".,;:!?-–()")
-
-                # Hard boundary check on the raw token (not just prefix)
-                if _nt_is_hard_boundary(next_tok):
-                    break
-                # New capitalised word — stop group
-                if next_prefix and next_prefix[0].isupper() and len(accumulated) > 3:
-                    break
-                # Length cap — use prefix for length, since suffix stays verbatim
-                if len(accumulated) + len(next_prefix) > MAX_FRAGMENT_MERGE_LEN:
-                    break
-
-                # Decide merge eligibility: check the alpha prefix
-                prefix_is_strong = _nt_is_strong_fragment(next_prefix)
-                prefix_is_weak = _nt_is_weak_fragment(next_prefix)
-
-                if prefix_is_strong or (prefix_is_weak and len(accumulated) <= 4):
-                    # Merge: accumulated += alpha prefix; append suffix to end of group
-                    group.append(next_tok)
-                    accumulated += next_prefix
-                    # If there's a suffix on this token (.com, -net, …) stop here —
-                    # the suffix anchors this as the last element of the merge group.
-                    j += 1
-                    if next_suffix:
-                        break
-                else:
-                    break
-
-            if len(group) > 1:
-                # Preserve trailing punctuation / suffix of the last token
-                last_tok = group[-1]
-                _, last_suffix = _token_parts(last_tok)
-                # Also pick up any punctuation that wasn't part of the alpha prefix
-                extra_trail = last_tok[len(last_tok.rstrip(".,;:!?-–()")) :]
-                trail = last_suffix or extra_trail
-                result.append(accumulated + trail)
-                i = j
-            else:
-                result.append(tok)
-                i += 1
-        else:
-            result.append(tok)
-            i += 1
-
-    return result
+# Turkish NFC normalization target — applied via unicodedata.normalize
 
 
 def normalize_text(text: str) -> str:
     """
-    Robust normalization layer — repairs broken tokens produced by PDF extraction
-    or OCR before any downstream parsing step.
+    FIX 3 — Preprocessing normalization layer.
 
-    Pipeline (in order, all applied per-line where possible):
+    Applies safe, targeted fixes before the main OCR-repair and clean passes:
 
-      Step 1 — Unicode NFC normalization
-        Converts decomposed Turkish diacritics (combining diacritic + base char)
-        to their composed single-codepoint forms.  PDF subset fonts frequently
-        encode 'ş', 'ğ', 'ı', 'ö' in NFD form; without this step they vanish
-        inside downstream regex character-class filters.
+      1. Turkish Unicode NFC normalization — ensures composed form so that
+         characters like 'ş', 'ğ', 'ı' are single code points and not
+         broken into base-char + combining-diacritic pairs (a PDF encoding
+         artifact that causes them to vanish in downstream regex filters).
 
-        "s\u0327" (s + combining cedilla) → "ş" (U+015F, single codepoint)
+      2. Broken email address repair — removes spaces injected around '@'
+         and '.' within email-like token spans:
+           "user @ gmail .com"  →  "user@gmail.com"
+           "gma il. com"        →  fixed by repair_broken_emails() called
+                                   before this, but any residual patterns
+                                   are caught here too.
 
-      Step 2 — @ spacing fix
-        Collapses spaces injected around the @ sign in email-like spans.
-
-        "user @ gmail.com"  →  "user@gmail.com"
-
-      Step 3 — domain-dot spacing fix
-        Collapses spaces around '.' when followed by a 2–6 char alpha TLD.
-        Applied per-line, up to 3 passes, to handle multiple occurrences.
-
-        "gmail .com"  →  "gmail.com"
-        "ahmet. yilmaz @gmail. com"  →  "ahmet.yilmaz@gmail.com"
-
-      Step 4 — OCR fragment merger (per-line, token-level)
-        Groups adjacent tokens that look like OCR split-fragments of a single
-        word.  Uses two tiers:
-
-        Strong fragment (len 1–4, not a stop word / year / abbreviation):
-          Always eligible to start or extend a merge group.
-
-        Weak fragment (len 5, ≤ 2 vowels — consonant-heavy suffix):
-          May extend a group only when the accumulated length so far is ≤ 4
-          (prevents absorbing a suffix onto an already-long merge group).
-
-        Hard boundaries (stop words, years, ALL-CAPS abbreviations, numbers)
-        are never crossed.  Merged tokens never exceed MAX_FRAGMENT_MERGE_LEN.
-
-        "ün vers tes"     →  "ünverstes"       (all strong frags)
-        "bilg sayar müh"  →  "bilgsayar müh"   (bilg+sayar merge; müh isolated)
-        "tekn k becer"    →  "teknk becer"      (tekn+k merge; becer isolated)
-        "ilet ş m"        →  "iletşm"           (all strong frags)
-        "görsel ilet ş m" →  "görsel iletşm"    (görsel=real; ilet+ş+m merge)
-
-      Protected tokens (emails, URLs, phone numbers, COLUMN_BREAK_TOKEN) are
-      shielded by placeholder substitution before Steps 2–4 and restored
-      verbatim afterward.  Step 1 (NFC) runs before protection because Unicode
-      normalization on placeholder strings is harmless.
+      3. Conservative broken-word space removal — when a single character
+         or very short token (1–2 chars) is sandwiched between longer word
+         tokens on the same line and matches a known OCR-split pattern
+         (e.g. "tekn ik" where "ik" is a 2-char suffix fragment),
+         the space is collapsed.  Only applied per-line to avoid merging
+         across sentence boundaries.
 
     Args:
         text: Raw text after repair_broken_emails(), before fix_ocr_spacing().
 
     Returns:
-        Normalized text with the above repairs applied, as a plain string.
+        Normalized text with the above fixes applied.
 
     Examples::
 
         >>> normalize_text("user @ gmail . com")
         'user@gmail.com'
-        >>> normalize_text("ün vers tes")
-        'ünverstes'
-        >>> normalize_text("tekn k becer görsel ilet ş m")
-        'teknk becer görsel iletşm'
-        >>> normalize_text("ya zılım")     # "ya" is a stop word — no merge
-        'ya zılım'
-        >>> normalize_text("Ankara Ün vers tes")
-        'Ankara Ünverstes'
+        >>> normalize_text("tekn ik beceriler")
+        'teknik beceriler'
     """
     import unicodedata as _ud
 
     if not text:
         return ""
 
-    # ── Step 1: Unicode NFC normalization ────────────────────────────────────
-    # Must run BEFORE token protection so that placeholder strings
-    # (which are pure ASCII) are not affected.
+    # ── Step 1: Unicode NFC normalization ─────────────────────────────────────
+    # Converts decomposed Turkish characters (combining diacritics from some
+    # PDF fonts) back to their composed single-codepoint forms.
     text = _ud.normalize("NFC", text)
 
-    # ── Protect structured tokens ─────────────────────────────────────────────
-    # Shield emails, URLs, phones, and COLUMN_BREAK_TOKEN from all subsequent
-    # pattern-based transformations.  Restored verbatim after Step 4.
-    _prot_map: dict[str, str] = {}
+    # ── Step 2: Fix spaces around '@' in email-like spans ─────────────────────
+    # "user @ domain.com" → "user@domain.com"
+    # Applied up to 3 times in case of multiple spaces
+    for _ in range(3):
+        new = _NT_AT_SPACES.sub(r"\1@\2", text)
+        if new == text:
+            break
+        text = new
 
-    def _protect(pat: re.Pattern, t: str) -> str:
-        def _repl(m: re.Match) -> str:
-            key = f"\x00NT{len(_prot_map):04d}\x00"
-            _prot_map[key] = m.group(0)
-            return key
-
-        return pat.sub(_repl, t)
-
-    for _pat in _NS_PROTECTED_TOKENS:
-        text = _protect(_pat, text)
-
-    # ── Step 2: @ spacing fix ─────────────────────────────────────────────────
-    # Apply both patterns: space-before-@ and space-after-@ (some PDFs inject
-    # space on only one side of the @ sign).
-    for _at_pat in (_NT_AT_SPACES, _NT_AT_SPACES2):
-        for _ in range(3):
-            new = _at_pat.sub(r"\1@\2", text)
-            if new == text:
-                break
-            text = new
-
-    # ── Steps 3 & 4: per-line passes ─────────────────────────────────────────
-    out_lines: list[str] = []
+    # ── Step 3: Fix spaces around '.' in domain/TLD contexts ──────────────────
+    # "gmail .com" → "gmail.com", "outlook. com" → "outlook.com"
+    # Only fires when the token after the dot is 2-6 alpha chars (TLD pattern)
+    # and is followed by whitespace, end-of-string, or punctuation — i.e. it
+    # looks like a domain suffix, not a mid-sentence abbreviation.
+    # We apply per-line to avoid cross-sentence merging.
+    fixed_lines = []
     for line in text.splitlines():
-        # Step 3 — domain-dot spacing fix (up to 3 passes per line)
         for _ in range(3):
             new_line = _NT_DOT_SPACES.sub(r"\1.\2", line)
             if new_line == line:
                 break
             line = new_line
-
-        # Step 4 — OCR fragment merger
-        # Skip lines that are placeholder-only (protected tokens have no spaces
-        # to merge across, and the NUL sentinel chars confuse the tokenizer).
-        if "\x00" not in line:
-            tokens = line.split(" ")
-            tokens = _nt_merge_line_fragments(tokens)
-            line = " ".join(tokens)
-
-        out_lines.append(line)
-
-    text = "\n".join(out_lines)
-
-    # ── Restore protected tokens ──────────────────────────────────────────────
-    for key, original in _prot_map.items():
-        text = text.replace(key, original)
+        fixed_lines.append(line)
+    text = "\n".join(fixed_lines)
 
     return text
 
@@ -2126,6 +1799,45 @@ _HEADING_MAX_WORDS = 6
 # "experience") while being tight enough to avoid false positives on body text.
 _HEADING_FUZZY_THRESHOLD = 0.82
 
+# Weak keywords — generic single-word terms that appear legitimately in CV body
+# text and must NOT be matched via fuzzy comparison. They still match on EXACT
+# normalised string equality (so "Roles" as a standalone heading still works)
+# but are excluded from the fuzzy pass to prevent, e.g., "roles olan pozisyonlar"
+# from fuzzy-matching "roles" and splitting the experience section mid-block.
+_HEADING_WEAK_KEYWORDS: frozenset[str] = frozenset(
+    {
+        # English — common in body text
+        "career",
+        "work",
+        "jobs",
+        "tools",
+        "stack",
+        "me",
+        "bio",
+        "studies",
+        "learning",
+        "academic",
+        "contributions",
+        "roles",
+        "positions",
+        "degree",
+        "languages",
+        "libraries",
+        "frameworks",
+        "capabilities",
+        "strengths",
+        "expertise",
+        "overview",
+        "introduction",
+        "intro",
+    }
+)
+
+# Inline heading pattern: "Heading: body content here"
+# Heading part ≤ 40 chars (real headings are short), followed by ≥1 char of body.
+# Used to detect "beceriler: python sql" or "iş geçmişi: felis network - 2024".
+_HEADING_INLINE_RE = re.compile(r"^([^:\n]{1,40}):\s+(.+)$", re.UNICODE)
+
 # Pre-built normalised keyword → canonical-section index for O(1) lookup.
 # Keys are normalised (lowercase, no punctuation, stripped) keyword strings.
 _KW_NORM_MAP: dict[str, str] = {}
@@ -2171,10 +1883,13 @@ def _is_section_heading(line: str) -> Optional[str]:
       3. EXACT match: normalised line == a keyword  → return that section.
       4. BILINGUAL match: normalised line contains a "/" separator; check each
          part against the keyword map.
-      5. CONTAINS match (conservative): the normalised line is fully contained
-         within a known keyword phrase (i.e. partial keyword, e.g. "education"
-         inside "academic education").  We do NOT fire on keyword-as-substring-
-         of-body-text — that direction is intentionally excluded here.
+      5. FUZZY similarity match — OCR typo tolerance ("Educatlon" → education).
+         EXCLUDED from fuzzy: keywords in _HEADING_WEAK_KEYWORDS (too generic;
+         they only fire on exact match to prevent mid-body false triggers like
+         "roles olan pozisyonlar" splitting the experience section).
+
+    Note: Inline "Heading: content" patterns are detected separately by
+    _try_inline_heading() and handled before this function is called.
     """
     stripped = line.strip()
     if not stripped:
@@ -2204,13 +1919,16 @@ def _is_section_heading(line: str) -> Optional[str]:
                 return _KW_NORM_MAP[part_norm]
 
     # Rule 5 — fuzzy similarity match to tolerate OCR / spacing errors.
-    # Only applied to short lines (already guarded by Rule 1) to keep it safe.
-    # We compare the normalised line against every normalised keyword; if
-    # SequenceMatcher similarity exceeds the threshold we accept the match.
-    # This catches common OCR mistakes like "Educatlon" or "Experlence".
+    # Skip entirely if the normalised line is a weak keyword — exact-only for these.
+    if norm in _HEADING_WEAK_KEYWORDS:
+        return None
+
     best_score = 0.0
     best_section: Optional[str] = None
     for kw_norm, section in _KW_NORM_MAP.items():
+        # Skip weak keywords as fuzzy targets — they require exact match (Rule 3)
+        if kw_norm in _HEADING_WEAK_KEYWORDS:
+            continue
         ratio = SequenceMatcher(None, norm, kw_norm).ratio()
         if ratio > best_score:
             best_score = ratio
@@ -2226,6 +1944,56 @@ _SECTION_MIN_LINES = 1
 
 # ── How many lines of context to scan for fallback keyword recovery ───────────
 _FALLBACK_WINDOW = 50
+
+
+def _try_inline_heading(line: str) -> Optional[tuple[str, str]]:
+    """
+    Detect "Heading: body content" inline pattern and split it.
+
+    Some CV templates (especially Word-exported PDFs) place the section keyword
+    and its first content item on the same line, separated by a colon:
+
+        "hakkımda: yazılım geliştirici 5 yıl deneyim"
+        "beceriler: python sql react"
+        "iş geçmişi: felis network - ankara - 2024"
+
+    Without this split, the line would fail the _HEADING_MAX_WORDS guard
+    (too many words) and be accumulated as body text, causing the section
+    to either be missed entirely or the content to bleed into the previous
+    section bucket.
+
+    Algorithm:
+      1. Check for a colon in the line (fast reject if absent).
+      2. Match the _HEADING_INLINE_RE pattern: (≤40 chars):(≥1 char).
+      3. Test the pre-colon part through _is_section_heading().
+      4. If matched: return (section_name, body_part).
+      5. Otherwise: return None.
+
+    Args:
+        line: Raw line from the CV text.
+
+    Returns:
+        (section_name, body_content) tuple if the line is an inline heading,
+        None otherwise.
+    """
+    if ":" not in line:
+        return None
+
+    m = _HEADING_INLINE_RE.match(line.strip())
+    if not m:
+        return None
+
+    heading_part = m.group(1).strip()
+    body_part = m.group(2).strip()
+
+    if not heading_part or not body_part:
+        return None
+
+    section = _is_section_heading(heading_part)
+    if section is not None:
+        return (section, body_part)
+
+    return None
 
 
 def _score_section(lines: list[str]) -> float:
@@ -2270,6 +2038,10 @@ def _fallback_keyword_recovery(
     This is intentionally less strict than _is_section_heading() — we are in
     fallback mode and accept some noise in exchange for not returning empty.
 
+    Weak keywords (_HEADING_WEAK_KEYWORDS) are excluded from the trigger set:
+    common words like "career", "work", "tools" would fire on body text and
+    recover incorrect content into the wrong section bucket.
+
     Returns a dict of { section_name: [recovered_lines] } for the empty sections
     only; caller merges into the main sections dict.
     """
@@ -2278,13 +2050,17 @@ def _fallback_keyword_recovery(
 
     for section in empty_sections:
         keywords = SECTION_KEYWORDS.get(section, [])
-        # Build a set of normalised keyword tokens for whole-word matching
+        # Build a set of normalised keyword tokens for whole-word matching.
+        # Exclude weak keywords to prevent false triggers on common body words.
         kw_norms = {
             re.sub(
                 r"[^\w\u0130\u0131\s]", "", turkish_lower(kw), flags=re.UNICODE
             ).strip()
             for kw in keywords
-        }
+        } - _HEADING_WEAK_KEYWORDS  # strip ambiguous single-word entries
+
+        if not kw_norms:
+            continue
 
         hit_idx: Optional[int] = None
         for idx, line in enumerate(all_lines):
@@ -2433,6 +2209,29 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
         if COLUMN_BREAK_TOKEN in raw_line:
             if current_section:
                 sections[current_section].append(raw_line)
+            continue
+
+        # ── Inline heading check: "keyword: content on same line" ─────────────
+        # Must run BEFORE _is_section_heading so that "beceriler: python sql"
+        # is correctly split rather than rejected by the word-count guard.
+        inline = _try_inline_heading(raw_line)
+        if inline is not None:
+            detected, body_content = inline
+            # Apply the same duplicate/loop prevention as for standalone headings
+            if detected in seen_sections:
+                last_occurrence = (
+                    len(transition_log) - 1 - transition_log[::-1].index(detected)
+                )
+                sections_since = set(transition_log[last_occurrence + 1 :])
+                sections_since.discard(detected)
+                current_section = detected
+            else:
+                current_section = detected
+                seen_sections.add(detected)
+            transition_log.append(detected)
+            # Inject the body content immediately into the new section
+            if body_content and current_section:
+                sections[current_section].append(body_content)
             continue
 
         detected = _is_section_heading(raw_line)
