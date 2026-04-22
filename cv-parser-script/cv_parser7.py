@@ -139,11 +139,6 @@ GAP_SCAN_BUCKETS = 200
 # Prevents splitting on narrow inter-word spaces inside a single column.
 MIN_GAP_FRACTION = 0.03
 
-# SESSION 2: minimum x0 jump for the Stage-2 bimodal fallback column detector.
-# ~24 pt on A4 — wider than inter-word spacing (3-6 pt), narrow enough to catch
-# tight-gutter two-column templates common in Turkish CV designs.
-MIN_X0_JUMP_FRACTION = 0.04
-
 # Section heading keywords — English and Turkish
 SECTION_KEYWORDS: dict[str, list[str]] = {
     "summary": [
@@ -891,290 +886,106 @@ def repair_broken_emails(text: str, debug: bool = False) -> str:
 
 
 # ─────────────────────────────────────────────
-#  0d. NORMALIZE TEXT  (SESSION 3 — robust broken-token repair)
+#  0d. NORMALIZE TEXT  (FIX 3 — dedicated preprocessing layer)
 # ─────────────────────────────────────────────
 #
-# Five targeted transformations applied before fix_ocr_spacing() and clean_text():
-#   1. Unicode NFC — resolves decomposed Turkish diacritics (PDF subset font artifact).
-#   2. @ spacing fix — "user @ domain" → "user@domain" (space on either side).
-#   3. Domain-dot spacing fix — "gmail .com" → "gmail.com".
-#   4. OCR fragment merger — groups adjacent short tokens that are split fragments
-#      of one word, using a two-tier strong/weak fragment classifier.
+# PURPOSE
+# ───────
+# Provides a single entry-point normalization pass that:
+#   1. Repairs broken email patterns  ("gma l. com" → "gmail.com")
+#      by removing spaces around "@" and "." within email-like token spans.
+#   2. Removes extraneous spaces inside words when safe to do so,
+#      using a conservative heuristic (only merges very short fragments
+#      that are clearly OCR artifacts, not real short words).
+#   3. Normalizes Turkish characters if they appear in decomposed Unicode
+#      form (e.g. combining diacritics from some PDF encodings).
 #
-# SAFETY: never merges across stop words, years, ALL-CAPS abbreviations, or numbers.
-# Protected tokens (emails, URLs, phones, COLUMN_BREAK) shielded throughout.
+# This runs BEFORE fix_ocr_spacing and BEFORE clean_text so that both
+# downstream steps receive well-formed tokens.
+#
+# CALLED FROM: process_cv() immediately after repair_broken_emails()
 
-# @ spacing — handle space on only one side ("user @domain", "user@ domain")
-_NT_AT_SPACES = re.compile(r"([A-Za-z0-9._%+\-])\s+@\s*([A-Za-z0-9.\-])")
-_NT_AT_SPACES2 = re.compile(r"([A-Za-z0-9._%+\-])\s*@\s+([A-Za-z0-9.\-])")
-
-# domain-dot spacing: "gmail .com" → "gmail.com"
+# Compiled patterns used only inside normalize_text()
+# Matches "word @ word" or "word@ word" spacing around the @ sign
+_NT_AT_SPACES = re.compile(r"([A-Za-z0-9._%+\-])\s+@\s+([A-Za-z0-9.\-])")
+# Matches a dot with spaces around it inside what looks like a domain/email
+# e.g. "gmail .com" or "gmail. com"
 _NT_DOT_SPACES = re.compile(r"([A-Za-z0-9])\s*\.\s*([A-Za-z]{2,6})(?=\s|$|[,;])")
-
-# ── Fragment merger constants ─────────────────────────────────────────────────
-
-MAX_FRAGMENT_MERGE_LEN: int = 10  # merged token cap (realistic max CV word length)
-
-_NT_STOP_WORDS: frozenset = frozenset(
-    {
-        "ve",
-        "veya",
-        "ile",
-        "ya",
-        "da",
-        "de",
-        "ki",
-        "mi",
-        "mu",
-        "mü",
-        "mı",
-        "bir",
-        "bu",
-        "şu",
-        "o",
-        "her",
-        "hiç",
-        "bazı",
-        "çok",
-        "az",
-        "daha",
-        "en",
-        "için",
-        "gibi",
-        "kadar",
-        "sonra",
-        "önce",
-        "üzere",
-        "karşı",
-        "göre",
-        "a",
-        "e",
-        "i",
-        "ı",
-        "u",
-        "ü",
-        "and",
-        "or",
-        "the",
-        "in",
-        "on",
-        "at",
-        "to",
-        "of",
-        "for",
-        "by",
-        "as",
-        "is",
-        "was",
-        "are",
-        "an",
-        "it",
-    }
-)
-
-_NT_VOWELS: frozenset = frozenset("aeıioöuüAEIİOÖUÜ")
-
-
-def _nt_vowel_count(s: str) -> int:
-    return sum(1 for c in s if c in _NT_VOWELS)
-
-
-def _nt_is_strong_fragment(tok: str) -> bool:
-    """len 1–4, not a stop word / year / ALL-CAPS abbreviation / number."""
-    t = tok.strip(".,;:!?-–()")
-    if not t or t.lower() in _NT_STOP_WORDS:
-        return False
-    if re.match(r"^\d+$", t) or re.match(r"^(19|20)\d{2}$", t):
-        return False
-    if re.match(r"^[A-Z]{2,5}$", tok) and len(tok) >= 2:
-        return False
-    return len(t) <= 4
-
-
-def _nt_is_weak_fragment(tok: str) -> bool:
-    """len exactly 5, ≤2 vowels — consonant-heavy morphological suffix."""
-    t = tok.strip(".,;:!?-–()")
-    if not t or t.lower() in _NT_STOP_WORDS:
-        return False
-    if re.match(r"^\d+$", t) or re.match(r"^(19|20)\d{2}$", t):
-        return False
-    if re.match(r"^[A-Z]{2,5}$", tok) and len(tok) >= 2:
-        return False
-    return len(t) == 5 and _nt_vowel_count(t) <= 2
-
-
-def _nt_is_hard_boundary(tok: str) -> bool:
-    """Stop words, years, abbreviations, pure numbers — never merge across these."""
-    t = tok.strip(".,;:!?-–()")
-    if t.lower() in _NT_STOP_WORDS:
-        return True
-    if re.match(r"^(19|20)\d{2}$", t):
-        return True
-    if re.match(r"^[A-Z]{2,5}$", tok) and len(tok) >= 2:
-        return True
-    if re.match(r"^\d+$", t):
-        return True
-    return False
-
-
-def _nt_merge_line_fragments(tokens: list) -> list:
-    """
-    Merge OCR-split fragment tokens on a single line.
-
-    SESSION 3 core fix: two-tier classifier prevents over-merging.
-    Strong fragments (len ≤ 4) always eligible; weak fragments (len 5, ≤2 vowels)
-    only absorbed when accumulated length is still ≤ 4.
-    Suffix-bearing tokens (e.g. "ook.com") handled via alpha-prefix extraction.
-    _PREFIX_RE covers Latin Extended-A/B (U+0100–U+024F) so Turkish characters
-    (ş U+015F, ğ U+011F, ı U+0131) are correctly included in word prefixes.
-    """
-    # SESSION 3 FIX: extend character range to U+0100-U+024F to cover Turkish
-    # extended characters — without this, "geliştirici" splits at "geli"+"ştirici"
-    # making "geli" (len4) look like a strong fragment.
-    _PREFIX_RE = re.compile(
-        r"^([A-Za-zÀ-ÖØ-öø-ÿ\u0100-\u024F]+)(.*)",
-        re.UNICODE,
-    )
-
-    def _token_parts(tok: str):
-        m = _PREFIX_RE.match(tok)
-        return (m.group(1), m.group(2)) if m else (tok, "")
-
-    result: list = []
-    i = 0
-    while i < len(tokens):
-        tok = tokens[i]
-        t = tok.strip(".,;:!?-–()")
-
-        if _nt_is_hard_boundary(tok):
-            result.append(tok)
-            i += 1
-            continue
-
-        if _nt_is_strong_fragment(t):
-            group = [tok]
-            accumulated = t
-            j = i + 1
-
-            while j < len(tokens):
-                next_tok = tokens[j]
-                next_prefix, next_suffix = _token_parts(next_tok)
-                next_t = next_tok.strip(".,;:!?-–()")
-
-                if _nt_is_hard_boundary(next_tok):
-                    break
-                if next_prefix and next_prefix[0].isupper() and len(accumulated) > 3:
-                    break
-                if len(accumulated) + len(next_prefix) > MAX_FRAGMENT_MERGE_LEN:
-                    break
-
-                prefix_strong = _nt_is_strong_fragment(next_prefix)
-                prefix_weak = _nt_is_weak_fragment(next_prefix)
-
-                if prefix_strong or (prefix_weak and len(accumulated) <= 4):
-                    group.append(next_tok)
-                    accumulated += next_prefix
-                    j += 1
-                    if next_suffix:
-                        break
-                else:
-                    break
-
-            if len(group) > 1:
-                last_tok = group[-1]
-                _, last_suffix = _token_parts(last_tok)
-                extra_trail = last_tok[len(last_tok.rstrip(".,;:!?-–()")) :]
-                trail = last_suffix or extra_trail
-                result.append(accumulated + trail)
-                i = j
-            else:
-                result.append(tok)
-                i += 1
-        else:
-            result.append(tok)
-            i += 1
-
-    return result
+# Turkish NFC normalization target — applied via unicodedata.normalize
 
 
 def normalize_text(text: str) -> str:
     """
-    SESSION 3 — Robust preprocessing normalization layer.
+    FIX 3 — Preprocessing normalization layer.
 
-    Runs AFTER repair_broken_emails(), BEFORE fix_ocr_spacing() and clean_text().
+    Applies safe, targeted fixes before the main OCR-repair and clean passes:
 
-    Steps:
-      1. Unicode NFC — composed Turkish diacritics (ş, ğ, ı single codepoints).
-      2. Protect emails/URLs/phones/COLUMN_BREAK with placeholders.
-      3. @ spacing fix (both sides independently via two patterns).
-      4. Domain-dot spacing fix (up to 3 passes per line).
-      5. OCR fragment merger (per-line, token-level, two-tier classifier).
-      6. Restore protected tokens verbatim.
+      1. Turkish Unicode NFC normalization — ensures composed form so that
+         characters like 'ş', 'ğ', 'ı' are single code points and not
+         broken into base-char + combining-diacritic pairs (a PDF encoding
+         artifact that causes them to vanish in downstream regex filters).
+
+      2. Broken email address repair — removes spaces injected around '@'
+         and '.' within email-like token spans:
+           "user @ gmail .com"  →  "user@gmail.com"
+           "gma il. com"        →  fixed by repair_broken_emails() called
+                                   before this, but any residual patterns
+                                   are caught here too.
+
+      3. Conservative broken-word space removal — when a single character
+         or very short token (1–2 chars) is sandwiched between longer word
+         tokens on the same line and matches a known OCR-split pattern
+         (e.g. "tekn ik" where "ik" is a 2-char suffix fragment),
+         the space is collapsed.  Only applied per-line to avoid merging
+         across sentence boundaries.
+
+    Args:
+        text: Raw text after repair_broken_emails(), before fix_ocr_spacing().
+
+    Returns:
+        Normalized text with the above fixes applied.
 
     Examples::
 
         >>> normalize_text("user @ gmail . com")
         'user@gmail.com'
-        >>> normalize_text("ün vers tes")
-        'ünverstes'
-        >>> normalize_text("tekn k becer görsel ilet ş m")
-        'teknk becer görsel iletşm'
-        >>> normalize_text("ya zılım")   # "ya" = stop word → no merge
-        'ya zılım'
+        >>> normalize_text("tekn ik beceriler")
+        'teknik beceriler'
     """
     import unicodedata as _ud
 
     if not text:
         return ""
 
-    # Step 1: Unicode NFC
+    # ── Step 1: Unicode NFC normalization ─────────────────────────────────────
+    # Converts decomposed Turkish characters (combining diacritics from some
+    # PDF fonts) back to their composed single-codepoint forms.
     text = _ud.normalize("NFC", text)
 
-    # Step 2: protect structured tokens
-    _prot_map: dict[str, str] = {}
+    # ── Step 2: Fix spaces around '@' in email-like spans ─────────────────────
+    # "user @ domain.com" → "user@domain.com"
+    # Applied up to 3 times in case of multiple spaces
+    for _ in range(3):
+        new = _NT_AT_SPACES.sub(r"\1@\2", text)
+        if new == text:
+            break
+        text = new
 
-    def _protect(pat: re.Pattern, t: str) -> str:
-        def _repl(m: re.Match) -> str:
-            key = f"\x00NT{len(_prot_map):04d}\x00"
-            _prot_map[key] = m.group(0)
-            return key
-
-        return pat.sub(_repl, t)
-
-    for _pat in _NS_PROTECTED_TOKENS:
-        text = _protect(_pat, text)
-
-    # Step 3: @ spacing fix — both one-sided patterns
-    for _at_pat in (_NT_AT_SPACES, _NT_AT_SPACES2):
-        for _ in range(3):
-            new = _at_pat.sub(r"\1@\2", text)
-            if new == text:
-                break
-            text = new
-
-    # Steps 4 + 5: per-line
-    out_lines: list[str] = []
+    # ── Step 3: Fix spaces around '.' in domain/TLD contexts ──────────────────
+    # "gmail .com" → "gmail.com", "outlook. com" → "outlook.com"
+    # Only fires when the token after the dot is 2-6 alpha chars (TLD pattern)
+    # and is followed by whitespace, end-of-string, or punctuation — i.e. it
+    # looks like a domain suffix, not a mid-sentence abbreviation.
+    # We apply per-line to avoid cross-sentence merging.
+    fixed_lines = []
     for line in text.splitlines():
-        # Step 4: domain-dot spacing
         for _ in range(3):
             new_line = _NT_DOT_SPACES.sub(r"\1.\2", line)
             if new_line == line:
                 break
             line = new_line
-
-        # Step 5: fragment merger (skip lines containing placeholders)
-        if "\x00" not in line:
-            toks = line.split(" ")
-            toks = _nt_merge_line_fragments(toks)
-            line = " ".join(toks)
-
-        out_lines.append(line)
-
-    text = "\n".join(out_lines)
-
-    # Step 6: restore protected tokens
-    for key, original in _prot_map.items():
-        text = text.replace(key, original)
+        fixed_lines.append(line)
+    text = "\n".join(fixed_lines)
 
     return text
 
@@ -1277,91 +1088,64 @@ def fix_ocr_spacing(text: str) -> str:
 
 def _find_column_split_x(words: list[dict], page_width: float) -> Optional[float]:
     """
-    Find the x-coordinate of the column boundary between left and right word clusters.
+    Find the x-coordinate of the widest horizontal whitespace gap between
+    word clusters on a page — this is where the column boundary lies.
 
-    SESSION 2 FIX — two-stage algorithm replacing the old x0→x1 extent painting:
+    Algorithm:
+      1. Build a 1-D occupancy array along the x-axis (GAP_SCAN_BUCKETS wide).
+      2. Mark each bucket as 'occupied' if any word overlaps it.
+      3. Find the longest contiguous run of *empty* buckets.
+      4. Return the centre x of that run, or None if no significant gap found.
 
-    Stage 1 — x0-anchor occupancy scan
-      Mark only the bucket containing each word's *x0* (start anchor).
-      The old code painted every bucket from x0 to x1, so a long heading like
-      "iş geçmişi" bridged the gutter and hid the gap → layout declared SINGLE
-      → all words sorted by (top, x0) → left/right columns interleaved on each row
-      → "eğitim iş geçmişi".  x0-only marking keeps the gutter empty.
-
-    Stage 2 — bimodal x0 cluster fallback
-      For tight-gutter templates where Stage 1 finds no significant gap, find the
-      largest jump between consecutive distinct x0 values.  If the cliff is ≥
-      MIN_X0_JUMP_FRACTION of page width AND both sides have ≥ 10 % of words,
-      return the cliff midpoint as the split.
-
-    Args:
-        words      : list of pdfplumber word dicts (must have 'x0' key).
-        page_width : page width in pts.
-
-    Returns:
-        Split x-coordinate (float) or None if no two-column boundary found.
+    This is more robust than a hard midpoint split because it adapts to:
+      - Asymmetric layouts (narrow sidebar + wide main column)
+      - Layouts where the column split is off-centre
     """
     if not words:
         return None
 
     bucket_size = page_width / GAP_SCAN_BUCKETS
-
-    # ── Stage 1: x0-anchor occupancy scan ────────────────────────────────────
     occupied = [False] * GAP_SCAN_BUCKETS
-    for w in words:
-        bucket = max(0, min(GAP_SCAN_BUCKETS - 1, int(w["x0"] / bucket_size)))
-        occupied[bucket] = True
 
+    for w in words:
+        # Mark every bucket overlapped by this word's x extent
+        start_bucket = max(0, int(w["x0"] / bucket_size))
+        end_bucket = min(GAP_SCAN_BUCKETS - 1, int(w["x1"] / bucket_size))
+        for b in range(start_bucket, end_bucket + 1):
+            occupied[b] = True
+
+    # Find the longest unoccupied run
     best_start = best_end = -1
     current_start = None
+
     for i, occ in enumerate(occupied):
         if not occ:
             if current_start is None:
                 current_start = i
         else:
             if current_start is not None:
-                if (i - current_start) > (best_end - best_start):
+                run_len = i - current_start
+                if run_len > (best_end - best_start):
                     best_start, best_end = current_start, i - 1
                 current_start = None
+
+    # Handle gap that runs to the end of the array
     if current_start is not None:
-        if (GAP_SCAN_BUCKETS - current_start) > (best_end - best_start):
+        run_len = GAP_SCAN_BUCKETS - current_start
+        if run_len > (best_end - best_start):
             best_start, best_end = current_start, GAP_SCAN_BUCKETS - 1
 
-    if best_start != -1:
-        gap_fraction = (best_end - best_start + 1) / GAP_SCAN_BUCKETS
-        if gap_fraction >= MIN_GAP_FRACTION:
-            gap_centre_x = ((best_start + best_end) / 2.0) * bucket_size
-            logger.debug(
-                f"  [col_split] Stage-1 gap: x={gap_centre_x:.1f} pt ({gap_fraction * 100:.1f}%)"
-            )
-            return gap_centre_x
+    if best_start == -1:
+        return None  # No gap found
 
-    # ── Stage 2: bimodal x0 cluster fallback ─────────────────────────────────
-    x0_values = sorted(set(w["x0"] for w in words))
-    if len(x0_values) < 4:
+    gap_width_fraction = (best_end - best_start + 1) / GAP_SCAN_BUCKETS
+    if gap_width_fraction < MIN_GAP_FRACTION:
+        # Gap too narrow — probably just inter-word spacing, not a column split
         return None
 
-    min_jump = page_width * MIN_X0_JUMP_FRACTION
-    best_jump = 0.0
-    best_cliff_mid = None
-
-    for i in range(1, len(x0_values)):
-        jump = x0_values[i] - x0_values[i - 1]
-        if jump > best_jump:
-            cliff_x = (x0_values[i - 1] + x0_values[i]) / 2.0
-            left_frac = sum(1 for w in words if w["x0"] < cliff_x) / len(words)
-            right_frac = 1.0 - left_frac
-            if left_frac >= 0.10 and right_frac >= 0.10:
-                best_jump = jump
-                best_cliff_mid = cliff_x
-
-    if best_cliff_mid is not None and best_jump >= min_jump:
-        logger.debug(
-            f"  [col_split] Stage-2 bimodal cliff: x={best_cliff_mid:.1f} pt (jump={best_jump:.1f})"
-        )
-        return best_cliff_mid
-
-    return None
+    # Return the pixel x-coordinate of the gap's centre
+    gap_centre_x = ((best_start + best_end) / 2.0) * bucket_size
+    return gap_centre_x
 
 
 # ── 1b. Layout detection ──────────────────────────────────────────────────────
@@ -1406,10 +1190,13 @@ def _detect_page_layout(page, words: list[dict]) -> str:
     if split_x is None:
         return PageLayout.SINGLE
 
-    # SESSION 2 FIX: use x0 (word start anchor) for both detection and extraction.
-    # centre_x shifts long words rightward, causing misassignment near the gutter.
-    left_count = sum(1 for w in words if w["x0"] < split_x)
-    right_count = sum(1 for w in words if w["x0"] >= split_x)
+    # Use centre_x for both detection and extraction — must stay consistent
+    # with _extract_two_column, which also uses centre_x.  The old code used
+    # x1 / x0 thresholds here and centre_x in _extract_two_column, causing
+    # words near the gutter to be counted in detection but routed to the wrong
+    # column during extraction, which corrupted the column split decision.
+    left_count = sum(1 for w in words if (w["x0"] + w["x1"]) / 2 <= split_x)
+    right_count = sum(1 for w in words if (w["x0"] + w["x1"]) / 2 > split_x)
     total = len(words)
 
     left_ratio = left_count / total
@@ -1422,8 +1209,8 @@ def _detect_page_layout(page, words: list[dict]) -> str:
     # Right words keep absolute x-coords; translate them so x starts from 0
     # before scanning — otherwise gap fractions are against the full-page width
     # and the sub-gap check is essentially disabled.
-    left_words = [w for w in words if w["x0"] < split_x]
-    right_words = [w for w in words if w["x0"] >= split_x]
+    left_words = [w for w in words if (w["x0"] + w["x1"]) / 2 <= split_x]
+    right_words = [w for w in words if (w["x0"] + w["x1"]) / 2 > split_x]
     right_words_t = [
         {**w, "x0": w["x0"] - split_x, "x1": w["x1"] - split_x} for w in right_words
     ]
@@ -1442,46 +1229,46 @@ def _detect_page_layout(page, words: list[dict]) -> str:
 
 def _words_to_text(word_list: list[dict], y_tolerance: float = 4.0) -> str:
     """
-    Convert a list of pdfplumber word dicts to a clean text string.
+    Convert a list of pdfplumber word dicts to a text string.
 
-    Line reconstruction — bucket-snap grid (SESSION 1 FIX):
-      Each word's ``top`` coordinate is snapped to the nearest bucket of size
-      ``y_tolerance`` via ``round(top / y_tolerance) * y_tolerance``.  Words
-      within that tolerance of each other hash to the *same* key, so they land
-      in the same line-group without any drifting average.
-
-    Why bucket-snap instead of the previous rolling-average approach:
-      The old code updated ``current_top`` as a running mean, which caused
-      the reference baseline to creep upward on long lines.  After a few words
-      the mean had drifted enough that the next word (which truly belonged to
-      the same line) exceeded the tolerance and started a spurious new line.
-      Snapping to a fixed grid avoids drift entirely.
+    Words are sorted by (top, x0) and grouped into lines when their
+    vertical positions are within y_tolerance points of each other.
+    This handles slight baseline misalignments common in designed CVs.
 
     Args:
-        word_list    : list of pdfplumber word dicts (keys: text, x0, top).
-        y_tolerance  : bucket height in pts.  Default 4.0 pt works well for
-                       most CV fonts; increase to 6–8 for heavy leading variation.
+        word_list    : list of pdfplumber word dicts (keys: text, x0, x1, top).
+        y_tolerance  : vertical distance (pts) within which words share a line.
 
     Returns:
-        Newline-separated string, one output line per detected text row,
-        words sorted left-to-right within each row.
+        Newline-separated string, one line per detected text row.
     """
     if not word_list:
         return ""
 
-    from collections import defaultdict
-
-    line_buckets: dict[float, list[dict]] = defaultdict(list)
-    for w in word_list:
-        bucket_key = round(w["top"] / y_tolerance) * y_tolerance
-        line_buckets[bucket_key].append(w)
+    # Sort: primary = top (vertical position), secondary = x0 (left-to-right)
+    word_list = sorted(
+        word_list, key=lambda w: (round(w["top"] / y_tolerance) * y_tolerance, w["x0"])
+    )
 
     lines: list[str] = []
-    for bucket_key in sorted(line_buckets):
-        words_in_line = sorted(line_buckets[bucket_key], key=lambda w: w["x0"])
-        line_text = " ".join(w["text"] for w in words_in_line)
-        if line_text.strip():
-            lines.append(line_text)
+    current_line: list[str] = []
+    current_top: Optional[float] = None
+
+    for w in word_list:
+        if current_top is None or abs(w["top"] - current_top) < y_tolerance:
+            current_line.append(w["text"])
+            # Keep track of the average top so we don't drift on long lines
+            current_top = (
+                w["top"] if current_top is None else (current_top + w["top"]) / 2
+            )
+        else:
+            if current_line:
+                lines.append(" ".join(current_line))
+            current_line = [w["text"]]
+            current_top = w["top"]
+
+    if current_line:
+        lines.append(" ".join(current_line))
 
     return "\n".join(lines)
 
@@ -1491,16 +1278,12 @@ def _words_to_text(word_list: list[dict], y_tolerance: float = 4.0) -> str:
 
 def _extract_single_column(page) -> str:
     """
-    Standard single-column extraction using word bounding boxes exclusively.
+    Standard single-column extraction.
 
-    SESSION 1 FIX: Never calls page.extract_text().  extract_text() reassembles
-    characters from raw glyph positions and produces character-level split
-    artifacts ("ün vers tes", "gma l. com") on PDFs with custom encodings.
-    Word-based extraction with use_text_flow=True respects the PDF's internal
-    character-stream order and always yields correctly assembled words.
-
-    If extract_words() returns nothing (blank or image-only page), returns ""
-    so the caller falls through to OCR rather than using the broken path.
+    FIX 2: Replaced page.extract_text() with word-based extraction using
+    page.extract_words(use_text_flow=True) + _words_to_text().
+    This is consistent with the two-column path and avoids character-level
+    split artifacts that extract_text() can produce on some PDF encodings.
     """
     words = page.extract_words(
         x_tolerance=3,
@@ -1508,7 +1291,10 @@ def _extract_single_column(page) -> str:
         keep_blank_chars=False,
         use_text_flow=True,
     )
-    return _words_to_text(words, y_tolerance=4.0) if words else ""
+    if words:
+        return _words_to_text(words)
+    # Fallback to extract_text only if word extraction yields nothing at all
+    return page.extract_text(x_tolerance=3, y_tolerance=3) or ""
 
 
 def _extract_two_column(page, words: list[dict]) -> str:
@@ -1539,13 +1325,15 @@ def _extract_two_column(page, words: list[dict]) -> str:
             "  [layout] Gap detection failed — falling back to midpoint split."
         )
 
-    # SESSION 2 FIX: partition by x0 (word start anchor), not centre_x.
-    # centre_x = (x0+x1)/2 shifts long words rightward so a word starting in
-    # the left column can be routed to the right column near the gutter.
+    # Partition words into left and right columns
+    # Note: words straddling the gap (x0 < split_x < x1) go to whichever
+    # column their *centre* falls in — avoids double-counting headers.
     left_words: list[dict] = []
     right_words: list[dict] = []
+
     for w in words:
-        if w["x0"] < split_x:
+        centre_x = (w["x0"] + w["x1"]) / 2
+        if centre_x <= split_x:
             left_words.append(w)
         else:
             right_words.append(w)
@@ -1593,18 +1381,9 @@ def _extract_table_page(page) -> str:
     except Exception as e:
         logger.warning(f"  [layout_issue] Table extraction failed on page: {e}")
 
-    # SESSION 1 FIX: use word-based extraction (never extract_text()) for
-    # non-table text, consistent with all other extraction paths.
+    # Also capture text not inside any table bounding box
     try:
-        non_table_words = page.extract_words(
-            x_tolerance=3,
-            y_tolerance=3,
-            keep_blank_chars=False,
-            use_text_flow=True,
-        )
-        non_table_text = (
-            _words_to_text(non_table_words, y_tolerance=4.0) if non_table_words else ""
-        )
+        non_table_text = page.extract_text(x_tolerance=3, y_tolerance=3) or ""
         if non_table_text.strip():
             parts.append(non_table_text)
     except Exception:
@@ -1870,228 +1649,113 @@ def clean_text(text: str) -> str:
 
 
 # ─────────────────────────────────────────────
-#  4b. CV BLOCK GROUPING  (SESSION 4 — experience + education)
+#  4b. EXPERIENCE BLOCK GROUPING  (FIX 4)
 # ─────────────────────────────────────────────
 #
-# Four signal types detected per line:
-#   STRONG_HEADER  — "Company - Location - YEAR" → opens experience block
-#   DATE_ANCHOR    — "2018 - 2022" / "2021 - Present" → closes education block
-#   INSTITUTION    — university/school name → opens education block
-#   BODY           — role, description → appended to open block
+# PROBLEM
+# ───────
+# Experience entries extracted line-by-line produce fragmented output like:
+#   "Felis Network - Ankara - 2024"
+#   "Kameraman"
+#   "Kurgu Montaj"
 #
-# A BODY line immediately before a header that passes _bg_is_pre_title()
-# is reclassified as PRE_TITLE and attached to the FOLLOWING block.
+# FIX: Detect "entry header" lines (lines containing a "-" separator AND a
+# 4-digit year) and group the following lines (job title, description) with
+# them into a single structured block, separated by " | ".
 #
-# Output format:
-#   Experience: "Company - Location - Year | Title Description"
-#   Education:  "School | Department | Date"
+# Pattern for entry header: any line matching  "... - ... - YYYY"  or
+# containing a 4-digit year (2000-2099) alongside a dash separator.
 
-_BG_YEAR_PAT: str = r"(?:19|20)\d{2}"
-_BG_DATE_WORDS: str = r"(?:present|günümüz|halen|devam|now|today|current)"
-
-_BG_STRONG_HEADER = re.compile(
-    r"^.{3,}\s[-–]\s.*" + _BG_YEAR_PAT,
-    re.IGNORECASE | re.UNICODE,
-)
-_BG_DATE_ANCHOR = re.compile(
-    r"^"
-    + _BG_YEAR_PAT
-    + r"\s*[-–]\s*(?:"
-    + _BG_YEAR_PAT
-    + r"|"
-    + _BG_DATE_WORDS
-    + r")$"
-    r"|^" + _BG_YEAR_PAT + r"$",
-    re.IGNORECASE | re.UNICODE,
-)
-_BG_DATE_SHORT = re.compile(
-    r"^[\w\s\-–.,]{0,15}"
-    + _BG_YEAR_PAT
-    + r"(?:\s*[-–]\s*(?:"
-    + _BG_YEAR_PAT
-    + r"|"
-    + _BG_DATE_WORDS
-    + r"))?[\s.,]*$",
-    re.IGNORECASE | re.UNICODE,
-)
-_BG_INSTITUTION = re.compile(
-    r"\b(?:üniversite(?:si)?|university|universite"
-    r"|koleji?|college|lisesi?|high\s*school|lise"
-    r"|okulu?|school|enstitü(?:sü)?|institute|institut"
-    r"|akademi(?:si)?|academy|meslek\s+yüksek\s+okulu)\b",
-    re.IGNORECASE | re.UNICODE,
-)
-_BG_INTRO_STARTERS = re.compile(
-    r"^(?:deneyimli|deneyim|tecrübeli|tecrübe|yetenekli|yetkin"
-    r"|experienced?|skilled|dedicated|passionate|motivated|seasoned"
-    r"|özet|hakkımda|about|profile|summary|özgeçmiş)\b",
-    re.IGNORECASE | re.UNICODE,
-)
-
-
-def _bg_classify_line(line: str) -> str:
-    s = line.strip()
-    if _BG_STRONG_HEADER.match(s) and re.search(_BG_YEAR_PAT, s):
-        pre_year = re.split(_BG_YEAR_PAT, s)[0]
-        if re.search(r"[A-Za-zÀ-ÖØ-öø-ÿ\u0100-\u024F]{3,}", pre_year):
-            return "strong_header"
-    if _BG_DATE_ANCHOR.match(s) or _BG_DATE_SHORT.match(s):
-        return "date_anchor"
-    if _BG_INSTITUTION.search(s):
-        return "institution"
-    return "body"
-
-
-def _bg_is_pre_title(line: str) -> bool:
-    s = line.strip()
-    words = s.split()
-    if len(words) > 5 or len(s) > 45:
-        return False
-    if s.endswith((".", "!", "?", "…")):
-        return False
-    if _BG_INTRO_STARTERS.match(s):
-        return False
-    if "/" in s:
-        return True
-    if len(words) <= 3:
-        return True
-    if words and words[0][0].isupper():
-        return True
-    return False
-
-
-def group_cv_blocks(text: str) -> str:
-    """
-    SESSION 4 — Group fragmented CV lines into structured experience/education blocks.
-
-    Handles three layout patterns the old implementation missed:
-      1. Title line BEFORE the company/date header → attached to following block
-      2. Education blocks (school / department / year) with no dash-based anchor
-      3. Standalone date lines ("2018 - 2022") correctly close education blocks
-         rather than starting new ones
-
-    Args:
-        text: Raw section text (post-cleaning).
-
-    Returns:
-        Grouped text, one line per CV entry:
-          Experience: "Company - Location - Year | Title Description"
-          Education:  "School | Department | Date"
-
-    Examples::
-
-        >>> group_cv_blocks("Felis Network - Ankara - 2024\\nKameraman\\nKurgu Montaj")
-        'Felis Network - Ankara - 2024 | Kameraman Kurgu Montaj'
-
-        >>> group_cv_blocks("Kameraman / Kurgu Uzmanı\\nFelis Network - Ankara - 2024")
-        'Felis Network - Ankara - 2024 | Kameraman / Kurgu Uzmanı'
-
-        >>> group_cv_blocks("Gazi Üniversitesi\\nBilgisayar Mühendisliği\\n2018 - 2022")
-        'Gazi Üniversitesi | Bilgisayar Mühendisliği | 2018 - 2022'
-    """
-    if not text:
-        return text
-    raw_lines = [l for l in text.splitlines() if l.strip()]
-    if not raw_lines:
-        return text
-
-    classified = [(line, _bg_classify_line(line)) for line in raw_lines]
-
-    # Lookahead: body line immediately before a header that looks like a title
-    adjusted: list[tuple[str, str]] = []
-    for i, (line, cls) in enumerate(classified):
-        if cls == "body":
-            next_cls = classified[i + 1][1] if i + 1 < len(classified) else None
-            if next_cls in ("strong_header", "institution") and _bg_is_pre_title(line):
-                adjusted.append((line, "pre_title"))
-                continue
-        adjusted.append((line, cls))
-    classified = adjusted
-
-    blocks: list[dict] = []
-    orphans: list[str] = []
-    current: Optional[dict] = None
-    pending_pre_title: Optional[str] = None
-
-    def _flush() -> None:
-        nonlocal current
-        if current is not None:
-            blocks.append(current)
-            current = None
-
-    for line, cls in classified:
-        if cls == "strong_header":
-            _flush()
-            current = {
-                "header": line,
-                "pre_title": pending_pre_title,
-                "body": [],
-                "date": None,
-                "type": "experience",
-            }
-            pending_pre_title = None
-
-        elif cls == "institution":
-            _flush()
-            current = {
-                "header": line,
-                "pre_title": pending_pre_title,
-                "body": [],
-                "date": None,
-                "type": "education",
-            }
-            pending_pre_title = None
-
-        elif cls == "pre_title":
-            if current is None:
-                pending_pre_title = line
-            else:
-                current["body"].append(line)
-
-        elif cls == "date_anchor":
-            if current is not None:
-                if current["date"] is None:
-                    current["date"] = line
-                else:
-                    current["body"].append(line)
-            else:
-                if pending_pre_title:
-                    orphans.append(pending_pre_title)
-                    pending_pre_title = None
-                orphans.append(line)
-
-        else:  # body
-            if current is not None:
-                current["body"].append(line)
-            else:
-                if pending_pre_title:
-                    orphans.append(pending_pre_title)
-                    pending_pre_title = None
-                orphans.append(line)
-
-    _flush()
-    if pending_pre_title:
-        orphans.append(pending_pre_title)
-
-    output_lines: list[str] = list(orphans)
-    for block in blocks:
-        parts = [block["header"]]
-        if block["pre_title"]:
-            parts.append(block["pre_title"])
-        if block["body"]:
-            body_text = " ".join(b.strip() for b in block["body"] if b.strip())
-            if body_text:
-                parts.append(body_text)
-        if block["date"] and block["type"] == "education":
-            parts.append(block["date"])
-        output_lines.append(" | ".join(parts))
-
-    return "\n".join(output_lines)
+_EXP_HEADER_YEAR = re.compile(r"\b(20\d{2}|19\d{2})\b")
+_EXP_HEADER_DASH = re.compile(r"\s[-–]\s")
 
 
 def group_experience_blocks(experience_text: str) -> str:
-    """Backward-compatible alias for group_cv_blocks() (SESSION 4)."""
-    return group_cv_blocks(experience_text)
+    """
+    FIX 4 — Group fragmented experience lines into structured blocks.
+
+    An "entry header" is a line that contains BOTH:
+      • a 4-digit year (e.g. 2024, 2023, 2019 …)
+      • at least one dash separator (- or –) with surrounding whitespace
+
+    Lines following a header (until the next header) are treated as the
+    job title / description for that entry and are merged with the header
+    using " | " as separator, producing one block per job.
+
+    Example input:
+        Felis Network - Ankara - 2024
+        Kameraman
+        Kurgu Montaj
+        ABC Corp - İstanbul - 2022
+        Yazılım Geliştirici
+
+    Example output:
+        Felis Network - Ankara - 2024 | Kameraman Kurgu Montaj
+        ABC Corp - İstanbul - 2022 | Yazılım Geliştirici
+
+    Lines that appear BEFORE the first header (e.g. a standalone intro
+    sentence) are kept as-is without merging.
+
+    Args:
+        experience_text: Raw experience section text (post-extraction).
+
+    Returns:
+        Grouped text with one block per experience entry.
+    """
+    if not experience_text:
+        return experience_text
+
+    lines = [l for l in experience_text.splitlines() if l.strip()]
+    if not lines:
+        return experience_text
+
+    # Identify which lines are "entry headers"
+    def _is_entry_header(line: str) -> bool:
+        return bool(_EXP_HEADER_YEAR.search(line) and _EXP_HEADER_DASH.search(line))
+
+    # Group lines into blocks: each block starts at a header line
+    blocks: list[list[str]] = []
+    current_block: list[str] = []
+    pre_header: list[str] = []
+    found_first_header = False
+
+    for line in lines:
+        if _is_entry_header(line):
+            if not found_first_header:
+                found_first_header = True
+                # Any lines accumulated before the first header stay separate
+                pre_header = current_block
+                current_block = []
+            else:
+                # Save previous block before starting a new one
+                if current_block:
+                    blocks.append(current_block)
+            current_block = [line]
+        else:
+            current_block.append(line)
+
+    # Don't forget the last block
+    if current_block:
+        blocks.append(current_block)
+
+    # Merge each block: header " | " followed lines joined by space
+    merged_blocks: list[str] = []
+
+    # Preserve any pre-header lines unchanged
+    if pre_header:
+        merged_blocks.extend(pre_header)
+
+    for block in blocks:
+        if not block:
+            continue
+        header = block[0]
+        rest = [l.strip() for l in block[1:] if l.strip()]
+        if rest:
+            merged_blocks.append(f"{header} | {' '.join(rest)}")
+        else:
+            merged_blocks.append(header)
+
+    return "\n".join(merged_blocks)
 
 
 # ─────────────────────────────────────────────
@@ -2134,42 +1798,6 @@ _HEADING_MAX_WORDS = 6
 # 0.82 catches common OCR errors ("Educatlon" → "education", "Experlence" →
 # "experience") while being tight enough to avoid false positives on body text.
 _HEADING_FUZZY_THRESHOLD = 0.82
-
-# SESSION 5: single-word keywords too generic to fuzzy-match against body text.
-# They still fire on exact normalised equality (Rule 3) so "Roles" as a real
-# standalone heading still works, but body lines containing "roles olan pozisyonlar"
-# will not split the experience section mid-block.
-_HEADING_WEAK_KEYWORDS: frozenset = frozenset(
-    {
-        "career",
-        "work",
-        "jobs",
-        "tools",
-        "stack",
-        "me",
-        "bio",
-        "studies",
-        "learning",
-        "academic",
-        "contributions",
-        "roles",
-        "positions",
-        "degree",
-        "languages",
-        "libraries",
-        "frameworks",
-        "capabilities",
-        "strengths",
-        "expertise",
-        "overview",
-        "introduction",
-        "intro",
-    }
-)
-
-# SESSION 5: detects "Heading: body content on same line" (Word-export artifact).
-# heading part ≤ 40 chars, body part ≥ 1 char.
-_HEADING_INLINE_RE = re.compile(r"^([^:\n]{1,40}):\s+(.+)$", re.UNICODE)
 
 # Pre-built normalised keyword → canonical-section index for O(1) lookup.
 # Keys are normalised (lowercase, no punctuation, stripped) keyword strings.
@@ -2216,46 +1844,41 @@ def _is_section_heading(line: str) -> Optional[str]:
       3. EXACT match: normalised line == a keyword  → return that section.
       4. BILINGUAL match: normalised line contains a "/" separator; check each
          part against the keyword map.
-      5. FUZZY similarity match — OCR typo tolerance ("Educatlon" → education).
-         SESSION 5 FIX: keywords in _HEADING_WEAK_KEYWORDS are excluded from
-         the fuzzy pass.  They only fire on exact match (Rule 3) to prevent
-         body lines like "roles olan pozisyonlar" from splitting sections.
-
-    Note: Inline "Heading: content" patterns are handled by _try_inline_heading()
-    which is called before this function in the extract_sections loop.
+      5. FUZZY similarity match to tolerate OCR / spacing errors.
+         Only applied to short lines (already guarded by Rule 1).
+         Catches common OCR mistakes like "Educatlon" or "Experlence".
     """
     stripped = line.strip()
     if not stripped:
         return None
 
-    # Rule 1 — length guard
-    if len(stripped.split()) > _HEADING_MAX_WORDS:
+    # Rule 1 — length guard: real headings are short
+    word_count = len(stripped.split())
+    if word_count > _HEADING_MAX_WORDS:
         return None
 
     norm = _normalise_heading_line(stripped)
     if not norm:
         return None
 
-    # Rule 3 — exact match
+    # Rule 3 — exact match on fully-normalised line
     if norm in _KW_NORM_MAP:
         return _KW_NORM_MAP[norm]
 
-    # Rule 4 — bilingual split
+    # Rule 4 — bilingual "keyword / keyword" pattern
+    # IMPORTANT: "/" and "–" are stripped to spaces by _normalise_heading_line,
+    # so we must split on the RAW stripped line and normalise each part
+    # individually — not on the already-normalised `norm`.
     if re.search(r"[/–]", stripped):
         for raw_part in re.split(r"\s*[/–]\s*", stripped):
             part_norm = _normalise_heading_line(raw_part)
             if part_norm and part_norm in _KW_NORM_MAP:
                 return _KW_NORM_MAP[part_norm]
 
-    # Rule 5 — fuzzy (skip weak keywords entirely)
-    if norm in _HEADING_WEAK_KEYWORDS:
-        return None
-
+    # Rule 5 — fuzzy similarity match to tolerate OCR / spacing errors.
     best_score = 0.0
     best_section: Optional[str] = None
     for kw_norm, section in _KW_NORM_MAP.items():
-        if kw_norm in _HEADING_WEAK_KEYWORDS:
-            continue  # weak keywords: exact-only
         ratio = SequenceMatcher(None, norm, kw_norm).ratio()
         if ratio > best_score:
             best_score = ratio
@@ -2266,33 +1889,131 @@ def _is_section_heading(line: str) -> Optional[str]:
     return None
 
 
-def _try_inline_heading(line: str) -> Optional[tuple]:
+# ─────────────────────────────────────────────
+#  5b. EXTENDED SECTION MAP
+# ─────────────────────────────────────────────
+#
+# SECTION_KEYWORDS covers the five canonical output sections (summary, experience,
+# education, skills, projects).  Real Turkish CVs contain additional section types
+# not in that list: "Hobiler", "Program Becerileri", "Sertifikalar", etc.
+#
+# Without this map, unrecognised headings are invisible to _is_section_heading →
+# their content bleeds into the previous open section (the contamination bug).
+#
+# _SD_EXT_MAP maps normalised heading text → canonical bucket:
+#   "program becerileri" → "skills"   (sub-type of skills)
+#   "hobiler"            → "other"    (separate catch-all bucket)
+#   "sertifikalar"       → "other"
+#   … etc.
+#
+# The "other" bucket is a NEW output key added to the return dict.
+# It captures all content that belongs to a recognised section heading that
+# is NOT one of the five canonical sections.
+
+
+def _sd_norm(s: str) -> str:
+    """Normalise a string for _SD_EXT_MAP lookup (same rules as _KW_NORM_MAP)."""
+    s = turkish_lower(s)
+    s = re.sub(r"[^\w\u0130\u0131\s]", " ", s, flags=re.UNICODE)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+_SD_EXT_MAP: dict[str, str] = {}
+for _sd_heading, _sd_bucket in {
+    # Additional "skills" sub-sections
+    "program becerileri": "skills",
+    "teknik beceriler": "skills",
+    "yazılım becerileri": "skills",
+    "teknik yetkinlikler": "skills",
+    "dil becerileri": "skills",
+    # "other" — sections with no canonical equivalent
+    "hobiler": "other",
+    "hobi": "other",
+    "ilgi alanları": "other",
+    "ilgi ve hobiler": "other",
+    "sertifikalar": "other",
+    "sertifika": "other",
+    "belgeler": "other",
+    "lisanslar": "other",
+    "ödüller": "other",
+    "başarılar": "other",
+    "yayınlar": "other",
+    "gönüllülük": "other",
+    "gönüllü çalışmalar": "other",
+    "referanslar": "other",
+    "referans": "other",
+    "iletişim bilgileri": "other",
+    "kişisel bilgiler": "other",
+    # English equivalents → "other"
+    "hobbies": "other",
+    "interests": "other",
+    "activities": "other",
+    "certifications": "other",
+    "certificates": "other",
+    "awards": "other",
+    "achievements": "other",
+    "volunteering": "other",
+    "publications": "other",
+    "references": "other",
+}.items():
+    _SD_EXT_MAP[_sd_norm(_sd_heading)] = _sd_bucket
+
+
+def _sd_detect_heading(
+    line: str, prev_line: str, next_line: str
+) -> tuple[Optional[str], Optional[str]]:
     """
-    SESSION 5 — Detect "Heading: body content" inline pattern.
+    Three-layer heading detector with decoration stripping.
 
-    Word-exported PDFs sometimes place the section keyword and its first content
-    item on the same line separated by a colon:
-        "beceriler: python sql react"
-        "iş geçmişi: felis network - ankara - 2024"
+    Returns (canonical_section, method_label) or (None, None).
 
-    Without this split the line fails the _HEADING_MAX_WORDS guard (too many
-    words) and is accumulated as body text, causing section bleeding.
+    Layers (applied in order, stops at first match):
 
-    Returns:
-        (section_name, body_content) if the pre-colon part is a known heading.
-        None otherwise.
+      L1 — _is_section_heading()
+           Exact + bilingual + fuzzy match against SECTION_KEYWORDS.
+           Covers all five canonical sections.
+
+      L2 — _SD_EXT_MAP extended keyword lookup
+           Normalised exact match for section types missing from SECTION_KEYWORDS:
+           "Hobiler", "Program Becerileri", "Sertifikalar", etc.
+
+      L3 — Decoration stripping + re-check via L1 + L2
+           Strips decorative border characters ("─── … ───", "*** … ***",
+           "[ … ]") and trailing colons, then retests the cleaned text.
+           Handles PDF templates that wrap every heading in ornamental borders.
+
+    Layout-signal heuristics are intentionally NOT used here.  Short
+    capitalized lines such as "Python SQL" or "Adobe Premiere Pro" are
+    common CV body content (skill names, tool names) that would be
+    misclassified as headings by a naive layout scorer.
     """
-    if ":" not in line:
-        return None
-    m = _HEADING_INLINE_RE.match(line.strip())
-    if not m:
-        return None
-    heading_part = m.group(1).strip()
-    body_part = m.group(2).strip()
-    if not heading_part or not body_part:
-        return None
-    section = _is_section_heading(heading_part)
-    return (section, body_part) if section is not None else None
+    stripped = line.strip()
+    if not stripped:
+        return None, None
+
+    # L1: existing keyword detector
+    kw = _is_section_heading(stripped)
+    if kw:
+        return kw, "keyword"
+
+    # L2: extended keyword map
+    norm = _sd_norm(stripped)
+    if norm in _SD_EXT_MAP:
+        return _SD_EXT_MAP[norm], "extended"
+
+    # L3: strip decorative border characters, then re-check L1 + L2
+    plain = re.sub(r"^[^\w\u0130\u0131\u0100-\u024F]+", "", stripped, flags=re.UNICODE)
+    plain = re.sub(r"[^\w\u0130\u0131\u0100-\u024F]+$", "", plain, flags=re.UNICODE)
+    plain = plain.rstrip(":").strip()
+    if plain and plain != stripped:
+        kw2 = _is_section_heading(plain)
+        if kw2:
+            return kw2, "stripped_keyword"
+        norm2 = _sd_norm(plain)
+        if norm2 in _SD_EXT_MAP:
+            return _SD_EXT_MAP[norm2], "stripped_extended"
+
+    return None, None
 
 
 # ── Minimum line count for a section to be considered "non-empty" ────────────
@@ -2352,15 +2073,13 @@ def _fallback_keyword_recovery(
 
     for section in empty_sections:
         keywords = SECTION_KEYWORDS.get(section, [])
-        # SESSION 5 FIX: exclude weak keywords from fallback trigger set.
-        # Words like "career", "frameworks", "stack" would fire on body text
-        # and recover incorrect content into the wrong section bucket.
+        # Build a set of normalised keyword tokens for whole-word matching
         kw_norms = {
             re.sub(
                 r"[^\w\u0130\u0131\s]", "", turkish_lower(kw), flags=re.UNICODE
             ).strip()
             for kw in keywords
-        } - _HEADING_WEAK_KEYWORDS
+        }
 
         hit_idx: Optional[int] = None
         for idx, line in enumerate(all_lines):
@@ -2424,60 +2143,149 @@ def _dedup_section_lines(lines: list[str]) -> list[str]:
     return result
 
 
+# ── Content keyword scorer for headerless CVs ─────────────────────────────────
+
+_SD_CONTENT_KWS: dict[str, list[str]] = {
+    "experience": [
+        "şirket",
+        "company",
+        "pozisyon",
+        "staj",
+        "intern",
+        "çalıştım",
+        "worked",
+        "geliştirdim",
+        "yönettim",
+        "kameraman",
+        "mühendis",
+        "engineer",
+        "müdür",
+        "manager",
+        "uzman",
+        "specialist",
+    ],
+    "education": [
+        "üniversite",
+        "university",
+        "fakülte",
+        "bölüm",
+        "lisans",
+        "bachelor",
+        "yüksek lisans",
+        "master",
+        "doktora",
+        "mezun",
+        "graduate",
+        "diploma",
+        "lise",
+        "okul",
+    ],
+    "skills": [
+        "python",
+        "java",
+        "javascript",
+        "sql",
+        "react",
+        "django",
+        "html",
+        "css",
+        "typescript",
+        "figma",
+        "photoshop",
+        "premiere",
+        "excel",
+        "linux",
+        "git",
+        "docker",
+        "aws",
+        "azure",
+    ],
+    "summary": [
+        "deneyimliyim",
+        "experienced",
+        "uzmanım",
+        "hakkımda",
+        "kariyer",
+    ],
+}
+
+
+def _sd_score_line_for_section(line: str) -> Optional[str]:
+    """
+    Score *line* against per-section content keywords.
+    Returns the best-matching section name, or None if no keyword hit.
+    Used only by the headerless-CV fallback in extract_sections().
+    """
+    line_lower = turkish_lower(line)
+    scores = {
+        s: sum(1 for kw in kws if kw in line_lower)
+        for s, kws in _SD_CONTENT_KWS.items()
+    }
+    best = max(scores, key=scores.get)
+    return best if scores[best] > 0 else None
+
+
+# ── Canonical section list (includes new "other" bucket) ─────────────────────
+
+_SD_CANONICAL: list[str] = [
+    "summary",
+    "experience",
+    "education",
+    "skills",
+    "projects",
+    "other",
+]
+
+
 def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
     """
-    Split cleaned CV text into structured sections using a line-by-line
-    state machine — with duplicate/loop prevention, confidence scoring,
-    fallback recovery for empty sections, and optional debug output.
+    Position-aware, contamination-proof CV section extraction.
 
-    State machine logic (unchanged from previous version)
-    ──────────────────────────────────────────────────────
-    current_section = None
-    for each line:
-        if _is_section_heading(line):
-            current_section = detected_section
-        else:
-            append line to sections[current_section]
+    Replaces the original state machine with a hardened version that adds:
 
-    NEW: Duplicate / loop prevention
-    ─────────────────────────────────
-    A common failure on column-corrupted CVs is:
-        education → experience → education → experience  (oscillating)
-    or
-        experience → experience  (heading repeated from both columns)
+      1. Extended keyword map (_SD_EXT_MAP)
+         Recognises 30+ additional Turkish/English headings not in SECTION_KEYWORDS:
+         "Hobiler" → other, "Program Becerileri" → skills, "Sertifikalar" → other, …
+         These headings were previously INVISIBLE — their content bled into whatever
+         section was open before them (the primary contamination cause).
 
-    Fix: track the SEQUENCE of section transitions.  If a section is seen
-    again AFTER having already transitioned away from it, we do NOT reset
-    the accumulator — we APPEND to the existing content instead.  This means
-    that split-column content for the same logical section is merged rather
-    than creating phantom duplicate blocks.
+      2. "other" output bucket
+         Any content under a recognised-but-non-canonical heading lands here instead
+         of leaking into the previous section.  Downstream consumers can inspect
+         "other" for further classification.
 
-    NEW: Confidence scoring
-    ────────────────────────
-    Each section receives a score via _score_section().  Logged as a warning
-    when score < 0.5.  Returned in the output dict under "__confidence__" key
-    (a sub-dict) for downstream consumers.
+      3. Decoration stripping (Layer 3 in _sd_detect_heading)
+         "─── Beceriler ───", "*** Hakkımda ***", "[ İş Geçmişi ]" all correctly
+         detected after removing the border characters.
 
-    NEW: Fallback recovery
-    ──────────────────────
-    After the state machine pass, any section still empty triggers
-    _fallback_keyword_recovery(), which does a full-text keyword scan.
+      4. Column-split loop prevention (unchanged from original)
+         If the same section heading appears again after visiting other sections
+         (column-split PDF artefact), content is merged into the existing bucket
+         rather than creating a phantom second copy.
 
-    NEW: Debug output
-    ──────────────────
-    When debug=True (or when PARSER_DEBUG env var is set), prints:
-      • CLEANED TEXT SAMPLE (first 300 chars)
-      • DETECTED SECTIONS (names + line counts)
-      • EMPTY SECTION WARNING for any section with score < 0.5
+      5. Headerless CV fallback
+         If zero sections are detected after the main pass, per-line content
+         keyword scoring assigns lines to the most likely section.
+
+      6. Pre-header content is intentionally DISCARDED
+         Lines before the first heading (name, contact info) are not assigned to
+         any section — they are already captured by extract_contact_info() earlier
+         in the pipeline.
 
     Args:
-        text:  Cleaned, lowercased text with ===COLUMN_BREAK=== tokens intact.
-        debug: If True, print diagnostic output to stdout.
+        text:  Cleaned text (lowercased, normalised) with ===COLUMN_BREAK=== intact.
+        debug: If True, print per-line detection trace to stdout.
 
     Returns:
-        Dict with keys: summary, experience, education, skills, projects.
-        Each value is stripped body text.  Missing sections default to "".
+        Dict with keys: summary, experience, education, skills, projects, other.
+        Each value is stripped body text (empty string if section absent).
         Also includes "__confidence__" sub-dict with float scores per section.
+
+    Contamination guarantees:
+      • A line is assigned to AT MOST ONE section.
+      • Once a heading is detected, all subsequent body lines go to that section
+        exclusively — no line crosses a section boundary.
+      • Unknown headings route to "other" rather than the previous section.
     """
     _debug = debug or bool(os.environ.get("PARSER_DEBUG", ""))
 
@@ -2485,54 +2293,31 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
         sample = text[:300].replace("\n", " ↵ ")
         print(f"[DEBUG] CLEANED TEXT SAMPLE: {sample!r}")
 
-    sections: dict[str, list[str]] = {
-        "summary": [],
-        "experience": [],
-        "education": [],
-        "skills": [],
-        "projects": [],
-    }
+    sections: dict[str, list[str]] = {s: [] for s in _SD_CANONICAL}
 
+    lines = text.splitlines()
+    n = len(lines)
     current_section: Optional[str] = None
 
-    # ── Duplicate / loop prevention ───────────────────────────────────────────
-    # transition_log records every section-heading transition in document order.
-    # If we detect that the same section appears again AFTER at least one OTHER
-    # section was seen in between, we are in a loop/duplicate situation —
-    # we keep appending to the same bucket (do not reset current_section away
-    # from the prior occurrence).
-    transition_log: list[str] = []  # ordered list of section names as seen
-    seen_sections: set[str] = set()  # set of section names encountered so far
+    # Track transitions for column-split loop prevention
+    transition_log: list[str] = []
+    seen_sections: set[str] = set()
 
-    for raw_line in text.splitlines():
+    for i, raw_line in enumerate(lines):
+        prev_line = lines[i - 1] if i > 0 else ""
+        next_line = lines[i + 1] if i + 1 < n else ""
+
         # ── Pass COLUMN_BREAK_TOKEN through unchanged ─────────────────────────
         if COLUMN_BREAK_TOKEN in raw_line:
             if current_section:
                 sections[current_section].append(raw_line)
             continue
 
-        # ── SESSION 5: inline heading check ("keyword: content on same line") ─
-        inline = _try_inline_heading(raw_line)
-        if inline is not None:
-            detected, body_content = inline
-            if detected in seen_sections:
-                current_section = detected
-            else:
-                current_section = detected
-                seen_sections.add(detected)
-            transition_log.append(detected)
-            if body_content and current_section:
-                sections[current_section].append(body_content)
-            continue
-
-        detected = _is_section_heading(raw_line)
+        detected, method = _sd_detect_heading(raw_line, prev_line, next_line)
 
         if detected is not None:
-            # ── Duplicate / loop check ────────────────────────────────────────
+            # ── Column-split / loop prevention ────────────────────────────────
             if detected in seen_sections:
-                # This section heading has been seen before.
-                # Check if we've visited any OTHER section since the last time
-                # we were in this section.
                 last_occurrence = (
                     len(transition_log) - 1 - transition_log[::-1].index(detected)
                 )
@@ -2540,56 +2325,70 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
                 sections_since.discard(detected)
 
                 if sections_since:
-                    # We left this section, visited others, and came back.
-                    # This is a loop/repeat — merge into existing bucket by
-                    # simply NOT changing current_section (the accumulator
-                    # for this section keeps growing).
-                    logger.debug(
-                        f"  [dedup] Repeated section heading '{detected}' "
-                        f"after visiting {sections_since} — merging content."
-                    )
-                    # Keep current_section as detected (merge), record transition
-                    current_section = detected
-                else:
-                    # Consecutive repetition of same heading (e.g. from both columns).
-                    # Just stay in the same section — no-op.
-                    pass
+                    # We left this section, visited others, came back → column-split.
+                    # Merge into existing bucket (do not create duplicate content).
+                    if _debug:
+                        print(
+                            f"  [dedup] Repeated '{detected}' "
+                            f"after {sections_since} — merging content."
+                        )
+                # Always update current_section (merge into existing bucket)
             else:
-                # New section — normal transition
-                current_section = detected
                 seen_sections.add(detected)
 
+            current_section = detected
             transition_log.append(detected)
 
+            if _debug:
+                print(f"  [H] line {i}: {raw_line.strip()!r} → {detected!r} ({method})")
+
         else:
-            # Body line — accumulate into current section
-            if current_section is not None and raw_line.strip():
+            # ── Body line: assign to current section ──────────────────────────
+            # Pre-header lines (current_section is None) are discarded — they
+            # contain name/contact info already captured by extract_contact_info().
+            if raw_line.strip() and current_section is not None:
                 sections[current_section].append(raw_line)
 
     # ── Confidence scoring ────────────────────────────────────────────────────
     confidence: dict[str, float] = {
-        sec: _score_section(lines) for sec, lines in sections.items()
+        sec: _score_section(lines_list) for sec, lines_list in sections.items()
     }
 
-    # ── Fallback recovery for empty sections ─────────────────────────────────
-    empty_sections = [sec for sec, lines in sections.items() if not lines]
-    if empty_sections:
-        recovered = _fallback_keyword_recovery(text, empty_sections)
-        for sec, lines in recovered.items():
-            if lines:
-                sections[sec] = lines
-                confidence[sec] = _score_section(lines) * 0.6  # discounted score
-                logger.info(
-                    f"  [fallback] Recovered {len(lines)} line(s) "
-                    f"for empty section '{sec}' via keyword scan."
-                )
+    # ── Fallback: completely headerless CV ────────────────────────────────────
+    total_content = sum(len(v) for v in sections.values())
+    if total_content == 0 and text.strip():
+        if _debug:
+            print(
+                "  [fallback] No section headers detected — using content keyword scoring"
+            )
+        for line in lines:
+            if line.strip():
+                sec = _sd_score_line_for_section(line) or "other"
+                sections[sec].append(line)
+        # Discounted confidence for keyword-scored content
+        confidence = {s: _score_section(v) * 0.4 for s, v in sections.items()}
+
+    # ── Targeted fallback for specific empty canonical sections ───────────────
+    empty_canonical = [
+        s
+        for s in ["summary", "experience", "education", "skills", "projects"]
+        if not sections[s]
+    ]
+    if empty_canonical:
+        recovered = _fallback_keyword_recovery(text, empty_canonical)
+        for sec, rec_lines in recovered.items():
+            if rec_lines:
+                sections[sec] = rec_lines
+                confidence[sec] = _score_section(rec_lines) * 0.6
+                if _debug:
+                    print(
+                        f"  [fallback] Recovered {len(rec_lines)} line(s) for '{sec}'"
+                    )
 
     # ── Build final output ────────────────────────────────────────────────────
-    # Deduplicate each section's lines before joining to prevent repeated
-    # extraction artifacts from appearing in the output.
     result: dict[str, str] = {
-        sec: "\n".join(_dedup_section_lines(lines)).strip()
-        for sec, lines in sections.items()
+        sec: "\n".join(_dedup_section_lines(lines_list)).strip()
+        for sec, lines_list in sections.items()
     }
     result["__confidence__"] = confidence  # type: ignore[assignment]
 
@@ -2606,215 +2405,90 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
     # ── Log warnings for low-confidence sections ──────────────────────────────
     for sec, score in confidence.items():
         if score < 0.5:
-            msg = (
+            logger.warning(
                 f"  [quality] EMPTY SECTION WARNING: '{sec}' has "
                 f"confidence={score:.2f} (lines={len(sections[sec])})"
             )
-            logger.warning(msg)
-            if _debug:
-                print(
-                    f"[DEBUG] EMPTY SECTION WARNING: '{sec}' — confidence={score:.2f}"
-                )
 
     return result
 
 
 # ─────────────────────────────────────────────
-#  6. CONTACT INFO EXTRACTION  (SESSION 6)
+#  6. CONTACT INFO EXTRACTION
 # ─────────────────────────────────────────────
-#
-# SESSION 6 changes vs original:
-#   _repair_email_in_text() — three-pass window-based email repair:
-#     Pass 1: global @ spacing ("user @ domain" → "user@domain")
-#     Pass 2: global TLD dot spacing ("gmail .com" → "gmail.com")
-#     Pass 3: per-@ window collapse — expands ±60 chars around every @,
-#             collapses ALL whitespace, normalises "(.)"->".", validates.
-#             Handles: "gma il@gmail.com", "ahmet .yilmaz @gmail.com",
-#                      "outl ook@gma il.com", "user@domain(.)com"
-#   _is_valid_tr_phone() — post-match validation:
-#     Rejects TC Kimlik (11 digits, first digit non-zero)
-#     Rejects year-like 8-digit strings ("20XXXXXX")
-#   _CI_PHONE_TR — four explicit Turkish national phone formats
-#     (replaces generic _RE_PHONE_CONTACT which matched TC Kimlik numbers)
 
-# Email patterns
-_CI_FIND_EMAIL = re.compile(
-    r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}",
-    re.IGNORECASE,
-)
-_CI_VALID_EMAIL = re.compile(
-    r"^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$",
-    re.IGNORECASE,
-)
-
-# Turkish phone — four national formats
-_CI_PHONE_TR = re.compile(
-    r"""
-    (?<!\d)
-    (?:
-        # Format A: +90 or 0090 country code
-        (?:\+90|0090)[\s.\-]?
-        \(?\d{3}\)?[\s.\-]?\d{3}[\s.\-]?\d{2}[\s.\-]?\d{2}
-        |
-        # Format B: leading 0, national (mobile 05XX, landline 03XX)
-        0\d{3}[\s.\-]?\d{3}[\s.\-]?\d{2}[\s.\-]?\d{2}
-        |
-        # Format C: parenthesised area code  (0312) 456 78 90
-        \(0\d{2,3}\)[\s.\-]?\d{3}[\s.\-]?\d{2}[\s.\-]?\d{2}
-        |
-        # Format D: 7-digit local (rare, no area code)
-        \d{3}[\s.\-]\d{2}[\s.\-]\d{2}
-    )
-    (?!\d)
-    """,
-    re.VERBOSE,
-)
-
-# Social profile patterns (kept from original, renamed for clarity)
-_CI_LINKEDIN = re.compile(
+_RE_LINKEDIN = re.compile(
     r"(?:https?://)?(?:www\.)?linkedin\.com/in/([a-zA-Z0-9_\-%.]+)",
     re.IGNORECASE,
 )
-_CI_GITHUB = re.compile(
+_RE_GITHUB = re.compile(
     r"(?:https?://)?(?:www\.)?github\.com/([a-zA-Z0-9_\-]+)",
     re.IGNORECASE,
 )
-
-
-def _repair_email_in_text(text: str) -> str:
-    """
-    SESSION 6 — Repair broken email addresses by collapsing injected spaces.
-
-    Three passes:
-      Pass 1: global @ spacing (both one-sided variants)
-      Pass 2: global TLD dot spacing (up to 3 iterations)
-      Pass 3: per-@ window — for each @ sign, expand ±60 chars (stopping at
-              newlines), collapse all whitespace, strip "(.)"-style noise,
-              validate via _CI_VALID_EMAIL; substitute if valid.
-
-    Examples::
-        "gma il@gmail.com"         → "gmail@gmail.com"
-        "ahmet .yilmaz @gmail.com" → "ahmet.yilmaz@gmail.com"
-        "outl ook@gma il.com"      → "outlook@gmail.com"
-        "user@domain(.)com"        → "user@domain.com"
-    """
-    if not text:
-        return text
-
-    # Pass 1: @ spacing
-    text = re.sub(r"([A-Za-z0-9._%+\-])\s+@\s*([A-Za-z0-9])", r"\1@\2", text)
-    text = re.sub(r"([A-Za-z0-9._%+\-])\s*@\s+([A-Za-z0-9])", r"\1@\2", text)
-
-    # Pass 2: TLD dot spacing
-    for _ in range(3):
-        new = re.sub(
-            r"([A-Za-z0-9])\s*\.\s*([A-Za-z]{2,6})(?=\s|$|[,;:\)])",
-            r"\1.\2",
-            text,
-        )
-        if new == text:
-            break
-        text = new
-
-    # Pass 3: per-@ window collapse
-    chars = list(text)
-    char_offset = 0
-
-    for at_m in re.finditer(r"@", text):
-        at_pos = at_m.start()
-
-        left = at_pos - 1
-        while left >= 0 and (at_pos - left) <= 60 and text[left] not in "\n\r":
-            left -= 1
-        left += 1
-
-        right = at_pos + 1
-        while (
-            right < len(text) and (right - at_pos) <= 60 and text[right] not in "\n\r"
-        ):
-            right += 1
-
-        window = text[left:right]
-        collapsed = re.sub(r"\s+", "", window)
-        collapsed = re.sub(r"[\(\[]\s*\.\s*[\)\]]", ".", collapsed)  # (.) → .
-
-        em = _CI_FIND_EMAIL.search(collapsed)
-        if em and _CI_VALID_EMAIL.match(em.group(0)):
-            replacement = list(collapsed)
-            chars[left + char_offset : right + char_offset] = replacement
-            char_offset += len(replacement) - (right - left)
-
-    return "".join(chars)
-
-
-def _is_valid_tr_phone(raw: str) -> bool:
-    """
-    SESSION 6 — Validate a regex-matched string as a genuine Turkish phone number.
-
-    Guards:
-      • digit count 7–12
-      • 11 digits starting non-zero → TC Kimlik → reject
-      • 8 digits starting "20"     → year-like  → reject
-    """
-    digits = re.sub(r"\D", "", raw)
-    n = len(digits)
-    if n < 7 or n > 12:
-        return False
-    if n == 11 and digits[0] != "0":  # TC Kimlik
-        return False
-    if n == 8 and digits.startswith("20"):  # year-range
-        return False
-    return True
+_RE_PHONE_CONTACT = re.compile(
+    r"(?<!\d)(?:\+?\d{1,3}[\s.\-]?)?(?:\(?\d{2,4}\)?[\s.\-]?){1,4}\d{2,4}(?!\d)",
+)
 
 
 def extract_contact_info(text: str) -> dict[str, str]:
     """
-    SESSION 6 — Extract contact information from raw (un-cleaned) CV text.
+    Extract contact information using precise regular expressions.
 
-    Pipeline:
-      1. _repair_email_in_text() — three-pass broken email repair.
-      2. _CI_FIND_EMAIL.search()  — extract first valid email.
-      3. _CI_PHONE_TR.finditer() + _is_valid_tr_phone() — Turkish phone.
-      4. _CI_LINKEDIN / _CI_GITHUB — social profile URLs.
+    Extracts: email, phone, linkedin, github.
 
-    Returns dict: {email, phone, linkedin, github}, each "" if not found.
+    IMPORTANT: We operate on the ORIGINAL (un-cleaned) text to avoid
+    mangling punctuation inside emails and URLs.
 
-    Examples::
-        extract_contact_info("gma il@gm ail.com  +90 532 123 45 67")
-        → {"email": "gmail@gmail.com", "phone": "+90 532 123 45 67", ...}
-
-        extract_contact_info("TC: 12345678901  Cep: 0532 111 22 33")
-        → {"email": "", "phone": "0532 111 22 33", ...}
+    FIX 6: Before applying the email regex, we create a pre-processed copy
+    of the text where spaces around '@' and '.' are collapsed, so that broken
+    emails like "user @ gmail . com" or "gma il.com" are matched correctly.
+    The original text is still used for all other fields (phone, linkedin,
+    github) to avoid unintended mutations.
     """
-    contact: dict[str, str] = {"email": "", "phone": "", "linkedin": "", "github": ""}
+    contact: dict[str, str] = {
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "github": "",
+    }
 
-    if not text:
-        return contact
+    # ── FIX 6: pre-process text for email extraction ──────────────────────────
+    # Collapse spaces around '@' sign:  "user @ domain"  → "user@domain"
+    email_search_text = re.sub(
+        r"([A-Za-z0-9._%+\-])\s+@\s+([A-Za-z0-9])", r"\1@\2", text
+    )
+    # Collapse spaces around '.' in TLD-like positions:
+    # "gmail .com" → "gmail.com" ; "outlook. com" → "outlook.com"
+    email_search_text = re.sub(
+        r"([A-Za-z0-9])\s*\.\s*([A-Za-z]{2,6})(?=\s|$|[,;\)])",
+        r"\1.\2",
+        email_search_text,
+    )
 
-    # Email: repair then extract
-    email_text = _repair_email_in_text(text)
-    em = _CI_FIND_EMAIL.search(email_text)
-    if em:
-        contact["email"] = em.group(0).strip()
+    email_match = _RE_EMAIL.search(email_search_text)
+    if email_match:
+        contact["email"] = email_match.group(0).strip()
 
-    # Phone: Turkish formats, validated
-    for ph_m in _CI_PHONE_TR.finditer(text):
-        raw = ph_m.group(0).strip()
-        if _is_valid_tr_phone(raw):
-            contact["phone"] = raw
+    phone_matches = _RE_PHONE_CONTACT.findall(text)
+    for raw in phone_matches:
+        digits = re.sub(r"\D", "", raw)
+        if 7 <= len(digits) <= 15:
+            contact["phone"] = raw.strip()
             break
 
-    # LinkedIn
-    li_m = _CI_LINKEDIN.search(text)
-    if li_m:
-        full = li_m.group(0)
-        contact["linkedin"] = full if full.startswith("http") else "https://" + full
+    linkedin_match = _RE_LINKEDIN.search(text)
+    if linkedin_match:
+        full = linkedin_match.group(0)
+        if not full.startswith("http"):
+            full = "https://" + full
+        contact["linkedin"] = full
 
-    # GitHub
-    gh_m = _CI_GITHUB.search(text)
-    if gh_m:
-        full = gh_m.group(0)
-        contact["github"] = full if full.startswith("http") else "https://" + full
+    github_match = _RE_GITHUB.search(text)
+    if github_match:
+        full = github_match.group(0)
+        if not full.startswith("http"):
+            full = "https://" + full
+        contact["github"] = full
 
     return contact
 
@@ -3015,13 +2689,11 @@ def process_cv(file_path: Path) -> dict:
     section_confidence: dict[str, float] = sections_raw.pop("__confidence__", {})
     sections = sections_raw
 
-    # ── Step 6b: group experience and education blocks (SESSIONS 4 + 5) ─────
-    # Experience: "Company - City - Year | Job Title Description"
-    # Education:  "School | Department | Date"
+    # ── Step 6b: group experience blocks (FIX 4) ─────────────────────────────
+    # Merge fragmented experience lines (each job was one line) into structured
+    # blocks: "Company - City - Year | Job Title Description".
     if sections.get("experience"):
-        sections["experience"] = group_cv_blocks(sections["experience"])
-    if sections.get("education"):
-        sections["education"] = group_cv_blocks(sections["education"])
+        sections["experience"] = group_experience_blocks(sections["experience"])
 
     # ── Step 7: photo detection ───────────────────────────────────────────────
     has_photo = False

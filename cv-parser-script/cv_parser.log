@@ -9013,3 +9013,380 @@
 2026-04-20 22:06:22,006  [INFO]    Output     : final_dataset.json
 2026-04-20 22:06:22,006  [INFO]    (check cv_parser.log for column-layout details)
 2026-04-20 22:06:22,007  [INFO]  ============================================================
+2026-04-22 20:04:06,072  [INFO]  Found 64 PDF(s) — 64 files total.
+2026-04-22 20:04:06,181  [INFO]  Processing: abdullah soylu.pdf
+2026-04-22 20:04:06,182  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:06,949  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-22 20:04:06,950  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:06,950  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:08,094  [INFO]    [done] abdullah soylu.pdf → format=pdf, lang=tr, photo=True, chars=1029
+2026-04-22 20:04:08,096  [INFO]  Processing: ahmet berat bulduk.pdf
+2026-04-22 20:04:08,096  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:08,414  [INFO]    [layout] TABLE layout detected — page 1 of 'ahmet berat bulduk.pdf'
+2026-04-22 20:04:09,478  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:09,479  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-22 20:04:09,479  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:09,487  [INFO]    [done] ahmet berat bulduk.pdf → format=pdf, lang=tr, photo=True, chars=3565
+2026-04-22 20:04:09,488  [INFO]  Processing: alihan tekin.pdf
+2026-04-22 20:04:09,489  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:09,630  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'alihan tekin.pdf'
+2026-04-22 20:04:09,631  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-22 20:04:10,514  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:10,514  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:10,531  [INFO]    [done] alihan tekin.pdf → format=pdf, lang=en, photo=True, chars=1618
+2026-04-22 20:04:10,532  [INFO]  Processing: arda gungor.pdf
+2026-04-22 20:04:10,533  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:10,709  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'arda gungor.pdf'
+2026-04-22 20:04:10,710  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-22 20:04:11,116  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.48 (lines=3)
+2026-04-22 20:04:11,117  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:11,125  [INFO]    [done] arda gungor.pdf → format=pdf, lang=tr, photo=True, chars=2483
+2026-04-22 20:04:11,126  [INFO]  Processing: ayse gunes.pdf
+2026-04-22 20:04:11,127  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:11,173  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:04:11,179  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:04:11,183  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:04:11,187  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:04:11,257  [INFO]    [layout] TABLE layout detected — page 1 of 'ayse gunes.pdf'
+2026-04-22 20:04:12,162  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-22 20:04:12,163  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:12,163  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:12,171  [INFO]    [done] ayse gunes.pdf → format=pdf, lang=tr, photo=True, chars=2923
+2026-04-22 20:04:12,172  [INFO]  Processing: ayse soydal.pdf
+2026-04-22 20:04:12,172  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:12,755  [INFO]    [done] ayse soydal.pdf → format=pdf, lang=tr, photo=False, chars=2693
+2026-04-22 20:04:12,756  [INFO]  Processing: ayten ceyda cetinkaya.pdf
+2026-04-22 20:04:12,756  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:13,508  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.48 (lines=6)
+2026-04-22 20:04:13,508  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:13,515  [INFO]    [done] ayten ceyda cetinkaya.pdf → format=pdf, lang=tr, photo=False, chars=1426
+2026-04-22 20:04:13,516  [INFO]  Processing: aziz ekren.pdf
+2026-04-22 20:04:13,517  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:13,777  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:13,777  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-22 20:04:13,778  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:13,790  [INFO]    [done] aziz ekren.pdf → format=pdf, lang=en, photo=False, chars=1884
+2026-04-22 20:04:13,792  [INFO]  Processing: berkay sengul.pdf
+2026-04-22 20:04:13,792  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:13,816  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:04:13,819  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:04:13,825  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:04:13,828  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:04:13,832  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:04:13,837  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:04:13,841  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:04:14,365  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:14,366  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.30 (lines=2)
+2026-04-22 20:04:14,366  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:14,382  [INFO]    [done] berkay sengul.pdf → format=pdf, lang=en, photo=False, chars=2003
+2026-04-22 20:04:14,383  [INFO]  Processing: bilal sarikavak.pdf
+2026-04-22 20:04:14,384  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:14,782  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'bilal sarikavak.pdf'
+2026-04-22 20:04:14,783  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-22 20:04:16,443  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:16,452  [INFO]    [done] bilal sarikavak.pdf → format=pdf, lang=tr, photo=True, chars=2978
+2026-04-22 20:04:16,453  [INFO]  Processing: bora ozmen.pdf
+2026-04-22 20:04:16,454  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:17,619  [INFO]    [done] bora ozmen.pdf → format=pdf, lang=en, photo=False, chars=2837
+2026-04-22 20:04:17,620  [INFO]  Processing: burcu kuzucu.pdf
+2026-04-22 20:04:17,620  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:18,628  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-22 20:04:18,629  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:18,630  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:18,643  [INFO]    [done] burcu kuzucu.pdf → format=pdf, lang=tr, photo=True, chars=1308
+2026-04-22 20:04:18,644  [INFO]  Processing: cem korkmaz.pdf
+2026-04-22 20:04:18,644  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:19,624  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:19,624  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-22 20:04:19,625  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.48 (lines=4)
+2026-04-22 20:04:19,625  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:19,634  [INFO]    [done] cem korkmaz.pdf → format=pdf, lang=tr, photo=True, chars=2805
+2026-04-22 20:04:19,635  [INFO]  Processing: cem tatlıdil.pdf
+2026-04-22 20:04:19,636  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:21,664  [INFO]    [layout] TABLE layout detected — page 1 of 'cem tatlıdil.pdf'
+2026-04-22 20:04:22,606  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:22,607  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-22 20:04:22,607  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-22 20:04:22,608  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:22,629  [INFO]    [done] cem tatlıdil.pdf → format=pdf, lang=en, photo=False, chars=3513
+2026-04-22 20:04:22,630  [INFO]  Processing: cetin yuceyurt.pdf
+2026-04-22 20:04:22,630  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:23,437  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:23,438  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:23,447  [INFO]    [done] cetin yuceyurt.pdf → format=pdf, lang=tr, photo=True, chars=2928
+2026-04-22 20:04:23,448  [INFO]  Processing: ebubekir bayazit.pdf
+2026-04-22 20:04:23,448  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:24,083  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:24,084  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-22 20:04:24,084  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:24,093  [INFO]    [done] ebubekir bayazit.pdf → format=pdf, lang=tr, photo=True, chars=1919
+2026-04-22 20:04:24,095  [INFO]  Processing: emine dogan.pdf
+2026-04-22 20:04:24,095  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:24,331  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'emine dogan.pdf'
+2026-04-22 20:04:24,332  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-22 20:04:25,002  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-22 20:04:25,003  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:25,003  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:25,012  [INFO]    [done] emine dogan.pdf → format=pdf, lang=tr, photo=True, chars=1976
+2026-04-22 20:04:25,013  [INFO]  Processing: emre celik.pdf
+2026-04-22 20:04:25,014  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:25,228  [INFO]    [layout] TABLE layout detected — page 1 of 'emre celik.pdf'
+2026-04-22 20:04:26,233  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:26,242  [INFO]    [done] emre celik.pdf → format=pdf, lang=tr, photo=True, chars=2009
+2026-04-22 20:04:26,243  [INFO]  Processing: emre mutlu.pdf
+2026-04-22 20:04:26,244  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:26,596  [INFO]    [layout] TABLE layout detected — page 1 of 'emre mutlu.pdf'
+2026-04-22 20:04:27,699  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:27,699  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:27,708  [INFO]    [done] emre mutlu.pdf → format=pdf, lang=tr, photo=True, chars=3328
+2026-04-22 20:04:27,709  [INFO]  Processing: esabil comal.pdf
+2026-04-22 20:04:27,709  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:27,990  [INFO]    [layout] TABLE layout detected — page 1 of 'esabil comal.pdf'
+2026-04-22 20:04:28,276  [INFO]    [layout] TABLE layout detected — page 2 of 'esabil comal.pdf'
+2026-04-22 20:04:28,450  [INFO]    [layout] TABLE layout detected — page 3 of 'esabil comal.pdf'
+2026-04-22 20:04:31,869  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:31,869  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-22 20:04:31,870  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:31,880  [INFO]    [done] esabil comal.pdf → format=pdf, lang=tr, photo=True, chars=9586
+2026-04-22 20:04:31,882  [INFO]  Processing: fatma ersoy.pdf
+2026-04-22 20:04:31,882  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:32,387  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:32,388  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:32,398  [INFO]    [done] fatma ersoy.pdf → format=pdf, lang=tr, photo=False, chars=1457
+2026-04-22 20:04:32,399  [INFO]  Processing: fatmanur paysan.pdf
+2026-04-22 20:04:32,399  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:33,073  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:33,074  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:33,088  [INFO]    [done] fatmanur paysan.pdf → format=pdf, lang=tr, photo=False, chars=904
+2026-04-22 20:04:33,089  [INFO]  Processing: fevzi cosgun.pdf
+2026-04-22 20:04:33,090  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:34,019  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-22 20:04:34,020  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:34,032  [INFO]    [done] fevzi cosgun.pdf → format=pdf, lang=tr, photo=False, chars=1634
+2026-04-22 20:04:34,033  [INFO]  Processing: furkan guner.pdf
+2026-04-22 20:04:34,033  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:34,724  [INFO]    [layout] TABLE layout detected — page 1 of 'furkan guner.pdf'
+2026-04-22 20:04:34,924  [INFO]    [layout] TABLE layout detected — page 2 of 'furkan guner.pdf'
+2026-04-22 20:04:39,917  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:39,918  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:39,939  [INFO]    [done] furkan guner.pdf → format=pdf, lang=mixed, photo=True, chars=6423
+2026-04-22 20:04:39,940  [INFO]  Processing: furkan karakurt.pdf
+2026-04-22 20:04:39,941  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:40,170  [INFO]    [layout] TABLE layout detected — page 1 of 'furkan karakurt.pdf'
+2026-04-22 20:04:40,278  [INFO]    [layout] TABLE layout detected — page 2 of 'furkan karakurt.pdf'
+2026-04-22 20:04:42,081  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:42,094  [INFO]    [done] furkan karakurt.pdf → format=pdf, lang=tr, photo=True, chars=5356
+2026-04-22 20:04:42,096  [INFO]  Processing: gizem kilinc.pdf
+2026-04-22 20:04:42,096  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:42,872  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:42,922  [INFO]    [done] gizem kilinc.pdf → format=pdf, lang=tr, photo=False, chars=2544
+2026-04-22 20:04:42,957  [INFO]  Processing: gokdeniz can.pdf
+2026-04-22 20:04:42,960  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:43,092  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'gokdeniz can.pdf'
+2026-04-22 20:04:43,093  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-22 20:04:44,685  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:44,694  [INFO]    [done] gokdeniz can.pdf → format=pdf, lang=tr, photo=True, chars=3241
+2026-04-22 20:04:44,695  [INFO]  Processing: gul koc.pdf
+2026-04-22 20:04:44,696  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:44,966  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:44,967  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.48 (lines=4)
+2026-04-22 20:04:44,967  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:44,967  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:44,972  [INFO]    [done] gul koc.pdf → format=pdf, lang=tr, photo=False, chars=480
+2026-04-22 20:04:44,974  [INFO]  Processing: görkem tolu.pdf
+2026-04-22 20:04:44,974  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:45,240  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:45,240  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:45,247  [INFO]    [done] görkem tolu.pdf → format=pdf, lang=tr, photo=True, chars=1098
+2026-04-22 20:04:45,248  [INFO]  Processing: ilteris cansiz.pdf
+2026-04-22 20:04:45,249  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:46,039  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.30 (lines=2)
+2026-04-22 20:04:46,039  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:46,040  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:46,048  [INFO]    [done] ilteris cansiz.pdf → format=pdf, lang=tr, photo=False, chars=1639
+2026-04-22 20:04:46,049  [INFO]  Processing: ipek nur sarialp.pdf
+2026-04-22 20:04:46,049  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:46,344  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.30 (lines=2)
+2026-04-22 20:04:46,345  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:46,353  [INFO]    [done] ipek nur sarialp.pdf → format=pdf, lang=en, photo=True, chars=1482
+2026-04-22 20:04:46,354  [INFO]  Processing: irem celik.pdf
+2026-04-22 20:04:46,354  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:46,799  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.48 (lines=13)
+2026-04-22 20:04:46,799  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:46,807  [INFO]    [done] irem celik.pdf → format=pdf, lang=tr, photo=True, chars=1016
+2026-04-22 20:04:46,808  [INFO]  Processing: irem sude uslu.pdf
+2026-04-22 20:04:46,808  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:47,921  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:47,921  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.20 (lines=2)
+2026-04-22 20:04:47,922  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.20 (lines=1)
+2026-04-22 20:04:47,922  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.40 (lines=8)
+2026-04-22 20:04:47,923  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.40 (lines=34)
+2026-04-22 20:04:47,933  [INFO]    [done] irem sude uslu.pdf → format=pdf, lang=en, photo=True, chars=1719
+2026-04-22 20:04:47,934  [INFO]  Processing: kaan olmez.pdf
+2026-04-22 20:04:47,935  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:48,428  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:48,436  [INFO]    [done] kaan olmez.pdf → format=pdf, lang=tr, photo=True, chars=1220
+2026-04-22 20:04:48,438  [INFO]  Processing: kemal diri.pdf
+2026-04-22 20:04:48,438  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:48,621  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'kemal diri.pdf'
+2026-04-22 20:04:48,621  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-22 20:04:49,545  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:49,554  [INFO]    [done] kemal diri.pdf → format=pdf, lang=tr, photo=True, chars=1856
+2026-04-22 20:04:49,555  [INFO]  Processing: mehmet deniz mol.pdf
+2026-04-22 20:04:49,556  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:49,677  [INFO]    [layout] MULTI_COLUMN (3+) detected — page 1 of 'mehmet deniz mol.pdf'
+2026-04-22 20:04:49,678  [INFO]    [layout] Multi-column (3+) page detected — using positional sort.
+2026-04-22 20:04:51,515  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:51,516  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:51,522  [INFO]    [done] mehmet deniz mol.pdf → format=pdf, lang=tr, photo=True, chars=4785
+2026-04-22 20:04:51,524  [INFO]  Processing: mehmet emre arican.pdf
+2026-04-22 20:04:51,524  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:51,722  [INFO]    [layout] TABLE layout detected — page 1 of 'mehmet emre arican.pdf'
+2026-04-22 20:04:52,161  [INFO]    [done] mehmet emre arican.pdf → format=pdf, lang=tr, photo=False, chars=4532
+2026-04-22 20:04:52,163  [INFO]  Processing: mina demirci.pdf
+2026-04-22 20:04:52,163  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:53,109  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:53,109  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-22 20:04:53,109  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-04-22 20:04:53,110  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:53,110  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:53,118  [INFO]    [done] mina demirci.pdf → format=pdf, lang=tr, photo=True, chars=512
+2026-04-22 20:04:53,118  [INFO]  Processing: muhammed fatih ulasli.pdf
+2026-04-22 20:04:53,118  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:54,215  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:04:54,225  [INFO]    [done] muhammed fatih ulasli.pdf → format=pdf, lang=en, photo=True, chars=1971
+2026-04-22 20:04:54,226  [INFO]  Processing: muhammed furkan ozcan mekatronik.pdf
+2026-04-22 20:04:54,226  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:55,519  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:04:55,520  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:04:55,528  [INFO]    [done] muhammed furkan ozcan mekatronik.pdf → format=pdf, lang=tr, photo=True, chars=2826
+2026-04-22 20:04:55,529  [INFO]  Processing: muhammed furkan ozcan.pdf
+2026-04-22 20:04:55,530  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:04:55,573  [INFO]    [pdf→ocr] Text too short (0 chars) in 'muhammed furkan ozcan.pdf' — invoking OCR.
+2026-04-22 20:04:55,573  [INFO]    [ocr] Starting OCR on 'muhammed furkan ozcan.pdf'
+2026-04-22 20:04:59,900  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-04-22 20:04:59,900  [INFO]    [ocr] Extracted 2939 chars from 'muhammed furkan ozcan.pdf'
+2026-04-22 20:05:00,426  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:05:00,427  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.20 (lines=2)
+2026-04-22 20:05:00,427  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.40 (lines=6)
+2026-04-22 20:05:00,428  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:05:00,428  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.40 (lines=47)
+2026-04-22 20:05:00,452  [INFO]    [done] muhammed furkan ozcan.pdf → format=ocr, lang=tr, photo=True, chars=2916
+2026-04-22 20:05:00,454  [INFO]  Processing: muhammet dogan.pdf
+2026-04-22 20:05:00,454  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:00,842  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:05:00,843  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:05:00,850  [INFO]    [done] muhammet dogan.pdf → format=pdf, lang=tr, photo=True, chars=993
+2026-04-22 20:05:00,851  [INFO]  Processing: nilsu ak 1.pdf
+2026-04-22 20:05:00,851  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:01,222  [INFO]    [done] nilsu ak 1.pdf → format=pdf, lang=tr, photo=False, chars=1753
+2026-04-22 20:05:01,224  [INFO]  Processing: nilsu ak 2.pdf
+2026-04-22 20:05:01,224  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:01,395  [INFO]    [layout] TABLE layout detected — page 1 of 'nilsu ak 2.pdf'
+2026-04-22 20:05:02,638  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:05:02,639  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:05:02,650  [INFO]    [done] nilsu ak 2.pdf → format=pdf, lang=en, photo=True, chars=3286
+2026-04-22 20:05:02,651  [INFO]  Processing: omer bugra karakoc.pdf
+2026-04-22 20:05:02,651  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:03,463  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:05:03,464  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-22 20:05:03,472  [INFO]    [done] omer bugra karakoc.pdf → format=pdf, lang=tr, photo=True, chars=1528
+2026-04-22 20:05:03,473  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-22 20:05:03,474  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:06,188  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-22 20:05:07,897  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-22 20:05:07,898  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:05:07,907  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6027
+2026-04-22 20:05:07,908  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-22 20:05:07,909  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:08,542  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-22 20:05:08,558  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-22 20:05:08,559  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-22 20:05:08,560  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:08,959  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-22 20:05:08,965  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2411
+2026-04-22 20:05:08,966  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-22 20:05:08,967  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:09,405  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-22 20:05:09,406  [INFO]  Processing: sena nur morbel.pdf
+2026-04-22 20:05:09,407  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:09,434  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:05:09,442  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:05:09,445  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:05:09,449  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-04-22 20:05:09,669  [INFO]    [layout] TABLE layout detected — page 1 of 'sena nur morbel.pdf'
+2026-04-22 20:05:10,610  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:05:10,611  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:05:10,620  [INFO]    [done] sena nur morbel.pdf → format=pdf, lang=tr, photo=True, chars=3452
+2026-04-22 20:05:10,621  [INFO]  Processing: senem naz yurt.pdf
+2026-04-22 20:05:10,622  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:10,967  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:05:10,967  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:05:10,975  [INFO]    [done] senem naz yurt.pdf → format=pdf, lang=en, photo=False, chars=4049
+2026-04-22 20:05:10,977  [INFO]  Processing: suat bilgay.pdf
+2026-04-22 20:05:10,977  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:11,802  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:05:11,802  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:05:11,822  [INFO]    [done] suat bilgay.pdf → format=pdf, lang=en, photo=True, chars=4124
+2026-04-22 20:05:11,823  [INFO]  Processing: sudenaz boyali.pdf
+2026-04-22 20:05:11,823  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:12,003  [INFO]    [layout] TABLE layout detected — page 1 of 'sudenaz boyali.pdf'
+2026-04-22 20:05:12,457  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-22 20:05:12,457  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:05:12,464  [INFO]    [done] sudenaz boyali.pdf → format=pdf, lang=tr, photo=True, chars=1193
+2026-04-22 20:05:12,465  [INFO]  Processing: tugba zengin.pdf
+2026-04-22 20:05:12,465  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:13,503  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.40 (lines=7)
+2026-04-22 20:05:13,504  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.20 (lines=2)
+2026-04-22 20:05:13,504  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.40 (lines=8)
+2026-04-22 20:05:13,505  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.40 (lines=35)
+2026-04-22 20:05:13,518  [INFO]    [done] tugba zengin.pdf → format=pdf, lang=en, photo=True, chars=3090
+2026-04-22 20:05:13,518  [INFO]  Processing: ufuk yuceyurt.pdf
+2026-04-22 20:05:13,519  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:14,020  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:05:14,021  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:05:14,028  [INFO]    [done] ufuk yuceyurt.pdf → format=pdf, lang=tr, photo=True, chars=1672
+2026-04-22 20:05:14,029  [INFO]  Processing: vedat acat.pdf
+2026-04-22 20:05:14,030  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:14,181  [INFO]    [layout] TABLE layout detected — page 1 of 'vedat acat.pdf'
+2026-04-22 20:05:14,495  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-04-22 20:05:14,495  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-22 20:05:14,496  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:05:14,502  [INFO]    [done] vedat acat.pdf → format=pdf, lang=tr, photo=True, chars=2048
+2026-04-22 20:05:14,503  [INFO]  Processing: yagiz tokgoz.pdf
+2026-04-22 20:05:14,503  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:14,878  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:05:14,879  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-22 20:05:14,879  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:05:14,888  [INFO]    [done] yagiz tokgoz.pdf → format=pdf, lang=en, photo=False, chars=1922
+2026-04-22 20:05:14,890  [INFO]  Processing: yuksel cosgun Backend.pdf
+2026-04-22 20:05:14,890  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:15,370  [INFO]    [done] yuksel cosgun Backend.pdf → format=pdf, lang=en, photo=True, chars=2446
+2026-04-22 20:05:15,372  [INFO]  Processing: yuksel cosgun DEVOPS-CLOUD.pdf
+2026-04-22 20:05:15,372  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:15,889  [INFO]    [done] yuksel cosgun DEVOPS-CLOUD.pdf → format=pdf, lang=en, photo=True, chars=2600
+2026-04-22 20:05:15,890  [INFO]  Processing: yuksel cosgun ML Data.pdf
+2026-04-22 20:05:15,890  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:16,322  [INFO]    [done] yuksel cosgun ML Data.pdf → format=pdf, lang=en, photo=True, chars=2249
+2026-04-22 20:05:16,323  [INFO]  Processing: yuksel cosgun Mobile.pdf
+2026-04-22 20:05:16,323  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:16,767  [INFO]    [done] yuksel cosgun Mobile.pdf → format=pdf, lang=en, photo=True, chars=2332
+2026-04-22 20:05:16,768  [INFO]  Processing: yuksel cosgun QA Automation.pdf
+2026-04-22 20:05:16,768  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:17,215  [INFO]    [done] yuksel cosgun QA Automation.pdf → format=pdf, lang=en, photo=True, chars=2183
+2026-04-22 20:05:17,216  [INFO]  Processing: yuksel cosgun Resume.pdf
+2026-04-22 20:05:17,217  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:17,625  [INFO]    [done] yuksel cosgun Resume.pdf → format=pdf, lang=en, photo=True, chars=2258
+2026-04-22 20:05:17,626  [INFO]  Processing: zeliha ayca aydemir.pdf
+2026-04-22 20:05:17,627  [INFO]    [method] PDF extraction (column-aware)
+2026-04-22 20:05:17,799  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-04-22 20:05:17,800  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-22 20:05:17,809  [INFO]    [done] zeliha ayca aydemir.pdf → format=pdf, lang=en, photo=False, chars=1332
+2026-04-22 20:05:17,818  [INFO]  ============================================================
+2026-04-22 20:05:17,819  [INFO]  DONE — 64 files processed
+2026-04-22 20:05:17,819  [INFO]    ✓ Success  : 64
+2026-04-22 20:05:17,820  [INFO]    ✗ Failed   : 0
+2026-04-22 20:05:17,820  [INFO]    ~ OCR used : 1
+2026-04-22 20:05:17,820  [INFO]    Output     : final_dataset.json
+2026-04-22 20:05:17,821  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-22 20:05:17,821  [INFO]  ============================================================
