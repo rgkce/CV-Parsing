@@ -61,6 +61,20 @@ try:
 except ImportError:
     LANGDETECT_AVAILABLE = False
 
+try:
+    from rapidfuzz import fuzz as _rf_fuzz
+
+    RAPIDFUZZ_AVAILABLE = True
+except ImportError:
+    RAPIDFUZZ_AVAILABLE = False
+
+try:
+    from sklearn.cluster import KMeans as _KMeans
+
+    SKLEARN_AVAILABLE = True
+except ImportError:
+    SKLEARN_AVAILABLE = False
+
 
 # ─────────────────────────────────────────────
 #  LOGGING SETUP
@@ -916,78 +930,88 @@ _NT_DOT_SPACES = re.compile(r"([A-Za-z0-9])\s*\.\s*([A-Za-z]{2,6})(?=\s|$|[,;])"
 
 def normalize_text(text: str) -> str:
     """
-    FIX 3 — Preprocessing normalization layer.
+    FIX 3 (Session 11 upgrade) — Structure-safe preprocessing normalization.
 
-    Applies safe, targeted fixes before the main OCR-repair and clean passes:
+    Processes text LINE BY LINE so that section headers are NEVER mutated:
+      • Header lines (exact/fuzzy match against SECTION_KEYWORDS + _SD_EXT_MAP)
+        are passed through completely untouched.
+      • Body lines receive:
+          1. Unicode NFC normalization (Turkish composed chars)
+          2. Email space repair  (\"user @ gmail . com\" → \"user@gmail.com\")
+          3. Domain-dot fix restricted to lines containing '@'
+             (avoids false-positive sentence-dot collapses like \"Dr. Smith\")
+          4. Conservative trailing-whitespace trim
 
-      1. Turkish Unicode NFC normalization — ensures composed form so that
-         characters like 'ş', 'ğ', 'ı' are single code points and not
-         broken into base-char + combining-diacritic pairs (a PDF encoding
-         artifact that causes them to vanish in downstream regex filters).
-
-      2. Broken email address repair — removes spaces injected around '@'
-         and '.' within email-like token spans:
-           "user @ gmail .com"  →  "user@gmail.com"
-           "gma il. com"        →  fixed by repair_broken_emails() called
-                                   before this, but any residual patterns
-                                   are caught here too.
-
-      3. Conservative broken-word space removal — when a single character
-         or very short token (1–2 chars) is sandwiched between longer word
-         tokens on the same line and matches a known OCR-split pattern
-         (e.g. "tekn ik" where "ik" is a 2-char suffix fragment),
-         the space is collapsed.  Only applied per-line to avoid merging
-         across sentence boundaries.
+    This guarantees that headings like \"İŞ GEÇMİŞİ\" or \"Teknik Beceriler\"
+    survive intact for _sd_detect_heading() downstream.
 
     Args:
         text: Raw text after repair_broken_emails(), before fix_ocr_spacing().
 
     Returns:
-        Normalized text with the above fixes applied.
-
-    Examples::
-
-        >>> normalize_text("user @ gmail . com")
-        'user@gmail.com'
-        >>> normalize_text("tekn ik beceriler")
-        'teknik beceriler'
+        Normalized text with header lines preserved and body lines repaired.
     """
     import unicodedata as _ud
 
     if not text:
         return ""
 
-    # ── Step 1: Unicode NFC normalization ─────────────────────────────────────
-    # Converts decomposed Turkish characters (combining diacritics from some
-    # PDF fonts) back to their composed single-codepoint forms.
-    text = _ud.normalize("NFC", text)
+    # Pre-build a fast header-detection closure that checks both keyword maps.
+    # We do NOT call _sd_detect_heading() here (it needs prev/next context)
+    # so we use the simpler _is_section_heading() + _SD_EXT_MAP lookup instead.
+    def _is_header(line: str) -> bool:
+        stripped = line.strip()
+        if not stripped or len(stripped.split()) > _HEADING_MAX_WORDS:
+            return False
+        if _is_section_heading(stripped) is not None:
+            return True
+        norm = _sd_norm(stripped)
+        if norm in _SD_EXT_MAP:
+            return True
+        # Check after decoration stripping ("─── Beceriler ───")
+        plain = re.sub(
+            r"^[^\w\u0130\u0131\u0100-\u024F]+", "", stripped, flags=re.UNICODE
+        )
+        plain = re.sub(r"[^\w\u0130\u0131\u0100-\u024F]+$", "", plain, flags=re.UNICODE)
+        plain = plain.rstrip(":").strip()
+        if plain and plain != stripped:
+            if _is_section_heading(plain) is not None:
+                return True
+            if _sd_norm(plain) in _SD_EXT_MAP:
+                return True
+        return False
 
-    # ── Step 2: Fix spaces around '@' in email-like spans ─────────────────────
-    # "user @ domain.com" → "user@domain.com"
-    # Applied up to 3 times in case of multiple spaces
-    for _ in range(3):
-        new = _NT_AT_SPACES.sub(r"\1@\2", text)
-        if new == text:
-            break
-        text = new
+    result_lines: list[str] = []
 
-    # ── Step 3: Fix spaces around '.' in domain/TLD contexts ──────────────────
-    # "gmail .com" → "gmail.com", "outlook. com" → "outlook.com"
-    # Only fires when the token after the dot is 2-6 alpha chars (TLD pattern)
-    # and is followed by whitespace, end-of-string, or punctuation — i.e. it
-    # looks like a domain suffix, not a mid-sentence abbreviation.
-    # We apply per-line to avoid cross-sentence merging.
-    fixed_lines = []
     for line in text.splitlines():
-        for _ in range(3):
-            new_line = _NT_DOT_SPACES.sub(r"\1.\2", line)
-            if new_line == line:
-                break
-            line = new_line
-        fixed_lines.append(line)
-    text = "\n".join(fixed_lines)
+        # ── Header guard ──────────────────────────────────────────────────────
+        if _is_header(line):
+            result_lines.append(line)  # headers pass through completely unchanged
+            continue
 
-    return text
+        # ── Body line normalization ───────────────────────────────────────────
+        # Step 1: Unicode NFC (composed Turkish chars)
+        line = _ud.normalize("NFC", line)
+
+        # Step 2: Fix spaces around '@'  ("user @ domain" → "user@domain")
+        for _ in range(3):
+            new = _NT_AT_SPACES.sub(r"\1@\2", line)
+            if new == line:
+                break
+            line = new
+
+        # Step 3: Domain-dot fix ONLY on lines that contain '@'
+        # Prevents "Dr. Smith" or "Jan. 2020" being collapsed
+        if "@" in line:
+            for _ in range(3):
+                new = _NT_DOT_SPACES.sub(r"\1.\2", line)
+                if new == line:
+                    break
+                line = new
+
+        result_lines.append(line)
+
+    return "\n".join(result_lines)
 
 
 def fix_ocr_spacing(text: str) -> str:
@@ -1088,33 +1112,68 @@ def fix_ocr_spacing(text: str) -> str:
 
 def _find_column_split_x(words: list[dict], page_width: float) -> Optional[float]:
     """
-    Find the x-coordinate of the widest horizontal whitespace gap between
-    word clusters on a page — this is where the column boundary lies.
+    Find the x-coordinate of the column boundary between two text columns.
 
-    Algorithm:
-      1. Build a 1-D occupancy array along the x-axis (GAP_SCAN_BUCKETS wide).
-      2. Mark each bucket as 'occupied' if any word overlaps it.
-      3. Find the longest contiguous run of *empty* buckets.
-      4. Return the centre x of that run, or None if no significant gap found.
+    Strategy (two-stage):
+      Stage 1 — KMeans clustering (when sklearn available):
+        Cluster word x0-positions into 2 groups.  If both clusters contain
+        at least COLUMN_MIN_RATIO of all words AND their centres are separated
+        by ≥ MIN_GAP_FRACTION * page_width, return the midpoint between the
+        right edge of the left cluster and the left edge of the right cluster.
+        KMeans adapts naturally to asymmetric layouts (narrow sidebar + wide main).
 
-    This is more robust than a hard midpoint split because it adapts to:
-      - Asymmetric layouts (narrow sidebar + wide main column)
-      - Layouts where the column split is off-centre
+      Stage 2 — Gap-scan fallback (always available):
+        Build a 1-D occupancy array along the x-axis (GAP_SCAN_BUCKETS wide),
+        find the longest unoccupied run, return its centre.
+        Used when sklearn is absent OR KMeans produces a degenerate split.
+
+    Returns the split x-coordinate in page pixels, or None if no credible
+    column boundary is found.
     """
     if not words:
         return None
 
+    n_words = len(words)
+
+    # ── Stage 1: KMeans clustering ────────────────────────────────────────────
+    if SKLEARN_AVAILABLE and n_words >= 6:
+        try:
+            import numpy as np
+
+            X = np.array([[w["x0"]] for w in words], dtype=float)
+            km = _KMeans(n_clusters=2, n_init=5, random_state=42)
+            labels = km.fit_predict(X)
+
+            left_idx = int(km.cluster_centers_[0][0] <= km.cluster_centers_[1][0])
+            right_idx = 1 - left_idx
+
+            left_words = [words[i] for i, l in enumerate(labels) if l == left_idx]
+            right_words = [words[i] for i, l in enumerate(labels) if l == right_idx]
+
+            left_ratio = len(left_words) / n_words
+            right_ratio = len(right_words) / n_words
+
+            if left_ratio >= COLUMN_MIN_RATIO and right_ratio >= COLUMN_MIN_RATIO:
+                left_max_x1 = max(w["x1"] for w in left_words)
+                right_min_x0 = min(w["x0"] for w in right_words)
+                gap = right_min_x0 - left_max_x1
+
+                if gap / page_width >= MIN_GAP_FRACTION:
+                    # Return midpoint of the physical gap between clusters
+                    return (left_max_x1 + right_min_x0) / 2.0
+        except Exception:
+            pass  # Degenerate data or import issue — fall through to Stage 2
+
+    # ── Stage 2: Gap-scan fallback ────────────────────────────────────────────
     bucket_size = page_width / GAP_SCAN_BUCKETS
     occupied = [False] * GAP_SCAN_BUCKETS
 
     for w in words:
-        # Mark every bucket overlapped by this word's x extent
         start_bucket = max(0, int(w["x0"] / bucket_size))
         end_bucket = min(GAP_SCAN_BUCKETS - 1, int(w["x1"] / bucket_size))
         for b in range(start_bucket, end_bucket + 1):
             occupied[b] = True
 
-    # Find the longest unoccupied run
     best_start = best_end = -1
     current_start = None
 
@@ -1129,23 +1188,19 @@ def _find_column_split_x(words: list[dict], page_width: float) -> Optional[float
                     best_start, best_end = current_start, i - 1
                 current_start = None
 
-    # Handle gap that runs to the end of the array
     if current_start is not None:
         run_len = GAP_SCAN_BUCKETS - current_start
         if run_len > (best_end - best_start):
             best_start, best_end = current_start, GAP_SCAN_BUCKETS - 1
 
     if best_start == -1:
-        return None  # No gap found
+        return None
 
     gap_width_fraction = (best_end - best_start + 1) / GAP_SCAN_BUCKETS
     if gap_width_fraction < MIN_GAP_FRACTION:
-        # Gap too narrow — probably just inter-word spacing, not a column split
         return None
 
-    # Return the pixel x-coordinate of the gap's centre
-    gap_centre_x = ((best_start + best_end) / 2.0) * bucket_size
-    return gap_centre_x
+    return ((best_start + best_end) / 2.0) * bucket_size
 
 
 # ── 1b. Layout detection ──────────────────────────────────────────────────────
@@ -1612,6 +1667,23 @@ def clean_text(text: str) -> str:
     if not text:
         return ""
 
+    # ── Step 0: URL noise filter ─────────────────────────────────────────────
+    # Keep linkedin.com and github.com (valuable contact signals).
+    # Strip all other http/https/www URLs — they are almost always noise in CVs
+    # (portfolio links, job board footers, PDF metadata artifacts).
+    def _filter_url(m: re.Match) -> str:
+        url = m.group(0)
+        url_lower = url.lower()
+        if "linkedin.com" in url_lower or "github.com" in url_lower:
+            return url
+        return ""  # drop noise URL
+
+    text = re.sub(
+        r"https?://[^\s]+|www\.[^\s]+", _filter_url, text, flags=re.IGNORECASE
+    )
+    # Collapse any blank lines left by removed URLs
+    text = re.sub(r"\n{3,}", "\n\n", text)
+
     # ── Step 1: Protect structured tokens ───────────────────────────────────
     protected: dict[str, str] = {}
 
@@ -1879,7 +1951,12 @@ def _is_section_heading(line: str) -> Optional[str]:
     best_score = 0.0
     best_section: Optional[str] = None
     for kw_norm, section in _KW_NORM_MAP.items():
-        ratio = SequenceMatcher(None, norm, kw_norm).ratio()
+        if RAPIDFUZZ_AVAILABLE:
+            # rapidfuzz is ~10-50× faster than difflib.SequenceMatcher and
+            # uses token_set_ratio which handles word-order variations better.
+            ratio = _rf_fuzz.token_set_ratio(norm, kw_norm) / 100.0
+        else:
+            ratio = SequenceMatcher(None, norm, kw_norm).ratio()
         if ratio > best_score:
             best_score = ratio
             best_section = section
@@ -1957,6 +2034,75 @@ for _sd_heading, _sd_bucket in {
     "references": "other",
 }.items():
     _SD_EXT_MAP[_sd_norm(_sd_heading)] = _sd_bucket
+
+
+# ─────────────────────────────────────────────
+#  5c. HIERARCHICAL SECTION CONSTANTS  (Session 10)
+# ─────────────────────────────────────────────
+#
+# MAIN_HEADERS  — generic section labels that open a new top-level section.
+# SUB_HEADERS   — specific sub-types that nest UNDER the current MAIN section.
+#
+# When a SUB heading is encountered, content accumulates under:
+#   sections["skills_subsections"][sub_label]  (or analogous for other mains)
+# while sections["skills"] (flat string) continues to receive the same lines
+# for full backward compatibility.
+#
+# Normalised keys (via _sd_norm) are compared so Turkish chars always match.
+
+MAIN_HEADERS: set[str] = {
+    _sd_norm(h)
+    for h in [
+        # Turkish
+        "eğitim",
+        "iş geçmişi",
+        "iş deneyimi",
+        "deneyim",
+        "beceriler",
+        "hakkımda",
+        "özet",
+        "projeler",
+        # English
+        "education",
+        "experience",
+        "work experience",
+        "skills",
+        "summary",
+        "about",
+        "projects",
+    ]
+}
+
+# sub_norm_key → (parent_section, display_label)
+SUB_HEADERS: dict[str, tuple[str, str]] = {
+    _sd_norm(k): v
+    for k, v in {
+        "program becerileri": ("skills", "Program Becerileri"),
+        "teknik beceriler": ("skills", "Teknik Beceriler"),
+        "yazılım becerileri": ("skills", "Yazılım Becerileri"),
+        "teknik yetkinlikler": ("skills", "Teknik Yetkinlikler"),
+        "dil becerileri": ("skills", "Dil Becerileri"),
+        "diller": ("skills", "Diller"),
+        "yabancı diller": ("skills", "Yabancı Diller"),
+        "hobiler": ("other", "Hobiler"),
+        "ilgi alanları": ("other", "İlgi Alanları"),
+        "sertifikalar": ("other", "Sertifikalar"),
+        "ödüller": ("other", "Ödüller"),
+        "başarılar": ("other", "Başarılar"),
+        "gönüllülük": ("other", "Gönüllülük"),
+        "referanslar": ("other", "Referanslar"),
+        # English equivalents
+        "languages": ("skills", "Languages"),
+        "technical skills": ("skills", "Technical Skills"),
+        "soft skills": ("skills", "Soft Skills"),
+        "hobbies": ("other", "Hobbies"),
+        "interests": ("other", "Interests"),
+        "certifications": ("other", "Certifications"),
+        "awards": ("other", "Awards"),
+        "volunteering": ("other", "Volunteering"),
+        "references": ("other", "References"),
+    }.items()
+}
 
 
 def _sd_detect_heading(
@@ -2295,9 +2441,14 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
 
     sections: dict[str, list[str]] = {s: [] for s in _SD_CANONICAL}
 
+    # Subsection accumulators: { section_name: { sub_label: [lines] } }
+    # e.g. {"skills": {"Teknik Beceriler": ["Python", "SQL"], "_root": []}}
+    sub_accum: dict[str, dict[str, list[str]]] = {}
+
     lines = text.splitlines()
     n = len(lines)
     current_section: Optional[str] = None
+    current_sub: Optional[str] = None  # display label of active sub-section
 
     # Track transitions for column-split loop prevention
     transition_log: list[str] = []
@@ -2316,6 +2467,28 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
         detected, method = _sd_detect_heading(raw_line, prev_line, next_line)
 
         if detected is not None:
+            # ── Check if this is a SUB-heading first ──────────────────────────
+            norm_raw = _sd_norm(raw_line.strip())
+            if norm_raw in SUB_HEADERS:
+                parent_sec, sub_label = SUB_HEADERS[norm_raw]
+                # Sub-heading: keep current_section open (or adopt parent)
+                # but activate a named sub-bucket inside it.
+                if current_section is None or current_section not in _SD_CANONICAL:
+                    current_section = parent_sec
+                    if parent_sec not in seen_sections:
+                        seen_sections.add(parent_sec)
+                        transition_log.append(parent_sec)
+                current_sub = sub_label
+                if current_section not in sub_accum:
+                    sub_accum[current_section] = {"_root": []}
+                if sub_label not in sub_accum[current_section]:
+                    sub_accum[current_section][sub_label] = []
+                if _debug:
+                    print(
+                        f"  [SUB] line {i}: {raw_line.strip()!r} → {current_section}/{sub_label}"
+                    )
+                continue  # sub-heading line itself not stored as body content
+
             # ── Column-split / loop prevention ────────────────────────────────
             if detected in seen_sections:
                 last_occurrence = (
@@ -2338,6 +2511,7 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
 
             current_section = detected
             transition_log.append(detected)
+            current_sub = None  # new main section resets sub-section pointer
 
             if _debug:
                 print(f"  [H] line {i}: {raw_line.strip()!r} → {detected!r} ({method})")
@@ -2348,6 +2522,12 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
             # contain name/contact info already captured by extract_contact_info().
             if raw_line.strip() and current_section is not None:
                 sections[current_section].append(raw_line)
+                # Also accumulate into sub-section bucket if one is active
+                if current_sub is not None and current_section in sub_accum:
+                    sub_accum[current_section][current_sub].append(raw_line)
+                elif current_section in sub_accum:
+                    # Content before any sub-heading → "_root" bucket
+                    sub_accum[current_section]["_root"].append(raw_line)
 
     # ── Confidence scoring ────────────────────────────────────────────────────
     confidence: dict[str, float] = {
@@ -2390,6 +2570,21 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
         sec: "\n".join(_dedup_section_lines(lines_list)).strip()
         for sec, lines_list in sections.items()
     }
+
+    # ── Subsection output (hierarchical) ─────────────────────────────────────
+    # For each section that had sub-headings, emit a "{section}_subsections"
+    # key containing a dict { sub_label: cleaned_text }.
+    # "_root" holds content that appeared before any sub-heading within the section.
+    # Backward compat: the flat sections[section] string is unchanged.
+    for sec, sub_dict in sub_accum.items():
+        built: dict[str, str] = {}
+        for sub_label, sub_lines in sub_dict.items():
+            cleaned = "\n".join(_dedup_section_lines(sub_lines)).strip()
+            if cleaned:
+                built[sub_label] = cleaned
+        if built:
+            result[f"{sec}_subsections"] = built  # type: ignore[assignment]
+
     result["__confidence__"] = confidence  # type: ignore[assignment]
 
     # ── Debug output ──────────────────────────────────────────────────────────
