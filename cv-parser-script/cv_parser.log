@@ -11004,3 +11004,325 @@
 2026-04-26 21:21:26,714  [INFO]    Output     : final_dataset.json
 2026-04-26 21:21:26,714  [INFO]    (check cv_parser.log for column-layout details)
 2026-04-26 21:21:26,714  [INFO]  ============================================================
+2026-04-27 13:22:11,847  [WARNING]  No CV files found. Check your directory paths.
+2026-04-27 13:23:47,605  [INFO]  Found 6 PDF(s) — 6 files total.
+2026-04-27 13:23:47,607  [INFO]  Processing: 1.pdf
+2026-04-27 13:23:47,607  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:23:47,714  [INFO]    [layout] TABLE layout detected — page 1 of '1.pdf'
+2026-04-27 13:23:48,401  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-04-27 13:23:48,401  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:23:48,891  [INFO]    [done] 1.pdf → format=pdf, lang=en, photo=False, chars=2336
+2026-04-27 13:23:48,892  [INFO]  Processing: 2.pdf
+2026-04-27 13:23:48,892  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:23:51,066  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:23:51,075  [INFO]    [done] 2.pdf → format=pdf, lang=en, photo=False, chars=4103
+2026-04-27 13:23:51,076  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-27 13:23:51,076  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:23:52,880  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-27 13:23:55,358  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-27 13:23:55,358  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:23:55,369  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6027
+2026-04-27 13:23:55,369  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-27 13:23:55,370  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:23:56,314  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-27 13:23:56,314  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:23:56,326  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-27 13:23:56,327  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-27 13:23:56,327  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:23:57,000  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-27 13:23:57,001  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:23:57,006  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2379
+2026-04-27 13:23:57,007  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-27 13:23:57,007  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:23:57,615  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:23:57,625  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-27 13:23:57,627  [INFO]  ============================================================
+2026-04-27 13:23:57,627  [INFO]  DONE — 6 files processed
+2026-04-27 13:23:57,627  [INFO]    ✓ Success  : 6
+2026-04-27 13:23:57,627  [INFO]    ✗ Failed   : 0
+2026-04-27 13:23:57,627  [INFO]    ~ OCR used : 0
+2026-04-27 13:23:57,628  [INFO]    Output     : final_dataset.json
+2026-04-27 13:23:57,628  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-27 13:23:57,628  [INFO]  ============================================================
+2026-04-27 13:25:10,481  [INFO]  Found 4 PDF(s) — 4 files total.
+2026-04-27 13:25:10,482  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-27 13:25:10,483  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:25:12,328  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-27 13:25:14,811  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-27 13:25:14,812  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:25:14,959  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6027
+2026-04-27 13:25:14,960  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-27 13:25:14,960  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:25:17,146  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-27 13:25:17,146  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:25:17,156  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-27 13:25:17,156  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-27 13:25:17,156  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:25:17,828  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-27 13:25:17,828  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:25:17,833  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2379
+2026-04-27 13:25:17,834  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-27 13:25:17,834  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:25:18,438  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:25:18,447  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-27 13:25:18,449  [INFO]  ============================================================
+2026-04-27 13:25:18,449  [INFO]  DONE — 4 files processed
+2026-04-27 13:25:18,449  [INFO]    ✓ Success  : 4
+2026-04-27 13:25:18,449  [INFO]    ✗ Failed   : 0
+2026-04-27 13:25:18,450  [INFO]    ~ OCR used : 0
+2026-04-27 13:25:18,450  [INFO]    Output     : final_dataset.json
+2026-04-27 13:25:18,450  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-27 13:25:18,450  [INFO]  ============================================================
+2026-04-27 13:51:29,533  [INFO]  Found 4 PDF(s) — 4 files total.
+2026-04-27 13:51:29,534  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-27 13:51:29,535  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:51:31,396  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-27 13:51:34,485  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-27 13:51:34,485  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:51:34,634  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6027
+2026-04-27 13:51:34,634  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-27 13:51:34,634  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:51:37,016  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-27 13:51:37,016  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:51:37,027  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-27 13:51:37,027  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-27 13:51:37,028  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:51:37,820  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-27 13:51:37,820  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:51:37,826  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2379
+2026-04-27 13:51:37,826  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-27 13:51:37,826  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:51:38,543  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:51:38,552  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-27 13:51:38,554  [INFO]  ============================================================
+2026-04-27 13:51:38,554  [INFO]  DONE — 4 files processed
+2026-04-27 13:51:38,554  [INFO]    ✓ Success  : 4
+2026-04-27 13:51:38,554  [INFO]    ✗ Failed   : 0
+2026-04-27 13:51:38,554  [INFO]    ~ OCR used : 0
+2026-04-27 13:51:38,554  [INFO]    Output     : final_dataset.json
+2026-04-27 13:51:38,555  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-27 13:51:38,555  [INFO]  ============================================================
+2026-04-27 13:59:24,501  [INFO]  Found 4 PDF(s) — 4 files total.
+2026-04-27 13:59:24,502  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-27 13:59:24,502  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:59:26,375  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-27 13:59:29,465  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-27 13:59:29,465  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:59:29,918  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6027
+2026-04-27 13:59:29,919  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-27 13:59:29,919  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:59:32,627  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-27 13:59:32,627  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:59:32,639  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-27 13:59:32,640  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-27 13:59:32,640  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:59:33,430  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-27 13:59:33,431  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:59:33,436  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2379
+2026-04-27 13:59:33,437  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-27 13:59:33,437  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 13:59:34,248  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 13:59:34,257  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-27 13:59:34,259  [INFO]  ============================================================
+2026-04-27 13:59:34,259  [INFO]  DONE — 4 files processed
+2026-04-27 13:59:34,259  [INFO]    ✓ Success  : 4
+2026-04-27 13:59:34,259  [INFO]    ✗ Failed   : 0
+2026-04-27 13:59:34,259  [INFO]    ~ OCR used : 0
+2026-04-27 13:59:34,259  [INFO]    Output     : final_dataset.json
+2026-04-27 13:59:34,259  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-27 13:59:34,260  [INFO]  ============================================================
+2026-04-27 14:07:13,285  [INFO]  Found 4 PDF(s) — 4 files total.
+2026-04-27 14:07:13,287  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-27 14:07:13,287  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 14:07:15,232  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-27 14:07:18,301  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-27 14:07:18,301  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 14:07:18,466  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6027
+2026-04-27 14:07:18,466  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-27 14:07:18,466  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 14:07:20,845  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-27 14:07:20,846  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 14:07:20,856  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-27 14:07:20,857  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-27 14:07:20,857  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 14:07:21,648  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-27 14:07:21,653  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2379
+2026-04-27 14:07:21,653  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-27 14:07:21,653  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 14:07:22,360  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-27 14:07:22,370  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-27 14:07:22,371  [INFO]  ============================================================
+2026-04-27 14:07:22,371  [INFO]  DONE — 4 files processed
+2026-04-27 14:07:22,371  [INFO]    ✓ Success  : 4
+2026-04-27 14:07:22,372  [INFO]    ✗ Failed   : 0
+2026-04-27 14:07:22,372  [INFO]    ~ OCR used : 0
+2026-04-27 14:07:22,372  [INFO]    Output     : final_dataset.json
+2026-04-27 14:07:22,372  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-27 14:07:22,372  [INFO]  ============================================================
+2026-04-27 14:27:46,892  [INFO]  Found 4 PDF(s) — 4 files total.
+2026-04-27 14:27:46,893  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-27 14:27:46,893  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 14:27:48,760  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-27 14:27:50,088  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-27 14:27:50,239  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6027
+2026-04-27 14:27:50,239  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-27 14:27:50,240  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 14:27:52,114  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-27 14:27:52,114  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-27 14:27:52,114  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 14:27:52,760  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-27 14:27:52,766  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2379
+2026-04-27 14:27:52,767  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-27 14:27:52,767  [INFO]    [method] PDF extraction (column-aware)
+2026-04-27 14:27:53,269  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-27 14:27:53,271  [INFO]  ============================================================
+2026-04-27 14:27:53,271  [INFO]  DONE — 4 files processed
+2026-04-27 14:27:53,271  [INFO]    ✓ Success  : 4
+2026-04-27 14:27:53,271  [INFO]    ✗ Failed   : 0
+2026-04-27 14:27:53,272  [INFO]    ~ OCR used : 0
+2026-04-27 14:27:53,272  [INFO]    Output     : final_dataset.json
+2026-04-27 14:27:53,272  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-27 14:27:53,272  [INFO]  ============================================================
+2026-04-28 10:33:35,202  [INFO]  Found 4 PDF(s) — 4 files total.
+2026-04-28 10:33:35,205  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-28 10:33:35,205  [INFO]    [method] PDF extraction (column-aware)
+2026-04-28 10:33:37,220  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-28 10:33:40,519  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-28 10:33:40,519  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-28 10:33:42,129  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6027
+2026-04-28 10:33:42,130  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-28 10:33:42,130  [INFO]    [method] PDF extraction (column-aware)
+2026-04-28 10:33:45,678  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-28 10:33:45,678  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-28 10:33:46,091  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-28 10:33:46,092  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-28 10:33:46,092  [INFO]    [method] PDF extraction (column-aware)
+2026-04-28 10:33:46,928  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-28 10:33:47,165  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2379
+2026-04-28 10:33:47,165  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-28 10:33:47,165  [INFO]    [method] PDF extraction (column-aware)
+2026-04-28 10:33:47,915  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-28 10:33:48,155  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-28 10:33:48,157  [INFO]  ============================================================
+2026-04-28 10:33:48,157  [INFO]  DONE — 4 files processed
+2026-04-28 10:33:48,157  [INFO]    ✓ Success  : 4
+2026-04-28 10:33:48,158  [INFO]    ✗ Failed   : 0
+2026-04-28 10:33:48,158  [INFO]    ~ OCR used : 0
+2026-04-28 10:33:48,158  [INFO]    Output     : final_dataset.json
+2026-04-28 10:33:48,158  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-28 10:33:48,158  [INFO]  ============================================================
+2026-04-28 10:36:34,709  [INFO]  Found 4 PDF(s) — 4 files total.
+2026-04-28 10:36:34,710  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-28 10:36:34,711  [INFO]    [method] PDF extraction (column-aware)
+2026-04-28 10:36:36,617  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-28 10:36:39,842  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-28 10:36:39,842  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-28 10:36:41,036  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6027
+2026-04-28 10:36:41,036  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-28 10:36:41,036  [INFO]    [method] PDF extraction (column-aware)
+2026-04-28 10:36:43,488  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-28 10:36:43,489  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-28 10:36:43,912  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-28 10:36:43,912  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-28 10:36:43,912  [INFO]    [method] PDF extraction (column-aware)
+2026-04-28 10:36:44,725  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-28 10:36:44,961  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2379
+2026-04-28 10:36:44,961  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-28 10:36:44,962  [INFO]    [method] PDF extraction (column-aware)
+2026-04-28 10:36:45,715  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-28 10:36:45,955  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-28 10:36:45,956  [INFO]  ============================================================
+2026-04-28 10:36:45,957  [INFO]  DONE — 4 files processed
+2026-04-28 10:36:45,957  [INFO]    ✓ Success  : 4
+2026-04-28 10:36:45,957  [INFO]    ✗ Failed   : 0
+2026-04-28 10:36:45,957  [INFO]    ~ OCR used : 0
+2026-04-28 10:36:45,957  [INFO]    Output     : final_dataset.json
+2026-04-28 10:36:45,957  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-28 10:36:45,958  [INFO]  ============================================================
+2026-04-29 21:28:20,516  [INFO]  Found 4 PDF(s) — 4 files total.
+2026-04-29 21:28:20,519  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-29 21:28:20,520  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:28:22,461  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-29 21:28:24,581  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-29 21:28:24,582  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-29 21:28:25,251  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6027
+2026-04-29 21:28:25,252  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-29 21:28:25,252  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:28:27,690  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-29 21:28:27,690  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-29 21:28:27,703  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-29 21:28:27,703  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-29 21:28:27,704  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:28:28,202  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-29 21:28:28,211  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2379
+2026-04-29 21:28:28,212  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-29 21:28:28,213  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:28:28,729  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-29 21:28:28,740  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-29 21:28:28,742  [INFO]  ============================================================
+2026-04-29 21:28:28,742  [INFO]  DONE — 4 files processed
+2026-04-29 21:28:28,743  [INFO]    ✓ Success  : 4
+2026-04-29 21:28:28,743  [INFO]    ✗ Failed   : 0
+2026-04-29 21:28:28,743  [INFO]    ~ OCR used : 0
+2026-04-29 21:28:28,743  [INFO]    Output     : final_dataset.json
+2026-04-29 21:28:28,743  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-29 21:28:28,744  [INFO]  ============================================================
+2026-04-29 21:35:52,788  [INFO]  Found 4 PDF(s) — 4 files total.
+2026-04-29 21:35:52,789  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-29 21:35:52,789  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:35:54,716  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-29 21:35:57,876  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-29 21:35:57,876  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-29 21:35:58,046  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6027
+2026-04-29 21:35:58,047  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-29 21:35:58,047  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:36:00,537  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-29 21:36:00,537  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-29 21:36:00,549  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-29 21:36:00,549  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-29 21:36:00,550  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:36:01,355  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-29 21:36:01,361  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2379
+2026-04-29 21:36:01,361  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-29 21:36:01,362  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:36:02,083  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-29 21:36:02,092  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-29 21:36:02,094  [INFO]  ============================================================
+2026-04-29 21:36:02,094  [INFO]  DONE — 4 files processed
+2026-04-29 21:36:02,095  [INFO]    ✓ Success  : 4
+2026-04-29 21:36:02,095  [INFO]    ✗ Failed   : 0
+2026-04-29 21:36:02,095  [INFO]    ~ OCR used : 0
+2026-04-29 21:36:02,095  [INFO]    Output     : final_dataset.json
+2026-04-29 21:36:02,095  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-29 21:36:02,096  [INFO]  ============================================================
+2026-04-29 21:36:30,596  [INFO]  Found 4 PDF(s) — 4 files total.
+2026-04-29 21:36:30,597  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-29 21:36:30,597  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:36:38,972  [INFO]  Found 4 PDF(s) — 4 files total.
+2026-04-29 21:36:38,974  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-04-29 21:36:38,974  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:36:40,847  [INFO]    [layout] TABLE layout detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-04-29 21:36:42,856  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-04-29 21:36:42,856  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-29 21:36:43,012  [INFO]    [done] rumeysa gokce 1.pdf → format=pdf, lang=en, photo=True, chars=6027
+2026-04-29 21:36:43,012  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-04-29 21:36:43,012  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:36:44,982  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-04-29 21:36:44,982  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-29 21:36:44,995  [INFO]    [done] rumeysa gokce 2.pdf → format=pdf, lang=en, photo=False, chars=2071
+2026-04-29 21:36:44,996  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-04-29 21:36:44,996  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:36:45,449  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=2)
+2026-04-29 21:36:45,457  [INFO]    [done] rumeysa gokce 3.pdf → format=pdf, lang=tr, photo=False, chars=2379
+2026-04-29 21:36:45,457  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-04-29 21:36:45,457  [INFO]    [method] PDF extraction (column-aware)
+2026-04-29 21:36:45,926  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-04-29 21:36:45,937  [INFO]    [done] rumeysa gokce 4.pdf → format=pdf, lang=en, photo=True, chars=2331
+2026-04-29 21:36:45,939  [INFO]  ============================================================
+2026-04-29 21:36:45,939  [INFO]  DONE — 4 files processed
+2026-04-29 21:36:45,939  [INFO]    ✓ Success  : 4
+2026-04-29 21:36:45,939  [INFO]    ✗ Failed   : 0
+2026-04-29 21:36:45,939  [INFO]    ~ OCR used : 0
+2026-04-29 21:36:45,940  [INFO]    Output     : final_dataset.json
+2026-04-29 21:36:45,940  [INFO]    (check cv_parser.log for column-layout details)
+2026-04-29 21:36:45,940  [INFO]  ============================================================

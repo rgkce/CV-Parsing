@@ -38,6 +38,14 @@ System dependency:
     macOS         : brew install tesseract
 """
 
+from __future__ import annotations
+
+import re
+import unicodedata
+from dataclasses import dataclass, field
+from difflib import SequenceMatcher
+from typing import Dict, List, Optional, Tuple
+
 import os
 import re
 import json
@@ -53,6 +61,7 @@ import pytesseract
 from PIL import Image
 import io
 from tqdm import tqdm
+
 
 try:
     from langdetect import detect as langdetect_detect
@@ -156,6 +165,35 @@ MIN_GAP_FRACTION = 0.03
 # Section heading keywords — English and Turkish
 SECTION_KEYWORDS: dict[str, list[str]] = {
     "summary": [
+        # ===== SHORT NATURAL HEADINGS =====
+        "a bit about me",
+        "a little about me",
+        "about the author",
+        "about candidate",
+        "who is this candidate",
+        # ===== FIRST PERSON STYLE TITLES =====
+        "i am",
+        "i am a",
+        "i am an",
+        "this is me",
+        # ===== COVER LETTER STYLE =====
+        "personal statement",
+        "career statement",
+        "statement",
+        # ===== LINKEDIN STYLE =====
+        "headline",
+        "tagline",
+        "professional headline",
+        # ===== TURKISH NATURAL =====
+        "kısaca",
+        "kendimden bahsetmek gerekirse",
+        "kısaca kendim",
+        "kısaca ben",
+        "ben kimim?",
+        "ben kimim",
+        "kendi hakkımda",
+        "biraz kendimden bahsedeyim",
+        "kısaca kendimi tanıtayım",
         # ======================
         # CORE
         # ======================
@@ -1683,90 +1721,23 @@ _NT_DOT_SPACES = re.compile(r"([A-Za-z0-9])\s*\.\s*([A-Za-z]{2,6})(?=\s|$|[,;])"
 # Turkish NFC normalization target — applied via unicodedata.normalize
 
 
-def normalize_text(text: str) -> str:
-    """
-    FIX 3 (Session 11 upgrade) — Structure-safe preprocessing normalization.
-
-    Processes text LINE BY LINE so that section headers are NEVER mutated:
-      • Header lines (exact/fuzzy match against SECTION_KEYWORDS + _SD_EXT_MAP)
-        are passed through completely untouched.
-      • Body lines receive:
-          1. Unicode NFC normalization (Turkish composed chars)
-          2. Email space repair  (\"user @ gmail . com\" → \"user@gmail.com\")
-          3. Domain-dot fix restricted to lines containing '@'
-             (avoids false-positive sentence-dot collapses like \"Dr. Smith\")
-          4. Conservative trailing-whitespace trim
-
-    This guarantees that headings like \"İŞ GEÇMİŞİ\" or \"Teknik Beceriler\"
-    survive intact for _sd_detect_heading() downstream.
-
-    Args:
-        text: Raw text after repair_broken_emails(), before fix_ocr_spacing().
-
-    Returns:
-        Normalized text with header lines preserved and body lines repaired.
-    """
-    import unicodedata as _ud
-
-    if not text:
-        return ""
-
-    # Pre-build a fast header-detection closure that checks both keyword maps.
-    # We do NOT call _sd_detect_heading() here (it needs prev/next context)
-    # so we use the simpler _is_section_heading() + _SD_EXT_MAP lookup instead.
-    def _is_header(line: str) -> bool:
-        stripped = line.strip()
-        if not stripped or len(stripped.split()) > _HEADING_MAX_WORDS:
-            return False
-        if _is_section_heading(stripped) is not None:
-            return True
-        norm = _sd_norm(stripped)
-        if norm in _SD_EXT_MAP:
-            return True
-        # Check after decoration stripping ("─── Beceriler ───")
-        plain = re.sub(
-            r"^[^\w\u0130\u0131\u0100-\u024F]+", "", stripped, flags=re.UNICODE
-        )
-        plain = re.sub(r"[^\w\u0130\u0131\u0100-\u024F]+$", "", plain, flags=re.UNICODE)
-        plain = plain.rstrip(":").strip()
-        if plain and plain != stripped:
-            if _is_section_heading(plain) is not None:
-                return True
-            if _sd_norm(plain) in _SD_EXT_MAP:
-                return True
-        return False
-
-    result_lines: list[str] = []
-
-    for line in text.splitlines():
-        # ── Header guard ──────────────────────────────────────────────────────
-        if _is_header(line):
-            result_lines.append(line)  # headers pass through completely unchanged
-            continue
-
-        # ── Body line normalization ───────────────────────────────────────────
-        # Step 1: Unicode NFC (composed Turkish chars)
-        line = _ud.normalize("NFC", line)
-
-        # Step 2: Fix spaces around '@'  ("user @ domain" → "user@domain")
-        for _ in range(3):
-            new = _NT_AT_SPACES.sub(r"\1@\2", line)
-            if new == line:
-                break
-            line = new
-
-        # Step 3: Domain-dot fix ONLY on lines that contain '@'
-        # Prevents "Dr. Smith" or "Jan. 2020" being collapsed
-        if "@" in line:
-            for _ in range(3):
-                new = _NT_DOT_SPACES.sub(r"\1.\2", line)
-                if new == line:
-                    break
-                line = new
-
-        result_lines.append(line)
-
-    return "\n".join(result_lines)
+# ── OCR glyph translation table (applied inside normalize_text Pass 1) ────────
+# Repairs ligatures and dotless-i before any downstream text matching.
+_NT_OCR_TRANSLATE: dict[int, str] = {
+    0x0131: "i",  # ı → i   (dotless-i)
+    0x0130: "I",  # İ → I   (becomes i after turkish_lower)
+    0xFB01: "fi",  # ﬁ → fi
+    0xFB02: "fl",  # ﬂ → fl
+    0xFB00: "ff",  # ﬀ → ff
+    0xFB03: "ffi",  # ﬃ → ffi
+    0xFB04: "ffl",  # ﬄ → ffl
+    0x2018: "'",  # ' left single quote
+    0x2019: "'",  # ' right single quote
+    0x201C: '"',  # " left double quote
+    0x201D: '"',  # " right double quote
+    0x2013: "-",  # – en-dash
+    0x2014: "-",  # — em-dash
+}
 
 
 def fix_ocr_spacing(text: str) -> str:
@@ -1863,6 +1834,1297 @@ def fix_ocr_spacing(text: str) -> str:
 # ─────────────────────────────────────────────
 
 # ── 1a. Gap-based column boundary detection ───────────────────────────────────
+
+
+# ─────────────────────────────────────────────
+#  STAGE 2 — BLOCK SEGMENTATION
+# ─────────────────────────────────────────────
+
+from dataclasses import dataclass, field
+
+
+# ─────────────────────────────────────────────────────────────────────────
+#  STRUCTURED PIPELINE  (cv_pipeline.py — embedded)
+#  Replaces the old CVBlock, split_into_blocks, and assign_sections.
+#  Stages 1-6: normalize → block segment → heading detect → boundary assign
+#              → classify → safety rules → output.
+# ─────────────────────────────────────────────────────────────────────────
+"""
+cv_pipeline.py
+==============
+Structured CV Parsing Pipeline  —  Stages 1-6
+==============================================
+
+Replaces the original keyword-matching approach with a 6-stage structural
+pipeline that is layout-aware, OCR-robust, and section-contamination-proof.
+
+PIPELINE OVERVIEW
+─────────────────
+  Stage 1  normalize_text(text)
+           └─ OCR error repair, Unicode NFC, whitespace normalisation,
+              duplicate-block removal.
+
+  Stage 2  split_into_blocks(text) → List[CVBlock]
+           └─ Split into logical blocks on blank lines or heading detection.
+              Each block records structural signals: is_list, has_dates, etc.
+
+  Stage 3  is_heading(line) / detect_heading(block) → Optional[str]
+           └─ Robust heading detection: keyword dict, OCR tolerance, merged-
+              heading splitting, decoration stripping.
+
+  Stage 4  assign_sections(blocks) → Dict[str, List[str]]
+           └─ State-machine boundary detection: section starts at a heading,
+              ends at the next heading.  Heading-labeled blocks are trusted
+              directly; unlabeled blocks go to the fallback classifier.
+
+  Stage 5  classify_block(block, index) → str
+           └─ Structural heuristics for heading-less blocks: date ranges →
+              experience; degree words → education; list + tech words → skills;
+              build verbs → projects; prose + pronouns → summary.
+
+  Stage 6  apply_safety_rules(sections) + build_output(sections)
+           └─ Post-classification safety rules (skills ≠ paragraphs, education
+              needs institution keyword, summary capped, etc.).
+
+PUBLIC API
+──────────
+  parse_cv(text: str) -> Dict[str, str]
+      Full pipeline: str → normalized → blocks → sections → final dict.
+
+  normalize_text(text: str) -> str
+  split_into_blocks(text: str) -> List[CVBlock]
+  is_heading(line: str) -> bool
+  detect_heading(block: str) -> Optional[str]
+  assign_sections(blocks: List[CVBlock]) -> Dict[str, List[str]]
+  classify_block(block: CVBlock, index: int) -> str
+
+All functions are pure / side-effect-free and fully unit-testable.
+"""
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  CONSTANTS & DICTIONARIES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Canonical output section names — every block maps to one of these.
+CANONICAL_SECTIONS: List[str] = [
+    "summary",
+    "experience",
+    "education",
+    "skills",
+    "projects",
+    "other",
+]
+
+# Maximum word-count for a line to be considered a potential heading.
+# Lines of ≥ 7 words are almost certainly body text.
+_HEADING_MAX_WORDS: int = 6
+
+# Summary length limits
+_SUMMARY_MIN_WORDS: int = 10  # lowered to catch short one-liner summaries
+_SUMMARY_MAX_WORDS: int = 120
+_SUMMARY_MAX_LINES: int = 8
+
+# Heading keyword dictionary:  canonical_section → list[heading_variants]
+# Entries are lowercased, stripped.  Both English and Turkish are included.
+# OCR-error variants are listed explicitly (educatıon, experıence, …).
+_HEADING_DICT: Dict[str, List[str]] = {
+    "summary": [
+        "summary",
+        "profile",
+        "about",
+        "about me",
+        "objective",
+        "professional summary",
+        "career objective",
+        "career summary",
+        "personal summary",
+        "executive summary",
+        "introduction",
+        "intro",
+        "overview",
+        "bio",
+        "biography",
+        "professional profile",
+        "personal statement",
+        "career statement",
+        "personal overview",
+        "who i am",
+        "about myself",
+        # OCR variants
+        "summ ary",
+        "summry",
+        "prof ile",
+        "proflie",
+        "sumary",
+        # Turkish
+        "ozet",
+        "özet",
+        "profil",
+        "hakkimda",
+        "hakkımda",
+        "hakkında",
+        "kariyer hedefi",
+        "kariyer ozeti",
+        "kariyer özeti",
+        "kisisel ozet",
+        "kişisel özet",
+        "genel bakis",
+        "genel bakış",
+        "tanitim",
+        "tanıtım",
+        "ben kimim",
+    ],
+    "experience": [
+        "experience",
+        "work experience",
+        "professional experience",
+        "employment",
+        "employment history",
+        "work history",
+        "career history",
+        "positions held",
+        "career",
+        "career progression",
+        "career path",
+        "job history",
+        "work record",
+        "internship",
+        "internships",
+        "professional background",
+        "relevant experience",
+        # OCR variants
+        "exper ience",
+        "experlence",
+        "experince",
+        "employ ment",
+        # Turkish
+        "deneyim",
+        "is deneyimi",
+        "iş deneyimi",
+        "is gecmisi",
+        "iş geçmişi",
+        "calisma gecmisi",
+        "çalışma geçmişi",
+        "kariyer gecmisi",
+        "kariyer geçmişi",
+        "mesleki deneyim",
+        "tecrube",
+        "tecrübe",
+        "staj",
+        "staj deneyimi",
+    ],
+    "education": [
+        "education",
+        "academic background",
+        "academic history",
+        "qualifications",
+        "degrees",
+        "schooling",
+        "studies",
+        "educational background",
+        "academic record",
+        "learning",
+        "university education",
+        "college education",
+        # OCR variants
+        "educat ion",
+        "edcation",
+        "educaton",
+        # Turkish
+        "egitim",
+        "eğitim",
+        "ogrenim",
+        "öğrenim",
+        "akademik gecmis",
+        "akademik geçmiş",
+        "mezuniyet",
+        "okul bilgileri",
+        "egitim bilgileri",
+        "eğitim bilgileri",
+        "lisans egitimi",
+        "lisans eğitimi",
+        "yuksek lisans",
+        "yüksek lisans",
+        "doktora",
+    ],
+    "skills": [
+        "skills",
+        "technical skills",
+        "core competencies",
+        "competencies",
+        "technologies",
+        "tools",
+        "proficiencies",
+        "key skills",
+        "expertise",
+        "capabilities",
+        "strengths",
+        "skill set",
+        "skills summary",
+        "professional skills",
+        "technical expertise",
+        "tech stack",
+        "technology stack",
+        "development stack",
+        "programming skills",
+        "software skills",
+        "languages",
+        "language skills",
+        "programming languages",
+        # OCR variants
+        "sk ills",
+        "skils",
+        # Turkish
+        "yetenekler",
+        "beceriler",
+        "teknolojiler",
+        "yetkinlikler",
+        "teknik beceriler",
+        "temel yetkinlikler",
+        "uzmanlik alanlari",
+        "uzmanlık alanları",
+        "bilgi birikimi",
+        "diller",
+        "yabanci diller",
+        "yabancı diller",
+    ],
+    "projects": [
+        "projects",
+        "personal projects",
+        "academic projects",
+        "side projects",
+        "portfolio",
+        "project work",
+        "key projects",
+        "selected projects",
+        "notable projects",
+        "open source",
+        # Turkish
+        "projeler",
+        "kisisel projeler",
+        "kişisel projeler",
+        "akademik projeler",
+        "proje calismasi",
+        "proje çalışması",
+    ],
+    "other": [
+        "certifications",
+        "certificates",
+        "licenses",
+        "awards",
+        "honors",
+        "achievements",
+        "publications",
+        "research",
+        "hobbies",
+        "interests",
+        "volunteering",
+        "references",
+        "additional information",
+        "extracurricular",
+        "activities",
+        "memberships",
+        "contact",
+        "contact information",
+        "personal information",
+        # Turkish
+        "sertifikalar",
+        "odüller",
+        "ödüller",
+        "basarilar",
+        "başarılar",
+        "yayinlar",
+        "yayınlar",
+        "hobiler",
+        "ilgi alanlari",
+        "ilgi alanları",
+        "gonüllülük",
+        "gönüllülük",
+        "referanslar",
+        "ek bilgiler",
+        "iletisim bilgileri",
+        "iletişim bilgileri",
+        "kisisel bilgiler",
+        "kişisel bilgiler",
+    ],
+}
+
+# Flattened lookup: normalised_heading_text → canonical_section
+# Built once at import time for O(1) lookup speed.
+_HEADING_LOOKUP: Dict[str, str] = {}
+for _sec, _variants in _HEADING_DICT.items():
+    for _v in _variants:
+        _HEADING_LOOKUP[_v.strip().lower()] = _sec
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  COMPILED REGEX PATTERNS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Used in Stage 1: OCR character repairs
+_RE_OCR_DOTLESS_I = re.compile(r"ı")  # dotless-ı → i  (OCR noise)
+_RE_OCR_SPACED_L = re.compile(r"\bl\.\s+")  # "l. " → "l." (OCR split dot)
+_RE_OCR_GMAIL = re.compile(r"gma\s*l\s+", re.I)  # "gma l " → "gmail"
+_RE_AT_SPACES = re.compile(r"([A-Za-z0-9._%+\-])\s+@\s+([A-Za-z0-9.\-])")
+_RE_DOT_SPACES = re.compile(r"([A-Za-z0-9])\s*\.\s*([A-Za-z]{2,6})(?=\s|$)")
+_RE_MULTI_SPACE = re.compile(r"[ \t]{2,}")
+_RE_MULTI_NEWLINE = re.compile(r"\n{3,}")
+
+# Used in Stage 2: block structural signals
+_RE_YEAR = re.compile(r"\b(19|20)\d{2}\b")
+_RE_DATE_RANGE = re.compile(
+    r"(19|20)\d{2}\s*[-–]\s*((19|20)\d{2}|present|günümüz|halen|devam|now)",
+    re.I,
+)
+_RE_BULLET = re.compile(r"^\s*[-•·▪◦●◆▸►*]\s+\S")
+_RE_COMMA_LIST = re.compile(
+    r"^(?:[A-Za-zÇĞİÖŞÜçğışöüA-Z][A-Za-z0-9+#.\s]{0,24},\s*){2,}"
+)
+
+# Used in Stage 3: heading detection
+_RE_DECORATION_LEAD = re.compile(r"^[^\w\u0130\u0131\u0100-\u024F]+", re.UNICODE)
+_RE_DECORATION_TAIL = re.compile(r"[^\w\u0130\u0131\u0100-\u024F]+$", re.UNICODE)
+_RE_ALL_CAPS_WORD = re.compile(r"^[A-ZÇĞİÖŞÜ\s]+$")
+_RE_MERGED_HEADING = re.compile(
+    r"(education|experience|skills|summary|projects|profile|"
+    r"eğitim|deneyim|beceriler|özet)\s+"
+    r"(education|experience|skills|summary|projects|profile|"
+    r"eğitim|deneyim|beceriler|özet)",
+    re.I,
+)
+
+# Used in Stage 5: content classification heuristics
+_RE_ROLE_WORDS = re.compile(
+    r"\b(intern|stajyer|engineer|mühendis|manager|müdür|developer|geliştirici"
+    r"|analyst|analist|specialist|uzman|coordinator|koordinatör|lead|lider"
+    r"|director|direktör|officer|consultant|danışman|architect|mimar"
+    r"|designer|tasarımcı|researcher|araştırmacı|assistant|asistan"
+    r"|executive|başkan|president|vice president|vp|ceo|cto|cfo)\b",
+    re.I,
+)
+_RE_COMPANY_WORDS = re.compile(
+    r"\b(a\.ş|ltd|inc|corp|gmbh|s\.a|llc|co\.|şirketi|company|holding"
+    r"|group|grup|teknoloji|technology|solutions|systems|consulting"
+    r"|agency|ajans|bank|banka|hospital|hastane)\b",
+    re.I,
+)
+_RE_DEGREE_WORDS = re.compile(
+    r"\b(üniversite|university|fakülte|faculty|bölüm|department|lisans|bachelor"
+    r"|yüksek\s+lisans|master|msc|mba|doktora|phd|doctorate|diploma|mezun"
+    r"|graduate|lise|high\s+school|okul|school|akademi|academy|enstitü|institute"
+    r"|college|polytechnic)\b",
+    re.I,
+)
+_RE_TECH_WORDS = re.compile(
+    r"\b(python|java|javascript|typescript|sql|react|angular|vue|django|flask"
+    r"|spring|node|nodejs|html|css|sass|scss|php|ruby|swift|kotlin|go|rust"
+    r"|c\+\+|docker|kubernetes|k8s|aws|azure|gcp|git|linux|bash|terraform"
+    r"|jenkins|figma|sketch|photoshop|premiere|illustrator|after\s*effects"
+    r"|excel|powerbi|tableau|matlab|hadoop|spark|tensorflow|pytorch"
+    r"|mongodb|postgresql|mysql|redis|graphql|rest|api|microservices)\b",
+    re.I,
+)
+_RE_PROJECT_VERBS = re.compile(
+    r"\b(built|developed|created|designed|implemented|architected|deployed"
+    r"|launched|contributed|maintained|engineered|coded|programmed|wrote"
+    r"|geliştirdim|oluşturdum|tasarladım|yaptım|kurdum|inşa ettim)\b",
+    re.I,
+)
+_RE_PLATFORM_WORDS = re.compile(
+    # Only genuine deployment/hosting platforms — NOT generic terms like
+    # "backend" or "frontend" which appear in summaries and experience bullets.
+    r"\b(github|gitlab|bitbucket|heroku|vercel|netlify|app\s+store|play\s+store"
+    r"|npm|pypi|demo\s+at|deployed\s+on|android\s+app|ios\s+app)\b",
+    re.I,
+)
+_RE_SENTENCE_END = re.compile(r"[.!?]\s*$")
+_RE_PRONOUN = re.compile(
+    r"\b(i am|i have|i'm|i've|ben|benim|hakkımda|kendimi|kariyer|hedefim"
+    r"|motivated|passionate|experienced|uzman|deneyimli|seeking|looking)\b",
+    re.I,
+)
+
+# Safety rules
+_RE_LONG_SENTENCE = re.compile(r"\w[\w\s]{60,}[.!?]")  # paragraph line in skills
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  STAGE 1 — TEXT NORMALISATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+def normalize_text(text: str) -> str:
+    """
+    Stage 1 — produce clean, deduplicated text ready for block segmentation.
+
+    Passes (in order):
+      1. Unicode NFC composition  — resolves decomposed diacritics.
+      2. OCR glyph repairs        — ı→i, ligatures, broken email spacing.
+      3. Per-line whitespace norm — collapse tabs, strip trailing spaces.
+      4. Duplicate block removal  — drops ≥80%-similar repeated paragraphs
+                                    (the multi-column PDF double-extraction bug).
+      5. Collapse excess newlines — max two consecutive blank lines.
+
+    Structured tokens (emails, URLs, phones) are protected so that repairs
+    never corrupt them.
+
+    Args:
+        text: Raw text from PDF/OCR extraction.
+
+    Returns:
+        Normalised text with OCR errors fixed and duplicates removed.
+    """
+    if not text:
+        return ""
+
+    # ── Pass 1: Unicode NFC ───────────────────────────────────────────────────
+    text = unicodedata.normalize("NFC", text)
+
+    # ── Pass 2: OCR glyph repairs (global, safe) ──────────────────────────────
+    # Replace common OCR ligature artifacts
+    _ligature_map = {
+        "\ufb01": "fi",  # ﬁ → fi
+        "\ufb02": "fl",  # ﬂ → fl
+        "\ufb00": "ff",  # ﬀ → ff
+        "\ufb03": "ffi",  # ﬃ → ffi
+        "\ufb04": "ffl",  # ﬄ → ffl
+        "\u2018": "'",  # ' → '
+        "\u2019": "'",  # ' → '
+        "\u201c": '"',  # " → "
+        "\u201d": '"',  # " → "
+        "\u2013": "-",  # – → -
+        "\u2014": "-",  # — → -
+        "\u00b7": " ",  # · → space (bullet used as separator)
+    }
+    for src, dst in _ligature_map.items():
+        text = text.replace(src, dst)
+
+    # Repair broken emails: spaces around "@" and "." in email-like contexts
+    text = _repair_broken_emails(text)
+
+    # ── Pass 3: Per-line whitespace normalisation ─────────────────────────────
+    normalised_lines: List[str] = []
+    for line in text.splitlines():
+        # Apply email spacing fix per line (catches most broken patterns)
+        if "@" in line:
+            for _ in range(3):
+                new = _RE_AT_SPACES.sub(r"\1@\2", line)
+                if new == line:
+                    break
+                line = new
+            for _ in range(3):
+                new = _RE_DOT_SPACES.sub(r"\1.\2", line)
+                if new == line:
+                    break
+                line = new
+
+        # Replace OCR dotless-ı with regular i only in body text
+        # (heading lines stay untouched so heading detection still fires)
+        if len(line.split()) > _HEADING_MAX_WORDS:
+            line = _RE_OCR_DOTLESS_I.sub("i", line)
+
+        # Collapse inline whitespace
+        line = _RE_MULTI_SPACE.sub(" ", line).rstrip()
+        normalised_lines.append(line)
+
+    text = "\n".join(normalised_lines)
+
+    # ── Pass 4: Duplicate block removal ───────────────────────────────────────
+    text = _remove_duplicate_blocks(text, threshold=0.80)
+
+    # ── Pass 5: Collapse excess blank lines ───────────────────────────────────
+    text = _RE_MULTI_NEWLINE.sub("\n\n", text).strip()
+
+    return text
+
+
+def _repair_broken_emails(text: str) -> str:
+    """
+    Collapse spaces injected inside email addresses by PDF extraction.
+
+    Strategy: find any token sequence containing "@", collapse internal spaces,
+    validate with a strict email regex before substituting.
+
+    Example:
+        "gma l. com" is not an email pattern (no @) so skip it.
+        "user @ gmail . com" → "user@gmail.com" (validated → substitute).
+    """
+    if "@" not in text:
+        return text
+
+    _candidate = re.compile(
+        r"[A-Za-z0-9._%+\-]+\s*@\s*[A-Za-z0-9.\-\s]+\.\s*[A-Za-z]{2,}",
+        re.I,
+    )
+    _valid_email = re.compile(
+        r"^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$", re.I
+    )
+
+    def _try_fix(m: re.Match) -> str:
+        original = m.group(0)
+        collapsed = re.sub(r"\s+", "", original)
+        return collapsed if _valid_email.match(collapsed) else original
+
+    return _candidate.sub(_try_fix, text)
+
+
+def _remove_duplicate_blocks(text: str, threshold: float = 0.80) -> str:
+    """
+    Drop paragraph blocks whose normalised content is ≥ threshold similar to
+    any previously seen block.  Only the first occurrence is kept.
+
+    A block = sequence of non-empty lines surrounded by blank lines.
+    Similarity is measured with SequenceMatcher on lowercased, space-collapsed
+    fingerprints.  This eliminates the most common multi-column PDF artifact:
+    the same paragraph extracted twice (once per column).
+
+    Args:
+        text:      Normalised text (NFC, whitespace fixed).
+        threshold: Similarity ratio above which a block is considered a duplicate.
+
+    Returns:
+        Text with duplicate blocks removed.
+    """
+    raw_blocks = re.split(r"\n{2,}", text.strip())
+    if len(raw_blocks) <= 1:
+        return text
+
+    def _fingerprint(block: str) -> str:
+        return re.sub(r"\s+", " ", block.strip().lower())
+
+    kept: List[str] = []
+    seen_fps: List[str] = []
+
+    for block in raw_blocks:
+        fp = _fingerprint(block)
+        if not fp:
+            # Preserve empty-looking blocks (structural separators)
+            kept.append(block)
+            seen_fps.append(fp)
+            continue
+
+        is_duplicate = any(
+            SequenceMatcher(None, fp, seen_fp).ratio() >= threshold
+            for seen_fp in seen_fps
+            if seen_fp
+        )
+        if not is_duplicate:
+            kept.append(block)
+            seen_fps.append(fp)
+
+    return "\n\n".join(kept)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  STAGE 2 — BLOCK SEGMENTATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+@dataclass
+class CVBlock:
+    """
+    A contiguous group of lines that share a common structural role.
+
+    Attributes:
+        lines:      Body lines (heading line stripped out).
+        heading:    Canonical section name if the block started with a heading.
+        is_list:    True when the majority of lines are bullet/comma-list items.
+        has_dates:  True when any line contains a 4-digit year (19xx / 20xx).
+        line_count: Number of non-empty body lines.
+    """
+
+    lines: List[str] = field(default_factory=list)
+    heading: Optional[str] = None
+    is_list: bool = False
+    has_dates: bool = False
+    line_count: int = 0
+
+
+def split_into_blocks(text: str) -> List[CVBlock]:
+    """
+    Stage 2 — split normalised text into logical CVBlock objects.
+
+    A new block starts when:
+      (a) One or more blank lines separate the current line group from the next.
+      (b) A heading line is detected mid-paragraph (heading detected in-stream).
+
+    Within each block:
+      • The heading line is stored in CVBlock.heading and removed from CVBlock.lines
+        so that downstream code only sees body content.
+      • Structural signals (is_list, has_dates, line_count) are computed once here
+        so later stages don't have to reparse lines.
+
+    List detection rules:
+      • Majority of lines start with a bullet marker (-, •, *, etc.)
+      • Block reads as a comma-separated list
+      • Single line with 3+ short space-separated tokens (tech-stack pattern)
+
+    Args:
+        text: Output of normalize_text() — normalised but NOT yet lowercased.
+              Heading detection is done case-insensitively internally.
+
+    Returns:
+        Ordered list of CVBlock objects preserving document reading order.
+    """
+    lines = text.splitlines()
+    blocks: List[CVBlock] = []
+    current_lines: List[str] = []
+    current_heading: Optional[str] = None
+
+    def _flush(lns: List[str], hdg: Optional[str]) -> None:
+        """Finalise the current accumulated block and append to `blocks`."""
+        # A heading-only block with no lines is still valid — it marks a
+        # section boundary even if content follows in the next block.
+        non_empty = [l for l in lns if l.strip()]
+        if not non_empty and hdg is None:
+            return  # truly empty — nothing to add
+
+        block = CVBlock(
+            lines=non_empty,
+            heading=hdg,
+            line_count=len(non_empty),
+        )
+        # Compute structural signals
+        block.has_dates = any(_RE_YEAR.search(l) for l in non_empty)
+
+        bullet_count = sum(1 for l in non_empty if _RE_BULLET.match(l))
+        is_majority_bullets = bullet_count >= max(1, len(non_empty) // 2)
+
+        # Comma-list: join all lines, check for repeated "token, " pattern
+        joined = " ".join(non_empty)
+        is_comma_list = bool(len(non_empty) >= 2 and _RE_COMMA_LIST.match(joined))
+
+        # Single-line tech stack: ≥3 tokens, all short, no dates,
+        # and must NOT end with sentence punctuation (rules out prose summaries).
+        _line0 = non_empty[0] if non_empty else ""
+        is_tech_line = (
+            len(non_empty) == 1
+            and len(_line0.split()) >= 3
+            and all(len(tok) <= 20 for tok in _line0.split())
+            and not _RE_YEAR.search(_line0)
+            and not _RE_SENTENCE_END.search(_line0.strip())
+        )
+
+        block.is_list = is_majority_bullets or is_comma_list or is_tech_line
+        blocks.append(block)
+
+    for line in lines:
+        stripped = line.strip()
+
+        # ── Blank line → flush the current block ─────────────────────────────
+        if not stripped:
+            if current_lines or current_heading is not None:
+                _flush(current_lines, current_heading)
+                current_lines = []
+                current_heading = None
+            continue
+
+        # ── Heading detection ─────────────────────────────────────────────────
+        detected_section = _detect_section_from_line(stripped)
+
+        if detected_section is not None:
+            # Flush whatever accumulated before this heading
+            if current_lines or current_heading is not None:
+                _flush(current_lines, current_heading)
+            # Start a new block rooted at this heading
+            current_lines = []
+            current_heading = detected_section
+        else:
+            # Body line — accumulate into current block
+            current_lines.append(line)
+
+    # Flush the final block
+    if current_lines or current_heading is not None:
+        _flush(current_lines, current_heading)
+
+    return blocks
+
+
+def _detect_section_from_line(line: str) -> Optional[str]:
+    """
+    Internal helper: detect canonical section from a single raw line.
+
+    Wraps is_heading() and detect_heading() into a single call that returns
+    the canonical section name or None.
+
+    Used by split_into_blocks() and assign_sections().
+    """
+    if is_heading(line):
+        return detect_heading(line)
+    return None
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  STAGE 3 — HEADING DETECTION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+def is_heading(line: str) -> bool:
+    """
+    Stage 3a — decide whether a single line is a section heading.
+
+    Rules (applied in order, stops at first match):
+      1. Word-count guard: ≥ 7 words → NOT a heading (body text).
+      2. Decoration stripping: remove leading/trailing non-word chars, then re-test.
+      3. Keyword lookup: normalised text found in _HEADING_LOOKUP → heading.
+      4. Merged-heading detection: two heading words run together → heading.
+      5. OCR-repaired lookup: replace dotless-ı with i, re-check dict.
+
+    Deliberately does NOT use:
+      • ALL-CAPS heuristic alone (skill names like "PYTHON SQL" would fire)
+      • Font-size inference (not available in plain text)
+
+    Args:
+        line: A single raw text line (not yet lowercased).
+
+    Returns:
+        True if the line is a section heading.
+    """
+    stripped = line.strip()
+    if not stripped:
+        return False
+
+    # Guard: too many words → definitely body text
+    if len(stripped.split()) >= _HEADING_MAX_WORDS + 1:
+        return False
+
+    # Strip decoration characters and trailing colon, then lookup
+    plain = _strip_decoration(stripped)
+
+    # Layer 1: exact normalised keyword match
+    if _keyword_match(plain):
+        return True
+
+    # Layer 2: merged heading ("education skills" → two headings run together)
+    if _RE_MERGED_HEADING.search(plain.lower()):
+        return True
+
+    # Layer 3: OCR repair — replace dotless-ı → i, retry lookup
+    ocr_repaired = plain.replace("ı", "i").replace("İ", "I")
+    if ocr_repaired != plain and _keyword_match(ocr_repaired):
+        return True
+
+    return False
+
+
+def detect_heading(block: str) -> Optional[str]:
+    """
+    Stage 3b — return the canonical section name for a heading line/block.
+
+    Works on either a single line or a short multi-line block.
+    For merged headings ("education skills"), returns the FIRST matched section.
+
+    Args:
+        block: A raw line or short block known to be (or suspected to be) a heading.
+
+    Returns:
+        Canonical section name ("summary", "experience", …) or None.
+    """
+    stripped = block.strip()
+    if not stripped:
+        return None
+
+    # Use only the first line when given a multi-line block
+    first_line = stripped.splitlines()[0].strip()
+    plain = _strip_decoration(first_line)
+
+    # Direct lookup
+    result = _keyword_lookup(plain)
+    if result:
+        return result
+
+    # Merged-heading: return the first sub-heading found
+    if _RE_MERGED_HEADING.search(plain.lower()):
+        for match in _RE_MERGED_HEADING.finditer(plain.lower()):
+            # Try each captured word
+            for group_idx in (1, 2):
+                candidate = match.group(group_idx)
+                result = _keyword_lookup(candidate)
+                if result:
+                    return result
+
+    # OCR-repaired lookup
+    ocr_repaired = plain.replace("ı", "i").replace("İ", "I")
+    return _keyword_lookup(ocr_repaired)
+
+
+def _strip_decoration(line: str) -> str:
+    """
+    Remove leading/trailing decorative border characters from a heading.
+
+    Examples:
+        "─── Education ───"  →  "Education"
+        "*** Skills ***"     →  "Skills"
+        "[ Experience ]"     →  "Experience"
+        "EDUCATION:"         →  "EDUCATION"
+
+    Args:
+        line: Raw heading candidate.
+
+    Returns:
+        Line with decoration stripped but word content preserved.
+    """
+    stripped = _RE_DECORATION_LEAD.sub("", line.strip())
+    stripped = _RE_DECORATION_TAIL.sub("", stripped)
+    stripped = stripped.rstrip(":").strip()
+    return stripped
+
+
+def _normalise_for_lookup(text: str) -> str:
+    """
+    Normalise text for heading dictionary lookup.
+
+    Lowercases (ASCII-safe), strips non-word characters, collapses whitespace.
+
+    Args:
+        text: Any heading candidate string.
+
+    Returns:
+        Normalised string for use as a dict key.
+    """
+    text = text.lower()
+    text = re.sub(r"[^\w\s\u0130\u0131\u00C0-\u024F]", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _keyword_match(text: str) -> bool:
+    """Return True if normalised text appears in the heading dictionary."""
+    return _normalise_for_lookup(text) in _HEADING_LOOKUP
+
+
+def _keyword_lookup(text: str) -> Optional[str]:
+    """Return canonical section name for the text, or None."""
+    return _HEADING_LOOKUP.get(_normalise_for_lookup(text))
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  STAGE 4 — SECTION BOUNDARY DETECTION (assign_sections)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+def _is_contact_block(block: "CVBlock") -> bool:
+    """
+    Return True if a heading-less block looks like a name/contact header.
+
+    These blocks appear at the very top of a CV before any labelled section.
+    They contain 1-2 lines with a person name, phone, email, URL, LinkedIn,
+    or address — not content that belongs to any CV section.
+
+    Detection criteria (all must hold):
+      • ≤ 3 non-empty lines
+      • No dates (not an experience or education entry)
+      • No sentence-ending punctuation (not a summary paragraph)
+      • Matches contact-pattern: email, phone, URL, or very short name-like line
+    """
+    import re as _re
+
+    if block.has_dates:
+        return False
+    non_empty = [l.strip() for l in block.lines if l.strip()]
+    if len(non_empty) > 3:
+        return False
+    # Must not look like prose (sentence-ending)
+    if any(_RE_SENTENCE_END.search(l) for l in non_empty):
+        return False
+    _RE_CONTACT = _re.compile(
+        r"(@|linkedin|github|http|www\.|\+\d|\(\d{3}\)|tel:|phone|"
+        r"\d{3}[-.]\d{3}|address|adres)",
+        _re.I,
+    )
+    _RE_NAME_LINE = _re.compile(
+        r"^[A-ZÇĞİÖŞÜ][a-zçğışöü]+(\s+[A-ZÇĞİÖŞÜ][a-zçğışöü]+){0,3}$"
+    )
+    for line in non_empty:
+        if _RE_CONTACT.search(line):
+            return True
+        if _RE_NAME_LINE.match(line.strip()):
+            return True
+    return False
+
+
+def assign_sections(blocks: List[CVBlock]) -> Dict[str, List[str]]:
+    """
+    Stage 4 — assign blocks to canonical sections using a boundary-state machine.
+
+    Algorithm:
+      1. Iterate blocks in document order.
+      2. If block.heading is set → that section is now ACTIVE.
+         All subsequent body lines go to this section UNTIL the next heading.
+      3. Heading-less blocks → classified by classify_block() (Stage 5).
+      4. Repeated headings (column-split PDF artifact) → merge into existing bucket.
+      5. Pre-heading blocks (before the first heading) → discarded.
+         Name/contact info is captured by a separate contact extractor.
+
+    Key guarantee:
+      A line is assigned to AT MOST ONE section.  Section boundaries are
+      determined by heading positions, NOT by keyword scanning of body text.
+
+    Args:
+        blocks: Ordered list from split_into_blocks().
+
+    Returns:
+        Dict { section_name: [body_lines] } with all CANONICAL_SECTIONS keys.
+    """
+    raw: Dict[str, List[str]] = {s: [] for s in CANONICAL_SECTIONS}
+
+    current_section: Optional[str] = None
+    seen_sections: set[str] = set()  # for column-split detection
+    transition_log: List[str] = []  # ordered section transitions
+
+    # Index for position-aware classify_block
+    block_index = 0
+
+    for block in blocks:
+        if block.heading is not None:
+            # ── New section boundary ──────────────────────────────────────────
+            detected = block.heading
+
+            if detected in seen_sections:
+                # Column-split loop prevention:
+                # The same heading appeared again after visiting other sections.
+                # Find which sections we visited since the last occurrence.
+                last_idx = (
+                    len(transition_log) - 1 - transition_log[::-1].index(detected)
+                )
+                sections_between = set(transition_log[last_idx + 1 :])
+                sections_between.discard(detected)
+
+                if sections_between:
+                    # We left this section and came back → column-split artefact.
+                    # Merge incoming content into the already-open bucket silently.
+                    pass  # current_section = detected will merge lines below
+            else:
+                seen_sections.add(detected)
+
+            current_section = detected
+            transition_log.append(detected)
+
+            # The block's own body lines belong to the newly-opened section
+            if block.lines:
+                raw[current_section].extend(block.lines)
+
+        else:
+            # ── No heading: classify by structure (Stage 5) ───────────────────
+            if not block.lines:
+                block_index += 1
+                continue
+
+            # Skip name/contact header blocks that appear before any heading.
+            # These are 1-2 line blocks at the very top containing only a name,
+            # phone, email, or URL — no useful section content.
+            if not current_section and _is_contact_block(block):
+                block_index += 1
+                continue
+
+            # Position-aware: only classify if we're past any header already
+            # OR if this looks structurally significant.
+            classified = classify_block(block, block_index)
+            raw[classified].extend(block.lines)
+
+        block_index += 1
+
+    return raw
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  STAGE 5 — CONTENT CLASSIFICATION (fallback for heading-less blocks)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+def classify_block(block: CVBlock, index: int) -> str:
+    """
+    Stage 5 — classify a heading-less CVBlock using structural heuristics.
+
+    Signal hierarchy (stops at first confident match):
+      1. Date-range pattern        → experience  (strongest signal)
+      2. Degree/institution words  → education   (requires date too)
+      3. Project build verbs OR platform names → projects
+      4. List shape + tech keywords → skills
+      5. High tech-word density (≥4) with no dates → skills
+      6. Paragraph prose + pronoun/career words → summary (top-3 blocks only)
+      7. Date + role/company words → experience
+      8. Keyword score fallback    → best-scoring section
+      9. Default                  → experience (most common unlabelled type)
+
+    Position matters for summary:
+      Block index 0-2 = top of CV = more likely to be the summary paragraph.
+
+    Args:
+        block: CVBlock with pre-computed structural signals.
+        index: Zero-based position of the block in the document.
+
+    Returns:
+        Canonical section name string.
+    """
+    full_text = " ".join(block.lines)
+    lower_text = full_text.lower()
+
+    # ── Signal 1: degree/institution words → education ───────────────────────
+    # Checked FIRST because education entries contain "YYYY-YYYY" date ranges
+    # (graduation spans) that would otherwise fire the experience signal below.
+    # Degree words are highly specific; false positives are rare.
+    if _RE_DEGREE_WORDS.search(lower_text) and block.has_dates:
+        return "education"
+
+    # ── Signal 2: date range → experience ────────────────────────────────────
+    # A YYYY-YYYY (or YYYY-present) pattern is the defining experience signal,
+    # but only AFTER education has been ruled out above.
+    if _RE_DATE_RANGE.search(full_text):
+        return "experience"
+
+    # ── Signal 3: project build verbs or platform names → projects ────────────
+    # Checked BEFORE list+tech so "built a React app" routes to projects even
+    # though React is a tech keyword that could trigger skills.
+    if _RE_PROJECT_VERBS.search(lower_text) or _RE_PLATFORM_WORDS.search(lower_text):
+        return "projects"
+
+    # ── Signal 4: list shape + ≥2 tech words → skills ────────────────────────
+    tech_hits = len(_RE_TECH_WORDS.findall(lower_text))
+    if block.is_list and tech_hits >= 2:
+        return "skills"
+
+    # ── Signal 5: dense tech keywords with no dates → skills ─────────────────
+    if tech_hits >= 4 and not block.has_dates:
+        return "skills"
+
+    # ── Signal 6: prose paragraph with pronouns/career words → summary ────────
+    # Only fires in the top portion of the CV (first 3 blocks) to avoid
+    # classifying mid-CV prose (experience bullet points) as a summary.
+    sentence_endings = sum(1 for l in block.lines if _RE_SENTENCE_END.search(l))
+    word_count = len(full_text.split())
+    is_prose = (
+        sentence_endings >= 1
+        and not block.has_dates
+        and not block.is_list
+        and _SUMMARY_MIN_WORDS <= word_count <= _SUMMARY_MAX_WORDS
+    )
+    if is_prose and index < 3 and _RE_PRONOUN.search(lower_text):
+        return "summary"
+
+    # ── Signal 7: date + role or company name → experience ────────────────────
+    if block.has_dates and (
+        _RE_ROLE_WORDS.search(lower_text) or _RE_COMPANY_WORDS.search(lower_text)
+    ):
+        return "experience"
+
+    # ── Signal 8: keyword score fallback ──────────────────────────────────────
+    scored = _score_text_for_section(full_text)
+    if scored:
+        return scored
+
+    # ── Default ───────────────────────────────────────────────────────────────
+    # The most common un-labelled block type in CVs is experience (job entries
+    # without clear date ranges, freelance work, etc.).
+    return "experience"
+
+
+def _score_text_for_section(text: str) -> Optional[str]:
+    """
+    Keyword-scoring fallback: assign points per section, return the winner.
+
+    Used as a last resort when structural signals alone are inconclusive.
+    Returns None if no section scores above zero.
+
+    Scoring criteria:
+      experience: date-range(3) + role-word(2) + company-word(1)
+      education:  degree-word(3) + date+degree(+2)
+      skills:     tech-word hits × 2 capped at 6, level-word(1)
+      projects:   project-verb(3) + platform(2)
+      summary:    pronoun(2) + sentence-ending with no date(1)
+
+    Args:
+        text: Full block text (joined lines).
+
+    Returns:
+        Best-scoring section name or None.
+    """
+    lower = text.lower()
+    scores: Dict[str, int] = {s: 0 for s in CANONICAL_SECTIONS}
+
+    if _RE_DATE_RANGE.search(text):
+        scores["experience"] += 3
+    if _RE_ROLE_WORDS.search(lower):
+        scores["experience"] += 2
+    if _RE_COMPANY_WORDS.search(lower):
+        scores["experience"] += 1
+
+    if _RE_DEGREE_WORDS.search(lower):
+        scores["education"] += 3
+    if _RE_YEAR.search(text) and _RE_DEGREE_WORDS.search(lower):
+        scores["education"] += 2
+
+    tech_hits = len(_RE_TECH_WORDS.findall(lower))
+    scores["skills"] += min(tech_hits * 2, 6)
+
+    _level_re = re.compile(
+        r"\b(beginner|intermediate|advanced|expert|fluent|native|proficient|"
+        r"başlangıç|orta|ileri|uzman|akıcı|anadil)\b",
+        re.I,
+    )
+    if _level_re.search(lower):
+        scores["skills"] += 1
+
+    if _RE_PROJECT_VERBS.search(lower):
+        scores["projects"] += 3
+    if _RE_PLATFORM_WORDS.search(lower):
+        scores["projects"] += 2
+
+    if _RE_PRONOUN.search(lower):
+        scores["summary"] += 2
+    if _RE_SENTENCE_END.search(text.strip()) and not _RE_YEAR.search(text):
+        scores["summary"] += 1
+
+    best_section = max(scores, key=lambda k: scores[k])
+    return best_section if scores[best_section] > 0 else None
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  STAGE 6 — SAFETY RULES + OUTPUT BUILDER
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+def _dedup_lines(lines: List[str]) -> List[str]:
+    """
+    Remove near-duplicate lines within a section (look-back window of 5).
+
+    Only CONSECUTIVE-ish duplicates are removed — legitimate repeated values
+    (e.g. "Python" appearing in both skills and an experience bullet) survive
+    because they are in different sections and different call contexts.
+
+    Args:
+        lines: Accumulated raw lines for one section.
+
+    Returns:
+        Lines with near-duplicates removed, order preserved.
+    """
+    LOOKBACK = 5
+    seen_recently: List[str] = []
+    result: List[str] = []
+
+    for line in lines:
+        norm_key = re.sub(r"\s+", " ", line.strip().lower())
+        if norm_key and norm_key in seen_recently:
+            continue
+        result.append(line)
+        if norm_key:
+            seen_recently.append(norm_key)
+            if len(seen_recently) > LOOKBACK:
+                seen_recently.pop(0)
+
+    return result
+
+
+def build_output(sections: Dict[str, List[str]]) -> Dict[str, str]:
+    """
+    Stage 6b — finalise and join per-section line lists into output strings.
+
+    Applies safety rules, deduplicates lines, strips whitespace, and returns
+    the six canonical string fields.
+
+    Args:
+        sections: Dict { section: [lines] } from assign_sections().
+
+    Returns:
+        Dict with keys: summary, experience, education, skills, projects, other.
+        All values are stripped strings (empty string if section has no content).
+    """
+    safe = _apply_safety_rules(sections)
+
+    result: Dict[str, str] = {}
+    for section in CANONICAL_SECTIONS:
+        deduped = _dedup_lines(safe.get(section, []))
+        result[section] = "\n".join(deduped).strip()
+
+    return result
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  PUBLIC ENTRY POINT — FULL PIPELINE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+def parse_cv(text: str) -> Dict[str, str]:
+    """
+    Full 6-stage CV parsing pipeline.
+
+    Transforms raw OCR/PDF text into a structured dict of CV sections.
+
+    Stages:
+      1. normalize_text()       — OCR repair, dedup, whitespace fix
+      2. split_into_blocks()    — logical block segmentation
+      3. (internal)             — heading detection per block
+      4. assign_sections()      — boundary-state-machine section assignment
+      5. classify_block()       — structural fallback for heading-less blocks
+      6. build_output()         — safety rules, dedup, join to strings
+
+    Args:
+        text: Raw text from PDF extraction or OCR.
+
+    Returns:
+        Dict with keys: summary, experience, education, skills, projects, other.
+
+    Example:
+        >>> result = parse_cv(raw_ocr_text)
+        >>> print(result["skills"])
+        "Python, SQL, React, Docker"
+    """
+    # Stage 1: normalise
+    normalised = normalize_text(text)
+
+    # Stage 2: segment into blocks (includes Stage 3 heading detection)
+    blocks = split_into_blocks(normalised)
+
+    # Stage 4: assign sections using boundary state machine
+    sections_raw = assign_sections(blocks)
+
+    # Stage 6: safety rules + output
+    return build_output(sections_raw)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  SELF-TEST  (run with:  python cv_pipeline.py)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ─── end of embedded cv_pipeline ─────────────────────────────────────────
+
+
+def detect_section_headers(text: str) -> list[tuple[int, str, str]]:
+    """
+    Stage 3 — scan text line by line and return all detected section headings.
+
+    Returns a list of (line_index, raw_line, canonical_section) tuples so
+    callers can use it to locate section boundaries without re-running the
+    full block segmentation.
+
+    Detection layers (in priority order):
+      L0: _SD_PRIORITY_OVERRIDES (spec-mandated routing)
+      L1: _is_section_heading()  (keyword + OCR repair + fuzzy)
+      L2: _SD_EXT_MAP extended map
+      L3: _sd_detect_heading()   (decoration-strip + context scoring)
+
+    Args:
+        text: Any stage of processed text (raw, normalised, or cleaned).
+
+    Returns:
+        List of (line_idx, raw_line, section_name) sorted by line_idx.
+    """
+    results: list[tuple[int, str, str]] = []
+    lines = text.splitlines()
+    n = len(lines)
+
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if not stripped:
+            continue
+
+        prev_line = lines[i - 1].strip() if i > 0 else ""
+        next_line = lines[i + 1].strip() if i < n - 1 else ""
+
+        section, _ = _sd_detect_heading(stripped, prev_line, next_line)
+        if section is not None:
+            results.append((i, line, section))
+
+    return results
 
 
 def _find_column_split_x(words: list[dict], page_width: float) -> Optional[float]:
@@ -3267,83 +4529,277 @@ def _dedup_section_lines(lines: list[str]) -> list[str]:
 
 # ── Content keyword scorer for headerless CVs ─────────────────────────────────
 
-_SD_CONTENT_KWS: dict[str, list[str]] = {
-    "experience": [
-        "şirket",
-        "company",
-        "pozisyon",
-        "staj",
-        "intern",
-        "çalıştım",
-        "worked",
-        "geliştirdim",
-        "yönettim",
-        "kameraman",
-        "mühendis",
-        "engineer",
-        "müdür",
-        "manager",
-        "uzman",
-        "specialist",
-    ],
-    "education": [
-        "üniversite",
-        "university",
-        "fakülte",
-        "bölüm",
-        "lisans",
-        "bachelor",
-        "yüksek lisans",
-        "master",
-        "doktora",
-        "mezun",
-        "graduate",
-        "diploma",
-        "lise",
-        "okul",
-    ],
-    "skills": [
-        "python",
-        "java",
-        "javascript",
-        "sql",
-        "react",
-        "django",
-        "html",
-        "css",
-        "typescript",
-        "figma",
-        "photoshop",
-        "premiere",
-        "excel",
-        "linux",
-        "git",
-        "docker",
-        "aws",
-        "azure",
-    ],
-    "summary": [
-        "deneyimliyim",
-        "experienced",
-        "uzmanım",
-        "hakkımda",
-        "kariyer",
-    ],
-}
+# ─────────────────────────────────────────────────────────────────────────────
+#  STAGE 4 — CONTENT CLASSIFICATION  (assign_sections)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+#  This replaces the old keyword-only _sd_score_line_for_section() fallback.
+#
+#  Design:
+#    • Heading-labelled blocks → trusted directly.
+#    • Unlabelled blocks → classified by STRUCTURE first, keywords second.
+#    • Safety rules applied after initial assignment to correct mis-routes.
+
+# ── Content-signal patterns ───────────────────────────────────────────────────
+
+# Experience: date + role/company signals
+_AS_DATE_RE = re.compile(r"\b(19|20)\d{2}\b")
+_AS_DATE_RANGE = re.compile(
+    r"(19|20)\d{2}\s*[-–]\s*((19|20)\d{2}|present|günümüz|halen|devam)", re.I
+)
+_AS_ROLE_WORDS = re.compile(
+    r"\b(intern|stajyer|engineer|mühendis|manager|müdür|developer|geliştirici"
+    r"|analyst|analist|specialist|uzman|coordinator|koordinatör|lead|lider"
+    r"|director|direktör|officer|consultant|danışman|architect|mimar"
+    r"|designer|tasarımcı|researcher|araştırmacı|assistant|asistan)\b",
+    re.I,
+)
+_AS_COMPANY_WORDS = re.compile(
+    r"\b(a\.ş|ltd|inc|corp|gmbh|s\.a|llc|co\.|şirketi|company|holding"
+    r"|group|grup|teknoloji|technology|solutions|çözümleri|systems|sistemleri"
+    r"|consulting|danışmanlık|agency|ajans)\b",
+    re.I,
+)
+
+# Education: institution and degree signals
+_AS_DEGREE_WORDS = re.compile(
+    r"\b(üniversite|university|fakülte|faculty|bölüm|department|lisans|bachelor"
+    r"|yüksek\s+lisans|master|msc|mba|doktora|phd|doctorate|diploma|mezun"
+    r"|graduate|lise|high\s+school|okul|school|akademi|academy|enstitü|institute)\b",
+    re.I,
+)
+
+# Skills: technology keywords
+_AS_TECH_WORDS = re.compile(
+    r"\b(python|java|javascript|typescript|sql|react|angular|vue|django|flask"
+    r"|spring|node|nodejs|html|css|sass|scss|php|ruby|swift|kotlin|go|rust|c\+\+"
+    r"|docker|kubernetes|k8s|aws|azure|gcp|git|linux|bash|terraform|jenkins"
+    r"|figma|sketch|photoshop|premiere|illustrator|after\s*effects"
+    r"|excel|powerbi|tableau|matlab|r\b|hadoop|spark|tensorflow|pytorch)\b",
+    re.I,
+)
+_AS_LEVEL_WORDS = re.compile(
+    r"\b(beginner|intermediate|advanced|expert|fluent|native|proficient"
+    r"|başlangıç|orta|ileri|uzman|akıcı|anadil|temel|iyi)\b",
+    re.I,
+)
+
+# Projects: build/create verbs and platform names
+_AS_PROJECT_VERBS = re.compile(
+    r"\b(built|developed|created|designed|implemented|geliştirdim|oluşturdum"
+    r"|tasarladım|yaptım|kurdum|coded|deployed|launched|contributed)\b",
+    re.I,
+)
+_AS_PLATFORM_RE = re.compile(
+    r"\b(github|gitlab|bitbucket|heroku|vercel|netlify|app store|play store"
+    r"|npm|pypi|portfolio|demo|api|backend|frontend|mobile|android|ios)\b",
+    re.I,
+)
+
+# Summary: prose signals (no dates, no bullets, full sentences)
+_AS_SENTENCE_END = re.compile(r"[.!?]\s*$")
+_AS_PRONOUN_RE = re.compile(
+    r"\b(i am|i have|i'm|ben|benim|hakkımda|kendimi|kariyer|hedefim"
+    r"|motivated|passionate|experienced|uzman|deneyimli)\b",
+    re.I,
+)
+
+# Safety-rule patterns
+_AS_PARA_RE = re.compile(r"\w[\w\s]{40,}[.!?]")  # long sentence → not skills
+
+
+def _classify_block(block: CVBlock) -> str:
+    """
+    Classify a single CVBlock into a canonical section name using structural
+    signals rather than (only) keyword matching.
+
+    Signal hierarchy:
+      1. Trusted heading — if block.heading is set, use it directly.
+      2. Date-range presence → experience (strongest structural signal).
+      3. Degree/institution words → education.
+      4. List shape + tech keywords → skills.
+      5. Build verbs or platform names → projects.
+      6. Paragraph prose with pronouns/career words → summary.
+      7. Keyword fallback (legacy _sd_score_line_for_section logic).
+      8. Default: experience (most common unlabelled block type in CVs).
+
+    Args:
+        block: CVBlock with lines and signals already computed.
+
+    Returns:
+        Canonical section name string.
+    """
+    if block.heading is not None:
+        return block.heading
+
+    full_text = " ".join(block.lines)
+    lower = turkish_lower(full_text)
+
+    # ── Signal 1: date range → experience ────────────────────────────────────
+    if _AS_DATE_RANGE.search(full_text):
+        return "experience"
+
+    # ── Signal 2: degree/institution words → education ────────────────────────
+    if _AS_DEGREE_WORDS.search(lower):
+        # Require at least one date too (education entries almost always have years)
+        if block.has_dates:
+            return "education"
+
+    # ── Signal 3: project verbs / platform names → projects ────────────
+    # Checked BEFORE list+tech so 'built a github app with React' routes
+    # to projects even though React is a technology keyword.
+    if _AS_PROJECT_VERBS.search(lower) or _AS_PLATFORM_RE.search(lower):
+        return "projects"
+
+    # ── Signal 4: list shape + tech words → skills ────────────────────────
+    tech_hits = len(_AS_TECH_WORDS.findall(lower))
+    if block.is_list and tech_hits >= 2:
+        return "skills"
+    if tech_hits >= 4 and not block.has_dates:
+        return "skills"
+
+    # ── Signal 5: paragraph prose → summary ───────────────────────────────
+    sentence_endings = sum(1 for l in block.lines if _AS_SENTENCE_END.search(l))
+    if (
+        sentence_endings >= 2
+        and not block.has_dates
+        and not block.is_list
+        and _AS_PRONOUN_RE.search(lower)
+    ):
+        return "summary"
+
+    # ── Signal 6: date + role/company → experience ──────────────────────────
+    if block.has_dates and (
+        _AS_ROLE_WORDS.search(lower) or _AS_COMPANY_WORDS.search(lower)
+    ):
+        return "experience"
+
+    # ── Signal 7: keyword score fallback ───────────────────────────────────────────
+    kw_section = _sd_score_line_for_section(full_text)
+    if kw_section:
+        return kw_section
+
+    # ── Default ────────────────────────────────────────────────────────────────
+    return "experience"
+
+
+def _apply_safety_rules(sections: dict[str, list[str]]) -> dict[str, list[str]]:
+    """
+    Stage 4 post-pass — enforce structural safety rules to catch
+    mis-classified content that passed through the signal hierarchy.
+
+    Rules:
+      • skills MUST NOT contain long paragraph lines (>60 chars with sentence
+        endings). Any such line is moved to summary if summary is short,
+        else dropped from skills.
+      • experience MUST contain at least one date per block-group.
+        Blocks with no dates are demoted to summary or other.
+      • education MUST contain an institution keyword.
+        Blocks with no institution signal are moved to experience.
+      • summary is capped at _SUMMARY_MAX_LINES non-empty lines.
+        Overflow goes to other.
+
+    Args:
+        sections: Dict of { section_name: [lines] } (pre-join).
+
+    Returns:
+        Cleaned sections dict with the same keys.
+    """
+    result = {k: list(v) for k, v in sections.items()}
+
+    # Rule 1: skills must not contain paragraphs
+    clean_skills: list[str] = []
+    spill_to_summary: list[str] = []
+    for line in result.get("skills", []):
+        if _AS_PARA_RE.search(line) and _AS_SENTENCE_END.search(line.strip()):
+            spill_to_summary.append(line)
+        else:
+            clean_skills.append(line)
+    result["skills"] = clean_skills
+    if spill_to_summary and len(result.get("summary", [])) < _SUMMARY_MAX_LINES:
+        result.setdefault("summary", []).extend(spill_to_summary)
+
+    # Rule 2: education must contain institution signal
+    clean_edu: list[str] = []
+    spill_exp: list[str] = []
+    for line in result.get("education", []):
+        if _AS_DEGREE_WORDS.search(turkish_lower(line)):
+            clean_edu.append(line)
+        else:
+            spill_exp.append(line)
+    result["education"] = clean_edu
+    result.setdefault("experience", []).extend(spill_exp)
+
+    # Rule 3: summary capped at _SUMMARY_MAX_LINES non-empty lines
+    summary_lines = result.get("summary", [])
+    non_empty = [l for l in summary_lines if l.strip()]
+    if len(non_empty) > _SUMMARY_MAX_LINES:
+        result["summary"] = non_empty[:_SUMMARY_MAX_LINES]
+        result.setdefault("other", []).extend(non_empty[_SUMMARY_MAX_LINES:])
+
+    return result
+
+
+_SUMMARY_MAX_LINES = 8
+
+
+def _assign_sections_compat(blocks):
+    """
+    Thin shim: calls the new structured assign_sections() and converts
+    the { section: [lines] } dict to { section: str } for backward compat.
+    Replaces the old assign_sections() which lived here.
+    """
+    raw = assign_sections(blocks)  # new pipeline function (embedded above)
+    return {k: "\n".join(v) if isinstance(v, list) else v for k, v in raw.items()}
 
 
 def _sd_score_line_for_section(line: str) -> Optional[str]:
     """
-    Score *line* against per-section content keywords.
-    Returns the best-matching section name, or None if no keyword hit.
-    Used only by the headerless-CV fallback in extract_sections().
+    Keyword fallback: score a single line against per-section content signals.
+    Used as Signal 7 in _classify_block() and by the headerless-CV fallback
+    in extract_sections().
+
+    Uses the same compiled patterns as assign_sections() so behaviour is
+    consistent whether a block is classified structurally or by keyword.
     """
-    line_lower = turkish_lower(line)
-    scores = {
-        s: sum(1 for kw in kws if kw in line_lower)
-        for s, kws in _SD_CONTENT_KWS.items()
+    lower = turkish_lower(line)
+
+    scores: dict[str, int] = {
+        "experience": 0,
+        "education": 0,
+        "skills": 0,
+        "projects": 0,
+        "summary": 0,
     }
-    best = max(scores, key=scores.get)
+
+    if _AS_DATE_RANGE.search(line):
+        scores["experience"] += 3
+    if _AS_ROLE_WORDS.search(lower):
+        scores["experience"] += 2
+    if _AS_COMPANY_WORDS.search(lower):
+        scores["experience"] += 1
+
+    if _AS_DEGREE_WORDS.search(lower):
+        scores["education"] += 3
+    if _AS_DATE_RE.search(line) and _AS_DEGREE_WORDS.search(lower):
+        scores["education"] += 2
+
+    tech_hits = len(_AS_TECH_WORDS.findall(lower))
+    scores["skills"] += min(tech_hits * 2, 6)
+    if _AS_LEVEL_WORDS.search(lower):
+        scores["skills"] += 1
+
+    if _AS_PROJECT_VERBS.search(lower):
+        scores["projects"] += 3
+    if _AS_PLATFORM_RE.search(lower):
+        scores["projects"] += 2
+
+    if _AS_PRONOUN_RE.search(lower):
+        scores["summary"] += 2
+    if _AS_SENTENCE_END.search(line.strip()) and not _AS_DATE_RE.search(line):
+        scores["summary"] += 1
+
+    best = max(scores, key=lambda k: scores[k])
     return best if scores[best] > 0 else None
 
 
@@ -3860,7 +5316,31 @@ def process_cv(file_path: Path) -> dict:
     section_confidence: dict[str, float] = sections_raw.pop("__confidence__", {})
     sections = sections_raw
 
-    # ── Step 6b: group experience blocks (FIX 4) ─────────────────────────────
+    # ── Step 6b: structured pipeline (NEW — full 6-stage parse_cv) ─────────
+    # parse_cv() runs the complete structured pipeline (normalize → block
+    # segment → heading detect → boundary assign → classify → safety rules).
+    # Strategy: the new pipeline output wins when the keyword pass left a
+    # section empty OR when the new output is >20% richer in content.
+    try:
+        _structured = parse_cv(cleaned_text)  # full 6-stage pipeline
+        for _sec in [
+            "summary",
+            "experience",
+            "education",
+            "skills",
+            "projects",
+            "other",
+        ]:
+            _kw_val = sections.get(_sec, "")
+            _st_val = _structured.get(_sec, "")
+            if not _kw_val and _st_val:
+                sections[_sec] = _st_val
+            elif _st_val and len(_st_val) > len(_kw_val) * 1.2:
+                sections[_sec] = _st_val
+    except Exception as _e:
+        logger.debug(f"  [structured_pipeline] skipped: {_e}")
+
+    # ── Step 6c: group experience blocks (FIX 4) ─────────────────────────────
     # Merge fragmented experience lines (each job was one line) into structured
     # blocks: "Company - City - Year | Job Title Description".
     if sections.get("experience"):
