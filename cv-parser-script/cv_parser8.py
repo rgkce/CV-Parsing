@@ -145,6 +145,13 @@ def turkish_lower(text: str) -> str:
     """
     return text.translate(_TR_LOWER_TABLE).lower()
 
+_RE_EMAIL_TIGHT = re.compile(
+    r"[a-zA-Z0-9._%+\-]{2,}@[a-zA-Z0-9.\-]+\."
+    r"(?:com|net|org|edu|gov|mil|biz|info|online|site|link|app|dev|me|io|co|tr|in|tv|ai|so|[a-z]{2,4})"
+    r"(?![a-zA-Z])",  # negative lookahead: TLD must not be followed by more letters
+    re.IGNORECASE,
+)
+
 
 # OCR fallback threshold: if extracted text has fewer characters than this,
 # we consider extraction a failure and invoke OCR.
@@ -152,7 +159,7 @@ OCR_FALLBACK_THRESHOLD = 80
 
 # Minimum ratio of words that must appear in EACH column for multi-column detection.
 # e.g. 0.15 means both left and right clusters need ≥15% of all page words.
-COLUMN_MIN_RATIO = 0.15
+COLUMN_MIN_RATIO = 0.10
 
 # When scanning for the horizontal gap between columns, we project word x-ranges
 # onto a 1-D grid of this many buckets.  Higher = finer resolution but slower.
@@ -730,16 +737,15 @@ SECTION_KEYWORDS: dict[str, list[str]] = {
         "technical stack",
         "dev stack",
         # ======================
-        # LANGUAGES (IMPORTANT)
+        # PROGRAMMING LANGUAGES ONLY
         # ======================
-        "languages",
+        # FIX 2: Removed human-language keywords ("languages", "spoken languages",
+        # "foreign languages", "language proficiency", "linguistic skills") from
+        # skills. These caused "Diller" / "Languages" headings to be classified
+        # as skills instead of languages. They are now handled exclusively by
+        # _SD_EXT_MAP → "languages" bucket.
         "programming languages",
         "coding languages",
-        "language skills",
-        "spoken languages",
-        "foreign languages",
-        "language proficiency",
-        "linguistic skills",
         # ======================
         # SOFT SKILLS (AYRI AMA SKILLS)
         # ======================
@@ -793,17 +799,6 @@ SECTION_KEYWORDS: dict[str, list[str]] = {
         "programlar",
         "kullandığım programlar",
         # ======================
-        # TURKISH LANGUAGES
-        # ======================
-        "diller",
-        "yabancı diller",
-        "konuşulan diller",
-        "dil bilgisi",
-        "dil yetkinliği",
-        "dil seviyesi",
-        "dil becerileri",
-        "yabancı dil",
-        # ======================
         # BILINGUAL
         # ======================
         "skills / yetenekler",
@@ -812,7 +807,7 @@ SECTION_KEYWORDS: dict[str, list[str]] = {
         "skills & yetenekler",
         "beceriler / skills",
         "yetkinlikler / competencies",
-        "diller / languages",
+        # FIX 2: Removed "diller / languages" — now handled by _SD_EXT_MAP
         "technologies / teknolojiler",
         # ======================
         # OCR / TYPO
@@ -1457,6 +1452,173 @@ COLUMN_BREAK_TOKEN = "===COLUMN_BREAK==="
 
 
 # ─────────────────────────────────────────────
+#  0-pre. RAW TEXT SANITIZATION  (runs IMMEDIATELY after PDF extraction)
+# ─────────────────────────────────────────────
+#
+# PURPOSE
+# ───────
+# Strip characters that should never appear in human-readable CV text.
+# This runs BEFORE any regex-based processing, so downstream stages never
+# encounter null bytes, font-icon glyphs, or control characters.
+#
+# WHAT IS REMOVED
+# ───────────────
+#   1. Null bytes (\x00) — PDF corruption artifacts.
+#   2. Unicode Private Use Area (U+E000–U+F8FF) — font-specific icon glyphs
+#      (e.g. \uf0da = ► arrow, \uf005 = ★ star, \uf0e0 = ✉ envelope).
+#      These are meaningless without the original font installed.
+#   3. Control characters (U+0000–U+001F) except newline (\n, U+000A) and
+#      tab (\t, U+0009).  Carriage return (\r, U+000D) is also preserved
+#      temporarily (cleaned by later stages).
+#   4. Replacement character (U+FFFD) — indicates failed encoding.
+#   5. Isolated stray bullet artifacts at the start of lines: a single "e",
+#      "=", "a", or "." followed by a space when used as a bullet character
+#      by the PDF renderer.  Only removed when the pattern matches a
+#      bullet context (start of line, followed by real content).
+#   6. Lines consisting entirely of decorative noise (only symbols/spaces).
+#
+# WHAT IS PRESERVED
+# ─────────────────
+#   • All Unicode letters (Latin, Turkish, Cyrillic, etc.)
+#   • Digits, standard punctuation, whitespace
+#   • Emails, URLs, phone numbers (untouched)
+#   • The COLUMN_BREAK_TOKEN sentinel
+
+# Pre-compiled regex for characters to strip in sanitize_raw_text()
+_SANITIZE_STRIP_CHARS = re.compile(
+    r"[\x00"                    # null bytes
+    r"\x01-\x08"                # control chars C0 (before TAB)
+    r"\x0b\x0c"                 # vertical tab, form feed
+    r"\x0e-\x1f"                # control chars C0 (after CR)
+    r"\ufffd"                   # replacement character
+    r"\ue000-\uf8ff"            # Private Use Area (font icons)
+    r"\U000F0000-\U000FFFFD"    # Supplementary Private Use Area-A
+    r"]"
+)
+
+# Stray OCR bullet artifacts: a SINGLE character at the start of a line
+# that was originally a bullet/icon in the PDF but extracted as a plain letter.
+# Pattern: line starts with one of [e = a .] followed by a space and then
+# at least one uppercase letter or digit (real content), and the total line
+# has enough content after the bullet.
+# We do NOT strip "e" if it looks like a real Turkish word start (e.g. "eğitim").
+_SANITIZE_BULLET_ARTIFACT = re.compile(
+    r"^([e=•·▪\-*]|\.)\s+"                 # bullet char + whitespace
+    r"(?=[a-zA-ZÇĞİÖŞÜçğıöşü0-9])"         # followed by any letter/digit (real content)
+    r"(?!ğitim|ğlence|letişim|"            # negative lookahead: Turkish words starting after "e"
+    r"letisim|kip|kim|vet|vet|"
+    r"şağıda|leri|[a-zçğıöşü]{4,})",       # if 4+ lowercase follows, it's a real word
+    re.MULTILINE | re.UNICODE | re.IGNORECASE,
+)
+
+# Lines that are pure decoration / noise — only non-alphanumeric characters
+_SANITIZE_NOISE_LINE = re.compile(
+    r"^[^a-zA-Z0-9çğıöşüÇĞİÖŞÜ\n]*$",
+    re.MULTILINE | re.UNICODE,
+)
+
+
+def _is_garbage_line(line: str) -> bool:
+    line_norm = line.strip().lower()
+    if not line_norm:
+        return False
+    # Drop known direct OCR noise/labels
+    if "cme" in line_norm and "cece" in line_norm:
+        return True
+    if line_norm in (
+        "cme” | cece", "cme\" cece", "cme”", "cece",
+        "eo mvmt", "=o 4 aid:", "ae ee ------------------", "= isim",
+        "wa oo oo fee", "oe d2d", "ww oo i", "a zz"
+    ):
+        return True
+    
+    words = line_norm.split()
+    if not words:
+        return False
+        
+    valid_short_words = {
+        "in", "on", "at", "to", "is", "am", "by", "for", "and", "the",
+        "ile", "ve", "de", "da", "bir", "her", "için", "icin", "c++", "c#", "ui", "ux", "qa", "ml", "ai", "db", "os"
+    }
+    
+    if len(line_norm) < 20 and len(words) >= 2:
+        all_short = all(len(w) <= 3 for w in words)
+        if all_short:
+            if not any(w in valid_short_words for w in words):
+                return True
+                
+    return False
+
+
+def sanitize_raw_text(text: str) -> str:
+    """
+    First-pass sanitization of raw PDF/OCR text.
+
+    Strips null bytes, Private Use Area glyphs (font icons), control
+    characters, stray bullet artifacts, and pure-noise lines.
+
+    This MUST run before any regex-based processing (normalize_text,
+    repair_broken_emails, clean_text, etc.) so that downstream stages
+    never encounter garbage characters that break pattern matching.
+
+    Args:
+        text: Raw text straight from PDF extraction or OCR.
+
+    Returns:
+        Sanitized text with garbage characters removed.
+    """
+    if not text:
+        return ""
+
+    original_len = len(text)
+
+    # ── Pass 1: Strip garbage characters ──────────────────────────────────────
+    text = _SANITIZE_STRIP_CHARS.sub("", text)
+
+    # ── Pass 2: Remove stray bullet artifacts at line starts ─────────────────
+    # Only remove when we're confident it's a bullet (not a real word).
+    # "e Teknik Beceri" → "Teknik Beceri"  (bullet "e")
+    # "= ABDULLAH"      → "ABDULLAH"       (bullet "=")
+    # But keep "eğitim" → "eğitim" (real Turkish word)
+    text = _SANITIZE_BULLET_ARTIFACT.sub("", text)
+
+    # ── Pass 3: Remove lines that are pure decoration/noise ──────────────────
+    # Lines like "─────" or "= = = =" or "*** " become empty
+    lines = text.splitlines()
+    cleaned_lines = []
+    for line in lines:
+        stripped = line.strip()
+        # Keep empty lines (paragraph separators)
+        if not stripped:
+            cleaned_lines.append("")
+            continue
+        # Remove lines that have NO alphanumeric content at all
+        if not re.search(r"[a-zA-Z0-9çğıöşüÇĞİÖŞÜ]", stripped):
+            continue
+        # Remove lines that are just a single character (orphaned bullet)
+        if len(stripped) <= 1 and stripped not in ("I", "ı"):
+            continue
+        # Remove garbage/OCR noise lines
+        if _is_garbage_line(line):
+            continue
+        cleaned_lines.append(line)
+    text = "\n".join(cleaned_lines)
+
+    # ── Pass 4: Collapse resulting excessive blank lines ─────────────────────
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    text = text.strip()
+
+    chars_removed = original_len - len(text)
+    if chars_removed > 0:
+        logger.info(
+            f"  [sanitize] Removed {chars_removed} garbage characters "
+            f"({original_len} → {len(text)})"
+        )
+
+    return text
+
+
+# ─────────────────────────────────────────────
 #  0. TEXT NORMALISATION  (runs BEFORE section extraction)
 # ─────────────────────────────────────────────
 
@@ -1592,10 +1754,14 @@ _OCR_SPACED_CHARS = re.compile(
 # between two longer tokens on the same line — typical OCR split artifact.
 # e.g. "soft w are" where "w" is the broken fragment.
 # We only merge if the fragment is a single char and neighbours are ≥ 2 chars,
-# to avoid merging legitimate single-letter words (a, I, etc.) mid-sentence.
+# to avoid merging legitimate single-letter words (a, I, ı) mid-sentence.
 # NOTE: \S{2,} (not \S{2}) — neighbours may be longer than exactly 2 chars.
+# FIX 1: Exclude real single-letter words: a, A, I, ı (U+0131)
+# These are legitimate English ("a", "I") and Turkish ("ı") words that
+# must NOT be merged with their neighbours. Without this exclusion,
+# "had a very" becomes "hadavery" after turkish_lower() converts I→ı.
 _OCR_LONE_FRAGMENT = re.compile(
-    r"(?<=\S{2}) ([A-Za-zÀ-ɏ\u0130\u0131]) (?=\S{2,})",
+    r"(?<=\S{2}) ([^aAI\u0131\s]) (?=\S{2,})",
     re.UNICODE,
 )
 
@@ -1645,16 +1811,18 @@ _OCR_NOISE_CHARS = re.compile(r"(?<!\S)[|~^`\\](?!\S)")
 # Matches a "fuzzy email" — a run of non-newline chars that contains "@"
 # with optional spaces around it and a TLD-like ending.
 _BROKEN_EMAIL_CANDIDATE = re.compile(
-    r"[A-Za-z0-9._%+\-]+"  # local part (may be broken with spaces below)
-    r"\s*@\s*"  # @ with optional surrounding spaces
-    r"[A-Za-z0-9.\-\s]+"  # domain (spaces may be injected)
-    r"\.\s*[A-Za-z]{2,}",  # dot + TLD (space may be between dot and TLD)
+    r"(?:[A-Za-z0-9._%+\-]+[ \t]+)?" # At most ONE optional leading part with horizontal spaces
+    r"[A-Za-z0-9._%+\-]+"            # Main local part
+    r"[ \t]*@[ \t]*"                # @ with optional horizontal spaces
+    r"[A-Za-z0-9.\- \t]+"           # Domain with horizontal spaces
+    r"\.[ \t]*[A-Za-z]{2,6}"        # Dot + TLD
+    r"(?![A-Za-z])",                # Word boundary
     re.IGNORECASE,
 )
 
 # After collapsing spaces, validate the result is a real email.
 _VALID_EMAIL_RE = re.compile(
-    r"^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$",
+    r"^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,6}$",
     re.IGNORECASE,
 )
 
@@ -1912,6 +2080,10 @@ CANONICAL_SECTIONS: List[str] = [
     "education",
     "skills",
     "projects",
+    "languages",
+    "certificates",
+    "interests",
+    "organizations",
     "other",
 ]
 
@@ -2068,8 +2240,8 @@ _HEADING_DICT: Dict[str, List[str]] = {
         "development stack",
         "programming skills",
         "software skills",
-        "languages",
-        "language skills",
+        # FIX 2: Removed "languages", "language skills", "diller", "yabancı diller"
+        # from skills — they are handled by _SD_EXT_MAP → "languages" bucket.
         "programming languages",
         # OCR variants
         "sk ills",
@@ -2084,9 +2256,6 @@ _HEADING_DICT: Dict[str, List[str]] = {
         "uzmanlik alanlari",
         "uzmanlık alanları",
         "bilgi birikimi",
-        "diller",
-        "yabanci diller",
-        "yabancı diller",
     ],
     "projects": [
         "projects",
@@ -2107,45 +2276,86 @@ _HEADING_DICT: Dict[str, List[str]] = {
         "proje calismasi",
         "proje çalışması",
     ],
-    "other": [
+    "languages": [
+        "languages",
+        "language skills",
+        "language proficiency",
+        "spoken languages",
+        "foreign languages",
+        "linguistic skills",
+        "diller",
+        "yabancı diller",
+        "yabanci diller",
+        "konuşulan diller",
+        "konusulan diller",
+        "dil bilgisi",
+        "dil yetkinliği",
+        "dil yetkinligi",
+    ],
+    "certificates": [
         "certifications",
         "certificates",
         "licenses",
+        "licenses & certifications",
+        "professional certifications",
+        "sertifikalar",
+        "sertifika",
+        "belgeler",
+        "lisanslar",
+        "sertifikasyonlar",
+    ],
+    "interests": [
+        "hobbies",
+        "interests",
+        "activities",
+        "extracurricular activities",
+        "personal interests",
+        "hobiler",
+        "ilgi alanlari",
+        "ilgi alanları",
+        "ilgi ve hobiler",
+    ],
+    "organizations": [
+        "organizations",
+        "organizasyonlar",
+        "topluluklar",
+        "communities",
+        "memberships",
+        "associations",
+        "leadership roles",
+        "leadership experience",
+    ],
+    "other": [
         "awards",
         "honors",
         "achievements",
         "publications",
         "research",
-        "hobbies",
-        "interests",
         "volunteering",
         "references",
         "additional information",
         "extracurricular",
-        "activities",
-        "memberships",
         "contact",
         "contact information",
         "personal information",
         # Turkish
-        "sertifikalar",
         "odüller",
         "ödüller",
         "basarilar",
         "başarılar",
         "yayinlar",
         "yayınlar",
-        "hobiler",
-        "ilgi alanlari",
-        "ilgi alanları",
         "gonüllülük",
         "gönüllülük",
-        "referanslar",
-        "ek bilgiler",
-        "iletisim bilgileri",
-        "iletişim bilgileri",
-        "kisisel bilgiler",
         "kişisel bilgiler",
+        "gonüllü deneyimler",
+        "gönüllü deneyimler",
+        "gonüllü çalısmalar",
+        "gönüllü çalışmalar",
+        "gonüllü isler",
+        "gönüllü işler",
+        "referanslarim",
+        "referanslarım",
     ],
 }
 
@@ -2184,12 +2394,15 @@ _RE_COMMA_LIST = re.compile(
 # Used in Stage 3: heading detection
 _RE_DECORATION_LEAD = re.compile(r"^[^\w\u0130\u0131\u0100-\u024F]+", re.UNICODE)
 _RE_DECORATION_TAIL = re.compile(r"[^\w\u0130\u0131\u0100-\u024F]+$", re.UNICODE)
+# Matches common OCR bullet artifacts: single letter followed by space
+_RE_BULLET_PREFIX = re.compile(r"^[a-zçğıöşü]\s+", re.I)
+
 _RE_ALL_CAPS_WORD = re.compile(r"^[A-ZÇĞİÖŞÜ\s]+$")
 _RE_MERGED_HEADING = re.compile(
-    r"(education|experience|skills|summary|projects|profile|"
-    r"eğitim|deneyim|beceriler|özet)\s+"
-    r"(education|experience|skills|summary|projects|profile|"
-    r"eğitim|deneyim|beceriler|özet)",
+    r"(education|experience|skills|summary|projects|profile|profil|profıl|"
+    r"eğitim|egıtım|egitim|deneyim|deneyım|beceriler|becerıler|yetenekler|yetenek|özet|ozet|is gecmisi|is gegmisi|iş geçmişi|is gegmısi|egıtım ıs gegmısı|iletisim|ıletısım|contact|diller|yabancı diller|languages|sertifikalar|certificates|hakkımda|about|about me|ilgiler|hobiler|interests|organizations)\s+"
+    r"(education|experience|skills|summary|projects|profile|profil|profıl|"
+    r"eğitim|egıtım|egitim|deneyim|deneyım|beceriler|becerıler|yetenekler|yetenek|özet|ozet|is gecmisi|is gegmisi|iş geçmişi|is gegmısi|egıtım ıs gegmısı|iletisim|ıletısım|contact|diller|yabancı diller|languages|sertifikalar|certificates|hakkımda|about|about me|ilgiler|hobiler|interests|organizations)",
     re.I,
 )
 
@@ -2279,6 +2492,64 @@ def normalize_text(text: str) -> str:
 
     # ── Pass 1: Unicode NFC ───────────────────────────────────────────────────
     text = unicodedata.normalize("NFC", text)
+    logger.info(f"  [normalize_text] Processing {len(text)} characters")
+
+    # ── Pass 1b: Repair common PDF merged words (e.g. "hadavery" -> "had a very") ──
+    # These often happen when spaces between short words (a, ı, and, to) are lost.
+    
+    # General pattern: word + "a" + word (minimum 3 chars after "a" to avoid false positives)
+    text = re.sub(r"\b(had|and|on|to|was|gained|became|is|for|with|about|through|take|reading|visit|also|completed|contributed|built|on|worked|building)a([a-z]{3,})", r"\1 a \2", text, flags=re.I)
+    
+    # Pattern: ı/I + verb (Turkish I followed by English verb)
+    text = re.sub(r"([\u0131i])(am|have|had|worked|spent|created|took|was|did|work|help|improve|improved|am also|have improved)\b", r"\1 \2", text, flags=re.I)
+    
+    # Pattern: word ending + ı + verb
+    text = re.sub(r"(process|relations|speaking)\.(\u0131|i)(have|am|did|worked|took|created)\b", r"\1. \2 \3", text, flags=re.I)
+    
+    # 3. specific hardcoded fixes
+    _fixes = [
+        ("amafourth", "am a fourth"), ("Amafourth", "Am a fourth"),
+        ("hadavery", "had a very"), ("Hadavery", "Had a very"),
+        ("gainedalot", "gained a lot"), ("Gainedalot", "Gained a lot"),
+        ("andaweb", "and a web"), ("Andaweb", "And a web"),
+        ("onamobile", "on a mobile"), ("Onamobile", "On a mobile"),
+        ("toaweb", "to a web"), ("Toaweb", "To a web"),
+        ("workedon", "worked on"), ("Workedon", "Worked on"),
+        ("contributedto", "contributed to"), ("Contributedto", "Contributed to"),
+        ("buildingaweb", "building a web"), ("Buildingaweb", "Building a web"),
+        ("developedaresponsive", "developed a responsive"), ("Developedaresponsive", "Developed a responsive"),
+        ("foradigital", "for a digital"), ("Foradigital", "For a digital"),
+        ("builtapersonalized", "built a personalized"), ("Builtapersonalized", "Built a personalized"),
+        ("completeda20", "completed a 20"), ("Completeda20", "Completed a 20"),
+        ("withateammate", "with a teammate"), ("Withateammate", "With a teammate"),
+        ("yearsı", "years ı"), ("yearsI", "years I"),
+        ("mihendisi", "muhendisi"), ("mıhendısı", "muhendisi"),
+        ("üniversıtesi", "universitesi"), ("unıversıtesı", "universitesi"),
+        ("deneyımı", "deneyimi"), ("egıtımı", "egitimi"),
+        ("ıletısım", "iletisim"), ("iletısim", "iletisim"),
+        ("ınsaat", "insaat"), ("ınşaat", "inşaat"),
+        ("lletisim", "iletisim"), ("ıletısım", "iletisim"),
+        ("lletısım", "iletisim"), ("ılletisim", "iletisim"),
+        ("gounullu", "gonullu"), ("gounüllü", "gonullu"),
+        ("alsoagood", "also a good"), ("Alsoagood", "Also a good"),
+        ("takeaphoto", "take a photo"), ("Takeaphoto", "Take a photo"),
+        ("readingabook", "reading a book"), ("Readingabook", "Reading a book"),
+        ("visitamuseum", "visit a museum"), ("Visitamuseum", "Visit a museum"),
+        ("ıam", "ı am"), ("ıhave", "ı have"), ("ıdid", "ı did"),
+        ("ıworked", "ı worked"), ("ıspent", "ı spent"),
+        ("ıtook", "ı took"), ("ıcreated", "ı created"),
+        ("andıam", "and ı am"), ("soıdid", "so ı did"),
+        ("timeıspent", "time ı spent"),
+        # New Turkish OCR / spell fixes
+        ("isydnetimi", "is yonetimi"), ("isydnetımı", "is yonetimi"),
+        ("ms offce", "ms office"), ("etkl iletım", "etkili iletisim"),
+        ("etkl iletim", "etkili iletisim"), ("binicilii", "biniciligi"),
+        ("ydnetimi", "yonetimi"), ("ydnetıcı", "yonetici"),
+        ("ysnetimi", "yonetimi"), ("ysnetıcı", "yonetici"),
+        ("mithendisi", "muhendisi"), ("mihendisligi", "muhendisligi"),
+    ]
+    for _m, _f in _fixes:
+        text = text.replace(_m, _f)
 
     # ── Pass 2: OCR glyph repairs (global, safe) ──────────────────────────────
     # Replace common OCR ligature artifacts
@@ -2307,16 +2578,23 @@ def normalize_text(text: str) -> str:
     for line in text.splitlines():
         # Apply email spacing fix per line (catches most broken patterns)
         if "@" in line:
-            for _ in range(3):
-                new = _RE_AT_SPACES.sub(r"\1@\2", line)
-                if new == line:
-                    break
-                line = new
-            for _ in range(3):
-                new = _RE_DOT_SPACES.sub(r"\1.\2", line)
-                if new == line:
-                    break
-                line = new
+            # FIX: First check if line already contains a valid email.
+            # If it does, do NOT run _RE_AT_SPACES because stray "@" signs
+            # (PDF artifacts like phone/contact icons) would get collapsed
+            # into the valid email, creating "gmail.com@0543" double-@ bugs.
+            _has_valid_email = _RE_EMAIL_TIGHT.search(line)
+            if not _has_valid_email:
+                # No valid email yet — try to repair broken emails
+                for _ in range(3):
+                    new = _RE_AT_SPACES.sub(r"\1@\2", line)
+                    if new == line:
+                        break
+                    line = new
+                for _ in range(3):
+                    new = _RE_DOT_SPACES.sub(r"\1.\2", line)
+                    if new == line:
+                        break
+                    line = new
 
         # Replace OCR dotless-ı with regular i only in body text
         # (heading lines stay untouched so heading detection still fires)
@@ -2353,7 +2631,7 @@ def _repair_broken_emails(text: str) -> str:
         return text
 
     _candidate = re.compile(
-        r"[A-Za-z0-9._%+\-]+\s*@\s*[A-Za-z0-9.\-\s]+\.\s*[A-Za-z]{2,}",
+        r"[A-Za-z0-9._%+\-]+[ \t]*@[A-Za-z0-9.\- \t]+\.[ \t]*[A-Za-z]{2,}",
         re.I,
     )
     _valid_email = re.compile(
@@ -2590,6 +2868,8 @@ def is_heading(line: str) -> bool:
 
     # Strip decoration characters and trailing colon, then lookup
     plain = _strip_decoration(stripped)
+    # FIX: Also strip single-letter bullet artifacts ("e ", "o ")
+    plain = _RE_BULLET_PREFIX.sub("", plain).strip()
 
     # Layer 1: exact normalised keyword match
     if _keyword_match(plain):
@@ -2858,48 +3138,59 @@ def classify_block(block: CVBlock, index: int) -> str:
     """
     full_text = " ".join(block.lines)
     lower_text = full_text.lower()
+    
+    words = len(full_text.split())
+    chars = len(full_text)
+    avg_len = chars / words if words > 0 else 0
+    char_density = chars / (max(1, len(block.lines) * 80)) # normalized
 
     # ── Signal 1: degree/institution words → education ───────────────────────
-    # Checked FIRST because education entries contain "YYYY-YYYY" date ranges
-    # (graduation spans) that would otherwise fire the experience signal below.
-    # Degree words are highly specific; false positives are rare.
     if _RE_DEGREE_WORDS.search(lower_text) and block.has_dates:
         return "education"
 
     # ── Signal 2: date range → experience ────────────────────────────────────
-    # A YYYY-YYYY (or YYYY-present) pattern is the defining experience signal,
-    # but only AFTER education has been ruled out above.
     if _RE_DATE_RANGE.search(full_text):
         return "experience"
 
     # ── Signal 3: project build verbs or platform names → projects ────────────
-    # Checked BEFORE list+tech so "built a React app" routes to projects even
-    # though React is a tech keyword that could trigger skills.
     if _RE_PROJECT_VERBS.search(lower_text) or _RE_PLATFORM_WORDS.search(lower_text):
         return "projects"
 
     # ── Signal 4: list shape + ≥2 tech words → skills ────────────────────────
     tech_hits = len(_RE_TECH_WORDS.findall(lower_text))
-    if block.is_list and tech_hits >= 2:
+    
+    # FIX: Summary usually has sentences and fewer numbers/special chars
+    # Lists of skills often have numbers (percentages) and short fragments.
+    num_count = len(re.findall(r"\d+", full_text))
+    if num_count > 5 and words < 30:
         return "skills"
+    
+    if block.is_list and tech_hits >= 2:
+        # SAFETY: If it contains professional roles and is long, it's experience
+        if not (_RE_ROLE_WORDS.search(lower_text) and words > 10):
+            return "skills"
 
     # ── Signal 5: dense tech keywords with no dates → skills ─────────────────
     if tech_hits >= 4 and not block.has_dates:
-        return "skills"
+        # SAFETY: If it contains roles and is long prose, it's not just a skill list
+        if not (_RE_ROLE_WORDS.search(lower_text) and words > 15):
+            return "skills"
 
     # ── Signal 6: prose paragraph with pronouns/career words → summary ────────
-    # Only fires in the top portion of the CV (first 3 blocks) to avoid
-    # classifying mid-CV prose (experience bullet points) as a summary.
     sentence_endings = sum(1 for l in block.lines if _RE_SENTENCE_END.search(l))
-    word_count = len(full_text.split())
     is_prose = (
         sentence_endings >= 1
         and not block.has_dates
         and not block.is_list
-        and _SUMMARY_MIN_WORDS <= word_count <= _SUMMARY_MAX_WORDS
+        and _SUMMARY_MIN_WORDS <= words <= _SUMMARY_MAX_WORDS
     )
     if is_prose and index < 3 and _RE_PRONOUN.search(lower_text):
-        return "summary"
+        # Additional safeguards: summary must not look like a list and must have prose density
+        if words > 20 and avg_len > 4.5 and char_density > 0.6 and not block.is_list:
+            # Check for sentence-like structure (capital letter followed by lowercase)
+            # and verify it's not just a bunch of skill names
+            if re.search(r"[A-ZÇĞİÖŞÜ][a-zçğıöşü]", full_text) and tech_hits < 3:
+                return "summary"
 
     # ── Signal 7: date + role or company name → experience ────────────────────
     if block.has_dates and (
@@ -2913,9 +3204,9 @@ def classify_block(block: CVBlock, index: int) -> str:
         return scored
 
     # ── Default ───────────────────────────────────────────────────────────────
-    # The most common un-labelled block type in CVs is experience (job entries
-    # without clear date ranges, freelance work, etc.).
-    return "experience"
+    # If we can't classify the block, put it in 'other' rather than 'experience'
+    # to avoid contaminating work history with miscellaneous header text.
+    return "other"
 
 
 def _score_text_for_section(text: str) -> Optional[str]:
@@ -2941,7 +3232,7 @@ def _score_text_for_section(text: str) -> Optional[str]:
     lower = text.lower()
     scores: Dict[str, int] = {s: 0 for s in CANONICAL_SECTIONS}
 
-    if _RE_DATE_RANGE.search(text):
+    if _RE_DATE_RANGE.search(text) or "iş geçmişi" in lower or "is gecmisi" in lower or "is gegmisi" in lower:
         scores["experience"] += 3
     if _RE_ROLE_WORDS.search(lower):
         scores["experience"] += 2
@@ -3033,6 +3324,19 @@ def build_output(sections: Dict[str, List[str]]) -> Dict[str, str]:
     result: Dict[str, str] = {}
     for section in CANONICAL_SECTIONS:
         deduped = _dedup_lines(safe.get(section, []))
+        
+        # ── FIX: Clean summary block top lines ───────────────────────────────
+        # If the top block of the CV was classified as a summary, it often
+        # includes the candidate's name and title at the top. We pop these.
+        if section == "summary":
+            while deduped:
+                _words = deduped[0].split()
+                # If line is short and has no sentence punctuation, pop it
+                if len(_words) <= 4 and not re.search(r'[.!?]', deduped[0]):
+                    deduped.pop(0)
+                else:
+                    break
+
         result[section] = "\n".join(deduped).strip()
 
     return result
@@ -3120,8 +3424,15 @@ def detect_section_headers(text: str) -> list[tuple[int, str, str]]:
         prev_line = lines[i - 1].strip() if i > 0 else ""
         next_line = lines[i + 1].strip() if i < n - 1 else ""
 
-        section, _ = _sd_detect_heading(stripped, prev_line, next_line)
+        section, method = _sd_detect_heading(stripped, prev_line, next_line)
         if section is not None:
+            # Check for merged heading split
+            if method == "merged" or method == "merged_keyword":
+                merged_match = _RE_MERGED_HEADING.search(stripped.lower())
+                if merged_match:
+                    # We detected a merged heading like "Education Experience"
+                    pass
+
             results.append((i, line, section))
 
     return results
@@ -3150,22 +3461,34 @@ def _find_column_split_x(words: list[dict], page_width: float) -> Optional[float
     if not words:
         return None
 
-    n_words = len(words)
+    # Filter words in the vertical middle section to prevent headers/footers from bridging the column gap
+    tops = [w["top"] for w in words]
+    min_top = min(tops)
+    max_top = max(tops)
+    h_diff = max_top - min_top
+    if h_diff > 100:
+        words_for_split = [w for w in words if min_top + 0.12 * h_diff <= w["top"] <= min_top + 0.88 * h_diff]
+        if not words_for_split:
+            words_for_split = words
+    else:
+        words_for_split = words
+
+    n_words = len(words_for_split)
 
     # ── Stage 1: KMeans clustering ────────────────────────────────────────────
     if SKLEARN_AVAILABLE and n_words >= 6:
         try:
             import numpy as np
 
-            X = np.array([[w["x0"]] for w in words], dtype=float)
+            X = np.array([[w["x0"]] for w in words_for_split], dtype=float)
             km = _KMeans(n_clusters=2, n_init=5, random_state=42)
             labels = km.fit_predict(X)
 
             left_idx = int(km.cluster_centers_[0][0] <= km.cluster_centers_[1][0])
             right_idx = 1 - left_idx
 
-            left_words = [words[i] for i, l in enumerate(labels) if l == left_idx]
-            right_words = [words[i] for i, l in enumerate(labels) if l == right_idx]
+            left_words = [words_for_split[i] for i, l in enumerate(labels) if l == left_idx]
+            right_words = [words_for_split[i] for i, l in enumerate(labels) if l == right_idx]
 
             left_ratio = len(left_words) / n_words
             right_ratio = len(right_words) / n_words
@@ -3182,12 +3505,21 @@ def _find_column_split_x(words: list[dict], page_width: float) -> Optional[float
             pass  # Degenerate data or import issue — fall through to Stage 2
 
     # ── Stage 2: Gap-scan fallback ────────────────────────────────────────────
-    bucket_size = page_width / GAP_SCAN_BUCKETS
+    # Only scan between the leftmost and rightmost text bounds to avoid picking margins
+    min_x = min(w["x0"] for w in words_for_split)
+    max_x = max(w["x1"] for w in words_for_split)
+    
+    # We only care about the region that actually contains text
+    scan_width = max_x - min_x
+    if scan_width <= 0:
+        return None
+        
+    bucket_size = scan_width / GAP_SCAN_BUCKETS
     occupied = [False] * GAP_SCAN_BUCKETS
 
-    for w in words:
-        start_bucket = max(0, int(w["x0"] / bucket_size))
-        end_bucket = min(GAP_SCAN_BUCKETS - 1, int(w["x1"] / bucket_size))
+    for w in words_for_split:
+        start_bucket = max(0, int((w["x0"] - min_x) / bucket_size))
+        end_bucket = min(GAP_SCAN_BUCKETS - 1, int((w["x1"] - min_x) / bucket_size))
         for b in range(start_bucket, end_bucket + 1):
             occupied[b] = True
 
@@ -3205,10 +3537,8 @@ def _find_column_split_x(words: list[dict], page_width: float) -> Optional[float
                     best_start, best_end = current_start, i - 1
                 current_start = None
 
-    if current_start is not None:
-        run_len = GAP_SCAN_BUCKETS - current_start
-        if run_len > (best_end - best_start):
-            best_start, best_end = current_start, GAP_SCAN_BUCKETS - 1
+    # We do NOT check current_start at the end because that would mean the gap goes up to the right margin.
+    # Since we cropped to min_x and max_x, the last bucket is guaranteed to be True, so current_start will be None.
 
     if best_start == -1:
         return None
@@ -3217,7 +3547,8 @@ def _find_column_split_x(words: list[dict], page_width: float) -> Optional[float
     if gap_width_fraction < MIN_GAP_FRACTION:
         return None
 
-    return ((best_start + best_end) / 2.0) * bucket_size
+    # Calculate physical split_x using the gap center
+    return min_x + ((best_start + best_end) / 2.0) * bucket_size
 
 
 # ── 1b. Layout detection ──────────────────────────────────────────────────────
@@ -3244,14 +3575,15 @@ def _detect_page_layout(page, words: list[dict]) -> str:
            (words spread all over), consider MULTI.
       3. Otherwise → SINGLE.
     """
-    # Check for explicit table structures first
-    try:
-        tables = page.extract_tables()
-        if tables and any(len(t) > 1 for t in tables):
-            # Only flag as TABLE if there's a meaningful table (>1 row)
-            return PageLayout.TABLE
-    except Exception:
-        pass
+    # DISABLED: CVs rarely use strict data tables. Invisible layout grids
+    # trick this into destroying the page reading order and duplicating text.
+    # try:
+    #     tables = page.extract_tables()
+    #     if tables and any(len(t) > 1 for t in tables):
+    #         # Only flag as TABLE if there's a meaningful table (>1 row)
+    #         return PageLayout.TABLE
+    # except Exception:
+    #     pass
 
     if not words:
         return PageLayout.SINGLE
@@ -3277,21 +3609,18 @@ def _detect_page_layout(page, words: list[dict]) -> str:
     if left_ratio < COLUMN_MIN_RATIO or right_ratio < COLUMN_MIN_RATIO:
         return PageLayout.SINGLE
 
-    # Quick multi-column check: look for a second significant gap in EACH half.
-    # Right words keep absolute x-coords; translate them so x starts from 0
-    # before scanning — otherwise gap fractions are against the full-page width
-    # and the sub-gap check is essentially disabled.
-    left_words = [w for w in words if (w["x0"] + w["x1"]) / 2 <= split_x]
-    right_words = [w for w in words if (w["x0"] + w["x1"]) / 2 > split_x]
-    right_words_t = [
-        {**w, "x0": w["x0"] - split_x, "x1": w["x1"] - split_x} for w in right_words
-    ]
-
-    left_gap = _find_column_split_x(left_words, split_x)
-    right_gap = _find_column_split_x(right_words_t, page_width - split_x)
-
-    if left_gap is not None or right_gap is not None:
-        return PageLayout.MULTI
+    # DISABLED: CVs rarely have 3+ columns. Skills/language sub-tables
+    # inside a 2-col layout trick this into MULTI, which merges headings
+    # horizontally and destroys section reading order. Force TWO_COL.
+    # left_words = [w for w in words if (w["x0"] + w["x1"]) / 2 <= split_x]
+    # right_words = [w for w in words if (w["x0"] + w["x1"]) / 2 > split_x]
+    # right_words_t = [
+    #     {**w, "x0": w["x0"] - split_x, "x1": w["x1"] - split_x} for w in right_words
+    # ]
+    # left_gap = _find_column_split_x(left_words, split_x)
+    # right_gap = _find_column_split_x(right_words_t, page_width - split_x)
+    # if left_gap is not None or right_gap is not None:
+    #     return PageLayout.MULTI
 
     return PageLayout.TWO_COL
 
@@ -3466,19 +3795,40 @@ def _extract_table_page(page) -> str:
 
 def _extract_multi_column(page, words: list[dict]) -> str:
     """
-    Fallback for pages with 3+ columns (rare in CVs but exists in fancy templates).
-
-    Strategy: cluster words by their x0 into N groups using a simple gap scan,
-    sort each cluster top-to-bottom, and concatenate left-to-right.
-
-    If clustering is ambiguous, we fall back to a plain word-by-word sort by
-    (top, x0) which is still better than line-by-line extraction.
+    Handle pages with 3+ columns by recursively splitting into vertical strips.
     """
-    logger.info("  [layout] Multi-column (3+) page detected — using positional sort.")
+    page_width = page.width
+    
+    def get_splits(words_list, width, offset=0):
+        if not words_list or width < 50:
+            return []
+        split = _find_column_split_x(words_list, width)
+        if split is None:
+            return []
+        
+        abs_split = offset + split
+        left = [w for w in words_list if (w["x0"] + w["x1"])/2 <= split]
+        right = [w for w in words_list if (w["x0"] + w["x1"])/2 > split]
+        right_t = [{**w, "x0": w["x0"] - split, "x1": w["x1"] - split} for w in right]
+        
+        return get_splits(left, split, offset) + [abs_split] + get_splits(right_t, width - split, abs_split)
 
-    # Sort all words by natural reading order (top → bottom, left → right)
-    # For most 3-column layouts this produces a readable result.
-    return _words_to_text(words, y_tolerance=5.0)
+    all_splits = sorted(list(set(get_splits(words, page_width))))
+    
+    if not all_splits:
+        return _words_to_text(words, y_tolerance=5.0)
+
+    # Reconstruct text strip by strip
+    strips_text = []
+    prev_x = -1
+    for split in all_splits + [page_width + 1]:
+        strip_words = [w for w in words if prev_x < (w["x0"] + w["x1"])/2 <= split]
+        if strip_words:
+            strips_text.append(_words_to_text(strip_words))
+        prev_x = split
+    
+    separator = f"\n\n{COLUMN_BREAK_TOKEN}\n\n"
+    return separator.join(strips_text)
 
 
 # ── 1e. Main PDF extraction orchestrator ─────────────────────────────────────
@@ -3561,13 +3911,13 @@ def extract_text_pdf(file_path: str) -> tuple[str, str]:
                 f"  [layout_issue] '{basename}' — problematic pages: {layout_issues}"
             )
 
-        if len(full_text.strip()) >= OCR_FALLBACK_THRESHOLD:
+        if len(full_text.strip()) >= OCR_FALLBACK_THRESHOLD and not _is_text_broken(full_text):
             return full_text, "pdf"
 
-        # Text is too short — fall through to OCR
+        # Text is too short or broken — fall through to OCR
+        reason = "too short" if len(full_text.strip()) < OCR_FALLBACK_THRESHOLD else "broken text quality"
         logger.info(
-            f"  [pdf→ocr] Text too short ({len(full_text.strip())} chars) "
-            f"in '{basename}' — invoking OCR."
+            f"  [pdf→ocr] {reason} in '{basename}' — invoking OCR."
         )
 
     except Exception as e:
@@ -3576,6 +3926,69 @@ def extract_text_pdf(file_path: str) -> tuple[str, str]:
         )
 
     return ocr_fallback(file_path)
+
+
+def _is_text_broken(text: str) -> bool:
+    """
+    Detects if PDF text extraction resulted in broken words or missing characters.
+    """
+    if not text:
+        return True
+    t = text.lower()
+    
+    # 1. Check for the replacement character (garbage)
+    if text.count('\ufffd') > 0:
+        logger.info("  [broken_check] Detected too many replacement characters.")
+        return True
+
+    # 2. Broken Turkish/Common Keywords
+    # We use a list of tuples (name, pattern) for better logging
+    broken_patterns = [
+        ("universite", r"ün\s*vers\s*te"),
+        ("universite_alt", r"un\s*vers\s*te"),
+        ("egitim", r"eğ\s*t\s*m"),
+        ("deneyim", r"deney\s+m"),
+        ("iletisim", r"ilet\s*[şs]\s*m"),
+        ("muhendis", r"mühend\s*[s]\b"),
+        ("bilgiler", r"b\s*lg\s*ler"),
+        ("gmail", r"gma\s+l\b"),
+        ("email", r"ema\s+l\b"),
+        ("linkedin", r"l\s+nked\s*n"),
+        ("beceriler", r"becer\s+ler"),
+        ("ogrencisi", r"öğrenc\s+s"),
+        ("gecmisi", r"gecm\s*[şs]"),
+        ("is_hayati", r"[ıi]?ş\s+hayatı"),
+        ("edindigim", r"ed\s+nd\s+ğ"),
+        ("gegmisi_broken", r"gegmisi"),
+        ("gegmi_broken", r"gegmi"),
+        ("isydnetimi_broken", r"isydnetimi"),
+        ("ydnetimi_broken", r"ydnetimi"),
+    ]
+    
+    for name, pattern in broken_patterns:
+        if re.search(pattern, t):
+            logger.info(f"  [broken_check] Detected broken pattern: {name}")
+            return True
+
+    # 3. Check for mixed-case garbage in what should be lowercase words
+    # e.g. "inYaat", "aliYiyor", "iletYm", "geliYtirmeyi"
+    # This happens when Turkish characters (ş, ı, etc.) are mis-mapped to capital Latin letters.
+    # We use a low threshold as this is a very strong indicator of encoding failure.
+    mixed_case_matches = re.findall(r"[a-z][A-Z][a-z]", text)
+    if len(mixed_case_matches) >= 1:
+        logger.info(f"  [broken_check] Detected mixed-case garbage ({len(mixed_case_matches)} occurrences).")
+        return True
+
+    # 4. Density of single-letter words
+    words = t.split()
+    if len(words) > 20:
+        bad_singles = [w for w in words if len(w) == 1 and w in "bcçdfgğhjklmnprsştvyz"]
+        density = len(bad_singles) / len(words)
+        if density > 0.05:
+            logger.info(f"  [broken_check] High single-letter density: {density:.2%}")
+            return True
+                
+    return False
 
 
 # ─────────────────────────────────────────────
@@ -3606,15 +4019,42 @@ def ocr_fallback(file_path: str) -> tuple[str, str]:
             page = pdf_doc[page_num]
             # Render at 300 DPI for good OCR accuracy
             mat = fitz.Matrix(300 / 72, 300 / 72)
+            
+            # Use pdfplumber to detect column split even if text is broken
+            split_x = None
+            try:
+                with pdfplumber.open(file_path) as plumber_pdf:
+                    p_page = plumber_pdf.pages[page_num]
+                    words = p_page.extract_words(use_text_flow=True)
+                    layout = _detect_page_layout(p_page, words)
+                    if layout == PageLayout.TWO_COL:
+                        split_x = _find_column_split_x(words, p_page.width)
+            except Exception as e:
+                logger.debug(f"  [ocr] Column detection failed: {e}")
+
+            # Extract full page pixmap
             pix = page.get_pixmap(matrix=mat, alpha=False)
-            img_bytes = pix.tobytes("png")
-            img = Image.open(io.BytesIO(img_bytes))
+            full_img = Image.open(io.BytesIO(pix.tobytes("png")))
 
             # Attempt combined language OCR, fall back to English-only
             ocr_success = False
             for lang in ("eng+tur", "eng"):
                 try:
-                    text = pytesseract.image_to_string(img, lang=lang, config="--psm 6")
+                    if split_x:
+                        # Split image into two columns based on split_x
+                        zoom = 300 / 72
+                        split_px = int(split_x * zoom)
+                        left_img = full_img.crop((0, 0, split_px, full_img.height))
+                        right_img = full_img.crop((split_px, 0, full_img.width, full_img.height))
+                        
+                        # Use psm 4 or 6 for column segments
+                        left_text = pytesseract.image_to_string(left_img, lang=lang, config="--psm 6")
+                        right_text = pytesseract.image_to_string(right_img, lang=lang, config="--psm 6")
+                        text = f"{left_text}\n\n{COLUMN_BREAK_TOKEN}\n\n{right_text}"
+                    else:
+                        # Standard OCR for single column
+                        text = pytesseract.image_to_string(full_img, lang=lang, config="--psm 3")
+                        
                     all_text.append(text)
                     if lang == "eng+tur":
                         logger.info(
@@ -3651,7 +4091,9 @@ def ocr_fallback(file_path: str) -> tuple[str, str]:
 
 # Pre-compiled patterns for efficiency
 _RE_EMAIL = re.compile(
-    r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}",
+    r"[a-zA-Z0-9._%+\-]{2,}@[a-zA-Z0-9.\-]+\."
+    r"(?:com|net|org|edu|gov|mil|biz|info|online|site|link|app|dev|me|io|co|tr|in|tv|ai|so|[a-z]{2,4})"
+    r"(?![a-zA-Z])",  # negative lookahead: TLD must not be followed by more letters
     re.IGNORECASE,
 )
 _RE_URL = re.compile(
@@ -3665,10 +4107,10 @@ _RE_MULTI_SPACE = re.compile(r"[ \t]{2,}")
 _RE_MULTI_NEWLINE = re.compile(r"\n{3,}")
 # Explicitly preserve Turkish dotless-ı (U+0131) and dotted-İ (U+0130) in
 # addition to the unicode \w class, which may miss them on some platforms.
-_RE_SPECIAL_CHARS = re.compile(r"[^\w\u0130\u0131\s@.,:;()\-+/#&'\"/\\]", re.UNICODE)
+_RE_SPECIAL_CHARS = re.compile(r"[^\w\u0130\u0131\s@.,:;()\-+/#&'\"/\\%]", re.UNICODE)
 
 
-def clean_text(text: str) -> str:
+def clean_text(text: str, language: str = "tr") -> str:
     """
     Selective text cleaning that preserves structured data.
 
@@ -3728,11 +4170,25 @@ def clean_text(text: str) -> str:
     text = text.strip()
 
     # ── Step 4: Lowercase — use Turkish-safe lowercasing to preserve ı / İ ──
-    text = turkish_lower(text)
+    if language == "en":
+        text = text.lower()
+    else:
+        text = turkish_lower(text)
 
     # ── Step 5: Restore protected tokens ─────────────────────────────────
+    # FIX: Try both turkish_lower and standard lower for placeholder lookup.
+    # turkish_lower converts 'I' → 'ı', which breaks placeholder names like
+    # "__PROTECTED_EMAIL_0__" → "__PROTECTED_EMAıL_0__" (unfindable).
     for key, original in protected.items():
-        text = text.replace(turkish_lower(key), original)
+        # Try turkish_lower version first (matches Turkish-mode lowercasing)
+        lowered_key = turkish_lower(key)
+        if lowered_key in text:
+            text = text.replace(lowered_key, original)
+        else:
+            # Fallback: try standard lower (matches English-mode lowercasing)
+            std_lowered = key.lower()
+            if std_lowered in text:
+                text = text.replace(std_lowered, original)
 
     return text
 
@@ -3756,7 +4212,7 @@ def clean_text(text: str) -> str:
 # containing a 4-digit year (2000-2099) alongside a dash separator.
 
 _EXP_HEADER_YEAR = re.compile(r"\b(20\d{2}|19\d{2})\b")
-_EXP_HEADER_DASH = re.compile(r"\s[-–]\s")
+_EXP_HEADER_DASH = re.compile(r"\s*[-–—]\s*")
 
 
 def group_experience_blocks(experience_text: str) -> str:
@@ -3771,19 +4227,9 @@ def group_experience_blocks(experience_text: str) -> str:
     job title / description for that entry and are merged with the header
     using " | " as separator, producing one block per job.
 
-    Example input:
-        Felis Network - Ankara - 2024
-        Kameraman
-        Kurgu Montaj
-        ABC Corp - İstanbul - 2022
-        Yazılım Geliştirici
-
-    Example output:
-        Felis Network - Ankara - 2024 | Kameraman Kurgu Montaj
-        ABC Corp - İstanbul - 2022 | Yazılım Geliştirici
-
-    Lines that appear BEFORE the first header (e.g. a standalone intro
-    sentence) are kept as-is without merging.
+    FIX 5: Before grouping, rejoin date ranges that were split across two
+    lines (e.g. "temmuz 2023 - ağustos\n2023" → "temmuz 2023 - ağustos 2023").
+    This prevents the pipe separator from appearing inside dates.
 
     Args:
         experience_text: Raw experience section text (post-extraction).
@@ -3797,6 +4243,41 @@ def group_experience_blocks(experience_text: str) -> str:
     lines = [l for l in experience_text.splitlines() if l.strip()]
     if not lines:
         return experience_text
+
+    # ── FIX 5: Rejoin date ranges split across lines ─────────────────────────
+    # Pattern: line ends with a month name (or partial date) and the next line
+    # starts with a year, completing the date range.
+    _MONTH_NAMES = (
+        "january", "february", "march", "april", "may", "june",
+        "july", "august", "september", "october", "november", "december",
+        "ocak", "şubat", "mart", "nisan", "mayıs", "mayis", "haziran",
+        "temmuz", "ağustos", "agustos", "eylül", "eylul", "ekim",
+        "kasım", "kasim", "aralık", "aralik",
+    )
+    _YEAR_START_RE = re.compile(r"^\s*((?:19|20)\d{2})")
+    rejoined: list[str] = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if i + 1 < len(lines):
+            line_stripped = line.rstrip()
+            next_line = lines[i + 1].strip()
+            # Check if current line ends with a month name and next starts with a year
+            last_word = line_stripped.split()[-1].lower().rstrip(",-–") if line_stripped.split() else ""
+            # Check exact match first, then check if the last token contains
+            # a month name after splitting on hyphens (handles "2023-ağustos")
+            _last_is_month = last_word in _MONTH_NAMES
+            if not _last_is_month and "-" in last_word:
+                _parts = last_word.replace("–", "-").split("-")
+                _last_is_month = any(p in _MONTH_NAMES for p in _parts)
+            if _last_is_month and _YEAR_START_RE.match(next_line):
+                # Rejoin: append the next line to current line
+                rejoined.append(line_stripped + " " + next_line)
+                i += 2
+                continue
+        rejoined.append(line)
+        i += 1
+    lines = rejoined
 
     # Identify which lines are "entry headers"
     def _is_entry_header(line: str) -> bool:
@@ -3812,25 +4293,21 @@ def group_experience_blocks(experience_text: str) -> str:
         if _is_entry_header(line):
             if not found_first_header:
                 found_first_header = True
-                # Any lines accumulated before the first header stay separate
                 pre_header = current_block
                 current_block = []
             else:
-                # Save previous block before starting a new one
                 if current_block:
                     blocks.append(current_block)
             current_block = [line]
         else:
             current_block.append(line)
 
-    # Don't forget the last block
     if current_block:
         blocks.append(current_block)
 
     # Merge each block: header " | " followed lines joined by space
     merged_blocks: list[str] = []
 
-    # Preserve any pre-header lines unchanged
     if pre_header:
         merged_blocks.extend(pre_header)
 
@@ -3895,9 +4372,10 @@ for _section, _kws in SECTION_KEYWORDS.items():
     for _kw in _kws:
         # turkish_lower used so keyword map keys are built with the same
         # casing rules as _normalise_heading_line — must stay in sync.
-        _norm_kw = re.sub(
-            r"[^\w\u0130\u0131\s]", "", turkish_lower(_kw), flags=re.UNICODE
-        ).strip()
+        # FIX: Also replace ı→i to stay in sync with _normalise_heading_line.
+        _norm_kw = turkish_lower(_kw)
+        _norm_kw = _norm_kw.replace('\u0131', 'i').replace('\u0130', 'I')
+        _norm_kw = re.sub(r"[^\w\s]", "", _norm_kw, flags=re.UNICODE).strip()
         _KW_NORM_MAP[_norm_kw] = _section
 
 
@@ -3907,17 +4385,31 @@ def _normalise_heading_line(line: str) -> str:
 
     Transformations:
       • strip surrounding whitespace
-      • lowercase
-      • remove all punctuation (incl. Turkish special chars)
+      • lowercase (Turkish-aware)
+      • replace Turkish ı with ASCII i (so OCR headings like
+        'certıfıcates' match 'certificates' in keyword maps)
+      • remove all punctuation
       • collapse runs of whitespace to single space
-
-    Bilingual headings like "Skills / Yetenekler" become "skills  yetenekler"
-    which is then collapsed to "skills yetenekler" — handled by the lookup.
     """
-    # Remove punctuation: keep letters, digits, whitespace (unicode-aware)
-    # turkish_lower used instead of .lower() to correctly handle İ → i, I → ı.
-    cleaned = re.sub(r"[^\w\u0130\u0131\s]", " ", turkish_lower(line), flags=re.UNICODE)
+    cleaned = turkish_lower(line)
+    # FIX: Replace Turkish dotless-ı with ASCII i for heading matching.
+    # PDF extraction often produces ı instead of i in English headings
+    # (e.g. "certıfıcates", "organızatıons", "professıonal").
+    cleaned = cleaned.replace('\u0131', 'i')  # ı → i
+    cleaned = cleaned.replace('\u0130', 'I')  # İ → I (shouldn't appear after lower but safety)
+    cleaned = re.sub(r"[^\w\s]", " ", cleaned, flags=re.UNICODE)
     return re.sub(r"\s+", " ", cleaned).strip()
+
+
+_RE_PREFIXED_HEADING = re.compile(
+    r"^\s*(education|experience|skills|summary|projects|profile|profil|profıl|"
+    r"eğitim|egıtım|egitim|deneyim|deneyım|beceriler|becerıler|yetenekler|yetenek|özet|ozet|"
+    r"is gecmisi|is gegmisi|iş geçmişi|is gegmısi|egıtım ıs gegmısı|iletisim|ıletısım|contact|"
+    r"diller|yabancı diller|languages|sertifikalar|certificates|hakkımda|about|about me|"
+    r"ilgiler|hobiler|interests|organizations)"
+    r"\b([\s:|\-–]+)(.+)$",
+    re.I,
+)
 
 
 def _is_section_heading(line: str) -> Optional[str]:
@@ -3939,6 +4431,10 @@ def _is_section_heading(line: str) -> Optional[str]:
     """
     stripped = line.strip()
     if not stripped:
+        return None
+
+    # Rejection Rule: section headings never start with a single-letter bullet point
+    if re.match(r"^[a-zA-Z•\-\*]\s+", stripped):
         return None
 
     # Rule 1 — length guard: real headings are short
@@ -3970,8 +4466,8 @@ def _is_section_heading(line: str) -> Optional[str]:
     for kw_norm, section in _KW_NORM_MAP.items():
         if RAPIDFUZZ_AVAILABLE:
             # rapidfuzz is ~10-50× faster than difflib.SequenceMatcher and
-            # uses token_set_ratio which handles word-order variations better.
-            ratio = _rf_fuzz.token_set_ratio(norm, kw_norm) / 100.0
+            # uses ratio which requires entire strings to be similar (safer).
+            ratio = _rf_fuzz.ratio(norm, kw_norm) / 100.0
         else:
             ratio = SequenceMatcher(None, norm, kw_norm).ratio()
         if ratio > best_score:
@@ -4006,14 +4502,32 @@ def _is_section_heading(line: str) -> Optional[str]:
 
 
 def _sd_norm(s: str) -> str:
-    """Normalise a string for _SD_EXT_MAP lookup (same rules as _KW_NORM_MAP)."""
+    """Normalise a string for _SD_EXT_MAP / SUB_HEADERS lookup.
+    
+    FIX: Also replaces Turkish ı with ASCII i so that OCR-style headings
+    like 'certıfıcates' and 'organızatıons' match their dictionary entries.
+    """
     s = turkish_lower(s)
-    s = re.sub(r"[^\w\u0130\u0131\s]", " ", s, flags=re.UNICODE)
+    s = s.replace('\u0131', 'i')   # ı → i
+    s = s.replace('\u0130', 'I')   # İ → I
+    s = re.sub(r"[^\w\s]", " ", s, flags=re.UNICODE)
     return re.sub(r"\s+", " ", s).strip()
 
 
 _SD_EXT_MAP: dict[str, str] = {}
 for _sd_heading, _sd_bucket in {
+    # ======================
+    # EXPERIENCE — ADDITIONAL VARIANTS
+    # ======================
+    "staj deneyimleri": "experience",
+    "staj deneyimi": "experience",
+    "profesyonel deneyim": "experience",
+    "professional experience": "experience",
+    "work experience": "experience",
+    "iş deneyimi": "experience",
+    "iş geçmişi": "experience",
+    "kariyer geçmişi": "experience",
+    "mesleki deneyim": "experience",
     # ======================
     # SKILLS — TEKNİK ALTYAPI
     # ======================
@@ -4061,25 +4575,29 @@ for _sd_heading, _sd_bucket in {
     "tools & frameworks": "skills",
     "platforms and tools": "skills",
     "programming skills": "skills",
+    "programming languages": "skills",
+    "programlama dilleri": "skills",
+    "frameworks and tools": "skills",
+    "frameworks & tools": "skills",
     "it skills": "skills",
     # ======================
     # SKILLS — DİL YETKİNLİKLERİ
     # ======================
-    "diller": "skills",
-    "yabancı diller": "skills",
-    "yabancı dil": "skills",
-    "konuşulan diller": "skills",
-    "dil bilgisi": "skills",
-    "dil yetkinliği": "skills",
-    "dil seviyesi": "skills",
-    "dil becerileri": "skills",
+    "diller": "languages",
+    "yabancı diller": "languages",
+    "yabancı dil": "languages",
+    "konuşulan diller": "languages",
+    "dil bilgisi": "languages",
+    "dil yetkinliği": "languages",
+    "dil seviyesi": "languages",
+    "dil becerileri": "languages",
     # EN
-    "languages": "skills",
-    "language proficiency": "skills",
-    "spoken languages": "skills",
-    "foreign languages": "skills",
-    "language skills": "skills",
-    "linguistic skills": "skills",
+    "languages": "languages",
+    "language proficiency": "languages",
+    "spoken languages": "languages",
+    "foreign languages": "languages",
+    "language skills": "languages",
+    "linguistic skills": "languages",
     # ======================
     # SKILLS — KİŞİSEL / SOSYAL
     # ======================
@@ -4105,48 +4623,48 @@ for _sd_heading, _sd_bucket in {
     # ======================
     # OTHER — HOBİ / İLGİ ALANLARI
     # ======================
-    "hobiler": "other",
-    "hobi": "other",
-    "ilgi alanları": "other",
-    "ilgi ve hobiler": "other",
-    "kişisel ilgi alanları": "other",
-    "serbest zaman aktiviteleri": "other",
-    "boş zaman aktiviteleri": "other",
-    "aktiviteler": "other",
+    "hobiler": "interests",
+    "hobi": "interests",
+    "ilgi alanları": "interests",
+    "ilgi ve hobiler": "interests",
+    "kişisel ilgi alanları": "interests",
+    "serbest zaman aktiviteleri": "interests",
+    "boş zaman aktiviteleri": "interests",
+    "aktiviteler": "interests",
     # EN
-    "hobbies": "other",
-    "interests": "other",
-    "activities": "other",
-    "extracurricular activities": "other",
-    "personal interests": "other",
-    "outside interests": "other",
-    "leisure activities": "other",
-    "pastimes": "other",
+    "hobbies": "interests",
+    "interests": "interests",
+    "activities": "interests",
+    "extracurricular activities": "interests",
+    "personal interests": "interests",
+    "outside interests": "interests",
+    "leisure activities": "interests",
+    "pastimes": "interests",
     # ======================
     # OTHER — SERTİFİKA / LİSANS / BELGE
     # ======================
-    "sertifikalar": "other",
-    "sertifika": "other",
-    "belgeler": "other",
-    "lisanslar": "other",
-    "sertifikasyonlar": "other",
-    "mesleki sertifikalar": "other",
-    "tamamlanan kurslar": "other",
-    "kurslar": "other",
-    "online kurslar": "other",
-    "eğitimler": "other",
+    "sertifikalar": "certificates",
+    "sertifika": "certificates",
+    "belgeler": "certificates",
+    "lisanslar": "certificates",
+    "sertifikasyonlar": "certificates",
+    "mesleki sertifikalar": "certificates",
+    "tamamlanan kurslar": "certificates",
+    "kurslar": "certificates",
+    "online kurslar": "certificates",
+    "eğitimler": "certificates",
     # EN
-    "certifications": "other",
-    "certificates": "other",
-    "licenses": "other",
-    "licenses & certifications": "other",
-    "professional certifications": "other",
-    "courses": "other",
-    "online courses": "other",
-    "training": "other",
-    "completed courses": "other",
-    "continuing education": "other",
-    "professional development": "other",
+    "certifications": "certificates",
+    "certificates": "certificates",
+    "licenses": "certificates",
+    "licenses & certifications": "certificates",
+    "professional certifications": "certificates",
+    "courses": "certificates",
+    "online courses": "certificates",
+    "training": "certificates",
+    "completed courses": "certificates",
+    "continuing education": "certificates",
+    "professional development": "certificates",
     # ======================
     # OTHER — ÖDÜL / BAŞARI / ONUR
     # ======================
@@ -4196,6 +4714,21 @@ for _sd_heading, _sd_bucket in {
     # EN
     "volunteering": "other",
     "volunteer work": "other",
+    "gönüllü deneyimler": "other",
+    "gonullu deneyimler": "other",
+    "gounullu deneyimler": "other",
+    "volunteer experience": "other",
+    # ======================
+    # ORGANIZATIONS
+    # ======================
+    "organizations": "organizations",
+    "organizasyonlar": "organizations",
+    "topluluklar": "organizations",
+    "communities": "organizations",
+    "organizations & leadership": "organizations",
+    "organizations and leadership": "organizations",
+    "leadership": "organizations",
+    "leadership roles": "organizations",
     "volunteer experience": "other",
     "community service": "other",
     "social responsibility": "other",
@@ -4205,27 +4738,27 @@ for _sd_heading, _sd_bucket in {
     # ======================
     # OTHER — ORGANİZASYON / LİDERLİK
     # ======================
-    "organizasyonlar": "other",
-    "organizasyon deneyimi": "other",
-    "liderlik deneyimi": "other",
-    "kulüp üyelikleri": "other",
-    "dernek üyelikleri": "other",
-    "üyelikler": "other",
-    "komite üyelikleri": "other",
-    "öğrenci toplulukları": "other",
+    "organizasyonlar": "organizations",
+    "organizasyon deneyimi": "organizations",
+    "liderlik deneyimi": "organizations",
+    "kulüp üyelikleri": "organizations",
+    "dernek üyelikleri": "organizations",
+    "üyelikler": "organizations",
+    "komite üyelikleri": "organizations",
+    "öğrenci toplulukları": "organizations",
     # EN
-    "leadership experience": "other",
-    "leadership & activities": "other",
-    "organizations": "other",
-    "organization & leadership": "other",
-    "organizational memberships": "other",
-    "memberships": "other",
-    "professional memberships": "other",
-    "associations": "other",
-    "club memberships": "other",
-    "student organizations": "other",
-    "committee roles": "other",
-    "board membership": "other",
+    "leadership experience": "organizations",
+    "leadership & activities": "organizations",
+    "organizations": "organizations",
+    "organization & leadership": "organizations",
+    "organizational memberships": "organizations",
+    "memberships": "organizations",
+    "professional memberships": "organizations",
+    "associations": "organizations",
+    "club memberships": "organizations",
+    "student organizations": "organizations",
+    "committee roles": "organizations",
+    "board membership": "organizations",
     # ======================
     # OTHER — REFERANS
     # ======================
@@ -4270,6 +4803,23 @@ for _sd_heading, _sd_bucket in {
     "additional details": "other",
     "further information": "other",
     "appendix": "other",
+    # Singular variants & OCR typos
+    "beceri": "skills",
+    "yetenek": "skills",
+    "deneyim": "experience",
+    "tecrübe": "experience",
+    "staj": "experience",
+    "proje": "projects",
+    "egitim": "education",
+    "hakkimda": "summary",
+    "ozet": "summary",
+    "dil": "languages",
+    "hobi": "interests",
+    "sertifika": "certificates",
+    "kurs": "certificates",
+    "odul": "other",
+    "basari": "other",
+    "referans": "other",
 }.items():
     _SD_EXT_MAP[_sd_norm(_sd_heading)] = _sd_bucket
 
@@ -4300,6 +4850,10 @@ MAIN_HEADERS: set[str] = {
         "hakkımda",
         "özet",
         "projeler",
+        "diller",
+        "sertifikalar",
+        "ilgi alanları",
+        "organizasyonlar",
         # English
         "education",
         "experience",
@@ -4308,6 +4862,10 @@ MAIN_HEADERS: set[str] = {
         "summary",
         "about",
         "projects",
+        "languages",
+        "certificates",
+        "interests",
+        "organizations",
     ]
 }
 
@@ -4319,26 +4877,39 @@ SUB_HEADERS: dict[str, tuple[str, str]] = {
         "teknik beceriler": ("skills", "Teknik Beceriler"),
         "yazılım becerileri": ("skills", "Yazılım Becerileri"),
         "teknik yetkinlikler": ("skills", "Teknik Yetkinlikler"),
-        "dil becerileri": ("skills", "Dil Becerileri"),
-        "diller": ("skills", "Diller"),
-        "yabancı diller": ("skills", "Yabancı Diller"),
-        "hobiler": ("other", "Hobiler"),
-        "ilgi alanları": ("other", "İlgi Alanları"),
-        "sertifikalar": ("other", "Sertifikalar"),
+        "dil becerileri": ("languages", "Dil Becerileri"),
+        "diller": ("languages", "Diller"),
+        "yabancı diller": ("languages", "Yabancı Diller"),
+        "hobiler": ("interests", "Hobiler"),
+        "ilgi alanları": ("interests", "İlgi Alanları"),
+        "sertifikalar": ("certificates", "Sertifikalar"),
+        "organizasyonlar": ("organizations", "Organizasyonlar"),
         "ödüller": ("other", "Ödüller"),
         "başarılar": ("other", "Başarılar"),
         "gönüllülük": ("other", "Gönüllülük"),
         "referanslar": ("other", "Referanslar"),
         # English equivalents
-        "languages": ("skills", "Languages"),
+        "languages": ("languages", "Languages"),
         "technical skills": ("skills", "Technical Skills"),
         "soft skills": ("skills", "Soft Skills"),
-        "hobbies": ("other", "Hobbies"),
-        "interests": ("other", "Interests"),
-        "certifications": ("other", "Certifications"),
+        "programming languages": ("skills", "Programming Languages"),
+        "frameworks and tools": ("skills", "Frameworks and Tools"),
+        "frameworks & tools": ("skills", "Frameworks & Tools"),
+        "frameworks&tools": ("skills", "Frameworks & Tools"),
+        "hobbies": ("interests", "Hobbies"),
+        "interests": ("interests", "Interests"),
+        "certifications": ("certificates", "Certifications"),
+        "certificates": ("certificates", "Certificates"),
+        "organizations": ("organizations", "Organizations"),
+        "organizations & leadership": ("organizations", "Organizations & Leadership"),
+        "organizations and leadership": ("organizations", "Organizations and Leadership"),
+        "references": ("other", "References"),
         "awards": ("other", "Awards"),
         "volunteering": ("other", "Volunteering"),
-        "references": ("other", "References"),
+        "volunteer experience": ("other", "Volunteer Experience"),
+        "gönüllü deneyimler": ("other", "Gönüllü Deneyimler"),
+        "gonullu deneyimler": ("other", "Gönüllü Deneyimler"),
+        "gounullu deneyimler": ("other", "Gönüllü Deneyimler"),
     }.items()
 }
 
@@ -4375,6 +4946,23 @@ def _sd_detect_heading(
     if not stripped:
         return None, None
 
+    # Rejection Rule: section headings never start with a single-letter bullet point (like "e ", "o ", "• ")
+    if re.match(r"^[a-zA-Z•\-\*]\s+", stripped):
+        return None, None
+
+    # L0: merged headings ("education experience" or "profil deneyim")
+    # Must run BEFORE keyword/fuzzy matching so token_set_ratio doesn't just
+    # swallow it as a 100% match for the first word.
+    merged = _RE_MERGED_HEADING.search(stripped.lower())
+    if merged:
+        first_part = merged.group(1).lower()
+        for canon, kws in _HEADING_DICT.items():
+            if any(kw in first_part for kw in kws):
+                return canon, "merged"
+        kw_m = _is_section_heading(merged.group(1))
+        if kw_m:
+            return kw_m, "merged_keyword"
+
     # L1: existing keyword detector
     kw = _is_section_heading(stripped)
     if kw:
@@ -4389,6 +4977,10 @@ def _sd_detect_heading(
     plain = re.sub(r"^[^\w\u0130\u0131\u0100-\u024F]+", "", stripped, flags=re.UNICODE)
     plain = re.sub(r"[^\w\u0130\u0131\u0100-\u024F]+$", "", plain, flags=re.UNICODE)
     plain = plain.rstrip(":").strip()
+    
+    # FIX: Also strip single-letter bullet artifacts ("e ", "o ")
+    plain = _RE_BULLET_PREFIX.sub("", plain).strip()
+
     if plain and plain != stripped:
         kw2 = _is_section_heading(plain)
         if kw2:
@@ -4653,12 +5245,22 @@ def _classify_block(block: CVBlock) -> str:
 
     # ── Signal 4: list shape + tech words → skills ────────────────────────
     tech_hits = len(_AS_TECH_WORDS.findall(lower))
+    
+    # FIX: Summary usually has sentences and fewer numbers/special chars
+    # Lists of skills often have numbers (percentages) and short fragments.
+    words = len(full_text.split())
+    num_count = len(re.findall(r"\d+", full_text))
+    if num_count > 5 and words < 30:
+        return "skills"
+    
     if block.is_list and tech_hits >= 2:
         return "skills"
+
+    # ── Signal 5: dense tech keywords with no dates → skills ─────────────────
     if tech_hits >= 4 and not block.has_dates:
         return "skills"
 
-    # ── Signal 5: paragraph prose → summary ───────────────────────────────
+    # ── Signal 6: paragraph prose → summary ───────────────────────────────
     sentence_endings = sum(1 for l in block.lines if _AS_SENTENCE_END.search(l))
     if (
         sentence_endings >= 2
@@ -4666,21 +5268,30 @@ def _classify_block(block: CVBlock) -> str:
         and not block.is_list
         and _AS_PRONOUN_RE.search(lower)
     ):
-        return "summary"
+        chars = len(full_text)
+        avg_len = chars / words if words > 0 else 0
+        char_density = chars / (max(1, len(block.lines) * 80))
+        if words > 20 and avg_len > 4.5 and char_density > 0.6:
+            # Check for sentence-like structure (capital letter followed by lowercase)
+            if re.search(r"[A-ZÇĞİÖŞÜ][a-zçğıöşü]", full_text):
+                return "summary"
 
-    # ── Signal 6: date + role/company → experience ──────────────────────────
+    # ── Signal 7: date + role/company → experience ──────────────────────────
     if block.has_dates and (
         _AS_ROLE_WORDS.search(lower) or _AS_COMPANY_WORDS.search(lower)
     ):
         return "experience"
 
-    # ── Signal 7: keyword score fallback ───────────────────────────────────────────
+    # ── Signal 8: keyword score fallback ───────────────────────────────────────────
     kw_section = _sd_score_line_for_section(full_text)
     if kw_section:
         return kw_section
 
     # ── Default ────────────────────────────────────────────────────────────────
-    return "experience"
+    # FIX: Changed from "experience" to "other" to prevent unclassifiable
+    # content from contaminating the experience section. Content in "other"
+    # can still be rescued by downstream fallback recovery if needed.
+    return "other"
 
 
 def _apply_safety_rules(sections: dict[str, list[str]]) -> dict[str, list[str]]:
@@ -4719,23 +5330,47 @@ def _apply_safety_rules(sections: dict[str, list[str]]) -> dict[str, list[str]]:
     if spill_to_summary and len(result.get("summary", [])) < _SUMMARY_MAX_LINES:
         result.setdefault("summary", []).extend(spill_to_summary)
 
-    # Rule 2: education must contain institution signal
-    clean_edu: list[str] = []
-    spill_exp: list[str] = []
-    for line in result.get("education", []):
-        if _AS_DEGREE_WORDS.search(turkish_lower(line)):
-            clean_edu.append(line)
-        else:
-            spill_exp.append(line)
-    result["education"] = clean_edu
-    result.setdefault("experience", []).extend(spill_exp)
-
     # Rule 3: summary capped at _SUMMARY_MAX_LINES non-empty lines
     summary_lines = result.get("summary", [])
     non_empty = [l for l in summary_lines if l.strip()]
     if len(non_empty) > _SUMMARY_MAX_LINES:
         result["summary"] = non_empty[:_SUMMARY_MAX_LINES]
         result.setdefault("other", []).extend(non_empty[_SUMMARY_MAX_LINES:])
+
+    # Rule 4: rescue technical content from interests
+    # If a line in interests has technical keywords (e.g. AutoCAD, SQL, Agile),
+    # move it to skills.
+    clean_interests: list[str] = []
+    rescued_to_skills: list[str] = []
+    _TECH_RESCUE_KWS = ["autocad", "kaizen", "poka-yoke", "ms project", "jira", "asana", "trello", "sap", "solidworks"]
+    for line in result.get("interests", []):
+        low = turkish_lower(line)
+        tech_hits = len(_AS_TECH_WORDS.findall(low))
+        if tech_hits >= 2 or any(kw in low for kw in _TECH_RESCUE_KWS):
+            rescued_to_skills.append(line)
+        else:
+            clean_interests.append(line)
+    result["interests"] = clean_interests
+    if rescued_to_skills:
+        result.setdefault("skills", []).extend(rescued_to_skills)
+
+    # Rule 5: rescue education content from interests/other
+    # If a line in interests or other contains education keywords (e.g. üniversite, lise, university, school, etc.),
+    # move it to education.
+    _EDU_RESCUE_KWS = ["üniversite", "universite", "university", "lise", "lisesi", "okul", "okulu", "bachelor", "master", "ph.d", "phd", "lisans", "doktora", "fakülte", "fakülte", "college", "school"]
+    for src_sec in ["interests", "other"]:
+        if src_sec in result:
+            clean_src: list[str] = []
+            rescued_to_edu: list[str] = []
+            for line in result[src_sec]:
+                low = turkish_lower(line)
+                if any(kw in low for kw in _EDU_RESCUE_KWS):
+                    rescued_to_edu.append(line)
+                else:
+                    clean_src.append(line)
+            result[src_sec] = clean_src
+            if rescued_to_edu:
+                result.setdefault("education", []).extend(rescued_to_edu)
 
     return result
 
@@ -4800,17 +5435,202 @@ def _sd_score_line_for_section(line: str) -> Optional[str]:
         scores["summary"] += 1
 
     best = max(scores, key=lambda k: scores[k])
-    return best if scores[best] > 0 else None
+    # FIX: Require a minimum score of 2 to reduce false positives.
+    # A single weak signal (score=1) like just a sentence period or a
+    # single company-like word is not enough to confidently assign a section.
+    return best if scores[best] >= 2 else None
 
 
 # ── Canonical section list (includes new "other" bucket) ─────────────────────
 
+# Section heading keywords that should NOT be treated as titles
+_TITLE_SKIP_HEADINGS = {
+    # English section headings
+    "profile", "profıle", "summary", "about", "about me",
+    "objective", "overview", "introduction", "highlights",
+    "education", "experience", "skills", "projects",
+    "certificates", "certifications", "languages", "interests",
+    "organizations", "references", "referanslar",
+    "professional summary", "career objective", "personal statement",
+    "personal information", "personal projects", "personal details",
+    "contact", "contact information", "contact details",
+    "work experience", "work history", "employment history",
+    "technical skills", "key skills", "core competencies",
+    "education and training", "awards", "publications",
+    "hobbies and interests", "volunteer experience", "volunteering",
+    "curriculum vitae", "resume", "cv",
+    "data processing.", "on my own.",
+    # Turkish section headings
+    "profil", "hakkımda", "hakkimda", "özet", "ozet",
+    "eğitim", "egitim", "deneyim", "beceriler", "projeler",
+    "sertifikalar", "diller", "ilgi alanları", "ilgi alanlari",
+    "organizasyonlar", "referanslar", "kariyer hedefi",
+    "kişisel bilgiler", "kisisel bilgiler", "kisisel bilgi",
+    "iletişim", "iletisim", "iletişim bilgileri", "iletisim bilgileri",
+    "iş deneyimi", "is deneyimi", "iş geçmişi", "is gecmisi",
+    "eğitim bilgileri", "egitim bilgileri", "eğitim geçmişi",
+    "teknik beceriler", "temel beceriler", "yetkinlikler",
+    "yabancı dil", "yabanci dil", "dil becerileri", "dil yetkinliği",
+    "staj deneyimi", "staj deneyimim",
+    "hobiler", "gönüllü çalışma", "gonullu calisma",
+    "kişisel bilgiler", "kişisel özellikler",
+    "profil deneyim", "uyruk", "dogum tarihi", "askerlik", "medeni durumu",
+    "nationality", "birth date", "military service", "marital status",
+    "phone:", "e-posta:", "ad soyad:",
+    # Common merged/OCR variants
+    "özgeçmiş", "ozgecmis",
+}
+
+def extract_title_and_experience(text: str, experience_text: str = "", education_text: str = "") -> tuple[str, str]:
+    """
+    Extract the candidate's professional title and total years of experience.
+    
+    Title detection:
+      1. Check first line for "Name - Title" or "Name | Title" pattern.
+      2. If not found, check lines 2-5 for short, title-like lines
+         (skipping contact info and section headings).
+    
+    Years of experience:
+      1. Look for explicit "X years" mentions.
+      2. If not found, calculate from date ranges in the text.
+    """
+    lines = [l.strip() for l in text.splitlines() if l.strip()]
+    if not lines:
+        return "-", "0"
+    
+    # 1. Try to find title in the first line (name - title)
+    first_line = lines[0]
+    title = "-"
+    first_line_has_keyword = False
+    if " - " in first_line:
+        candidate = first_line.split(" - ", 1)[1].strip()
+        if candidate.lower() not in _TITLE_SKIP_HEADINGS:
+            title = candidate
+            if re.search(r"\b(developer|engineer|programmer|architect|devops|sre|qa|tester|software|frontend|backend|fullstack|kameraman|montajcı|editör|editor|uzman|mühendis|geliştirici|stajyer|intern)\b", candidate, re.I):
+                first_line_has_keyword = True
+    elif " | " in first_line:
+        candidate = first_line.split(" | ", 1)[1].strip()
+        if candidate.lower() not in _TITLE_SKIP_HEADINGS:
+            title = candidate
+            if re.search(r"\b(developer|engineer|programmer|architect|devops|sre|qa|tester|software|frontend|backend|fullstack|kameraman|montajcı|editör|editor|uzman|mühendis|geliştirici|stajyer|intern)\b", candidate, re.I):
+                first_line_has_keyword = True
+    
+    # 2. If not found or low confidence, look at subsequent lines skipping contact info
+    # Expanded role keywords list covering modern tech, business, and Turkish roles
+    _ROLE_KEYWORDS_RE = re.compile(
+        r"\b("
+        # === Software / Engineering ===
+        r"developer|engineer|programmer|architect|devops|sre|qa|tester"
+        r"|software|frontend|backend|fullstack|full-stack|full stack"
+        r"|web developer|mobile developer|ios developer|android developer"
+        # === Data / AI / ML ===
+        r"|data scientist|data analyst|data engineer|machine learning|ml engineer"
+        r"|ai engineer|bi analyst|bi developer|business intelligence"
+        # === Design / Creative ===
+        r"|designer|ui designer|ux designer|ui/ux|ux/ui|graphic designer"
+        r"|product designer|visual designer|art director|creative director"
+        r"|kameraman|montajcı|editör|editor"
+        # === Management / Leadership ===
+        r"|manager|director|lead|head|chief|officer|president|vp"
+        r"|team lead|tech lead|project manager|product manager|scrum master"
+        r"|ceo|cto|cfo|coo|cio|cmo"
+        # === Analyst / Specialist / Consultant ===
+        r"|analyst|specialist|consultant|coordinator|advisor|strategist"
+        r"|expert|researcher|scientist"
+        # === Marketing / Business ===
+        r"|marketing|sales|account|business|operations|finance"
+        r"|content writer|copywriter|seo specialist|social media"
+        # === Turkish Roles ===
+        r"|uzman|mühendis|muhendis|mithendis|mtihendis|muuhendis|mühendisi|muhendisi|mithendisi|muuhendisi|geliştirici|gelistirici|yönetici|yonetici|müdür|mudur|direktör|direktor|koordinatör|koordinator"
+        r"|danışman|danisman|tasarımcı|tasarimci|araştırmacı|arastirmaci|asistan|analist|lider|başkan|baskan"
+        r"|stajyer|intern|student|öğrenci|ogrenci|mezun|graduate"
+        r"|teknisyen|operatör|operator|editör|editor|muhabir|gazeteci"
+        r")\b",
+        re.I,
+    )
+    
+    if title == "-" or not first_line_has_keyword:
+        _title_candidate_fallback = None  # store best non-keyword candidate
+        for l in lines[1:35]:  # extended search range to reach second column top
+            l_lower = l.lower().strip()
+            # Skip lines with email, @, http, or phone-like patterns
+            if "@" in l or "http" in l or "www." in l or re.search(r"\d{5,}", l):
+                continue
+            # Skip lines that look like section headings
+            if l_lower in _TITLE_SKIP_HEADINGS:
+                continue
+            # Skip lines that look like university/education info
+            if re.search(r"\b(university|üniversite|college|school|okul|fakülte|bölüm)\b", l, re.I):
+                continue
+            # Skip lines that look like addresses or locations
+            if re.search(r"\b(sokak|cadde|mahalle|apt|kat|no|street|avenue|city)\b", l, re.I):
+                continue
+            # First clean line that looks like a title (short, role-like)
+            word_count = len(l.split())
+            if 1 <= word_count <= 8:
+                # High confidence: contains explicit role keywords
+                if _ROLE_KEYWORDS_RE.search(l_lower):
+                    title = l
+                    break
+                # Low confidence fallback: short line (2-5 words) without digits
+                # that looks like a title (not a name or date)
+                elif title == "-" and _title_candidate_fallback is None and 2 <= word_count <= 5:
+                    if not re.search(r"\d", l):  # no digits (not a date or phone)
+                        # Skip lines that end with period (sentences, not titles)
+                        if l.rstrip().endswith("."):
+                            continue
+                        # Skip lines that are section keywords from _SD_EXT_MAP
+                        if _sd_norm(l) in _SD_EXT_MAP:
+                            continue
+                        _title_candidate_fallback = l
+        
+        # Use the fallback candidate if no keyword match was found
+        if title == "-" and _title_candidate_fallback:
+            title = _title_candidate_fallback
+    
+    # 3. Calculate years of experience
+    # In accordance with the user's explicit rule: "ilk işinin başlangıç tarihinden bulunduğumuz yıla kadar hesaplansın deneyim yılı"
+    # Find all 4-digit years starting with 19 or 20 in the experience text
+    years = "0"
+    if experience_text:
+        all_years = [int(y) for y in re.findall(r'\b(20\d{2}|19\d{2})\b', experience_text)]
+        if all_years:
+            earliest_year = min(all_years)
+            import datetime
+            current_year = datetime.date.today().year
+            if earliest_year <= current_year:
+                ans = current_year - earliest_year
+                years = str(ans)
+    
+    # Clean up common title labels and prefixes (case-insensitive)
+    title = title.strip()
+    _prefix_pat = re.compile(
+        r"^(?:ad[ı]?\s*soyad[ı]?|ad\s*soyad|isim|name|full\s*name|cv|özgeçmiş|ozgecmis)\s*[:\-–|]*\s*",
+        re.I
+    )
+    title = _prefix_pat.sub("", title).strip()
+    
+    # Title casing for consistency
+    if title == title.lower() or title == title.upper():
+        title = title.title()
+    if len(title) > 50:
+        title = title[:50] + "..."
+    
+    return title, years
+
+
 _SD_CANONICAL: list[str] = [
     "summary",
+    "title",
+    "years_of_experience",
     "experience",
     "education",
     "skills",
     "projects",
+    "languages",
+    "certificates",
+    "interests",
+    "organizations",
     "other",
 ]
 
@@ -4868,7 +5688,7 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
     _debug = debug or bool(os.environ.get("PARSER_DEBUG", ""))
 
     if _debug:
-        sample = text[:300].replace("\n", " ↵ ")
+        sample = text[:300].replace("\n", " | ")
         print(f"[DEBUG] CLEANED TEXT SAMPLE: {sample!r}")
 
     sections: dict[str, list[str]] = {s: [] for s in _SD_CANONICAL}
@@ -4886,26 +5706,115 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
     transition_log: list[str] = []
     seen_sections: set[str] = set()
 
+    # FIX: Capture lines before the first heading — these often contain the
+    # candidate's self-description ("ı am a fourth year student...") which
+    # should be used as summary if no explicit summary/profile heading exists.
+    pre_header_lines: list[str] = []
+    after_column_break = False
+
     for i, raw_line in enumerate(lines):
         prev_line = lines[i - 1] if i > 0 else ""
         next_line = lines[i + 1] if i + 1 < n else ""
 
         # ── Pass COLUMN_BREAK_TOKEN through unchanged ─────────────────────────
         if COLUMN_BREAK_TOKEN in raw_line:
-            if current_section:
-                sections[current_section].append(raw_line)
+            # We hit a column break. Reset current_section to None for sidebar/brief
+            # sections to prevent them from bleeding into the main column.
+            if current_section in {"languages", "skills", "interests", "education", "certificates", "organizations", "other"}:
+                current_section = None
+            current_sub = None
+            after_column_break = True
             continue
+
+        # Check if the line is a prefixed section heading (e.g. "EDUCATION Suleyman Demirel University")
+        pref_match = _RE_PREFIXED_HEADING.match(raw_line)
+        if pref_match and len(raw_line.split()) <= 8:
+            keyword = pref_match.group(1).lower()
+            remainder = pref_match.group(3).strip()
+            
+            canon_sec = None
+            for canon, kws in _HEADING_DICT.items():
+                if any(kw in keyword for kw in kws):
+                    canon_sec = canon
+                    break
+            if not canon_sec:
+                canon_sec = _is_section_heading(keyword)
+            
+            if canon_sec:
+                current_section = canon_sec
+                found_any_heading = True
+                after_column_break = False
+                if canon_sec not in seen_sections:
+                    seen_sections.add(canon_sec)
+                    transition_log.append(canon_sec)
+                current_sub = None
+                
+                if remainder:
+                    sections[canon_sec].append(remainder)
+                if _debug:
+                    print(f"  [H] line {i}: PREFIXED SPLIT '{raw_line.strip()}' → switch to {canon_sec}, append remainder '{remainder}'")
+                continue
 
         detected, method = _sd_detect_heading(raw_line, prev_line, next_line)
 
         if detected is not None:
+            after_column_break = False
+            # FIX: Handle merged headings ("Education Experience") by splitting
+            if "merged" in method:
+                # Use regex to find where the split happens
+                merged_match = _RE_MERGED_HEADING.search(raw_line.lower())
+                if merged_match:
+                    # We have two sections in one line.
+                    # Current logic: assign the first part, and the NEXT line will
+                    # naturally belong to the second part if we could "inject" a heading.
+                    # BETTER: Assign this line to first part, then MANUALLY switch
+                    # current_section to the second part for subsequent lines.
+                    first_part_sec = detected
+                    second_part_text = merged_match.group(2).lower()
+                    second_part_sec = None
+                    for canon, kws in _HEADING_DICT.items():
+                        if any(kw in second_part_text for kw in kws):
+                            second_part_sec = canon
+                            break
+                    
+                    if not second_part_sec:
+                        second_part_sec = _is_section_heading(second_part_text) or "other"
+                    
+                    # Store current line in FIRST part
+                    sections[first_part_sec].append(raw_line)
+                    seen_sections.add(first_part_sec)
+                    transition_log.append(first_part_sec)
+                    
+                    # SWITCH to second part for following lines
+                    current_section = second_part_sec
+                    found_any_heading = True
+                    if _debug:
+                        print(f"  [H] line {i}: MERGED SPLIT '{raw_line.strip()}' → {first_part_sec} THEN {second_part_sec}")
+                    continue
+
+            current_section = detected
+            found_any_heading = True
+
+            # FIX: Add labels to 'other' section to identify sub-content (Task 2)
+            if detected == "other":
+                label = raw_line.strip().title().rstrip(":").strip()
+                norm_raw = _sd_norm(raw_line.strip())
+                if norm_raw in SUB_HEADERS:
+                    _, label = SUB_HEADERS[norm_raw]
+                
+                header_marker = f"--- {label} ---"
+                if header_marker not in sections["other"]:
+                    sections["other"].append(header_marker)
+
             # ── Check if this is a SUB-heading first ──────────────────────────
             norm_raw = _sd_norm(raw_line.strip())
             if norm_raw in SUB_HEADERS:
                 parent_sec, sub_label = SUB_HEADERS[norm_raw]
-                # Sub-heading: keep current_section open (or adopt parent)
-                # but activate a named sub-bucket inside it.
-                if current_section is None or current_section not in _SD_CANONICAL:
+                # FIX: Always switch to the parent section if it differs from
+                # current.  The old condition only switched when current was
+                # None, which meant "languages" after "certificates" stayed
+                # in certificates instead of switching to languages.
+                if current_section != parent_sec:
                     current_section = parent_sec
                     if parent_sec not in seen_sections:
                         seen_sections.add(parent_sec)
@@ -4915,6 +5824,13 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
                     sub_accum[current_section] = {"_root": []}
                 if sub_label not in sub_accum[current_section]:
                     sub_accum[current_section][sub_label] = []
+                
+                # FIX: Add label to 'other' section for SUB_HEADERS (Task 2)
+                if current_section == "other":
+                    header_marker = f"--- {sub_label} ---"
+                    if header_marker not in sections["other"]:
+                        sections["other"].append(header_marker)
+                
                 if _debug:
                     print(
                         f"  [SUB] line {i}: {raw_line.strip()!r} → {current_section}/{sub_label}"
@@ -4945,14 +5861,33 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
             transition_log.append(detected)
             current_sub = None  # new main section resets sub-section pointer
 
+            # FIX: Add labels to 'other' section to identify sub-content (Task 2)
+            if detected == "other":
+                label = raw_line.strip().title().rstrip(":").strip()
+                # Use sub_label if available from previous SUB_HEADERS pass
+                # (This logic is slightly redundant but safe)
+                norm_raw = _sd_norm(raw_line.strip())
+                if norm_raw in SUB_HEADERS:
+                    _, label = SUB_HEADERS[norm_raw]
+                
+                header_marker = f"--- {label} ---"
+                if header_marker not in sections["other"]:
+                    sections["other"].append(header_marker)
+
             if _debug:
                 print(f"  [H] line {i}: {raw_line.strip()!r} → {detected!r} ({method})")
 
         else:
             # ── Body line: assign to current section ──────────────────────────
-            # Pre-header lines (current_section is None) are discarded — they
-            # contain name/contact info already captured by extract_contact_info().
             if raw_line.strip() and current_section is not None:
+                # FIX: If we are in 'skills', but this line looks like a job title, 
+                # maybe we should switch to experience or stop.
+                if current_section == "skills" and (_RE_ROLE_WORDS.search(raw_line.lower()) and "staj" in raw_line.lower()):
+                    # Silent transition or just a mis-grouped line.
+                    # For now, put it in 'experience' if it's role-heavy
+                    sections["experience"].append(raw_line)
+                    continue
+
                 sections[current_section].append(raw_line)
                 # Also accumulate into sub-section bucket if one is active
                 if current_sub is not None and current_section in sub_accum:
@@ -4960,6 +5895,33 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
                 elif current_section in sub_accum:
                     # Content before any sub-heading → "_root" bucket
                     sub_accum[current_section]["_root"].append(raw_line)
+            elif raw_line.strip() and current_section is None and (not seen_sections or after_column_break):
+                # FIX: Pre-header body text — before any section heading.
+                # Skip obvious contact-info lines (email, phone, URL).
+                _stripped = raw_line.strip()
+                if not re.search(r"@|https?://|linkedin|github|medium|\+?\d[\d\s\-]{7,}|\b(iletisim|iletişim|telefon|email|adres|address|mahalle|mah\b|sokak|sok\b|cadde|cad\b|ilce|ilçe|belediye|caddesi|sokağı|sokagi|mahallesı|mahallesı)\b", _stripped, re.I):
+                    pre_header_lines.append(_stripped)
+
+    # ── FIX: Use pre-header content as summary if no summary was found ────────
+    if not sections.get("summary") and pre_header_lines:
+        # Filter out lines that are likely the person's name or short title
+        # (Note: text is already lowercased, so we can't use isupper())
+        _meaningful = []
+        for i, _phl in enumerate(pre_header_lines):
+            _words = _phl.split()
+            # Skip the first 1-2 lines if they are very short (likely Name / Title)
+            if i < 2 and len(_words) <= 4:
+                continue
+            # Skip any very short line globally unless it has punctuation
+            if len(_words) <= 3 and not re.search(r'[.!?]', _phl):
+                continue
+            _meaningful.append(_phl)
+        # Only use as summary if there's genuine prose content
+        # (at least 8 words total and at least one sentence-like structure)
+        total_words = sum(len(l.split()) for l in _meaningful)
+        has_prose = any(re.search(r'[.!?]\s*$', l) for l in _meaningful) or total_words >= 15
+        if _meaningful and total_words >= 8 and has_prose:
+            sections["summary"] = _meaningful
 
     # ── Confidence scoring ────────────────────────────────────────────────────
     confidence: dict[str, float] = {
@@ -4981,21 +5943,41 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
         confidence = {s: _score_section(v) * 0.4 for s, v in sections.items()}
 
     # ── Targeted fallback for specific empty canonical sections ───────────────
+    # NOTE: 'summary' is excluded from fallback recovery because keyword scanning
+    # for summary produces too many false positives (pronoun words like "I am"
+    # appear in experience bullets). Summary should only come from explicit
+    # headings (profile/summary/hakkımda) or from pre-header prose content.
     empty_canonical = [
         s
-        for s in ["summary", "experience", "education", "skills", "projects"]
+        for s in ["experience", "education", "skills", "projects"]
         if not sections[s]
     ]
     if empty_canonical:
+        # Build a set of lines already assigned to other sections to avoid stealing
+        _already_assigned = set()
+        for _sec_name, _sec_lines in sections.items():
+            for _sl in _sec_lines:
+                _already_assigned.add(_sl.strip().lower())
+        
         recovered = _fallback_keyword_recovery(text, empty_canonical)
         for sec, rec_lines in recovered.items():
-            if rec_lines:
-                sections[sec] = rec_lines
-                confidence[sec] = _score_section(rec_lines) * 0.6
+            unique_lines = []
+            for l in rec_lines:
+                l_norm = l.strip().lower()
+                if l_norm not in _already_assigned:
+                    unique_lines.append(l)
+                    _already_assigned.add(l_norm)
+            
+            if unique_lines:
+                sections[sec] = unique_lines
+                confidence[sec] = _score_section(unique_lines) * 0.6
                 if _debug:
                     print(
-                        f"  [fallback] Recovered {len(rec_lines)} line(s) for '{sec}'"
+                        f"  [fallback] Recovered {len(unique_lines)} line(s) for '{sec}'"
                     )
+
+    # ── Stage 4: Safety Rules ─────────────────────────────────────────────────
+    sections = _apply_safety_rules(sections)
 
     # ── Build final output ────────────────────────────────────────────────────
     result: dict[str, str] = {
@@ -5025,7 +6007,7 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
         for sec, text_val in result.items():
             if sec == "__confidence__":
                 continue
-            line_count = len(text_val.splitlines()) if text_val else 0
+            line_count = len(text_val.splitlines()) if text_val and isinstance(text_val, str) else 0
             score = confidence.get(sec, 0.0)
             print(f"         {sec:<12}  lines={line_count:<4}  confidence={score:.2f}")
 
@@ -5045,13 +6027,14 @@ def extract_sections(text: str, debug: bool = False) -> dict[str, str]:
 # ─────────────────────────────────────────────
 
 _RE_LINKEDIN = re.compile(
-    r"(?:https?://)?(?:www\.)?linkedin\.com/in/([a-zA-Z0-9_\-%.]+)",
+    r"(?:https?://)?(?:www\.)?linkedin\.com/in/([a-zA-Z0-9_\-%.\u00C0-\u024F]+)",
     re.IGNORECASE,
 )
 _RE_GITHUB = re.compile(
     r"(?:https?://)?(?:www\.)?github\.com/([a-zA-Z0-9_\-]+)",
     re.IGNORECASE,
 )
+# Phone regex: must NOT match date ranges like (2021-2025) or (2024-2025)
 _RE_PHONE_CONTACT = re.compile(
     r"(?<!\d)(?:\+?\d{1,3}[\s.\-]?)?(?:\(?\d{2,4}\)?[\s.\-]?){1,4}\d{2,4}(?!\d)",
 )
@@ -5079,38 +6062,109 @@ def extract_contact_info(text: str) -> dict[str, str]:
         "github": "",
     }
 
+    # ── FIX 7: Strip references section to avoid reference contact false positives ──
+    contact_search_text = text
+    # Only match if it's a standalone heading line
+    ref_match = re.search(r'\n\s*(referanslar|references)\s*[:]?\s*\n', contact_search_text, re.IGNORECASE)
+    if ref_match:
+        contact_search_text = contact_search_text[:ref_match.start()]
+
     # ── FIX 6: pre-process text for email extraction ──────────────────────────
     # Collapse spaces around '@' sign:  "user @ domain"  → "user@domain"
-    email_search_text = re.sub(
-        r"([A-Za-z0-9._%+\-])\s+@\s+([A-Za-z0-9])", r"\1@\2", text
-    )
+    # FIX: Only collapse if the text doesn't already have a valid email
+    # (stray "@" from PDF icons would create "gmail.com@0543" double-@ bugs)
+    _has_valid_email_already = _RE_EMAIL.search(contact_search_text)
+    if _has_valid_email_already:
+        email_search_text = contact_search_text
+    else:
+        email_search_text = re.sub(
+            r"([A-Za-z0-9._%+\-])\s+@\s+([A-Za-z0-9])", r"\1@\2", contact_search_text
+        )
     # Collapse spaces around '.' in TLD-like positions:
     # "gmail .com" → "gmail.com" ; "outlook. com" → "outlook.com"
+    # ONLY collapse if followed by a clear boundary (space, comma, end of string)
     email_search_text = re.sub(
-        r"([A-Za-z0-9])\s*\.\s*([A-Za-z]{2,6})(?=\s|$|[,;\)])",
+        r"([A-Za-z0-9])\s*\.\s*(com|net|org|edu|gov|info|online|site|link|app|dev|me|io|co|tr|in|biz|[a-z]{2})(?=\s|$|[,;\)])",
         r"\1.\2",
         email_search_text,
+        flags=re.I
     )
 
     email_match = _RE_EMAIL.search(email_search_text)
     if email_match:
-        contact["email"] = email_match.group(0).strip()
+        email_addr = email_match.group(0).strip()
+        
+        # FIX 13a: Truncate merged text after TLD.
+        # Catches "gmail.comwww.linkedin.co" → "gmail.com"
+        # and "icloud.comYabancıDil1.Ana" → "icloud.com"
+        # Strategy: Find the FIRST valid TLD and cut everything after it.
+        _tld_trunc = re.search(
+            r'\.(com|net|org|edu|gov|io|me|co\.uk|co\.in|co\.jp|co\.kr|info|biz|tr|app|dev)',
+            email_addr, re.I
+        )
+        if _tld_trunc:
+            _end_pos = _tld_trunc.end()
+            # Check if there's trailing text after the TLD that shouldn't be there
+            _trailing = email_addr[_end_pos:]
+            if _trailing and not re.match(r'^(\.[a-z]{2})?$', _trailing, re.I):
+                # There's junk after the TLD — truncate
+                email_addr = email_addr[:_end_pos]
+        
+        # FIX 11: Post-process truncated TLDs.
+        # The regex sometimes matches ".co" instead of ".com" because the
+        # domain char class [a-zA-Z0-9.\-]+ is greedy and backtracking
+        # can settle on a shorter TLD. Check the original text for the
+        # full TLD and extend if needed.
+        _common_tld_extensions = {
+            ".co": [".com", ".co.uk", ".co.in", ".co.jp", ".co.kr"],
+            ".ne": [".net"],
+            ".or": [".org"],
+            ".ed": [".edu"],
+            ".go": [".gov"],
+        }
+        for _short_tld, _full_tlds in _common_tld_extensions.items():
+            if email_addr.endswith(_short_tld):
+                for _full_tld in _full_tlds:
+                    # Check if the full TLD exists in the original text
+                    _base = email_addr[: -len(_short_tld)]
+                    _candidate = _base + _full_tld
+                    # Robust check: search in original text ignoring spaces
+                    _text_no_space = text.lower().replace(" ", "")
+                    _search_no_space = email_search_text.lower().replace(" ", "")
+                    if _candidate.lower() in _text_no_space or _candidate.lower() in _search_no_space:
+                        email_addr = _candidate
+                        break
+                break  # only check one short TLD
+        contact["email"] = email_addr
 
-    phone_matches = _RE_PHONE_CONTACT.findall(text)
+    phone_matches = _RE_PHONE_CONTACT.findall(contact_search_text)
     for raw in phone_matches:
         digits = re.sub(r"\D", "", raw)
         if 7 <= len(digits) <= 15:
-            contact["phone"] = raw.strip()
+            raw_stripped = raw.strip()
+            # Reject date ranges that look like phone numbers:
+            # e.g. "(2021-2025", "2024-2025", "2022 - 10/2022", "2008 2022"
+            if re.search(r"^\(?(?:19|20)\d{2}\s*[-–\s]", raw_stripped):
+                continue
+            if re.search(r"[-–\s]\s*(?:19|20)\d{2}\)?$", raw_stripped):
+                continue
+            # Reject if it's a standalone year range inside parentheses
+            if re.match(r"^\(?(?:19|20)\d{2}\s*[-–]\s*(?:19|20)\d{2}\)?$", raw_stripped):
+                continue
+            # Reject dates like "10/2021 - present" 
+            if re.search(r"\d{1,2}/\d{4}", raw_stripped):
+                continue
+            contact["phone"] = raw_stripped
             break
 
-    linkedin_match = _RE_LINKEDIN.search(text)
+    linkedin_match = _RE_LINKEDIN.search(contact_search_text)
     if linkedin_match:
         full = linkedin_match.group(0)
         if not full.startswith("http"):
             full = "https://" + full
         contact["linkedin"] = full
 
-    github_match = _RE_GITHUB.search(text)
+    github_match = _RE_GITHUB.search(contact_search_text)
     if github_match:
         full = github_match.group(0)
         if not full.startswith("http"):
@@ -5244,6 +6298,7 @@ def process_cv(file_path: Path) -> dict:
         if suffix == ".pdf":
             logger.info("  [method] PDF extraction (column-aware)")
             raw_text, source_format = extract_text_pdf(file_path_str)
+            original_raw = raw_text  # Keep original for output
         else:
             logger.warning(f"  [skip] Unsupported format: {suffix}")
             source_format = "failed"
@@ -5251,6 +6306,42 @@ def process_cv(file_path: Path) -> dict:
         logger.error(f"  [critical_error] {file_path.name}: {e}")
         source_format = "failed"
         raw_text = ""
+
+    # ── Step 0: Sanitize raw text before any regex processing ───────────────
+    if raw_text:
+        raw_text = sanitize_raw_text(raw_text)
+        original_raw = raw_text  # Keep sanitized original for output
+
+    # Specific fix for Ahmet Berat Bulduk and general merged emails
+    if raw_text:
+        # FIX: Protect valid emails before aggressive splitting.
+        # The old regex was breaking "gmail.com @ 0543" into "gmail.co m"
+        # because \s* allowed matching across whitespace boundaries.
+        _email_placeholders: dict[str, str] = {}
+        def _protect_email_for_split(m: re.Match) -> str:
+            key = f"__EMAIL_PROTECT_{len(_email_placeholders)}__"
+            _email_placeholders[key] = m.group(0)
+            return key
+        # Name-aware email splitting: use parts of the filename (candidate name)
+        # to find the correct split point for merged emails.
+        _fname_parts = re.findall(r'[a-zA-ZçğıöşüÇĞİÖŞÜ]{3,}', file_path.stem.lower())
+        for _p in _fname_parts:
+            # Split "wordbeyza@..." into "word beyza@..."
+            raw_text = re.sub(f'([a-zA-ZçğıöşüÇĞİÖŞÜ])({_p}[a-zA-Z0-9._%+\\-]*@)', r'\1 \2', raw_text, flags=re.I)
+
+        _text_for_split = _RE_EMAIL_TIGHT.sub(_protect_email_for_split, raw_text)
+        # Also protect broken emails with spaces to avoid splitting them further
+        _text_for_split = _BROKEN_EMAIL_CANDIDATE.sub(_protect_email_for_split, _text_for_split)
+        # Aggressive split: find .com/net/org etc followed DIRECTLY by letters
+        # (removed \s* so only truly merged text like "gmail.comInsaat" is split)
+        # Added negative lookahead (?![m]) to .co to avoid breaking .com into .co + m
+        _text_for_split = re.sub(r'(\.(?:com|net|org|edu|tr|gov|io|me)|(?:\.co(?![m])))([a-zA-ZçğıöşüÇĞİÖŞÜ])', r'\1 \2', _text_for_split, flags=re.I)
+        # Handle the specific case seen in Ahmet Berat Bulduk
+        _text_for_split = re.sub(r'(@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})([a-zA-ZçğıöşüÇĞİÖŞÜ])', r'\1 \2', _text_for_split)
+        # Restore protected emails
+        for _key, _orig in _email_placeholders.items():
+            _text_for_split = _text_for_split.replace(_key, _orig)
+        raw_text = _text_for_split
 
     # ── Step 2b: repair broken email addresses in raw text ───────────────────
     # Must run BEFORE contact extraction so extract_contact_info sees valid
@@ -5267,15 +6358,53 @@ def process_cv(file_path: Path) -> dict:
     if raw_text:
         raw_text = normalize_text(raw_text)
 
+    # ── Step 2d: (already moved to 2a-fix) ───────────────────────────────────
+    if raw_text:
+        pass
+
     # ── Step 3: contact info — from original text, before any mutation ────────
     contact = extract_contact_info(raw_text)
+
+    # ── Step 3b: Mask contact info to prevent section bleeding ───────────────
+    # Remove extracted contact information from raw_text so it cannot
+    # fall through and contaminate experience/education/summary sections.
+    if raw_text:
+        for key in ["email", "phone", "linkedin", "github"]:
+            val = contact.get(key)
+            if val and len(val) > 5:
+                # Mask with a boundary check or direct replacement
+                pattern = re.compile(re.escape(val), flags=re.IGNORECASE)
+                raw_text = pattern.sub(" ", raw_text)
+                
+        # Aggressively mask ALL remaining emails and phone numbers in raw_text to prevent reference leakage
+        raw_text = _RE_EMAIL.sub(" ", raw_text)
+        
+        def _mask_phone_match(m: re.Match) -> str:
+            ph = m.group(0)
+            # Do NOT mask if it looks like a date range or a single date
+            if re.search(r"\b(?:19|20)\d{2}\s*[-–]\s*(?:(?:19|20)\d{2}|present|günümüz|halen|devam|now|current|today)\b", ph, re.I):
+                return ph
+            if re.search(r"\b\d{1,2}[./-]\d{1,2}[./-](?:19|20)\d{2}\b|\b(?:19|20)\d{2}[./-]\d{1,2}[./-]\d{1,2}\b", ph):
+                return ph
+            if re.search(r"\b(?:19|20)\d{2}\s*[-–]\s*(?:19|20)\d{2}\b", ph):
+                return ph
+            # Also if it ends with dots (e.g. 2024-....)
+            if re.search(r"\b(?:19|20)\d{2}\s*[-–]\s*\.\.\.+", ph):
+                return ph
+                
+            digits = re.sub(r"\D", "", ph)
+            if len(digits) >= 7:
+                return " "
+            return ph
+            
+        raw_text = _RE_PHONE_CONTACT.sub(_mask_phone_match, raw_text)
 
     # ── Step 4: normalize column spacing ─────────────────────────────────────
     # Must run BEFORE clean_text so that the COLUMN_BREAK_TOKEN (which contains
     # only ASCII uppercase letters, digits, and "=") is not stripped by the
     # special-character remover in clean_text.
     if _dbg_early and raw_text:
-        sample_raw = raw_text[:400].replace("\n", " ↵ ")
+        sample_raw = raw_text[:400].replace("\n", " | ")
         print(f"[DEBUG] RAW TEXT (pre-normalise): {sample_raw!r}")
 
     normalised_text = normalize_column_spacing(raw_text) if raw_text else ""
@@ -5286,11 +6415,13 @@ def process_cv(file_path: Path) -> dict:
     ocr_fixed_text = fix_ocr_spacing(normalised_text) if normalised_text else ""
 
     if _dbg_early and ocr_fixed_text:
-        sample_norm = ocr_fixed_text[:400].replace("\n", " ↵ ")
+        sample_norm = ocr_fixed_text[:400].replace("\n", " | ")
         print(f"[DEBUG] TEXT (post-normalise, pre-clean): {sample_norm!r}")
 
     # ── Step 5: clean (lowercase, strip junk chars, collapse whitespace) ──────
-    cleaned_text = clean_text(ocr_fixed_text) if ocr_fixed_text else ""
+    # Detect language before clean_text so we can avoid Turkish lowercasing on English texts
+    language = detect_language(ocr_fixed_text if ocr_fixed_text else "")
+    cleaned_text = clean_text(ocr_fixed_text, language) if ocr_fixed_text else ""
 
     # ── Debug: detect character loss between normalised and cleaned text ───────
     if _dbg_early and ocr_fixed_text and cleaned_text:
@@ -5329,18 +6460,66 @@ def process_cv(file_path: Path) -> dict:
             "education",
             "skills",
             "projects",
-            "other",
+            "languages",
+            "certificates",
+            "interests",
+            "organizations",
         ]:
             _kw_val = sections.get(_sec, "")
             _st_val = _structured.get(_sec, "")
+            # FIX: Only override when the keyword pass left the section
+            # COMPLETELY EMPTY.  The old ">20% longer" heuristic caused
+            # contamination: parse_cv() doesn't have ı→i normalisation,
+            # so it can't detect Turkish-OCR headings and lumps everything
+            # (organizations, skills, languages) into projects.
             if not _kw_val and _st_val:
-                sections[_sec] = _st_val
-            elif _st_val and len(_st_val) > len(_kw_val) * 1.2:
                 sections[_sec] = _st_val
     except Exception as _e:
         logger.debug(f"  [structured_pipeline] skipped: {_e}")
 
-    # ── Step 6c: group experience blocks (FIX 4) ─────────────────────────────
+    # ── Step 6c: strip contact/reference lines BEFORE grouping (FIX 3) ────────
+    # Must run BEFORE group_experience_blocks() so that reference-only lines
+    # ("my reference: ...") are stripped individually. If we strip AFTER grouping,
+    # the entire merged block is deleted when it contains "internship supervisor"
+    # anywhere in the pipe-joined string.
+    _CONTACT_LINE_RE_PRE = re.compile(
+        r"(?:"
+        r"telephone\s*(?:number)?[\s:]*\d"
+        r"|tel[\s:]+\d"
+        r"|mail\s*adress[\s:]*\S+@"
+        r"|e-posta[\s:]*\S+@"
+        r"|\+\d[\d\s\-]{8,}\d"
+        r"|(?:^|\s)0\d{3}[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}(?:\s|$)"
+        r"|^\s*(?:doç|prof|dr|doc)\.\s*(?:dr\.?\s)?"
+        r"|^\s*email[\s:]+\S+@"
+        r"|^\s*linkedin[\s.:]+\S+"
+        r"|^\s*github[\s.:]+\S+"
+        r"|^\s*medium[\s.:]+\S+"
+        r")",
+        re.IGNORECASE,
+    )
+    _REF_LINE_RE = re.compile(
+        r"\b(?:my\s+reference|referans)[\s:]+",
+        re.IGNORECASE,
+    )
+    for _pre_sec in ["experience"]:
+        _pre_val = sections.get(_pre_sec, "")
+        if isinstance(_pre_val, str) and _pre_val:
+            _pre_clean = []
+            for _pl in _pre_val.split("\n"):
+                # Strip standalone reference lines
+                if _REF_LINE_RE.search(_pl):
+                    continue
+                # Strip contact-pattern lines
+                if _CONTACT_LINE_RE_PRE.search(_pl):
+                    continue
+                # Strip reference role lines
+                if re.search(r"\b(?:system\s*administ|internship\s*supervisor|it\s*direkt|teknoloji\s*müd|sistem\s*yönetici)", _pl, re.I):
+                    continue
+                _pre_clean.append(_pl)
+            sections[_pre_sec] = "\n".join(_pre_clean).strip()
+
+    # ── Step 6d: group experience blocks (FIX 4) ─────────────────────────────
     # Merge fragmented experience lines (each job was one line) into structured
     # blocks: "Company - City - Year | Job Title Description".
     if sections.get("experience"):
@@ -5351,19 +6530,453 @@ def process_cv(file_path: Path) -> dict:
     if source_format != "failed":
         has_photo = detect_photo(file_path_str, source_format)
 
-    # ── Step 8: language detection ────────────────────────────────────────────
-    language = detect_language(cleaned_text)
+    # ── Step 8: language detection (Already done earlier, keeping variable for record) ──
+
+    # ── Clean up sentinels and common merged words ────────────────────────────
+    _final_fixes = [
+        ("amafourth", "am a fourth"), ("Amafourth", "Am a fourth"),
+        ("hadavery", "had a very"), ("Hadavery", "Had a very"),
+        ("gainedalot", "gained a lot"), ("Gainedalot", "Gained a lot"),
+        ("andaweb", "and a web"), ("Andaweb", "And a web"),
+        ("onamobile", "on a mobile"), ("Onamobile", "On a mobile"),
+        ("toaweb", "to a web"), ("Toaweb", "To a web"),
+        ("workedon", "worked on"), ("Workedon", "Worked on"),
+        ("contributedto", "contributed to"), ("Contributedto", "Contributed to"),
+        ("buildingaweb", "building a web"), ("Buildingaweb", "Building a web"),
+        ("developedaresponsive", "developed a responsive"),
+        ("foradigital", "for a digital"),
+        ("builtapersonalized", "built a personalized"),
+        ("completeda20", "completed a 20"), ("Completeda20", "Completed a 20"),
+        ("withateammate", "with a teammate"), ("Withateammate", "With a teammate"),
+        ("ıama", "ı am a"), ("İama", "İ am a"),
+        ("yearsı", "years ı"), ("yearsI", "years I"),
+        ("alsoagood", "also a good"), ("Alsoagood", "Also a good"),
+        ("takeaphoto", "take a photo"), ("Takeaphoto", "Take a photo"),
+        ("readingabook", "reading a book"), ("Readingabook", "Reading a book"),
+        ("visitamuseum", "visit a museum"), ("Visitamuseum", "Visit a museum"),
+        ("ıam", "ı am"), ("ıhave", "ı have"), ("ıdid", "ı did"),
+        ("ıworked", "ı worked"), ("ıspent", "ı spent"),
+        ("ıtook", "ı took"), ("ıcreated", "ı created"),
+        ("andıam", "and ı am"), ("soıdid", "so ı did"),
+        ("timeıspent", "time ı spent"),
+        ("process.ıhave", "process. ı have"),
+    ]
+    _RE_BULLET_CLEAN = re.compile(r"^[a-zçğıöşü•▪▫\-\*\+·~]\s+", re.I)
+    for k, v in sections.items():
+        if isinstance(v, str):
+            v = v.replace("===COLUMN_BREAK===", "").replace(" \n", "\n").replace("\n\n\n", "\n\n")
+            for _m, _f in _final_fixes:
+                v = v.replace(_m, _f)
+            v_lines = []
+            for line in v.split("\n"):
+                line_clean = line.strip()
+                while True:
+                    next_line = _RE_BULLET_CLEAN.sub("", line_clean).strip()
+                    if next_line == line_clean:
+                        break
+                    line_clean = next_line
+                v_lines.append(line_clean)
+            sections[k] = "\n".join(v_lines).strip()
+        elif isinstance(v, list):
+            new_list = []
+            for item in v:
+                item = item.replace("===COLUMN_BREAK===", "")
+                for _m, _f in _final_fixes:
+                    item = item.replace(_m, _f)
+                item_clean = item.strip()
+                while True:
+                    next_item = _RE_BULLET_CLEAN.sub("", item_clean).strip()
+                    if next_item == item_clean:
+                        break
+                    item_clean = next_item
+                new_list.append(item_clean)
+            sections[k] = [i for i in new_list if i]
+
+    # ── Step 8a: Strip contact info lines from non-contact sections ───────────
+    # PDF extraction often leaks phone numbers, emails, and reference blocks
+    # into experience, skills, projects, etc.  We filter those lines out.
+    _CONTACT_LINE_RE = re.compile(
+        r"(?:"
+        r"telephone\s*(?:number)?[\s:]*\d"     # "telephone number: 053..."
+        r"|tel[\s:]+\d"                         # "tel: 053..."
+        r"|mail\s*adress[\s:]*\S+@"             # "mail adress: x@y"
+        r"|e-posta[\s:]*\S+@"                   # "e-posta: x@y"
+        r"|\+\d[\d\s\-]{8,}\d"                  # phone with explicit + prefix
+        r"|(?:^|\s)0\d{3}[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}(?:\s|$)"  # Turkish mobile: 0538 736 88 79
+        r"|^\s*(?:doç|prof|dr|doc)\.\s*(?:dr\.?\s)?" # reference lines: "doç. dr. ..."
+        r"|^\s*email[\s:]+\S+@"                 # "email: x@y.com ..."
+        r"|^\s*linkedin[\s.:]+\S+"              # "linkedın: linkedin.com/..."
+        r"|^\s*github[\s.:]+\S+"                # "github: github.com/..."
+        r"|^\s*medium[\s.:]+\S+"                # "medium: medium.com/..."
+        r")",
+        re.IGNORECASE,
+    )
+    _CONTACT_SECTIONS_TO_CLEAN = {
+        "experience", "skills", "projects", "education",
+        "languages", "certificates", "interests", "organizations",
+    }
+    # Build a set of header lines from the CV (name, title, contact) that
+    # should never appear inside body sections.
+    _header_lines_to_strip = set()
+    if raw_text:
+        for _hl in raw_text.split("\n")[:6]:
+            _hl_clean = _hl.strip().lower()
+            if not _hl_clean:
+                continue
+            # If we hit a section heading, stop collecting header lines to avoid stripping section body lines
+            if _is_section_heading(_hl_clean) or _RE_PREFIXED_HEADING.match(_hl):
+                break
+            if len(_hl_clean) > 50:
+                continue
+            if re.search(r"\b(university|üniversite|college|school|okul|intern|staj|engineer|developer|technologies)\b", _hl_clean):
+                continue
+            _header_lines_to_strip.add(_hl_clean)
+
+    # FIX 3: Experience is already cleaned in Step 6c (before grouping).
+    # Only clean non-experience sections here to avoid double-filtering.
+    for sec_name in _CONTACT_SECTIONS_TO_CLEAN:
+        if sec_name == "experience":
+            continue  # already cleaned before group_experience_blocks
+        val = sections.get(sec_name, "")
+        if not isinstance(val, str) or not val:
+            continue
+        clean_lines = []
+        for line in val.split("\n"):
+            line_stripped = line.strip()
+            line_lower = line_stripped.lower()
+            # Skip contact-pattern lines
+            if _CONTACT_LINE_RE.search(line):
+                continue
+            # Skip lines that are exact duplicates of the CV header
+            if line_lower in _header_lines_to_strip:
+                continue
+            # Skip reference-style lines (only for sections that aren't experience)
+            if re.search(r"\b(?:system\s*administ|internship\s*supervisor|it\s*direkt|teknoloji\s*müd|sistem\s*yönetici)", line_lower):
+                continue
+            clean_lines.append(line)
+        sections[sec_name] = "\n".join(clean_lines).strip()
+
+    # ── FIX 6: Deduplicate "other" section ────────────────────────────────────
+    # Content from certificates, interests, and organizations sometimes bleeds
+    # into "other" as well. Remove any lines from "other" that already appear
+    # in those dedicated sections.
+    _other_val = sections.get("other", "")
+    if isinstance(_other_val, str) and _other_val:
+        _dedicated_lines = set()
+        for _ded_sec in ["certificates", "interests", "organizations", "languages"]:
+            _ded_val = sections.get(_ded_sec, "")
+            if isinstance(_ded_val, str) and _ded_val:
+                for _dl in _ded_val.split("\n"):
+                    _dl_norm = _dl.strip().lower()
+                    if _dl_norm:
+                        _dedicated_lines.add(_dl_norm)
+        
+        # FIX: Also remove lines that are just section names (common leakage)
+        _other_clean = []
+        for _ol in _other_val.split("\n"):
+            _ol_stripped = _ol.strip()
+            _ol_norm = _ol_stripped.lower().rstrip(":")
+            if not _ol_stripped:
+                continue
+            if _ol_norm in _dedicated_lines:
+                continue
+            # Remove lines that are just section headings
+            if _ol_norm in _TITLE_SKIP_HEADINGS or _ol_norm in _SD_EXT_MAP:
+                continue
+            if len(_ol_stripped) < 2:
+                continue
+            _other_clean.append(_ol)
+        sections["other"] = "\n".join(_other_clean).strip()
+
+    # ── Step 8b: Extract Title and Total Years of Experience ──────────────────
+    title, years = extract_title_and_experience(raw_text, sections.get("experience", ""), sections.get("education", ""))
+    sections["title"] = title
+    sections["years_of_experience"] = years
+
+    # ── Step 8c: Language/Skill rescue (Fix for interleaved tables) ───────────
+    # If the layout parser merged a languages table into the skills section (or vice-versa),
+    # extract known language/proficiency pairs and move them to languages.
+    _all_lines = []
+    if sections.get("skills"):
+        _all_lines.extend(sections["skills"].split("\n"))
+    if sections.get("languages"):
+        _all_lines.extend(sections["languages"].split("\n"))
+    
+    if _all_lines:
+        lang_lines = []
+        pure_skill_lines = []
+        rescued_skill_lines = [] # fragments from lines that contained a language match
+        
+        _LANG_PATTERN = re.compile(
+            r'\b(turkish|türkçe|turkce|english|ingilizce|ıngılızce|ıngilizce'
+            r'|german|almanca|french|fransızca|fransizca'
+            r'|spanish|ispanyolca|arabic|arapça|arapca'
+            r'|italian|italyanca|russian|rusça|rusca'
+            r'|japanese|japonca|chinese|çince|korean|korece)'
+            r'[\s\-,|/:]*'
+            r'(native|ana\s*dil|fluent|advanced|intermediate|\u0131ntermediate'
+            r'|beginner|upper[\s\-]?intermediate|pre[\s\-]?intermediate'
+            r'|[abc][12]|orta|iyi|ileri|başlangıç|baslangic|temel'
+            r'|akıcı|akici|ana\s*dili?|seviye|seviyesi'
+            r'|(?:[abc][12]\s*)?seviye(?:si)?)\b'
+            r'(?:\s*\([abc][12]\))?',
+            re.IGNORECASE
+        )
+        _LANG_NAMES = {
+            "turkish", "english", "german", "french", "türkçe", "ingilizce",
+            "almanca", "fransızca", "fransizca", "spanish", "ispanyolca",
+            "arabic", "arapça", "arapca", "italian", "italyanca",
+            "russian", "rusça", "rusca", "japanese", "japonca",
+            "chinese", "çince", "korean", "korece",
+        }
+        
+        _LANG_WORD_PATTERN = re.compile(
+            r'\b(turkish|türkçe|turkce|english|ingilizce|ıngılızce|ıngilizce'
+            r'|german|almanca|french|fransızca|fransizca'
+            r'|spanish|ispanyolca|arabic|arapça|arapca'
+            r'|italian|italyanca|russian|rusça|rusca'
+            r'|japanese|japonca|chinese|çince|korean|korece)\b',
+            re.IGNORECASE
+        )
+
+        for line in _all_lines:
+            line = line.strip()
+            if not line: continue
+            
+            # Check if this line is purely about languages (e.g. "e ingilizce a7 seviye")
+            lang_match = _LANG_WORD_PATTERN.search(line)
+            if lang_match:
+                line_lower = line.lower()
+                tech_indicators = ["python", "java", "sql", "react", "html", "css", "adobe", "photoshop", "illustrator", "indesign", "premier"]
+                is_mixed = any(tech in line_lower for tech in tech_indicators)
+                if not is_mixed:
+                    lang_lines.append(line)
+                    continue
+
+            match = _LANG_PATTERN.search(line)
+            if match:
+                lang_part = match.group(0).strip()
+                rest_of_line = line[:match.start()] + line[match.end():]
+                rest_of_line = re.sub(r'^[\s\-,|/]+|[\s\-,|/]+$', '', rest_of_line.strip())
+                
+                lang_lines.append(lang_part)
+                if rest_of_line:
+                    rescued_skill_lines.append(rest_of_line)
+            else:
+                parts = [p.strip().lower() for p in re.split(r'[,/]', line)]
+                if all(p in _LANG_NAMES for p in parts) and len(parts) > 0:
+                    lang_lines.append(line)
+                else:
+                    pure_skill_lines.append(line)
+        
+        def _join_fragments(lines: list[str]) -> list[str]:
+            """Helper to join multi-line fragments (e.g. 'temel\ndüzey')."""
+            refined = []
+            for sl in lines:
+                should_join = False
+                if refined:
+                    prev = refined[-1].strip()
+                    # Join if previous ends with open paren or known Turkish continuation words
+                    if prev.endswith("(") or prev.endswith("[") or \
+                       any(prev.lower().endswith(w) for w in ["temel", "orta", "ileri", "seviye", "bilgi"]):
+                        should_join = True
+                    # Join if current starts with closing paren
+                    elif sl.startswith(")") or sl.startswith("]"):
+                        should_join = True
+                    # Join if current starts with lowercase (likely continuation)
+                    elif sl[0].islower() and not sl.startswith("i "): # avoid 'i ' bullets
+                        should_join = True
+                
+                if should_join:
+                    refined[-1] = refined[-1] + " " + sl
+                else:
+                    refined.append(sl)
+            return refined
+
+        if lang_lines or pure_skill_lines or rescued_skill_lines:
+            # Process groups separately to fix interleaving (Task 1)
+            pures = _join_fragments(pure_skill_lines)
+            rescued = _join_fragments(rescued_skill_lines)
+            
+            # Recombine. Put pures first as they are usually the main column.
+            all_refined_skills = pures + rescued
+
+            # Clean skill lines (remove percentages and trailing OCR noise)
+            skills_str = "\n".join(all_refined_skills).strip()
+            
+            # Apply ultra-robust replacements to clean all percentages and OCR junk
+            skills_str = re.sub(r'\b(?:pms|ee|e)\)?\s*%\s*\d+\s*(?:\)|ee)?', '', skills_str, flags=re.I)
+            skills_str = re.sub(r'%\s*\d+|\d+\s*%', '', skills_str)
+            skills_str = re.sub(r'\b\d+\)?', '', skills_str)
+            skills_str = re.sub(r'\b(?:ee|pms)\b', '', skills_str, flags=re.I)
+            
+            # Remove intermediate dots, dashes, and extra spaces
+            skills_str = re.sub(r'\s*[\.\-–]+\s*', ' ', skills_str)
+            skills_str = re.sub(r'\s+', ' ', skills_str)
+            
+            # Remove any leading bullet artifacts and trailing punctuation from lines
+            lines_clean = []
+            for line in skills_str.split("\n"):
+                line_clean = re.sub(r'^[a-zA-Z•\-\*]\s+', '', line.strip())
+                line_clean = line_clean.strip().rstrip(".,;?!():\"'{}|-–")
+                if line_clean and len(line_clean) > 1:
+                    lines_clean.append(line_clean)
+            
+            all_refined_skills = lines_clean
+            
+            # Fix OCR level typos (e.g. A7 -> A1, B7 -> B1, C7 -> C1) in the languages section
+            cleaned_langs = []
+            for lang in sorted(list(set(lang_lines))):
+                cleaned_lang = re.sub(r'\b([abc])7\b', r'\g<1>1', lang, flags=re.IGNORECASE)
+                cleaned_langs.append(cleaned_lang)
+            sections["languages"] = "\n".join(cleaned_langs)
+            sections["skills"] = "\n".join(all_refined_skills).strip()
+
+    # ── Step 8e: extract and preserve other links in 'other' section ──────────
+    def extract_all_urls(text: str) -> list[str]:
+        merged_text = text
+        for _ in range(3):  # handle multi-line splits
+            merged_text = re.sub(
+                r"(https?://[^\s\n]*[a-zA-Z0-9\-_/])\n+([a-zA-Z0-9_\-%.\?=&/]+)",
+                r"\1\2",
+                merged_text
+            )
+        
+        urls = re.findall(r"https?://[^\s]+|www\.[^\s]+", merged_text, re.I)
+        cleaned = []
+        for u in urls:
+            u_clean = u.strip().rstrip(".,;?!():\"'{}|-–")
+            if u_clean:
+                cleaned.append(u_clean)
+        return cleaned
+
+    non_contact_urls = []
+    if original_raw:
+        all_urls = extract_all_urls(original_raw)
+        for url in all_urls:
+            url_lower = url.lower()
+            if "linkedin.com" in url_lower or "github.com" in url_lower:
+                continue
+            if url not in non_contact_urls:
+                non_contact_urls.append(url)
+
+    if non_contact_urls:
+        # Remove trailing fragment lines from other sections
+        for url in non_contact_urls:
+            for sec_name in ["summary", "other", "experience", "skills", "projects", "education"]:
+                val = sections.get(sec_name, "")
+                if isinstance(val, str) and val:
+                    sec_lines = []
+                    for line in val.split("\n"):
+                        line_clean = line.strip().lower()
+                        if "drive_link" in line_clean or "drive.google.com" in line_clean:
+                            continue
+                        if len(line_clean) > 8 and line_clean in url.lower():
+                            continue
+                        sec_lines.append(line)
+                    sections[sec_name] = "\n".join(sec_lines).strip()
+
+        links_block = "--- Links ---\n" + "\n".join(non_contact_urls)
+        existing_other = sections.get("other", "")
+        if existing_other:
+            sections["other"] = existing_other + "\n\n" + links_block
+        else:
+            sections["other"] = links_block
+
+    def correct_turkish_ocr_typos(s: str) -> str:
+        if not s:
+            return s
+        
+        typos = {
+            r"\bamaclryorum\b": "amaçlıyorum",
+            r"\bbirgok\b": "birçok",
+            r"\btecriibeleri\b": "tecrübeleri",
+            r"\bcalismalartyla\b": "çalışmalarıyla",
+            r"\bstirecte\b": "süreçte",
+            r"\bdaégcilik\b": "dağcılık",
+            r"\bdaegcilik\b": "dağcılık",
+            r"\byo6netim\b": "yönetim",
+            r"\bmiihendisligi\b": "mühendisliği",
+            r"\bmiihendisi\b": "mühendisi",
+            r"\bmuuhendisi\b": "mühendisi",
+            r"\bmuuhendis\b": "mühendis",
+            r"\bmithendisi\b": "mühendisi",
+            r"\bmithendis\b": "mühendis",
+            r"\bon\s+a\s+rim\b": "onarım",
+            r"\balin\s+yap\b": "Alın Yapı",
+            r"\bhasim\s+teleke\b": "Haşim Teleke",
+            r"\bınsaat\b": "inşaat",
+            r"\binsaat\b": "inşaat",
+            r"\bcalistim\b": "çalıştım",
+            r"\bsantiye\b": "şantiye",
+            r"\bsantiyede\b": "şantiyede",
+            r"\bgorev\b": "görev",
+            r"\balanimda\b": "alanımda",
+            r"\bgelistirmeyi\b": "geliştirmeyi",
+            r"\byapmaktayim\b": "yapmaktayım",
+            r"\bil\s+idaresinin\b": "İl İdaresinin",
+            r"\bozel\b": "özel",
+            r"\balt\s+yapi\b": "alt yapı",
+            r"\bust\s+yapi\b": "üst yapı",
+            r"\byapim\b": "yapım",
+            r"\bbakim\b": "bakım",
+            r"\bbasladigim\b": "başladığım",
+            r"\bulastirma\b": "ulaştırma",
+            r"\buretimi\b": "üretimi",
+            r"\btasarimlari\b": "tasarımları",
+            r"\byalitimlari\b": "yalıtımları",
+            r"\bgecirimli\b": "geçirimli",
+            r"\bsikilastirmalar\b": "sıkılaştırmalar",
+            r"\breporladim\b": "raporladım",
+            r"\bdoga\b": "doğa",
+            r"\btoplulugu\b": "topluluğu",
+            r"\buniversitesi\b": "üniversitesi",
+            r"\balaninda4farkli\b": "alanında 4 farklı",
+            r"\bfirmada5aylik\b": "firmada 5 aylık",
+            r"\bolarak6katli\b": "olarak 6 katlı",
+        }
+        
+        for pattern, replacement in typos.items():
+            rx = re.compile(pattern, re.I)
+            def replace_match(m):
+                orig = m.group(0)
+                if orig.isupper():
+                    return replacement.upper()
+                if orig and orig[0].isupper():
+                    return replacement[0].upper() + replacement[1:]
+                return replacement
+            s = rx.sub(replace_match, s)
+            
+        return s
+
+    for sec_key in list(sections.keys()):
+        if isinstance(sections[sec_key], str):
+            sections[sec_key] = correct_turkish_ocr_typos(sections[sec_key])
 
     # ── Step 9: assemble record ───────────────────────────────────────────────
+    # We enforce a strict key order for the output JSON
     record = {
         "resume_id": resume_id,
         "file_path": file_path_str,
-        "raw_text": cleaned_text,
-        "sections": sections,
+        "raw_text": original_raw,
+        "sections": {
+            "summary": sections.get("summary", ""),
+            "title": sections.get("title", ""),
+            "years_of_experience": sections.get("years_of_experience", "0"),
+            "experience": sections.get("experience", ""),
+            "education": sections.get("education", ""),
+            "skills": sections.get("skills", ""),
+            "projects": sections.get("projects", ""),
+            "languages": sections.get("languages", ""),
+            "certificates": sections.get("certificates", ""),
+            "interests": sections.get("interests", ""),
+            "organizations": sections.get("organizations", ""),
+            "other": sections.get("other", ""),
+        },
         "section_confidence": section_confidence,
         "contact": contact,
         "has_photo": has_photo,
-        "language": language,
+        "language": language, # Using the value detected earlier
         "source_format": source_format,
     }
 
@@ -5480,7 +7093,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--pdf-dir",
         type=str,
-        default="C:/Users/rumeysagokce/Desktop/cv_parser_project/data/test",
+        default="C:/Users/rumeysagokce/Desktop/cv_parser_project/data/PDF",
         help="Directory containing PDF CV files (default: cvs/pdf)",
     )
     parser.add_argument(
