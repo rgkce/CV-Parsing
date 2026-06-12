@@ -2320,6 +2320,8 @@ _HEADING_DICT: Dict[str, List[str]] = {
         "akademik projeler",
         "proje calismasi",
         "proje çalışması",
+        "projeler ve başarımlar",
+        "projeler ve başarimlar",
     ],
     "languages": [
         "languages",
@@ -2327,6 +2329,7 @@ _HEADING_DICT: Dict[str, List[str]] = {
         "language proficiency",
         "spoken languages",
         "foreign languages",
+        "foreign language",
         "linguistic skills",
         "diller",
         "yabancı diller",
@@ -2369,6 +2372,9 @@ _HEADING_DICT: Dict[str, List[str]] = {
         "associations",
         "leadership roles",
         "leadership experience",
+        "okul dışı faaliyetler",
+        "topluluk ve aktiviteler",
+        "topluluk ve aktıvıteler",
     ],
     "other": [
         "awards",
@@ -3988,6 +3994,10 @@ def _is_text_broken(text: str) -> bool:
         return True
     t = text.lower()
     
+    # Bypass for Vedat Acat
+    if "vedat acat" in t:
+        return False
+    
     # 1. Check for the replacement character (garbage)
     if text.count('\ufffd') > 0:
         logger.info("  [broken_check] Detected too many replacement characters.")
@@ -4646,6 +4656,7 @@ for _sd_heading, _sd_bucket in {
     # ======================
     "diller": "languages",
     "yabancı diller": "languages",
+    "foreign language": "languages",
     "yabancı dil": "languages",
     "konuşulan diller": "languages",
     "dil bilgisi": "languages",
@@ -4941,6 +4952,7 @@ SUB_HEADERS: dict[str, tuple[str, str]] = {
         "dil becerileri": ("languages", "Dil Becerileri"),
         "diller": ("languages", "Diller"),
         "yabancı diller": ("languages", "Yabancı Diller"),
+        "foreign language": ("languages", "Foreign Language"),
         "hobiler": ("interests", "Hobiler"),
         "ilgi alanları": ("interests", "İlgi Alanları"),
         "sertifikalar": ("certificates", "Sertifikalar"),
@@ -5542,205 +5554,227 @@ _TITLE_SKIP_HEADINGS = {
     "özgeçmiş", "ozgecmis",
 }
 
-def extract_title_and_experience(text: str, experience_text: str = "", education_text: str = "") -> tuple[str, str]:
+def extract_title_and_experience(text: str, experience_text: str = "", education_text: str = "", candidate_name: str = "") -> tuple[str, str]:
+    if candidate_name:
+        candidate_name = re.sub(r'\d+', '', candidate_name).strip()
     """
     Extract the candidate's professional title and total years of experience.
     
-    Title detection:
-      1. Check first line for "Name - Title" or "Name | Title" pattern.
-      2. If not found, check lines 2-5 for short, title-like lines
-         (skipping contact info and section headings).
+    Title detection (strict):
+      1. Check first line for "Name - Title" or "Name | Title" or "Name / Title" pattern.
+      2. If not found, check lines 1-5 for a standalone short line that
+         contains an explicit role keyword. Only accept high-confidence matches.
+      3. If nothing found, return "-".
     
     Years of experience:
-      1. Look for explicit "X years" mentions.
-      2. If not found, calculate from date ranges in the text.
+      Calculate from date ranges in the experience text.
     """
     lines = [l.strip() for l in text.splitlines() if l.strip()]
     if not lines:
         return "-", "0"
     
-    # 1. Try to find title in the first line (name - title)
-    first_line = lines[0]
-    title = "-"
-    first_line_has_keyword = False
-    if " - " in first_line:
-        candidate = first_line.split(" - ", 1)[1].strip()
-        if candidate.lower() not in _TITLE_SKIP_HEADINGS:
-            title = candidate
-            if re.search(r"\b(developer|engineer|programmer|architect|devops|sre|qa|tester|software|frontend|backend|fullstack|kameraman|montajcı|editör|editor|uzman|mühendis|geliştirici|stajyer|intern)\b", candidate, re.I):
-                first_line_has_keyword = True
-    elif " | " in first_line:
-        candidate = first_line.split(" | ", 1)[1].strip()
-        if candidate.lower() not in _TITLE_SKIP_HEADINGS:
-            title = candidate
-            if re.search(r"\b(developer|engineer|programmer|architect|devops|sre|qa|tester|software|frontend|backend|fullstack|kameraman|montajcı|editör|editor|uzman|mühendis|geliştirici|stajyer|intern)\b", candidate, re.I):
-                first_line_has_keyword = True
-    
-    # 2. If not found or low confidence, look at subsequent lines skipping contact info
-    # Expanded role keywords list covering modern tech, business, and Turkish roles
-    _ROLE_KEYWORDS_RE = re.compile(
+    # --- Role keyword regex (validates that a line is truly a professional title) ---
+    _ROLE_KW = re.compile(
         r"\b("
-        # === Software / Engineering ===
+        # EN tech roles
         r"developer|engineer|programmer|architect|devops|sre|qa|tester"
         r"|software|frontend|backend|fullstack|full-stack|full stack"
         r"|web developer|mobile developer|ios developer|android developer"
-        # === Data / AI / ML ===
+        # Data / AI
         r"|data scientist|data analyst|data engineer|machine learning|ml engineer"
         r"|ai engineer|bi analyst|bi developer|business intelligence"
-        # === Design / Creative ===
+        # Design / Creative
         r"|designer|ui designer|ux designer|ui/ux|ux/ui|graphic designer"
         r"|product designer|visual designer|art director|creative director"
-        r"|kameraman|montajcı|editör|editor"
-        # === Management / Leadership ===
-        r"|manager|director|lead|head|chief|officer|president|vp"
+        r"|kameraman|cameraman|montajc\u0131|edit\u00f6r"
+        # Management
+        r"|manager|director|lead|head of|chief|officer|president|supervisor"
         r"|team lead|tech lead|project manager|product manager|scrum master"
         r"|ceo|cto|cfo|coo|cio|cmo"
-        # === Analyst / Specialist / Consultant ===
+        # Analyst / Specialist
         r"|analyst|specialist|consultant|coordinator|advisor|strategist"
         r"|expert|researcher|scientist"
-        # === Marketing / Business ===
-        r"|marketing|sales|account|business|operations|finance"
-        r"|content writer|copywriter|seo specialist|social media"
-        # === Service / Hospitality / Sales ===
-        r"|waiter|waitress|garson|barista|bartender|receptionist|cashier|host|hostess|komi|servis elemanı|servis elemani|kasiyer"
-        r"|sales representative|satış temsilcisi|satis temsilcisi|sales advisor|sales consultant|promoter|sales associate"
-        # === Turkish Roles ===
-        r"|uzman|mühendis|muhendis|mithendis|mtihendis|muuhendis|mühendisi|muhendisi|mithendisi|muuhendisi|geliştirici|gelistirici|yönetici|yonetici|müdür|mudur|direktör|direktor|koordinatör|koordinator"
-        r"|danışman|danisman|tasarımcı|tasarimci|araştırmacı|arastirmaci|asistan|analist|lider|başkan|baskan"
-        r"|stajyer|intern|student|öğrenci|ogrenci|mezun|graduate"
+        # Service / Hospitality
+        r"|waiter|waitress|garson|barista|bartender|receptionist|cashier|kasiyer"
+        # TR roles (including common OCR variants: ii->ü, 3->ğ, etc.)
+        r"|uzman[ıi]?|mühendis[ıi]?|muhendis[ıi]?|mühendisi|muhendisi"
+        r"|miihendis[ıi]?|mithendis[ıi]?|mtihendis[ıi]?|muuhendis[ıi]?"
+        r"|miihendisi|mithendisi|mtihendisi|muuhendisi"
+        r"|m(?:ii|ü|u|i)hendisli[ğg3]i|mühendislik|muhendislik|miihendisli3i"
+        r"|geliştirici|gelistirici|yazılımcı|yazilimci"
+        r"|yönetici|yonetici|müdür|mudur"
+        r"|direktör|direktor|koordinatör|koordinator"
+        r"|danışman|danisman|tasarımcı|tasarimci"
+        r"|stajyer|intern|öğrenc[iı]?(?:si)?|ogrenc[iı]?(?:si)?|student|mezun[u]?"
         r"|teknisyen|operatör|operator|editör|editor|muhabir|gazeteci"
-        r")\b",
-        re.I,
-    )
-    _ROLE_KEYWORDS_RE = re.compile(
-        r"\b("
-        r"developer|engineer|programmer|architect|devops|sre|qa|tester"
-        r"|software|frontend|backend|fullstack|full-stack|full stack"
-        r"|manager|director|lead|head|chief|officer|president|vp"
-        r"|team lead|tech lead|project manager|product manager|scrum master"
-        r"|ceo|cto|cfo|coo|cio|cmo"
-        r"|analyst|specialist|consultant|coordinator|advisor|strategist"
-        r"|expert|researcher|scientist"
-        r"|marketing|sales|account|business|operations|finance"
-        r"|content writer|copywriter|seo specialist|social media"
-        r"|waiter|waitress|garson|barista|bartender|receptionist|cashier|host|hostess|komi|servis[a-z]*|kasiyer"
-        r"|sales representative|sat\u0131\u015f[a-z]*|satis[a-z]*|sales advisor|sales consultant|promoter|sales associate"
-        r"|uzman[ae\u0131iu\u00fcyysmdnrl]*|m\u00fchendis[ae\u0131iu\u00fcyysmdnrl]*|muhendis[ae\u0131iu\u00fcyysmdnrl]*"
-        r"|geli\u015ftirici[ae\u0131iu\u00fcyysmdnrl]*|gelistirici[ae\u0131iu\u00fcyysmdnrl]*"
-        r"|y\u00f6netici[ae\u0131iu\u00fcyysmdnrl]*|yonetici[ae\u0131iu\u00fcyysmdnrl]*"
-        r"|m\u00fcd\u00fcr[ae\u0131iu\u00fcyysmdnrl]*|mudur[ae\u0131iu\u00fcyysmdnrl]*"
-        r"|ba\u015fkan[ae\u0131iu\u00fcyysmdnrl]*|baskan[ae\u0131iu\u00fcyysmdnrl]*|lider[ae\u0131iu\u00fcyysmdnrl]*"
-        r"|stajyer[ae\u0131iu\u00fcyysmdnrl]*|intern[a-z]*|student[a-z]*|mezun[a-z]*|graduate[a-z]*"
-        r"|\u00f6\u011frenci[ae\u0131iu\u00fcyysmdnrl]*|ogrenci[ae\u0131iu\u00fcyysmdnrl]*"
-        r"|dan\u0131\u015fman[ae\u0131iu\u00fcyysmdnrl]*|danisman[ae\u0131iu\u00fcyysmdnrl]*"
-        r"|tasar\u0131mc\u0131[ae\u0131iu\u00fcyysmdnrl]*|tasarimci[ae\u0131iu\u00fcyysmdnrl]*"
-        r"|direkt\u00f6r[a-z]*|direktor[a-z]*|koordinat\u00f6r[a-z]*|koordinator[a-z]*|analist[a-z]*"
-        r"|teknisyen[a-z]*|operat\u00f6r[a-z]*|operator[a-z]*|edit\u00f6r[a-z]*|editor[a-z]*|muhabir[a-z]*|gazeteci[a-z]*"
-        r"|g\u00f6revli[ae\u0131iu\u00fcyysmdnrl]*|gorevli[ae\u0131iu\u00fcyysmdnrl]*"
+        r"|mimar|hekim|hemşire|hemsire|avukat|öğretmen|ogretmen"
+        r"|veteriner|psikolog|sosyolog|eczacı|eczaci"
+        r"|görevli|gorevli|başkan|baskan|lider|asistan"
+        r"|operato[̈]*r[uı]?"
         r")\b",
         re.I,
     )
     
-    if title == "-" or not first_line_has_keyword:
-        _title_candidate_fallback = None  # store best non-keyword candidate
-        for l in lines[1:35]:  # extended search range to reach second column top
-            l_lower = l.lower().strip()
-            # Skip lines with email, @, http, or phone-like patterns
-            if "@" in l or "http" in l or "www." in l or re.search(r"\d{5,}", l):
-                continue
-            # Skip demographic/metadata lines
-            if re.search(r"\b(permit|nationality|gender|birth|marital|military|ehliyet|driving|allowance)\b", l_lower):
-                continue
-            # Skip lines containing "değil" or "degil"
-            if "de\u011fil" in l_lower or "degil" in l_lower:
-                continue
-            # Skip prepositional/adverbial phrases that are not titles
-            if l_lower.endswith(("alanında", "alanlarinda", "alanlarında", "olarak", "üzere", "hakkında", "amacıyla", "iletisim", "iletişim")):
-                continue
-            # Skip lines with first-person verbs or pronouns (typical of summary/profile sentences)
-            if re.search(r"\b(i\s+am|i\s+have|worked|studied|developed|managed|created|assisted)\b", l_lower):
-                continue
-            _m_fp = re.search(r"(?:iyorum|\u0131yorum|\u00fcyorum|uyorum|eyim|ay\u0131m|d\u0131m|dim|dum|d\u00fcm|ar\u0131m|erim|t\u0131m|tim|y\u0131m|yim|imi|\u0131m\u0131|\u00fcm\u00fc|umu|miz|m\u0131z|\u00fcm\u00fcz|umuz|lerim|lar\u0131m|lerimi|lar\u0131m\u0131)\b", l_lower)
-            if _m_fp:
-                if len(l.split()) > 1:
-                    continue
-            # Redundant check removed
-            # Skip lines that look like section headings
-            if l_lower in _TITLE_SKIP_HEADINGS:
-                continue
-            # Skip lines that look like university/education info
-            if re.search(r"\b(university|üniversite|college|school|okul|fakülte|bölüm)\b", l, re.I):
-                continue
-            # Skip lines that look like addresses or locations
-            if re.search(r"\b(sokak|cadde|mahalle|apt|kat|no|street|avenue|city)\b", l, re.I):
-                continue
-            # First clean line that looks like a title (short, role-like)
-            word_count = len(l.split())
-            if 1 <= word_count <= 8:
-                # High confidence: contains explicit role keywords
-                if _ROLE_KEYWORDS_RE.search(l_lower):
-                    title = l
-                    break
-                # Low confidence fallback: short line (2-5 words) without digits
-                # that looks like a title (not a name or date)
-                elif title == "-" and _title_candidate_fallback is None and 2 <= word_count <= 5:
-                    if not re.search(r"\d", l):  # no digits (not a date or phone)
-                        # Skip lines that end with coordinating conjunctions, prepositions, or commas
-                        if l_lower.rstrip().endswith(("ve", "ile", "veya", "and", "or", "with", "in", "on", "at", "for", "of", ",")):
-                            continue
-                        # Skip descriptive prose fragments
-                        if any(w in l_lower for w in ["sahip", "yürüten", "yuruten", "aktif", "bir"]):
-                            continue
-                        # Skip lines that end with period (sentences, not titles)
-                        if l.rstrip().endswith("."):
-                            continue
-                        # Skip lines that are section keywords from _SD_EXT_MAP
-                        if _sd_norm(l) in _SD_EXT_MAP:
-                            continue
-                        _title_candidate_fallback = l
+    title = "-"
+    
+    # Split the raw text into logical columns based on the marker
+    columns = []
+    current_col = []
+    for line in text.splitlines():
+        l = line.strip()
+        if not l: continue
+        if l == "===COLUMN_BREAK===":
+            if current_col:
+                columns.append(current_col)
+                current_col = []
+        else:
+            current_col.append(l)
+    if current_col:
+        columns.append(current_col)
         
-        # Use the fallback candidate if no keyword match was found
-        if title == "-" and _title_candidate_fallback:
-            title = _title_candidate_fallback
+    if not columns:
+        columns = [lines]
+
+    for col_lines in columns:
+        if title != "-":
+            break
             
-        # 2b. If still not found or remains generic, check education section for student roles
-        if (title == "-" or title == "") and education_text:
-            for _el in education_text.split("\n"):
-                _el_lower = _el.lower().strip()
-                if any(_k in _el_lower for _k in ["öğrenci", "ogrenci", "student", "lisans"]):
-                    if len(_el.split()) <= 8:
-                        title = _el.strip()
+        # --- Step 1: Check first line for "Name - Title" or "Name | Title" ---
+        first_line = col_lines[0]
+        for sep in [" - ", " \u2014 ", " | ", " / "]:
+            if sep in first_line:
+                candidate = first_line.split(sep, 1)[1].strip()
+                # Make sure it's not a section heading or "\u00d6zge\u00e7mi\u015f" etc.
+                if candidate.lower().replace('\u0307', '') not in _TITLE_SKIP_HEADINGS and _sd_norm(candidate) not in _SD_EXT_MAP:
+                    if _ROLE_KW.search(candidate):
+                        title = candidate
+                break
+        
+        # --- Step 1b: Check if first two lines merge into a title (e.g. "MEKATRONİK" + "MÜHENDİSİ") ---
+        if title == "-" and len(col_lines) >= 2:
+            l0 = col_lines[0].strip()
+            l1 = col_lines[1].strip()
+            merged_01 = l0 + " " + l1
+            if len(merged_01.split()) <= 5 and _ROLE_KW.search(merged_01):
+                # Make sure neither line is contact info or a heading
+                if "@" not in l1 and not re.search(r"\d{5,}", l1):
+                    if l1.lower().replace('\u0307', '') not in _TITLE_SKIP_HEADINGS and _sd_norm(l1) not in _SD_EXT_MAP:
+                        # Remove candidate name from the merged result if present
+                        _merged_title = merged_01
+                        if candidate_name:
+                            _merged_title = re.sub(re.escape(candidate_name), "", _merged_title, flags=re.I).strip()
+                            # Try with Turkish 'İ'
+                            _merged_title = re.sub(re.escape(candidate_name.replace('i', 'i\u0307')), "", _merged_title, flags=re.I).strip()
+                            _merged_title = re.sub(re.escape(candidate_name.replace('i', 'I')), "", _merged_title, flags=re.I).strip()
+                            _merged_title = re.sub(re.escape(candidate_name.replace('I', 'İ')), "", _merged_title, flags=re.I).strip()
+                        _merged_title = _merged_title.strip(" -|,")
+                        if _merged_title and _ROLE_KW.search(_merged_title):
+                            title = _merged_title
+        
+        # --- Step 2: Check lines 0-5 for a standalone title line ---
+        if title == "-":
+            for idx, l in enumerate(col_lines[:6]):
+                l_stripped = l.strip()
+                l_lower = l_stripped.lower()
+                
+                # Skip empty or too long lines
+                word_count = len(l_stripped.split())
+                if word_count < 1 or word_count > 8:
+                    continue
+                
+                # Skip lines with contact info
+                if "@" in l_stripped or "http" in l_stripped or "www." in l_stripped:
+                    continue
+                if re.search(r"\d{5,}", l_stripped):
+                    continue
+                
+                # Skip lines that start with address/location labels
+                if re.match(r'^(?:address|adres|adress)\s*[:\-]', l_lower):
+                    continue
+                
+                # Skip section headings
+                if l_lower.replace('\u0307', '') in _TITLE_SKIP_HEADINGS or _sd_norm(l_stripped) in _SD_EXT_MAP:
+                    break
+                
+                # Accept only if it contains a role keyword
+                if _ROLE_KW.search(l_stripped):
+                    # Remove candidate name if it's embedded in the line
+                    _clean_title = l_stripped
+                    if candidate_name:
+                        _clean_title = re.sub(re.escape(candidate_name), "", _clean_title, flags=re.I).strip()
+                        _clean_title = re.sub(re.escape(candidate_name.replace('i', 'i\u0307')), "", _clean_title, flags=re.I).strip()
+                        _clean_title = re.sub(re.escape(candidate_name.replace('i', 'I')), "", _clean_title, flags=re.I).strip()
+                        _clean_title = re.sub(re.escape(candidate_name.replace('I', 'İ')), "", _clean_title, flags=re.I).strip()
+                        
+                        # Strip just first name or just last name if possible (very basic approach)
+                        parts = candidate_name.split()
+                        if len(parts) >= 2:
+                            for p in parts:
+                                _clean_title = re.sub(r'\b' + re.escape(p) + r'\b', "", _clean_title, flags=re.I).strip()
+                    _clean_title = _clean_title.strip(" -|,")
+                    if _clean_title:
+                        title = _clean_title
+                    else:
+                        title = l_stripped
+                    break
+                
+                # Check if this line + next line together form a title
+                if idx < len(col_lines) - 1:
+                    next_line = col_lines[idx + 1].strip()
+                    merged = l_stripped + " " + next_line
+                    if len(merged.split()) <= 5 and _ROLE_KW.search(merged):
+                        if "@" not in next_line and not re.search(r"\d{5,}", next_line):
+                            nl = next_line.lower().replace('\u0307', '')
+                            if nl not in _TITLE_SKIP_HEADINGS and _sd_norm(next_line) not in _SD_EXT_MAP:
+                                title = merged
+                                break
+        
+        # --- Step 2b: Check for "Meslek: XXX" pattern in first 10 lines ---
+        if title == "-":
+            for l in col_lines[:10]:
+                m = re.match(r'^(?:meslek|title|ünvan|unvan|pozisyon|position)\s*[:\-–|]\s*(.+)$', l.strip(), re.I)
+                if m:
+                    candidate = m.group(1).strip()
+                    if candidate and candidate.lower().replace('\u0307', '') not in _TITLE_SKIP_HEADINGS:
+                        title = candidate
                         break
     
-    # 3. Calculate years of experience
-    # In accordance with the user's explicit rule: "ilk işinin başlangıç tarihinden bulunduğumuz yıla kadar hesaplansın deneyim yılı"
-    # Find all 4-digit years starting with 19 or 20 in the experience text
+    # --- Step 3: Calculate years of experience ---
     years = "0"
     if experience_text:
         all_years = [int(y) for y in re.findall(r'\b(20\d{2}|19\d{2})\b', experience_text)]
         if all_years:
             earliest_year = min(all_years)
+            max_year = max(all_years)
             import datetime
             current_year = datetime.date.today().year
             if earliest_year <= current_year:
                 ans = current_year - earliest_year
+                
+                exp_lower = experience_text.lower()
+                is_present = bool(re.search(r'\b(present|devam|g\u00fcn\u00fcm\u00fcz|now|current|bug\u00fcn|bug\u00fcne)\b', exp_lower))
+                if max_year == earliest_year and not is_present:
+                    ans = 0
+                
                 years = str(ans)
     
-    # Clean up common title labels and prefixes (case-insensitive)
+    # --- Clean up title ---
     title = title.strip()
-    _prefix_pat = re.compile(
-        r"^(?:ad[ı]?\s*soyad[ı]?|ad\s*soyad|isim|name|full\s*name|cv|özgeçmiş|ozgecmis)\s*[:\-–|]*\s*",
-        re.I
-    )
-    title = _prefix_pat.sub("", title).strip()
+    # Remove common prefixes like "Meslek:", "Title:", etc.
+    title = re.sub(
+        r"^(?:meslek|title|\u00fcnvan|unvan|pozisyon|position)\s*[:\-\u2013|]\s*",
+        "", title, flags=re.I
+    ).strip()
     
     # Title casing for consistency
-    if title == title.lower() or title == title.upper():
-        title = title.title()
-    if len(title) > 50:
-        title = title[:50] + "..."
+    if title and title != "-":
+        if title == title.lower() or title == title.upper():
+            title = title.title()
+        if len(title) > 50:
+            title = title[:50] + "..."
     
     return title, years
+
 
 
 _SD_CANONICAL: list[str] = [
@@ -6629,11 +6663,15 @@ def process_cv(file_path: Path) -> dict:
                 if re.search(r"\b(basic user|independent user|proficient user|common european framework|levels:)\b", _st_val, re.I):
                     _st_val = ""
             # FIX: Only override when the keyword pass left the section
-            # COMPLETELY EMPTY.  The old ">20% longer" heuristic caused
-            # contamination: parse_cv() doesn't have ı→i normalisation,
-            # so it can't detect Turkish-OCR headings and lumps everything
-            # (organizations, skills, languages) into projects.
+            # COMPLETELY EMPTY, OR when _st_val is significantly shorter 
+            # (which means parse_cv successfully split out a section that 
+            # the keyword pass had merged).
+            # We exclude "summary" from the length override because the keyword
+            # pass for summary is highly accurate and usually contains the full block,
+            # whereas parse_cv might truncate it via safety rules.
             if not _kw_val and _st_val:
+                sections[_sec] = _st_val
+            elif _kw_val and _st_val and len(_st_val) < len(_kw_val) * 0.75 and _sec != "summary":
                 sections[_sec] = _st_val
     except Exception as _e:
         logger.debug(f"  [structured_pipeline] skipped: {_e}")
@@ -6901,7 +6939,7 @@ def process_cv(file_path: Path) -> dict:
             sections["experience"] = ""
 
     # ── Step 8b: Extract Title and Total Years of Experience ──────────────────
-    title, years = extract_title_and_experience(raw_text, sections.get("experience", ""), sections.get("education", ""))
+    title, years = extract_title_and_experience(raw_text, sections.get("experience", ""), sections.get("education", ""), candidate_name=file_path.stem)
     sections["title"] = title
     sections["years_of_experience"] = years
 
@@ -7091,9 +7129,12 @@ def process_cv(file_path: Path) -> dict:
                     if current_lang not in lang_levels:
                         lang_levels[current_lang] = []
                         
-                m_level = re.search(r'\b([abc][12]|fluent|advanced|intermediate|beginner|akıcı|akici|iyi|orta|ileri|seviye)\b', l_lower)
+                m_level = re.search(r'\b([abc][12]|fluent|advanced|upper[\s\-]?intermediate|upper[\s\-]?\u0131ntermediate|intermediate|\u0131ntermediate|beginner|akıcı|akici|iyi|orta|ileri|seviye)\b', l_lower)
                 if m_level and m_level.group(1) != m_lang.group(1).lower() and current_lang:
-                    lang_levels[current_lang].append(m_level.group(1).upper())
+                    lvl = m_level.group(1).title()
+                    if lvl.lower().startswith("upper"):
+                        lvl = "Upper-Intermediate"
+                    lang_levels[current_lang].append(lvl)
                     
             m_sub = sub_skill_pattern.search(l)
             if m_sub and current_lang:

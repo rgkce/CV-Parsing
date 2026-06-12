@@ -1,0 +1,22 @@
+import sys
+sys.path.append(r"c:\Users\rumeysagokce\Desktop\cv_parser_project - Kopya\cv-parser-script")
+import cv_parser8
+from pathlib import Path
+
+pdf_path = Path(r"c:\Users\rumeysagokce\Desktop\cv_parser_project - Kopya\data\PDF\sena nur morbel.pdf")
+record = cv_parser8.process_cv(pdf_path)
+
+print("\n=== FINAL ALL ===")
+for sec, content in record.get("sections", {}).items():
+    print(f"[{sec}]: {repr(content)}")
+
+print("\n=== CONTACT INFO ===")
+for k, v in record.get("contact", {}).items():
+    print(f"{k}: {repr(v)}")
+
+# Print raw text
+with __import__("pdfplumber").open(pdf_path) as pdf:
+    words = pdf.pages[0].extract_words(x_tolerance=3, y_tolerance=3, keep_blank_chars=False, use_text_flow=True)
+    text = cv_parser8._extract_two_column(pdf.pages[0], words)
+    print("\n--- RAW TEXT ---")
+    print(text)
