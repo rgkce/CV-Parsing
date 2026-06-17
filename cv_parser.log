@@ -3463,3 +3463,1080 @@
 2026-06-17 00:29:31,518  [INFO]    Output     : final_dataset.json
 2026-06-17 00:29:31,518  [INFO]    (check cv_parser.log for column-layout details)
 2026-06-17 00:29:31,519  [INFO]  ============================================================
+2026-06-17 20:59:10,418  [INFO]  Found 63 PDF(s) — 63 files total.
+2026-06-17 20:59:10,420  [INFO]  Processing: abdullah soylu.pdf
+2026-06-17 20:59:10,420  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:12,653  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'abdullah soylu.pdf'
+2026-06-17 20:59:12,660  [INFO]    [broken_check] Detected broken pattern: is_hayati
+2026-06-17 20:59:12,660  [INFO]    [pdf→ocr] broken text quality in 'abdullah soylu.pdf' — invoking OCR.
+2026-06-17 20:59:12,660  [INFO]    [ocr] Starting OCR on 'abdullah soylu.pdf'
+2026-06-17 20:59:15,145  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:15,147  [INFO]    [ocr] Extracted 1100 chars from 'abdullah soylu.pdf'
+2026-06-17 20:59:15,155  [INFO]    [sanitize] Removed 14 garbage characters (1100 → 1086)
+2026-06-17 20:59:15,157  [INFO]    [normalize_text] Processing 1086 characters
+2026-06-17 20:59:15,726  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:15,726  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:15,727  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:15,727  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:15,727  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:15,727  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 20:59:15,727  [INFO]    [normalize_text] Processing 976 characters
+2026-06-17 20:59:15,755  [INFO]    [done] abdullah soylu.pdf → format=ocr, lang=tr, photo=True, chars=976
+2026-06-17 20:59:15,756  [INFO]  Processing: ahmet berat bulduk.pdf
+2026-06-17 20:59:15,756  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:15,920  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'ahmet berat bulduk.pdf'
+2026-06-17 20:59:15,928  [INFO]    [broken_check] Detected mixed-case garbage (1 occurrences).
+2026-06-17 20:59:15,928  [INFO]    [pdf→ocr] broken text quality in 'ahmet berat bulduk.pdf' — invoking OCR.
+2026-06-17 20:59:15,928  [INFO]    [ocr] Starting OCR on 'ahmet berat bulduk.pdf'
+2026-06-17 20:59:17,751  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:17,752  [INFO]    [ocr] Extracted 1866 chars from 'ahmet berat bulduk.pdf'
+2026-06-17 20:59:17,760  [INFO]    [sanitize] Removed 31 garbage characters (1866 → 1835)
+2026-06-17 20:59:17,762  [INFO]    [normalize_text] Processing 1835 characters
+2026-06-17 20:59:17,813  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:17,813  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:17,814  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:17,814  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:17,814  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:17,814  [INFO]    [normalize_text] Processing 1718 characters
+2026-06-17 20:59:17,852  [INFO]    [done] ahmet berat bulduk.pdf → format=ocr, lang=tr, photo=True, chars=1718
+2026-06-17 20:59:17,852  [INFO]  Processing: alihan tekin.pdf
+2026-06-17 20:59:17,852  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:17,948  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'alihan tekin.pdf'
+2026-06-17 20:59:17,968  [INFO]    [broken_check] Detected mixed-case garbage (1 occurrences).
+2026-06-17 20:59:17,968  [INFO]    [pdf→ocr] broken text quality in 'alihan tekin.pdf' — invoking OCR.
+2026-06-17 20:59:17,968  [INFO]    [ocr] Starting OCR on 'alihan tekin.pdf'
+2026-06-17 20:59:19,483  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:20,228  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 20:59:20,231  [INFO]    [ocr] Extracted 1670 chars from 'alihan tekin.pdf'
+2026-06-17 20:59:20,236  [INFO]    [sanitize] Removed 7 garbage characters (1670 → 1663)
+2026-06-17 20:59:20,237  [INFO]    [normalize_text] Processing 1660 characters
+2026-06-17 20:59:20,262  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:20,262  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:20,262  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 20:59:20,262  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:20,262  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:20,263  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:20,263  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:20,263  [INFO]    [normalize_text] Processing 1593 characters
+2026-06-17 20:59:20,274  [INFO]    [done] alihan tekin.pdf → format=ocr, lang=en, photo=True, chars=1593
+2026-06-17 20:59:20,275  [INFO]  Processing: arda gungor.pdf
+2026-06-17 20:59:20,275  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:20,399  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'arda gungor.pdf'
+2026-06-17 20:59:20,407  [INFO]    [broken_check] Detected mixed-case garbage (1 occurrences).
+2026-06-17 20:59:20,407  [INFO]    [pdf→ocr] broken text quality in 'arda gungor.pdf' — invoking OCR.
+2026-06-17 20:59:20,407  [INFO]    [ocr] Starting OCR on 'arda gungor.pdf'
+2026-06-17 20:59:22,426  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:22,426  [INFO]    [ocr] Extracted 2521 chars from 'arda gungor.pdf'
+2026-06-17 20:59:22,431  [INFO]    [sanitize] Removed 12 garbage characters (2521 → 2509)
+2026-06-17 20:59:22,434  [INFO]    [normalize_text] Processing 2509 characters
+2026-06-17 20:59:22,480  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,480  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,481  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.30 (lines=1)
+2026-06-17 20:59:22,481  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,481  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,481  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,481  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,481  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=25)
+2026-06-17 20:59:22,481  [INFO]    [normalize_text] Processing 2457 characters
+2026-06-17 20:59:22,508  [INFO]    [done] arda gungor.pdf → format=ocr, lang=tr, photo=True, chars=2457
+2026-06-17 20:59:22,508  [INFO]  Processing: ayse gunes.pdf
+2026-06-17 20:59:22,508  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:22,543  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:22,547  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:22,550  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:22,552  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:22,607  [INFO]    [normalize_text] Processing 1465 characters
+2026-06-17 20:59:22,621  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,622  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,622  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,622  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,622  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,622  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,622  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,622  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,623  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:22,623  [INFO]    [normalize_text] Processing 1416 characters
+2026-06-17 20:59:22,631  [INFO]    [done] ayse gunes.pdf → format=pdf, lang=tr, photo=True, chars=1416
+2026-06-17 20:59:22,632  [INFO]  Processing: ayse soydal.pdf
+2026-06-17 20:59:22,632  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:22,790  [INFO]    [broken_check] Detected mixed-case garbage (2 occurrences).
+2026-06-17 20:59:22,790  [INFO]    [pdf→ocr] broken text quality in 'ayse soydal.pdf' — invoking OCR.
+2026-06-17 20:59:22,790  [INFO]    [ocr] Starting OCR on 'ayse soydal.pdf'
+2026-06-17 20:59:24,798  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:24,798  [INFO]    [ocr] Extracted 2758 chars from 'ayse soydal.pdf'
+2026-06-17 20:59:24,801  [INFO]    [sanitize] Removed 1 garbage characters (2758 → 2757)
+2026-06-17 20:59:24,804  [INFO]    [normalize_text] Processing 2757 characters
+2026-06-17 20:59:24,876  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:24,876  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:24,876  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:24,876  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:24,876  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 20:59:24,876  [INFO]    [normalize_text] Processing 2679 characters
+2026-06-17 20:59:24,932  [INFO]    [done] ayse soydal.pdf → format=ocr, lang=tr, photo=False, chars=2679
+2026-06-17 20:59:24,933  [INFO]  Processing: ayten ceyda cetinkaya.pdf
+2026-06-17 20:59:24,933  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:25,055  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'ayten ceyda cetinkaya.pdf'
+2026-06-17 20:59:25,062  [INFO]    [broken_check] Detected mixed-case garbage (2 occurrences).
+2026-06-17 20:59:25,062  [INFO]    [pdf→ocr] broken text quality in 'ayten ceyda cetinkaya.pdf' — invoking OCR.
+2026-06-17 20:59:25,062  [INFO]    [ocr] Starting OCR on 'ayten ceyda cetinkaya.pdf'
+2026-06-17 20:59:26,595  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:26,596  [INFO]    [ocr] Extracted 1407 chars from 'ayten ceyda cetinkaya.pdf'
+2026-06-17 20:59:26,600  [INFO]    [sanitize] Removed 5 garbage characters (1407 → 1402)
+2026-06-17 20:59:26,603  [INFO]    [normalize_text] Processing 1401 characters
+2026-06-17 20:59:26,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:26,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:26,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:26,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 20:59:26,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:26,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 20:59:26,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:26,631  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:26,632  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:26,632  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=11)
+2026-06-17 20:59:26,632  [INFO]    [normalize_text] Processing 1341 characters
+2026-06-17 20:59:26,650  [INFO]    [done] ayten ceyda cetinkaya.pdf → format=ocr, lang=tr, photo=False, chars=1341
+2026-06-17 20:59:26,650  [INFO]  Processing: aziz ekren.pdf
+2026-06-17 20:59:26,650  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:26,772  [INFO]    [broken_check] Detected mixed-case garbage (4 occurrences).
+2026-06-17 20:59:26,772  [INFO]    [pdf→ocr] broken text quality in 'aziz ekren.pdf' — invoking OCR.
+2026-06-17 20:59:26,773  [INFO]    [ocr] Starting OCR on 'aziz ekren.pdf'
+2026-06-17 20:59:28,326  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:28,865  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 20:59:28,865  [INFO]    [ocr] Extracted 1933 chars from 'aziz ekren.pdf'
+2026-06-17 20:59:28,868  [INFO]    [sanitize] Removed 2 garbage characters (1933 → 1931)
+2026-06-17 20:59:28,870  [INFO]    [normalize_text] Processing 1930 characters
+2026-06-17 20:59:28,910  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 20:59:28,910  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:28,911  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:28,911  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:28,911  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 20:59:28,911  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:28,911  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:28,912  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:28,912  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 20:59:28,912  [INFO]    [normalize_text] Processing 1873 characters
+2026-06-17 20:59:28,948  [INFO]    [done] aziz ekren.pdf → format=ocr, lang=en, photo=False, chars=1873
+2026-06-17 20:59:28,949  [INFO]  Processing: berkay sengul.pdf
+2026-06-17 20:59:28,949  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:28,963  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:28,966  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:28,969  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:28,970  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:28,972  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:28,975  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:28,977  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:29,123  [INFO]    [broken_check] Detected mixed-case garbage (1 occurrences).
+2026-06-17 20:59:29,123  [INFO]    [pdf→ocr] broken text quality in 'berkay sengul.pdf' — invoking OCR.
+2026-06-17 20:59:29,123  [INFO]    [ocr] Starting OCR on 'berkay sengul.pdf'
+2026-06-17 20:59:29,129  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:29,132  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:29,135  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:29,136  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:29,139  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:29,142  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:29,146  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 20:59:30,953  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:30,954  [INFO]    [ocr] Extracted 2060 chars from 'berkay sengul.pdf'
+2026-06-17 20:59:30,957  [INFO]    [sanitize] Removed 19 garbage characters (2060 → 2041)
+2026-06-17 20:59:30,959  [INFO]    [normalize_text] Processing 2042 characters
+2026-06-17 20:59:31,007  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,007  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,007  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,007  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,007  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,008  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,008  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,008  [INFO]    [normalize_text] Processing 1988 characters
+2026-06-17 20:59:31,046  [INFO]    [done] berkay sengul.pdf → format=ocr, lang=en, photo=False, chars=1988
+2026-06-17 20:59:31,046  [INFO]  Processing: beyza aktas.pdf
+2026-06-17 20:59:31,046  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:31,187  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'beyza aktas.pdf'
+2026-06-17 20:59:31,196  [INFO]    [normalize_text] Processing 1199 characters
+2026-06-17 20:59:31,216  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,216  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,216  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,216  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,216  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,216  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,216  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:31,216  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=2)
+2026-06-17 20:59:31,216  [INFO]    [normalize_text] Processing 1157 characters
+2026-06-17 20:59:31,228  [INFO]    [done] beyza aktas.pdf → format=pdf, lang=tr, photo=True, chars=1157
+2026-06-17 20:59:31,228  [INFO]  Processing: bilal sarikavak.pdf
+2026-06-17 20:59:31,228  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:31,467  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'bilal sarikavak.pdf'
+2026-06-17 20:59:31,475  [INFO]    [broken_check] Detected mixed-case garbage (5 occurrences).
+2026-06-17 20:59:31,475  [INFO]    [pdf→ocr] broken text quality in 'bilal sarikavak.pdf' — invoking OCR.
+2026-06-17 20:59:31,475  [INFO]    [ocr] Starting OCR on 'bilal sarikavak.pdf'
+2026-06-17 20:59:33,665  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:33,665  [INFO]    [ocr] Extracted 3072 chars from 'bilal sarikavak.pdf'
+2026-06-17 20:59:33,668  [INFO]    [sanitize] Removed 4 garbage characters (3072 → 3068)
+2026-06-17 20:59:33,671  [INFO]    [normalize_text] Processing 3068 characters
+2026-06-17 20:59:33,737  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 20:59:33,737  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:33,737  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:33,737  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 20:59:33,737  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:33,738  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 20:59:33,738  [INFO]    [normalize_text] Processing 2888 characters
+2026-06-17 20:59:33,789  [INFO]    [done] bilal sarikavak.pdf → format=ocr, lang=tr, photo=True, chars=2888
+2026-06-17 20:59:33,790  [INFO]  Processing: bora ozmen.pdf
+2026-06-17 20:59:33,790  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:33,965  [INFO]    [broken_check] Detected mixed-case garbage (2 occurrences).
+2026-06-17 20:59:33,965  [INFO]    [pdf→ocr] broken text quality in 'bora ozmen.pdf' — invoking OCR.
+2026-06-17 20:59:33,966  [INFO]    [ocr] Starting OCR on 'bora ozmen.pdf'
+2026-06-17 20:59:35,167  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:36,426  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 20:59:37,141  [INFO]    [ocr] Page 3: eng+tur OCR successful.
+2026-06-17 20:59:37,141  [INFO]    [ocr] Extracted 2918 chars from 'bora ozmen.pdf'
+2026-06-17 20:59:37,144  [INFO]    [sanitize] Removed 5 garbage characters (2918 → 2913)
+2026-06-17 20:59:37,147  [INFO]    [normalize_text] Processing 2913 characters
+2026-06-17 20:59:37,225  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,226  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,226  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,226  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,226  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,226  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,227  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,227  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,227  [INFO]    [normalize_text] Processing 2843 characters
+2026-06-17 20:59:37,290  [INFO]    [done] bora ozmen.pdf → format=ocr, lang=en, photo=False, chars=2843
+2026-06-17 20:59:37,291  [INFO]  Processing: burcu kuzucu.pdf
+2026-06-17 20:59:37,291  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:37,433  [INFO]    [normalize_text] Processing 1307 characters
+2026-06-17 20:59:37,452  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,452  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,452  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,452  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.30 (lines=1)
+2026-06-17 20:59:37,452  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,452  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,452  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,452  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,452  [INFO]    [normalize_text] Processing 1266 characters
+2026-06-17 20:59:37,458  [INFO]    [done] burcu kuzucu.pdf → format=pdf, lang=tr, photo=True, chars=1266
+2026-06-17 20:59:37,459  [INFO]  Processing: cem korkmaz.pdf
+2026-06-17 20:59:37,459  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:37,766  [INFO]    [layout] TWO_COLUMN detected — page 2 of 'cem korkmaz.pdf'
+2026-06-17 20:59:37,776  [INFO]    [normalize_text] Processing 2821 characters
+2026-06-17 20:59:37,811  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,811  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,811  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,811  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-06-17 20:59:37,811  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,811  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,812  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,812  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:37,812  [INFO]    [normalize_text] Processing 2690 characters
+2026-06-17 20:59:37,838  [INFO]    [done] cem korkmaz.pdf → format=pdf, lang=tr, photo=True, chars=2690
+2026-06-17 20:59:37,839  [INFO]  Processing: cem tatlıdil.pdf
+2026-06-17 20:59:37,839  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:39,110  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'cem tatlıdil.pdf'
+2026-06-17 20:59:39,118  [INFO]    [broken_check] Detected mixed-case garbage (2 occurrences).
+2026-06-17 20:59:39,118  [INFO]    [pdf→ocr] broken text quality in 'cem tatlıdil.pdf' — invoking OCR.
+2026-06-17 20:59:39,118  [INFO]    [ocr] Starting OCR on 'cem tatlıdil.pdf'
+2026-06-17 20:59:41,764  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:41,764  [INFO]    [ocr] Extracted 1791 chars from 'cem tatlıdil.pdf'
+2026-06-17 20:59:41,768  [INFO]    [sanitize] Removed 2 garbage characters (1791 → 1789)
+2026-06-17 20:59:41,770  [INFO]    [normalize_text] Processing 1788 characters
+2026-06-17 20:59:41,820  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:41,821  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:41,821  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:41,821  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:41,821  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 20:59:41,821  [INFO]    [normalize_text] Processing 1487 characters
+2026-06-17 20:59:41,857  [INFO]    [done] cem tatlıdil.pdf → format=ocr, lang=en, photo=False, chars=1487
+2026-06-17 20:59:41,857  [INFO]  Processing: cetin yuceyurt.pdf
+2026-06-17 20:59:41,857  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:42,035  [INFO]    [broken_check] Detected broken pattern: is_hayati
+2026-06-17 20:59:42,035  [INFO]    [pdf→ocr] broken text quality in 'cetin yuceyurt.pdf' — invoking OCR.
+2026-06-17 20:59:42,035  [INFO]    [ocr] Starting OCR on 'cetin yuceyurt.pdf'
+2026-06-17 20:59:43,111  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:44,254  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 20:59:45,475  [INFO]    [ocr] Page 3: eng+tur OCR successful.
+2026-06-17 20:59:45,475  [INFO]    [ocr] Extracted 2971 chars from 'cetin yuceyurt.pdf'
+2026-06-17 20:59:45,478  [INFO]    [sanitize] Removed 3 garbage characters (2971 → 2968)
+2026-06-17 20:59:45,481  [INFO]    [normalize_text] Processing 2968 characters
+2026-06-17 20:59:45,609  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,609  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,609  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,609  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,610  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,610  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,610  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,610  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,610  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,610  [INFO]    [normalize_text] Processing 2786 characters
+2026-06-17 20:59:45,709  [INFO]    [done] cetin yuceyurt.pdf → format=ocr, lang=tr, photo=True, chars=2786
+2026-06-17 20:59:45,709  [INFO]  Processing: ebubekir bayazit.pdf
+2026-06-17 20:59:45,709  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:45,821  [INFO]    [normalize_text] Processing 1920 characters
+2026-06-17 20:59:45,842  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,842  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,842  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,842  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,842  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,842  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,842  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,842  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:45,843  [INFO]    [normalize_text] Processing 1854 characters
+2026-06-17 20:59:45,855  [INFO]    [done] ebubekir bayazit.pdf → format=pdf, lang=tr, photo=True, chars=1854
+2026-06-17 20:59:45,855  [INFO]  Processing: emine dogan.pdf
+2026-06-17 20:59:45,855  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:45,991  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'emine dogan.pdf'
+2026-06-17 20:59:46,002  [INFO]    [normalize_text] Processing 1998 characters
+2026-06-17 20:59:46,050  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:46,050  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:46,050  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-06-17 20:59:46,050  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:46,050  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:46,050  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:46,051  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:46,051  [INFO]    [normalize_text] Processing 1959 characters
+2026-06-17 20:59:46,062  [INFO]    [done] emine dogan.pdf → format=pdf, lang=tr, photo=True, chars=1959
+2026-06-17 20:59:46,063  [INFO]  Processing: emre celik.pdf
+2026-06-17 20:59:46,063  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:46,200  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'emre celik.pdf'
+2026-06-17 20:59:46,206  [INFO]    [broken_check] Detected mixed-case garbage (2 occurrences).
+2026-06-17 20:59:46,206  [INFO]    [pdf→ocr] broken text quality in 'emre celik.pdf' — invoking OCR.
+2026-06-17 20:59:46,206  [INFO]    [ocr] Starting OCR on 'emre celik.pdf'
+2026-06-17 20:59:48,021  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:48,021  [INFO]    [ocr] Extracted 1360 chars from 'emre celik.pdf'
+2026-06-17 20:59:48,028  [INFO]    [sanitize] Removed 39 garbage characters (1360 → 1321)
+2026-06-17 20:59:48,030  [INFO]    [normalize_text] Processing 1320 characters
+2026-06-17 20:59:48,054  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:48,055  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:48,055  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:48,055  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:48,055  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=8)
+2026-06-17 20:59:48,055  [INFO]    [normalize_text] Processing 1299 characters
+2026-06-17 20:59:48,066  [INFO]    [done] emre celik.pdf → format=ocr, lang=tr, photo=True, chars=1299
+2026-06-17 20:59:48,066  [INFO]  Processing: emre mutlu.pdf
+2026-06-17 20:59:48,066  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:48,241  [INFO]    [normalize_text] Processing 1551 characters
+2026-06-17 20:59:48,270  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 20:59:48,270  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:48,270  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:48,270  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.48 (lines=7)
+2026-06-17 20:59:48,270  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.30 (lines=1)
+2026-06-17 20:59:48,271  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:48,271  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:48,271  [INFO]    [normalize_text] Processing 1461 characters
+2026-06-17 20:59:48,280  [INFO]    [done] emre mutlu.pdf → format=pdf, lang=tr, photo=True, chars=1461
+2026-06-17 20:59:48,281  [INFO]  Processing: fatma ersoy.pdf
+2026-06-17 20:59:48,281  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:48,420  [INFO]    [broken_check] Detected broken pattern: is_hayati
+2026-06-17 20:59:48,420  [INFO]    [pdf→ocr] broken text quality in 'fatma ersoy.pdf' — invoking OCR.
+2026-06-17 20:59:48,420  [INFO]    [ocr] Starting OCR on 'fatma ersoy.pdf'
+2026-06-17 20:59:49,892  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:49,892  [INFO]    [ocr] Extracted 1495 chars from 'fatma ersoy.pdf'
+2026-06-17 20:59:49,897  [INFO]    [sanitize] Removed 1 garbage characters (1495 → 1494)
+2026-06-17 20:59:49,899  [INFO]    [normalize_text] Processing 1494 characters
+2026-06-17 20:59:49,927  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:49,927  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:49,927  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:49,927  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 20:59:49,927  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:49,927  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:49,927  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 20:59:49,927  [INFO]    [normalize_text] Processing 1441 characters
+2026-06-17 20:59:49,944  [INFO]    [done] fatma ersoy.pdf → format=ocr, lang=tr, photo=False, chars=1441
+2026-06-17 20:59:49,945  [INFO]  Processing: fatmanur paysan.pdf
+2026-06-17 20:59:49,945  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:50,037  [INFO]    [normalize_text] Processing 910 characters
+2026-06-17 20:59:50,054  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,055  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,055  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,055  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.30 (lines=1)
+2026-06-17 20:59:50,055  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,055  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,055  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,055  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,056  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,056  [INFO]    [normalize_text] Processing 865 characters
+2026-06-17 20:59:50,061  [INFO]    [done] fatmanur paysan.pdf → format=pdf, lang=tr, photo=False, chars=865
+2026-06-17 20:59:50,061  [INFO]  Processing: fevzi cosgun.pdf
+2026-06-17 20:59:50,061  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:50,213  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'fevzi cosgun.pdf'
+2026-06-17 20:59:50,220  [INFO]    [sanitize] Removed 112 garbage characters (1669 → 1557)
+2026-06-17 20:59:50,222  [INFO]    [normalize_text] Processing 1556 characters
+2026-06-17 20:59:50,240  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,240  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,240  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,240  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,240  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,240  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 20:59:50,240  [INFO]    [normalize_text] Processing 1520 characters
+2026-06-17 20:59:50,252  [INFO]    [done] fevzi cosgun.pdf → format=pdf, lang=tr, photo=False, chars=1520
+2026-06-17 20:59:50,253  [INFO]  Processing: furkan guner.pdf
+2026-06-17 20:59:50,253  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 20:59:50,674  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'furkan guner.pdf'
+2026-06-17 20:59:50,812  [INFO]    [layout] TWO_COLUMN detected — page 3 of 'furkan guner.pdf'
+2026-06-17 20:59:50,915  [INFO]    [layout] TWO_COLUMN detected — page 6 of 'furkan guner.pdf'
+2026-06-17 20:59:50,951  [INFO]    [layout] TWO_COLUMN detected — page 7 of 'furkan guner.pdf'
+2026-06-17 20:59:50,990  [INFO]    [layout] TWO_COLUMN detected — page 8 of 'furkan guner.pdf'
+2026-06-17 20:59:51,021  [INFO]    [layout] TWO_COLUMN detected — page 9 of 'furkan guner.pdf'
+2026-06-17 20:59:51,058  [INFO]    [layout] TWO_COLUMN detected — page 10 of 'furkan guner.pdf'
+2026-06-17 20:59:51,093  [INFO]    [broken_check] Detected mixed-case garbage (3 occurrences).
+2026-06-17 20:59:51,093  [INFO]    [pdf→ocr] broken text quality in 'furkan guner.pdf' — invoking OCR.
+2026-06-17 20:59:51,093  [INFO]    [ocr] Starting OCR on 'furkan guner.pdf'
+2026-06-17 20:59:53,177  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 20:59:54,240  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 20:59:55,764  [INFO]    [ocr] Page 3: eng+tur OCR successful.
+2026-06-17 20:59:56,877  [INFO]    [ocr] Page 4: eng+tur OCR successful.
+2026-06-17 20:59:58,315  [INFO]    [ocr] Page 5: eng+tur OCR successful.
+2026-06-17 20:59:59,721  [INFO]    [ocr] Page 6: eng+tur OCR successful.
+2026-06-17 21:00:01,342  [INFO]    [ocr] Page 7: eng+tur OCR successful.
+2026-06-17 21:00:02,761  [INFO]    [ocr] Page 8: eng+tur OCR successful.
+2026-06-17 21:00:04,213  [INFO]    [ocr] Page 9: eng+tur OCR successful.
+2026-06-17 21:00:05,724  [INFO]    [ocr] Page 10: eng+tur OCR successful.
+2026-06-17 21:00:06,937  [INFO]    [ocr] Page 11: eng+tur OCR successful.
+2026-06-17 21:00:09,398  [INFO]    [ocr] Page 12: eng+tur OCR successful.
+2026-06-17 21:00:09,399  [INFO]    [ocr] Extracted 7078 chars from 'furkan guner.pdf'
+2026-06-17 21:00:09,420  [INFO]    [sanitize] Removed 2031 garbage characters (7078 → 5047)
+2026-06-17 21:00:09,424  [INFO]    [normalize_text] Processing 5047 characters
+2026-06-17 21:00:09,630  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:09,630  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:09,630  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:09,630  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:09,630  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:09,631  [INFO]    [normalize_text] Processing 4641 characters
+2026-06-17 21:00:09,791  [INFO]    [done] furkan guner.pdf → format=ocr, lang=mixed, photo=True, chars=4641
+2026-06-17 21:00:09,791  [INFO]  Processing: furkan karakurt.pdf
+2026-06-17 21:00:09,791  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:09,943  [INFO]    [sanitize] Removed 6 garbage characters (2751 → 2745)
+2026-06-17 21:00:09,945  [INFO]    [normalize_text] Processing 2746 characters
+2026-06-17 21:00:09,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 21:00:09,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:09,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:09,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 21:00:09,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:09,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:09,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:09,974  [INFO]    [normalize_text] Processing 2410 characters
+2026-06-17 21:00:09,990  [INFO]    [done] furkan karakurt.pdf → format=pdf, lang=mixed, photo=True, chars=2410
+2026-06-17 21:00:09,991  [INFO]  Processing: gizem kilinc.pdf
+2026-06-17 21:00:09,991  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:10,127  [INFO]    [broken_check] Detected mixed-case garbage (3 occurrences).
+2026-06-17 21:00:10,127  [INFO]    [pdf→ocr] broken text quality in 'gizem kilinc.pdf' — invoking OCR.
+2026-06-17 21:00:10,127  [INFO]    [ocr] Starting OCR on 'gizem kilinc.pdf'
+2026-06-17 21:00:11,953  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:11,953  [INFO]    [ocr] Extracted 2627 chars from 'gizem kilinc.pdf'
+2026-06-17 21:00:11,957  [INFO]    [sanitize] Removed 2 garbage characters (2627 → 2625)
+2026-06-17 21:00:11,961  [INFO]    [normalize_text] Processing 2623 characters
+2026-06-17 21:00:12,010  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:12,011  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:12,011  [WARNING]    [quality] EMPTY SECTION WARNING: 'education' has confidence=0.00 (lines=0)
+2026-06-17 21:00:12,011  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:12,011  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:00:12,011  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:12,012  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:12,012  [INFO]    [normalize_text] Processing 2489 characters
+2026-06-17 21:00:12,048  [INFO]    [done] gizem kilinc.pdf → format=ocr, lang=tr, photo=False, chars=2489
+2026-06-17 21:00:12,049  [INFO]  Processing: gokdeniz can.pdf
+2026-06-17 21:00:12,049  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:12,132  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'gokdeniz can.pdf'
+2026-06-17 21:00:12,196  [INFO]    [broken_check] Detected mixed-case garbage (49 occurrences).
+2026-06-17 21:00:12,197  [INFO]    [pdf→ocr] broken text quality in 'gokdeniz can.pdf' — invoking OCR.
+2026-06-17 21:00:12,197  [INFO]    [ocr] Starting OCR on 'gokdeniz can.pdf'
+2026-06-17 21:00:13,746  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:14,858  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 21:00:15,729  [INFO]    [ocr] Page 3: eng+tur OCR successful.
+2026-06-17 21:00:15,729  [INFO]    [ocr] Extracted 3713 chars from 'gokdeniz can.pdf'
+2026-06-17 21:00:15,736  [INFO]    [sanitize] Removed 14 garbage characters (3713 → 3699)
+2026-06-17 21:00:15,740  [INFO]    [normalize_text] Processing 3700 characters
+2026-06-17 21:00:15,890  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:15,890  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:15,891  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:15,891  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:15,891  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:15,891  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:15,891  [INFO]    [normalize_text] Processing 3243 characters
+2026-06-17 21:00:16,001  [INFO]    [done] gokdeniz can.pdf → format=ocr, lang=tr, photo=True, chars=3243
+2026-06-17 21:00:16,001  [INFO]  Processing: gul koc.pdf
+2026-06-17 21:00:16,001  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:16,071  [INFO]    [sanitize] Removed 26 garbage characters (480 → 454)
+2026-06-17 21:00:16,072  [INFO]    [normalize_text] Processing 454 characters
+2026-06-17 21:00:16,081  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 21:00:16,082  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:16,082  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:16,082  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:16,082  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:00:16,082  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:16,082  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:16,082  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:16,082  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:00:16,082  [INFO]    [normalize_text] Processing 422 characters
+2026-06-17 21:00:16,085  [INFO]    [done] gul koc.pdf → format=pdf, lang=tr, photo=False, chars=422
+2026-06-17 21:00:16,086  [INFO]  Processing: görkem tolu.pdf
+2026-06-17 21:00:16,086  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:16,189  [INFO]    [broken_check] Detected mixed-case garbage (2 occurrences).
+2026-06-17 21:00:16,189  [INFO]    [pdf→ocr] broken text quality in 'görkem tolu.pdf' — invoking OCR.
+2026-06-17 21:00:16,189  [INFO]    [ocr] Starting OCR on 'görkem tolu.pdf'
+2026-06-17 21:00:17,480  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:17,480  [INFO]    [ocr] Extracted 1130 chars from 'görkem tolu.pdf'
+2026-06-17 21:00:17,485  [INFO]    [sanitize] Removed 3 garbage characters (1130 → 1127)
+2026-06-17 21:00:17,486  [INFO]    [normalize_text] Processing 1127 characters
+2026-06-17 21:00:17,503  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,503  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,504  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,504  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,504  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,504  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,504  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,504  [INFO]    [normalize_text] Processing 1033 characters
+2026-06-17 21:00:17,514  [INFO]    [done] görkem tolu.pdf → format=ocr, lang=tr, photo=True, chars=1033
+2026-06-17 21:00:17,515  [INFO]  Processing: ipek nur sarialp.pdf
+2026-06-17 21:00:17,515  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:17,664  [INFO]    [sanitize] Removed 1 garbage characters (1494 → 1493)
+2026-06-17 21:00:17,667  [INFO]    [normalize_text] Processing 1493 characters
+2026-06-17 21:00:17,682  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,682  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,682  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,682  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,682  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,682  [INFO]    [normalize_text] Processing 1400 characters
+2026-06-17 21:00:17,688  [INFO]    [done] ipek nur sarialp.pdf → format=pdf, lang=en, photo=True, chars=1400
+2026-06-17 21:00:17,689  [INFO]  Processing: irem celik.pdf
+2026-06-17 21:00:17,689  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:17,806  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'irem celik.pdf'
+2026-06-17 21:00:17,813  [INFO]    [sanitize] Removed 71 garbage characters (1040 → 969)
+2026-06-17 21:00:17,814  [INFO]    [normalize_text] Processing 969 characters
+2026-06-17 21:00:17,833  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,833  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,833  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,833  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.10 (lines=1)
+2026-06-17 21:00:17,833  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,833  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:17,833  [INFO]    [normalize_text] Processing 897 characters
+2026-06-17 21:00:17,843  [INFO]    [done] irem celik.pdf → format=pdf, lang=tr, photo=True, chars=897
+2026-06-17 21:00:17,843  [INFO]  Processing: irem sude uslu.pdf
+2026-06-17 21:00:17,843  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:18,018  [INFO]    [broken_check] Detected mixed-case garbage (2 occurrences).
+2026-06-17 21:00:18,018  [INFO]    [pdf→ocr] broken text quality in 'irem sude uslu.pdf' — invoking OCR.
+2026-06-17 21:00:18,018  [INFO]    [ocr] Starting OCR on 'irem sude uslu.pdf'
+2026-06-17 21:00:19,657  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:19,657  [INFO]    [ocr] Extracted 1806 chars from 'irem sude uslu.pdf'
+2026-06-17 21:00:19,662  [INFO]    [sanitize] Removed 1 garbage characters (1806 → 1805)
+2026-06-17 21:00:19,664  [INFO]    [normalize_text] Processing 1806 characters
+2026-06-17 21:00:19,714  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 21:00:19,714  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:19,714  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:19,714  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.30 (lines=2)
+2026-06-17 21:00:19,715  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.10 (lines=1)
+2026-06-17 21:00:19,715  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:19,715  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:19,715  [INFO]    [normalize_text] Processing 1758 characters
+2026-06-17 21:00:19,750  [INFO]    [done] irem sude uslu.pdf → format=ocr, lang=en, photo=True, chars=1758
+2026-06-17 21:00:19,750  [INFO]  Processing: kaan olmez.pdf
+2026-06-17 21:00:19,750  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:19,852  [INFO]    [broken_check] Detected mixed-case garbage (1 occurrences).
+2026-06-17 21:00:19,852  [INFO]    [pdf→ocr] broken text quality in 'kaan olmez.pdf' — invoking OCR.
+2026-06-17 21:00:19,852  [INFO]    [ocr] Starting OCR on 'kaan olmez.pdf'
+2026-06-17 21:00:21,171  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:21,172  [INFO]    [ocr] Extracted 1271 chars from 'kaan olmez.pdf'
+2026-06-17 21:00:21,176  [INFO]    [sanitize] Removed 2 garbage characters (1271 → 1269)
+2026-06-17 21:00:21,178  [INFO]    [normalize_text] Processing 1269 characters
+2026-06-17 21:00:21,207  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 21:00:21,207  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:21,208  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:21,208  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.30 (lines=1)
+2026-06-17 21:00:21,208  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 21:00:21,208  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:21,208  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:00:21,209  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:21,209  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:21,209  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:21,209  [INFO]    [normalize_text] Processing 1099 characters
+2026-06-17 21:00:21,226  [INFO]    [done] kaan olmez.pdf → format=ocr, lang=tr, photo=True, chars=1099
+2026-06-17 21:00:21,227  [INFO]  Processing: kemal diri.pdf
+2026-06-17 21:00:21,227  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:21,391  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'kemal diri.pdf'
+2026-06-17 21:00:21,399  [INFO]    [broken_check] Detected mixed-case garbage (1 occurrences).
+2026-06-17 21:00:21,399  [INFO]    [pdf→ocr] broken text quality in 'kemal diri.pdf' — invoking OCR.
+2026-06-17 21:00:21,399  [INFO]    [ocr] Starting OCR on 'kemal diri.pdf'
+2026-06-17 21:00:23,166  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:23,167  [INFO]    [ocr] Extracted 1917 chars from 'kemal diri.pdf'
+2026-06-17 21:00:23,175  [INFO]    [sanitize] Removed 19 garbage characters (1917 → 1898)
+2026-06-17 21:00:23,177  [INFO]    [normalize_text] Processing 1898 characters
+2026-06-17 21:00:23,221  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:23,221  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:23,221  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:23,221  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:23,222  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:23,222  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:23,222  [INFO]    [normalize_text] Processing 1850 characters
+2026-06-17 21:00:23,254  [INFO]    [done] kemal diri.pdf → format=ocr, lang=tr, photo=True, chars=1850
+2026-06-17 21:00:23,254  [INFO]  Processing: mehmet deniz mol.pdf
+2026-06-17 21:00:23,254  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:23,361  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'mehmet deniz mol.pdf'
+2026-06-17 21:00:23,414  [INFO]    [broken_check] Detected mixed-case garbage (42 occurrences).
+2026-06-17 21:00:23,414  [INFO]    [pdf→ocr] broken text quality in 'mehmet deniz mol.pdf' — invoking OCR.
+2026-06-17 21:00:23,414  [INFO]    [ocr] Starting OCR on 'mehmet deniz mol.pdf'
+2026-06-17 21:00:25,683  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:26,974  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 21:00:27,593  [INFO]    [ocr] Page 3: eng+tur OCR successful.
+2026-06-17 21:00:27,593  [INFO]    [ocr] Extracted 5387 chars from 'mehmet deniz mol.pdf'
+2026-06-17 21:00:27,601  [INFO]    [sanitize] Removed 17 garbage characters (5387 → 5370)
+2026-06-17 21:00:27,607  [INFO]    [normalize_text] Processing 5371 characters
+2026-06-17 21:00:27,699  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:27,699  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:27,699  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:27,699  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:27,699  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:27,700  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:27,700  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=36)
+2026-06-17 21:00:27,700  [INFO]    [normalize_text] Processing 5146 characters
+2026-06-17 21:00:27,797  [INFO]    [done] mehmet deniz mol.pdf → format=ocr, lang=tr, photo=True, chars=5146
+2026-06-17 21:00:27,797  [INFO]  Processing: mehmet emre arican.pdf
+2026-06-17 21:00:27,798  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:28,037  [INFO]    [broken_check] Detected mixed-case garbage (13 occurrences).
+2026-06-17 21:00:28,037  [INFO]    [pdf→ocr] broken text quality in 'mehmet emre arican.pdf' — invoking OCR.
+2026-06-17 21:00:28,037  [INFO]    [ocr] Starting OCR on 'mehmet emre arican.pdf'
+2026-06-17 21:00:29,819  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:31,258  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 21:00:31,260  [INFO]    [ocr] Extracted 3563 chars from 'mehmet emre arican.pdf'
+2026-06-17 21:00:31,264  [INFO]    [sanitize] Removed 2 garbage characters (3563 → 3561)
+2026-06-17 21:00:31,268  [INFO]    [normalize_text] Processing 3561 characters
+2026-06-17 21:00:31,350  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,351  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,351  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,351  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,351  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,351  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,351  [INFO]    [normalize_text] Processing 3400 characters
+2026-06-17 21:00:31,419  [INFO]    [done] mehmet emre arican.pdf → format=ocr, lang=tr, photo=False, chars=3400
+2026-06-17 21:00:31,420  [INFO]  Processing: mina demirci.pdf
+2026-06-17 21:00:31,420  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:31,936  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'mina demirci.pdf'
+2026-06-17 21:00:31,944  [INFO]    [normalize_text] Processing 536 characters
+2026-06-17 21:00:31,957  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,957  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,957  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,957  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,957  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,957  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,957  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,958  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,958  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,958  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:00:31,958  [INFO]    [normalize_text] Processing 492 characters
+2026-06-17 21:00:31,965  [INFO]    [done] mina demirci.pdf → format=pdf, lang=tr, photo=True, chars=492
+2026-06-17 21:00:31,966  [INFO]  Processing: muhammed fatih ulasli.pdf
+2026-06-17 21:00:31,966  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:32,150  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'muhammed fatih ulasli.pdf'
+2026-06-17 21:00:32,157  [INFO]    [broken_check] Detected mixed-case garbage (4 occurrences).
+2026-06-17 21:00:32,157  [INFO]    [pdf→ocr] broken text quality in 'muhammed fatih ulasli.pdf' — invoking OCR.
+2026-06-17 21:00:32,157  [INFO]    [ocr] Starting OCR on 'muhammed fatih ulasli.pdf'
+2026-06-17 21:00:33,997  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:33,998  [INFO]    [ocr] Extracted 2018 chars from 'muhammed fatih ulasli.pdf'
+2026-06-17 21:00:34,006  [INFO]    [sanitize] Removed 10 garbage characters (2018 → 2008)
+2026-06-17 21:00:34,008  [INFO]    [normalize_text] Processing 2008 characters
+2026-06-17 21:00:34,044  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:34,044  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:34,045  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:00:34,045  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:34,045  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:34,045  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:34,045  [INFO]    [normalize_text] Processing 1948 characters
+2026-06-17 21:00:34,065  [INFO]    [done] muhammed fatih ulasli.pdf → format=ocr, lang=en, photo=True, chars=1948
+2026-06-17 21:00:34,066  [INFO]  Processing: muhammed furkan ozcan mekatronik.pdf
+2026-06-17 21:00:34,066  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:34,275  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'muhammed furkan ozcan mekatronik.pdf'
+2026-06-17 21:00:34,417  [INFO]    [broken_check] Detected mixed-case garbage (2 occurrences).
+2026-06-17 21:00:34,417  [INFO]    [pdf→ocr] broken text quality in 'muhammed furkan ozcan mekatronik.pdf' — invoking OCR.
+2026-06-17 21:00:34,417  [INFO]    [ocr] Starting OCR on 'muhammed furkan ozcan mekatronik.pdf'
+2026-06-17 21:00:36,250  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:37,489  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 21:00:37,490  [INFO]    [ocr] Extracted 3013 chars from 'muhammed furkan ozcan mekatronik.pdf'
+2026-06-17 21:00:37,497  [INFO]    [sanitize] Removed 12 garbage characters (3013 → 3001)
+2026-06-17 21:00:37,500  [INFO]    [normalize_text] Processing 3001 characters
+2026-06-17 21:00:37,552  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:37,552  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:37,553  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:37,553  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:37,553  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:37,553  [INFO]    [normalize_text] Processing 2727 characters
+2026-06-17 21:00:37,589  [INFO]    [done] muhammed furkan ozcan mekatronik.pdf → format=ocr, lang=tr, photo=True, chars=2727
+2026-06-17 21:00:37,589  [INFO]  Processing: muhammed furkan ozcan.pdf
+2026-06-17 21:00:37,589  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:37,619  [INFO]    [pdf→ocr] too short in 'muhammed furkan ozcan.pdf' — invoking OCR.
+2026-06-17 21:00:37,619  [INFO]    [ocr] Starting OCR on 'muhammed furkan ozcan.pdf'
+2026-06-17 21:00:40,066  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:40,066  [INFO]    [ocr] Extracted 2939 chars from 'muhammed furkan ozcan.pdf'
+2026-06-17 21:00:40,071  [INFO]    [sanitize] Removed 8 garbage characters (2939 → 2931)
+2026-06-17 21:00:40,074  [INFO]    [normalize_text] Processing 2931 characters
+2026-06-17 21:00:40,161  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,161  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,161  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,161  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,162  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,162  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,162  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,162  [INFO]    [normalize_text] Processing 2782 characters
+2026-06-17 21:00:40,228  [INFO]    [done] muhammed furkan ozcan.pdf → format=ocr, lang=tr, photo=True, chars=2782
+2026-06-17 21:00:40,229  [INFO]  Processing: muhammet dogan.pdf
+2026-06-17 21:00:40,229  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:40,346  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'muhammet dogan.pdf'
+2026-06-17 21:00:40,353  [INFO]    [sanitize] Removed 49 garbage characters (1023 → 974)
+2026-06-17 21:00:40,354  [INFO]    [normalize_text] Processing 974 characters
+2026-06-17 21:00:40,374  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,374  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,375  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,375  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,375  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,375  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,375  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:40,375  [INFO]    [normalize_text] Processing 914 characters
+2026-06-17 21:00:40,383  [INFO]    [done] muhammet dogan.pdf → format=pdf, lang=tr, photo=True, chars=914
+2026-06-17 21:00:40,384  [INFO]  Processing: nilsu ak 1.pdf
+2026-06-17 21:00:40,384  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:40,498  [INFO]    [broken_check] Detected mixed-case garbage (2 occurrences).
+2026-06-17 21:00:40,499  [INFO]    [pdf→ocr] broken text quality in 'nilsu ak 1.pdf' — invoking OCR.
+2026-06-17 21:00:40,499  [INFO]    [ocr] Starting OCR on 'nilsu ak 1.pdf'
+2026-06-17 21:00:42,010  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:42,011  [INFO]    [ocr] Extracted 1826 chars from 'nilsu ak 1.pdf'
+2026-06-17 21:00:42,015  [INFO]    [sanitize] Removed 3 garbage characters (1826 → 1823)
+2026-06-17 21:00:42,018  [INFO]    [normalize_text] Processing 1823 characters
+2026-06-17 21:00:42,067  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,067  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,067  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,067  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,067  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,067  [INFO]    [normalize_text] Processing 1753 characters
+2026-06-17 21:00:42,100  [INFO]    [done] nilsu ak 1.pdf → format=ocr, lang=tr, photo=False, chars=1753
+2026-06-17 21:00:42,100  [INFO]  Processing: nilsu ak 2.pdf
+2026-06-17 21:00:42,100  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:42,236  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'nilsu ak 2.pdf'
+2026-06-17 21:00:42,243  [INFO]    [sanitize] Removed 18 garbage characters (1542 → 1524)
+2026-06-17 21:00:42,244  [INFO]    [normalize_text] Processing 1524 characters
+2026-06-17 21:00:42,268  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,268  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,268  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,268  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,268  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,268  [INFO]    [normalize_text] Processing 1500 characters
+2026-06-17 21:00:42,277  [INFO]    [done] nilsu ak 2.pdf → format=pdf, lang=en, photo=True, chars=1500
+2026-06-17 21:00:42,277  [INFO]  Processing: omer bugra karakoc.pdf
+2026-06-17 21:00:42,277  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:42,539  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'omer bugra karakoc.pdf'
+2026-06-17 21:00:42,545  [INFO]    [sanitize] Removed 94 garbage characters (1559 → 1465)
+2026-06-17 21:00:42,547  [INFO]    [normalize_text] Processing 1466 characters
+2026-06-17 21:00:42,572  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,572  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,572  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.30 (lines=1)
+2026-06-17 21:00:42,572  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,572  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,572  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:42,572  [INFO]    [normalize_text] Processing 1407 characters
+2026-06-17 21:00:42,580  [INFO]    [done] omer bugra karakoc.pdf → format=pdf, lang=tr, photo=True, chars=1407
+2026-06-17 21:00:42,581  [INFO]  Processing: rumeysa gokce 1.pdf
+2026-06-17 21:00:42,581  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:44,476  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'rumeysa gokce 1.pdf'
+2026-06-17 21:00:44,485  [INFO]    [broken_check] Detected mixed-case garbage (4 occurrences).
+2026-06-17 21:00:44,485  [INFO]    [pdf→ocr] broken text quality in 'rumeysa gokce 1.pdf' — invoking OCR.
+2026-06-17 21:00:44,485  [INFO]    [ocr] Starting OCR on 'rumeysa gokce 1.pdf'
+2026-06-17 21:00:48,421  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:48,422  [INFO]    [ocr] Extracted 3033 chars from 'rumeysa gokce 1.pdf'
+2026-06-17 21:00:48,430  [INFO]    [sanitize] Removed 2 garbage characters (3033 → 3031)
+2026-06-17 21:00:48,432  [INFO]    [normalize_text] Processing 3031 characters
+2026-06-17 21:00:48,508  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:48,508  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:48,508  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:00:48,508  [INFO]    [normalize_text] Processing 2761 characters
+2026-06-17 21:00:48,565  [INFO]    [done] rumeysa gokce 1.pdf → format=ocr, lang=en, photo=True, chars=2761
+2026-06-17 21:00:48,565  [INFO]  Processing: rumeysa gokce 2.pdf
+2026-06-17 21:00:48,565  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:48,741  [INFO]    [broken_check] Detected mixed-case garbage (6 occurrences).
+2026-06-17 21:00:48,741  [INFO]    [pdf→ocr] broken text quality in 'rumeysa gokce 2.pdf' — invoking OCR.
+2026-06-17 21:00:48,741  [INFO]    [ocr] Starting OCR on 'rumeysa gokce 2.pdf'
+2026-06-17 21:00:50,519  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:50,519  [INFO]    [ocr] Extracted 2138 chars from 'rumeysa gokce 2.pdf'
+2026-06-17 21:00:50,524  [INFO]    [sanitize] Removed 3 garbage characters (2138 → 2135)
+2026-06-17 21:00:50,526  [INFO]    [normalize_text] Processing 2135 characters
+2026-06-17 21:00:50,605  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:50,605  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:50,606  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 21:00:50,606  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:50,606  [INFO]    [normalize_text] Processing 2007 characters
+2026-06-17 21:00:50,663  [INFO]    [done] rumeysa gokce 2.pdf → format=ocr, lang=en, photo=False, chars=2007
+2026-06-17 21:00:50,664  [INFO]  Processing: rumeysa gokce 3.pdf
+2026-06-17 21:00:50,664  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:50,805  [INFO]    [broken_check] Detected mixed-case garbage (5 occurrences).
+2026-06-17 21:00:50,806  [INFO]    [pdf→ocr] broken text quality in 'rumeysa gokce 3.pdf' — invoking OCR.
+2026-06-17 21:00:50,806  [INFO]    [ocr] Starting OCR on 'rumeysa gokce 3.pdf'
+2026-06-17 21:00:52,163  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:53,198  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 21:00:53,198  [INFO]    [ocr] Extracted 2490 chars from 'rumeysa gokce 3.pdf'
+2026-06-17 21:00:53,203  [INFO]    [sanitize] Removed 2 garbage characters (2490 → 2488)
+2026-06-17 21:00:53,206  [INFO]    [normalize_text] Processing 2484 characters
+2026-06-17 21:00:53,262  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:53,263  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:53,263  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 21:00:53,263  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:53,263  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:53,263  [INFO]    [normalize_text] Processing 2177 characters
+2026-06-17 21:00:53,304  [INFO]    [done] rumeysa gokce 3.pdf → format=ocr, lang=tr, photo=False, chars=2177
+2026-06-17 21:00:53,304  [INFO]  Processing: rumeysa gokce 4.pdf
+2026-06-17 21:00:53,305  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:53,488  [INFO]    [broken_check] Detected mixed-case garbage (7 occurrences).
+2026-06-17 21:00:53,489  [INFO]    [pdf→ocr] broken text quality in 'rumeysa gokce 4.pdf' — invoking OCR.
+2026-06-17 21:00:53,489  [INFO]    [ocr] Starting OCR on 'rumeysa gokce 4.pdf'
+2026-06-17 21:00:55,376  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:55,377  [INFO]    [ocr] Extracted 2403 chars from 'rumeysa gokce 4.pdf'
+2026-06-17 21:00:55,381  [INFO]    [sanitize] Removed 1 garbage characters (2403 → 2402)
+2026-06-17 21:00:55,383  [INFO]    [normalize_text] Processing 2402 characters
+2026-06-17 21:00:55,457  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:55,457  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:55,457  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:55,458  [INFO]    [normalize_text] Processing 2324 characters
+2026-06-17 21:00:55,514  [INFO]    [done] rumeysa gokce 4.pdf → format=ocr, lang=en, photo=True, chars=2324
+2026-06-17 21:00:55,514  [INFO]  Processing: sena nur morbel.pdf
+2026-06-17 21:00:55,514  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:55,534  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 21:00:55,539  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 21:00:55,540  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 21:00:55,543  [WARNING]  Could not get FontBBox from font descriptor because None cannot be parsed as 4 floats
+2026-06-17 21:00:55,730  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'sena nur morbel.pdf'
+2026-06-17 21:00:55,789  [INFO]    [sanitize] Removed 48 garbage characters (1947 → 1899)
+2026-06-17 21:00:55,791  [INFO]    [normalize_text] Processing 1899 characters
+2026-06-17 21:00:55,820  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:55,820  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:55,820  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:55,820  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:00:55,820  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:55,820  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:55,821  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:00:55,821  [INFO]    [normalize_text] Processing 1799 characters
+2026-06-17 21:00:55,836  [INFO]    [done] sena nur morbel.pdf → format=pdf, lang=mixed, photo=True, chars=1799
+2026-06-17 21:00:55,836  [INFO]  Processing: senem naz yurt.pdf
+2026-06-17 21:00:55,837  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:55,995  [INFO]    [sanitize] Removed 2 garbage characters (4170 → 4168)
+2026-06-17 21:00:56,001  [INFO]    [normalize_text] Processing 4168 characters
+2026-06-17 21:00:56,025  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:56,025  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:56,025  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 21:00:56,025  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:00:56,025  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:56,025  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:56,026  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:56,026  [INFO]    [normalize_text] Processing 4102 characters
+2026-06-17 21:00:56,041  [INFO]    [done] senem naz yurt.pdf → format=pdf, lang=en, photo=False, chars=4102
+2026-06-17 21:00:56,041  [INFO]  Processing: suat bilgay.pdf
+2026-06-17 21:00:56,041  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:00:56,204  [INFO]    [broken_check] Detected mixed-case garbage (8 occurrences).
+2026-06-17 21:00:56,204  [INFO]    [pdf→ocr] broken text quality in 'suat bilgay.pdf' — invoking OCR.
+2026-06-17 21:00:56,204  [INFO]    [ocr] Starting OCR on 'suat bilgay.pdf'
+2026-06-17 21:00:58,268  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:00:59,767  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 21:00:59,768  [INFO]    [ocr] Extracted 4220 chars from 'suat bilgay.pdf'
+2026-06-17 21:00:59,774  [INFO]    [sanitize] Removed 9 garbage characters (4220 → 4211)
+2026-06-17 21:00:59,777  [INFO]    [normalize_text] Processing 4211 characters
+2026-06-17 21:00:59,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:00:59,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:00:59,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.30 (lines=1)
+2026-06-17 21:00:59,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:00:59,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:00:59,974  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:00:59,975  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:00:59,975  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=6)
+2026-06-17 21:00:59,975  [INFO]    [normalize_text] Processing 4069 characters
+2026-06-17 21:01:00,144  [INFO]    [done] suat bilgay.pdf → format=ocr, lang=en, photo=True, chars=4069
+2026-06-17 21:01:00,145  [INFO]  Processing: sudenaz boyali.pdf
+2026-06-17 21:01:00,145  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:01:00,289  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'sudenaz boyali.pdf'
+2026-06-17 21:01:00,297  [INFO]    [normalize_text] Processing 1088 characters
+2026-06-17 21:01:00,317  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:01:00,317  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:00,317  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 21:01:00,317  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:01:00,317  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:01:00,317  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:01:00,317  [INFO]    [normalize_text] Processing 932 characters
+2026-06-17 21:01:00,324  [INFO]    [done] sudenaz boyali.pdf → format=pdf, lang=tr, photo=True, chars=932
+2026-06-17 21:01:00,325  [INFO]  Processing: tugba zengin.pdf
+2026-06-17 21:01:00,325  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:01:00,575  [INFO]    [layout] TWO_COLUMN detected — page 1 of 'tugba zengin.pdf'
+2026-06-17 21:01:00,583  [INFO]    [broken_check] Detected mixed-case garbage (9 occurrences).
+2026-06-17 21:01:00,584  [INFO]    [pdf→ocr] broken text quality in 'tugba zengin.pdf' — invoking OCR.
+2026-06-17 21:01:00,584  [INFO]    [ocr] Starting OCR on 'tugba zengin.pdf'
+2026-06-17 21:01:03,038  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:01:03,038  [INFO]    [ocr] Extracted 3242 chars from 'tugba zengin.pdf'
+2026-06-17 21:01:03,047  [INFO]    [sanitize] Removed 13 garbage characters (3242 → 3229)
+2026-06-17 21:01:03,051  [INFO]    [normalize_text] Processing 3229 characters
+2026-06-17 21:01:03,209  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:01:03,209  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:03,210  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:01:03,210  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:01:03,210  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:01:03,210  [INFO]    [normalize_text] Processing 3140 characters
+2026-06-17 21:01:03,348  [INFO]    [done] tugba zengin.pdf → format=ocr, lang=en, photo=True, chars=3140
+2026-06-17 21:01:03,349  [INFO]  Processing: ufuk yuceyurt.pdf
+2026-06-17 21:01:03,349  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:01:03,536  [INFO]    [broken_check] Detected mixed-case garbage (1 occurrences).
+2026-06-17 21:01:03,537  [INFO]    [pdf→ocr] broken text quality in 'ufuk yuceyurt.pdf' — invoking OCR.
+2026-06-17 21:01:03,537  [INFO]    [ocr] Starting OCR on 'ufuk yuceyurt.pdf'
+2026-06-17 21:01:05,076  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:01:05,753  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 21:01:06,323  [INFO]    [ocr] Page 3: eng+tur OCR successful.
+2026-06-17 21:01:06,323  [INFO]    [ocr] Extracted 1740 chars from 'ufuk yuceyurt.pdf'
+2026-06-17 21:01:06,328  [INFO]    [sanitize] Removed 4 garbage characters (1740 → 1736)
+2026-06-17 21:01:06,331  [INFO]    [normalize_text] Processing 1736 characters
+2026-06-17 21:01:06,392  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,392  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,393  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,393  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,393  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,393  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,393  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,393  [INFO]    [normalize_text] Processing 1612 characters
+2026-06-17 21:01:06,433  [INFO]    [done] ufuk yuceyurt.pdf → format=ocr, lang=tr, photo=True, chars=1612
+2026-06-17 21:01:06,434  [INFO]  Processing: vedat acat.pdf
+2026-06-17 21:01:06,434  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:01:06,590  [INFO]    [sanitize] Removed 4 garbage characters (1844 → 1840)
+2026-06-17 21:01:06,593  [INFO]    [normalize_text] Processing 1840 characters
+2026-06-17 21:01:06,609  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,609  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,609  [WARNING]    [quality] EMPTY SECTION WARNING: 'experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,610  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,610  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,610  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,610  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,610  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,610  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,610  [INFO]    [normalize_text] Processing 1672 characters
+2026-06-17 21:01:06,618  [INFO]    [done] vedat acat.pdf → format=pdf, lang=tr, photo=True, chars=1672
+2026-06-17 21:01:06,619  [INFO]  Processing: yagiz tokgoz.pdf
+2026-06-17 21:01:06,619  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:01:06,760  [INFO]    [sanitize] Removed 1 garbage characters (1946 → 1945)
+2026-06-17 21:01:06,764  [INFO]    [normalize_text] Processing 1945 characters
+2026-06-17 21:01:06,780  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,781  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,781  [WARNING]    [quality] EMPTY SECTION WARNING: 'projects' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,781  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,781  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,781  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:01:06,781  [INFO]    [normalize_text] Processing 1849 characters
+2026-06-17 21:01:06,788  [INFO]    [done] yagiz tokgoz.pdf → format=pdf, lang=en, photo=False, chars=1849
+2026-06-17 21:01:06,789  [INFO]  Processing: yuksel cosgun Backend.pdf
+2026-06-17 21:01:06,789  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:01:06,972  [INFO]    [broken_check] Detected mixed-case garbage (6 occurrences).
+2026-06-17 21:01:06,972  [INFO]    [pdf→ocr] broken text quality in 'yuksel cosgun Backend.pdf' — invoking OCR.
+2026-06-17 21:01:06,973  [INFO]    [ocr] Starting OCR on 'yuksel cosgun Backend.pdf'
+2026-06-17 21:01:08,916  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:01:09,596  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 21:01:09,597  [INFO]    [ocr] Extracted 2528 chars from 'yuksel cosgun Backend.pdf'
+2026-06-17 21:01:09,602  [INFO]    [sanitize] Removed 6 garbage characters (2528 → 2522)
+2026-06-17 21:01:09,605  [INFO]    [normalize_text] Processing 2522 characters
+2026-06-17 21:01:09,685  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:01:09,686  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:09,686  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:01:09,686  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:01:09,686  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:01:09,686  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:01:09,686  [INFO]    [normalize_text] Processing 2302 characters
+2026-06-17 21:01:09,756  [INFO]    [done] yuksel cosgun Backend.pdf → format=ocr, lang=en, photo=True, chars=2302
+2026-06-17 21:01:09,756  [INFO]  Processing: yuksel cosgun DEVOPS-CLOUD.pdf
+2026-06-17 21:01:09,756  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:01:09,937  [INFO]    [broken_check] Detected mixed-case garbage (8 occurrences).
+2026-06-17 21:01:09,937  [INFO]    [pdf→ocr] broken text quality in 'yuksel cosgun DEVOPS-CLOUD.pdf' — invoking OCR.
+2026-06-17 21:01:09,937  [INFO]    [ocr] Starting OCR on 'yuksel cosgun DEVOPS-CLOUD.pdf'
+2026-06-17 21:01:11,926  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:01:12,584  [INFO]    [ocr] Page 2: eng+tur OCR successful.
+2026-06-17 21:01:12,585  [INFO]    [ocr] Extracted 2681 chars from 'yuksel cosgun DEVOPS-CLOUD.pdf'
+2026-06-17 21:01:12,590  [INFO]    [sanitize] Removed 6 garbage characters (2681 → 2675)
+2026-06-17 21:01:12,592  [INFO]    [normalize_text] Processing 2675 characters
+2026-06-17 21:01:12,688  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:01:12,689  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:12,689  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:01:12,689  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:01:12,689  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:01:12,689  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:01:12,689  [INFO]    [normalize_text] Processing 2461 characters
+2026-06-17 21:01:12,761  [INFO]    [done] yuksel cosgun DEVOPS-CLOUD.pdf → format=ocr, lang=en, photo=True, chars=2461
+2026-06-17 21:01:12,762  [INFO]  Processing: yuksel cosgun ML Data.pdf
+2026-06-17 21:01:12,762  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:01:13,016  [INFO]    [broken_check] Detected mixed-case garbage (6 occurrences).
+2026-06-17 21:01:13,016  [INFO]    [pdf→ocr] broken text quality in 'yuksel cosgun ML Data.pdf' — invoking OCR.
+2026-06-17 21:01:13,016  [INFO]    [ocr] Starting OCR on 'yuksel cosgun ML Data.pdf'
+2026-06-17 21:01:14,854  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:01:14,855  [INFO]    [ocr] Extracted 2320 chars from 'yuksel cosgun ML Data.pdf'
+2026-06-17 21:01:14,860  [INFO]    [sanitize] Removed 5 garbage characters (2320 → 2315)
+2026-06-17 21:01:14,862  [INFO]    [normalize_text] Processing 2315 characters
+2026-06-17 21:01:14,938  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:01:14,939  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:14,939  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:01:14,939  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:01:14,939  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:01:14,939  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:01:14,939  [INFO]    [normalize_text] Processing 2103 characters
+2026-06-17 21:01:14,994  [INFO]    [done] yuksel cosgun ML Data.pdf → format=ocr, lang=en, photo=True, chars=2103
+2026-06-17 21:01:14,995  [INFO]  Processing: yuksel cosgun Mobile.pdf
+2026-06-17 21:01:14,995  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:01:15,164  [INFO]    [broken_check] Detected mixed-case garbage (6 occurrences).
+2026-06-17 21:01:15,164  [INFO]    [pdf→ocr] broken text quality in 'yuksel cosgun Mobile.pdf' — invoking OCR.
+2026-06-17 21:01:15,164  [INFO]    [ocr] Starting OCR on 'yuksel cosgun Mobile.pdf'
+2026-06-17 21:01:17,089  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:01:17,089  [INFO]    [ocr] Extracted 2409 chars from 'yuksel cosgun Mobile.pdf'
+2026-06-17 21:01:17,095  [INFO]    [sanitize] Removed 5 garbage characters (2409 → 2404)
+2026-06-17 21:01:17,097  [INFO]    [normalize_text] Processing 2404 characters
+2026-06-17 21:01:17,177  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:01:17,177  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:17,177  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:01:17,177  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:01:17,177  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:01:17,177  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:01:17,177  [INFO]    [normalize_text] Processing 2187 characters
+2026-06-17 21:01:17,238  [INFO]    [done] yuksel cosgun Mobile.pdf → format=ocr, lang=en, photo=True, chars=2187
+2026-06-17 21:01:17,238  [INFO]  Processing: yuksel cosgun QA Automation.pdf
+2026-06-17 21:01:17,238  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:01:17,407  [INFO]    [broken_check] Detected mixed-case garbage (6 occurrences).
+2026-06-17 21:01:17,407  [INFO]    [pdf→ocr] broken text quality in 'yuksel cosgun QA Automation.pdf' — invoking OCR.
+2026-06-17 21:01:17,407  [INFO]    [ocr] Starting OCR on 'yuksel cosgun QA Automation.pdf'
+2026-06-17 21:01:19,217  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:01:19,217  [INFO]    [ocr] Extracted 2254 chars from 'yuksel cosgun QA Automation.pdf'
+2026-06-17 21:01:19,223  [INFO]    [sanitize] Removed 7 garbage characters (2254 → 2247)
+2026-06-17 21:01:19,225  [INFO]    [normalize_text] Processing 2247 characters
+2026-06-17 21:01:19,295  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:01:19,295  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:19,295  [WARNING]    [quality] EMPTY SECTION WARNING: 'languages' has confidence=0.00 (lines=0)
+2026-06-17 21:01:19,296  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:01:19,296  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:01:19,296  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:01:19,296  [INFO]    [normalize_text] Processing 2037 characters
+2026-06-17 21:01:19,352  [INFO]    [done] yuksel cosgun QA Automation.pdf → format=ocr, lang=en, photo=True, chars=2037
+2026-06-17 21:01:19,353  [INFO]  Processing: yuksel cosgun Resume.pdf
+2026-06-17 21:01:19,353  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:01:19,504  [INFO]    [broken_check] Detected mixed-case garbage (6 occurrences).
+2026-06-17 21:01:19,504  [INFO]    [pdf→ocr] broken text quality in 'yuksel cosgun Resume.pdf' — invoking OCR.
+2026-06-17 21:01:19,504  [INFO]    [ocr] Starting OCR on 'yuksel cosgun Resume.pdf'
+2026-06-17 21:01:21,380  [INFO]    [ocr] Page 1: eng+tur OCR successful.
+2026-06-17 21:01:21,381  [INFO]    [ocr] Extracted 2328 chars from 'yuksel cosgun Resume.pdf'
+2026-06-17 21:01:21,386  [INFO]    [sanitize] Removed 5 garbage characters (2328 → 2323)
+2026-06-17 21:01:21,388  [INFO]    [normalize_text] Processing 2323 characters
+2026-06-17 21:01:21,454  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:01:21,454  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:21,454  [WARNING]    [quality] EMPTY SECTION WARNING: 'interests' has confidence=0.00 (lines=0)
+2026-06-17 21:01:21,454  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:01:21,454  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:01:21,454  [INFO]    [normalize_text] Processing 2111 characters
+2026-06-17 21:01:21,505  [INFO]    [done] yuksel cosgun Resume.pdf → format=ocr, lang=en, photo=True, chars=2111
+2026-06-17 21:01:21,506  [INFO]  Processing: zeliha ayca aydemir.pdf
+2026-06-17 21:01:21,506  [INFO]    [method] PDF extraction (column-aware)
+2026-06-17 21:01:21,599  [INFO]    [normalize_text] Processing 1336 characters
+2026-06-17 21:01:21,612  [WARNING]    [quality] EMPTY SECTION WARNING: 'summary' has confidence=0.00 (lines=0)
+2026-06-17 21:01:21,612  [WARNING]    [quality] EMPTY SECTION WARNING: 'title' has confidence=0.00 (lines=0)
+2026-06-17 21:01:21,612  [WARNING]    [quality] EMPTY SECTION WARNING: 'years_of_experience' has confidence=0.00 (lines=0)
+2026-06-17 21:01:21,613  [WARNING]    [quality] EMPTY SECTION WARNING: 'skills' has confidence=0.00 (lines=0)
+2026-06-17 21:01:21,613  [WARNING]    [quality] EMPTY SECTION WARNING: 'certificates' has confidence=0.00 (lines=0)
+2026-06-17 21:01:21,613  [WARNING]    [quality] EMPTY SECTION WARNING: 'organizations' has confidence=0.00 (lines=0)
+2026-06-17 21:01:21,613  [WARNING]    [quality] EMPTY SECTION WARNING: 'other' has confidence=0.00 (lines=0)
+2026-06-17 21:01:21,613  [INFO]    [normalize_text] Processing 1279 characters
+2026-06-17 21:01:21,620  [INFO]    [done] zeliha ayca aydemir.pdf → format=pdf, lang=en, photo=False, chars=1279
+2026-06-17 21:01:21,628  [INFO]  ============================================================
+2026-06-17 21:01:21,628  [INFO]  DONE — 63 files processed
+2026-06-17 21:01:21,628  [INFO]    ✓ Success  : 63
+2026-06-17 21:01:21,628  [INFO]    ✗ Failed   : 0
+2026-06-17 21:01:21,628  [INFO]    ~ OCR used : 40
+2026-06-17 21:01:21,628  [INFO]    Output     : final_dataset.json
+2026-06-17 21:01:21,628  [INFO]    (check cv_parser.log for column-layout details)
+2026-06-17 21:01:21,628  [INFO]  ============================================================
