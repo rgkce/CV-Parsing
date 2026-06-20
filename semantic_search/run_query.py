@@ -95,13 +95,22 @@ def run_single_query(
     query: str,
     weights: Dict[str, float],
     top_k: int,
+    dataset: List[Dict] = None,
+    bm25 = None,
+    resume_ids_bm25 = None,
 ) -> List[Dict]:
     """Encode a query, search, combine scores, and return results."""
     query_emb = encode_query(model, query)
     section_results = search_all_sections(indexes, query_emb)
     results = combine_scores(
-        section_results, resume_ids,
-        weights=weights, top_k=top_k,
+        section_results,
+        resume_ids,
+        weights=weights,
+        query_text=query,
+        dataset=dataset,
+        top_k=top_k,
+        bm25=bm25,
+        resume_ids_bm25=resume_ids_bm25
     )
     return results
 
@@ -117,6 +126,7 @@ def main() -> None:
         help="Custom query string.  If omitted, runs sample queries.",
     )
     parser.add_argument("--top-k", type=int, default=TOP_K)
+    parser.add_argument("--weight-title", type=float, default=None)
     parser.add_argument("--weight-skills", type=float, default=None)
     parser.add_argument("--weight-experience", type=float, default=None)
     parser.add_argument("--weight-education", type=float, default=None)
@@ -131,6 +141,7 @@ def main() -> None:
     # ── Build weights dict ────────────────────
     weights = dict(DEFAULT_WEIGHTS)
     overrides = {
+        "title": args.weight_title,
         "skills": args.weight_skills,
         "experience": args.weight_experience,
         "education": args.weight_education,
@@ -160,6 +171,14 @@ def main() -> None:
     logger.info("Loading FAISS indexes from disk...")
     indexes = load_indexes()
 
+    logger.info("Loading dataset for lexical checks...")
+    with open('final_dataset.json', 'r', encoding='utf-8') as f:
+        dataset = json.load(f)
+
+    logger.info("Loading BM25 keyword index...")
+    from semantic_search.bm25_indexer import load_bm25_index
+    bm25, resume_ids_bm25 = load_bm25_index()
+
     # ── Run queries ───────────────────────────
     queries = [args.query] if args.query else SAMPLE_QUERIES
 
@@ -168,6 +187,9 @@ def main() -> None:
         results = run_single_query(
             model, indexes, resume_ids, query,
             weights=weights, top_k=args.top_k,
+            dataset=dataset,
+            bm25=bm25,
+            resume_ids_bm25=resume_ids_bm25
         )
         all_results.append({"query": query, "results": results})
 

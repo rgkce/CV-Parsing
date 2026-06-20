@@ -23,6 +23,8 @@ import numpy as np
 from .config import (
     DEFAULT_WEIGHTS,
     MATCH_THRESHOLD,
+    MAX_SCORE_DROP,
+    MIN_SCORE_THRESHOLD,
     QUERY_PREFIX,
     SECTIONS,
     TOP_K,
@@ -153,50 +155,22 @@ def combine_scores(
     weights: Dict[str, float] | None = None,
     top_k: int = TOP_K,
     match_threshold: float = MATCH_THRESHOLD,
+    min_score: float = MIN_SCORE_THRESHOLD,
+    max_drop: float = MAX_SCORE_DROP,
+    dataset: List[Dict[str, Any]] | None = None,
+    query_text: str = "",
+    bm25: Any = None,
+    resume_ids_bm25: List[str] | None = None,
 ) -> List[Dict[str, Any]]:
-    """
-    Combine per-section similarities into a single weighted score per
-    candidate and return a ranked list.
-
-    Algorithm
-    ---------
-    For each candidate *i*:
-
-    1.  Collect cosine similarities from every section index.
-    2.  Identify which sections are "present" (non-zero embedding).
-        A zero-vector candidate in a section will have similarity ≈ 0.
-    3.  Re-normalise weights to sum to 1.0 over the *present* sections
-        so that CVs missing a section are not unfairly penalised.
-    4.  Compute ``final_score = Σ (normalised_weight_s × sim_s)``.
-    5.  Record which sections exceeded ``match_threshold``.
-
-    Parameters
-    ----------
-    section_results : dict[str, (scores, indices)]
-        Output of ``search_all_sections``.
-    resume_ids : list[str]
-        Ordered resume IDs matching index positions.
-    weights : dict[str, float], optional
-        Section weights.  Defaults to ``config.DEFAULT_WEIGHTS``.
-    top_k : int
-        How many candidates to return.
-    match_threshold : float
-        Minimum similarity for a section to appear in ``matched_sections``.
-
-    Returns
-    -------
-    list[dict]
-        Sorted descending by ``score``.  Each dict contains::
-
-            {
-                "resume_id": str,
-                "score": float,
-                "matched_sections": list[str],
-                "section_scores": dict[str, float],
-            }
-    """
     weights = weights or DEFAULT_WEIGHTS
     n_candidates = len(resume_ids)
+
+    # Pre-compute lexical core keywords if dataset is provided
+    core_keywords = set()
+    if query_text and dataset:
+        stopwords = {"mühendisi", "mühendisliği", "öğrencisi", "uzmanı", "geliştirici", "developer", "engineer", "student", "manager"}
+        words = query_text.lower().split()
+        core_keywords = {w for w in words if w not in stopwords and len(w) > 2}
 
     # Build a per-candidate similarity matrix: {candidate_idx: {section: sim}}
     candidate_sims: Dict[int, Dict[str, float]] = {
@@ -258,7 +232,56 @@ def combine_scores(
             "section_scores": section_scores,
         })
 
-    # Sort descending by score
+    # Sort descending by dense score to establish dense rank
     scored.sort(key=lambda x: x["score"], reverse=True)
 
+    # ── Filter: absolute minimum score ────────
+    if min_score > 0:
+        scored = [r for r in scored if r["score"] >= min_score]
+
+    # ── Filter: relative drop from #1 ─────────
+    if scored and max_drop > 0:
+        best_score = scored[0]["score"]
+        scored = [r for r in scored if (best_score - r["score"]) <= max_drop]
+
+    # ── HYBRID SCORING (RRF) ─────────
+    # If BM25 is provided, we re-rank the candidates that passed the dense filters.
+    if bm25 and resume_ids_bm25 and query_text and scored:
+        from semantic_search.bm25_indexer import tokenize_text
+        from semantic_search.config import RRF_K
+        
+        tokenized_query = tokenize_text(query_text)
+        
+        # Get BM25 scores for ALL documents in the index
+        all_bm25_scores = bm25.get_scores(tokenized_query)
+        
+        # Map resume_id to BM25 score
+        bm25_score_map = {rid: score for rid, score in zip(resume_ids_bm25, all_bm25_scores)}
+        
+        # Assign dense rank
+        for i, r in enumerate(scored):
+            r["dense_rank"] = i + 1
+            r["bm25_score"] = bm25_score_map.get(r["resume_id"], 0.0)
+            
+        # Sort by BM25 score descending to get sparse rank
+        scored.sort(key=lambda x: x["bm25_score"], reverse=True)
+        
+        # Assign sparse rank and compute RRF
+        for i, r in enumerate(scored):
+            # If BM25 score is 0, assign a severely low rank to penalize it in RRF
+            if r["bm25_score"] <= 0.0:
+                sparse_rank = 1000
+            else:
+                sparse_rank = i + 1
+                
+            r["sparse_rank"] = sparse_rank
+            
+            # Calculate RRF score
+            rrf_score = (1.0 / (RRF_K + r["dense_rank"])) + (1.0 / (RRF_K + sparse_rank))
+            r["rrf_score"] = round(rrf_score, 5)
+            
+        # Re-sort finally by RRF score
+        scored.sort(key=lambda x: x["rrf_score"], reverse=True)
+
     return scored[:top_k]
+

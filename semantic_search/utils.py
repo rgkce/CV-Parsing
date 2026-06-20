@@ -13,7 +13,7 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, List
 
-from .config import DATASET_PATH, SECTIONS
+from .config import DATASET_PATH, MAX_SECTION_LENGTH, SECTIONS
 
 logger = logging.getLogger(__name__)
 
@@ -102,7 +102,8 @@ def get_section_texts(
     -------
     list[str]
         One string per CV.  Empty string if the section is missing
-        or blank for a given CV.
+        or blank for a given CV.  Truncated to ``MAX_SECTION_LENGTH``
+        to prevent overly long sections from producing generic embeddings.
     """
     if section not in SECTIONS:
         raise ValueError(
@@ -110,8 +111,19 @@ def get_section_texts(
         )
 
     texts: List[str] = []
+    placeholders = {"-", "none", "n/a", "yok", "null", "belirtilmemiş"}
+    
     for record in dataset:
         text = record.get("sections", {}).get(section, "")
         # Normalise: strip and collapse None → ""
-        texts.append((text or "").strip())
+        text = (text or "").strip()
+        
+        # Treat common placeholders as empty
+        if text.lower() in placeholders or len(text) < 2:
+            text = ""
+            
+        # Truncate to prevent long sections from diluting the embedding
+        if len(text) > MAX_SECTION_LENGTH:
+            text = text[:MAX_SECTION_LENGTH]
+        texts.append(text)
     return texts

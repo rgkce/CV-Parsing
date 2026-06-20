@@ -19,6 +19,7 @@ Steps:
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import sys
 import time
@@ -30,6 +31,7 @@ from .embeddings import (
     save_embeddings,
 )
 from .indexer import build_all_indexes, save_indexes
+from .bm25_indexer import build_bm25_index, save_bm25_index
 from .utils import get_resume_ids, load_dataset
 
 logging.basicConfig(
@@ -104,6 +106,13 @@ def main() -> None:
     logger.info("=" * 60)
     save_indexes(indexes, args.faiss_dir)
 
+    # ── 7. Build BM25 index ──────────────────
+    logger.info("=" * 60)
+    logger.info("STEP 7 / 7  —  Building BM25 keyword index")
+    logger.info("=" * 60)
+    bm25, resume_ids_bm25 = build_bm25_index(dataset)
+    save_bm25_index(bm25, resume_ids_bm25)
+
     elapsed = time.perf_counter() - t_start
 
     # ── Summary ──────────────────────────────
@@ -112,9 +121,9 @@ def main() -> None:
     logger.info("=" * 60)
     logger.info("  CVs processed     : %d", len(dataset))
     logger.info("  Sections embedded  : %s", SECTIONS)
-    logger.info("  Embedding dim      : %d", embeddings_dict[SECTIONS[0]].shape[1])
-    logger.info("  Embeddings saved   : %s", args.embeddings_dir)
     logger.info("  FAISS indexes saved: %s", args.faiss_dir)
+    from semantic_search.config import BM25_INDEX_PATH
+    logger.info("  BM25 index saved   : %s", BM25_INDEX_PATH)
     logger.info("  Total time         : %.1f seconds", elapsed)
     logger.info("=" * 60)
 
