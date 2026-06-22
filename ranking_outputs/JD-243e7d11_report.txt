@@ -1,0 +1,43 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-243e7d11
+  Date       : 2026-06-22 22:28
+  Candidates : 2
+
+  Job Description:
+  AutoCAD ve SAP2000 bilen, santiye deneyimi olan insaat muhendisi
+
+--------------------------------------------------------------------------------
+  Rank  Candidate ID                            Skills   Exp      Edu      Soft     Total   
+  ----------------------------------------------------------------------------
+  1     7fb4d4ee-79d2-4ca2-8921-ccc41dc084c0      79.4    66.2    60.0    60.0    69.9
+  2     4029e938-5660-402d-ac04-98acf9fa517b      74.5    67.2    60.0    60.0    68.3
+--------------------------------------------------------------------------------
+
+  CANDIDATE #1 — 7fb4d4ee-79d2-4ca2-8921-ccc41dc084c0
+  Final Score: 69.9/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Strong technical skill alignment (score: 79)
+    - Some relevant experience found (score: 66)
+
+  ----------------------------------------
+
+  CANDIDATE #2 — 4029e938-5660-402d-ac04-98acf9fa517b
+  Final Score: 68.3/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Some relevant experience found (score: 67)
+
+  [!] Missing Requirements:
+    - sap2000
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

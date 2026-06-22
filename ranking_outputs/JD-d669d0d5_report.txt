@@ -1,0 +1,85 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-d669d0d5
+  Date       : 2026-06-22 22:27
+  Candidates : 5
+
+  Job Description:
+  Python developer with machine learning and data analysis experience
+
+--------------------------------------------------------------------------------
+  Rank  Candidate ID                            Skills   Exp      Edu      Soft     Total   
+  ----------------------------------------------------------------------------
+  1     f28bb141-c3fa-4a3d-9295-80d20367f5e3      75.0    78.9    60.0    60.0    72.6
+  2     018ef800-076c-4a00-8afe-eec0d52c30c8      76.9    75.4    60.0    60.0    72.2
+  3     c16851cd-0dbb-45ad-9bba-493163e3eccf      76.8    75.4    60.0    60.0    72.1
+  4     69375bc3-4b89-4568-8380-0c679fe4eb63      76.1    75.4    60.0    60.0    71.8
+  5     b75bfe16-902a-4e47-8d1b-f4fc90535a86      73.8    76.5    60.0    60.0    71.3
+--------------------------------------------------------------------------------
+
+  CANDIDATE #1 — f28bb141-c3fa-4a3d-9295-80d20367f5e3
+  Final Score: 72.6/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Strong technical skill alignment (score: 75)
+    - Relevant professional experience (score: 79)
+
+  [!] Missing Requirements:
+    - machine learning
+    - data analysis
+
+  ----------------------------------------
+
+  CANDIDATE #2 — 018ef800-076c-4a00-8afe-eec0d52c30c8
+  Final Score: 72.2/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Strong technical skill alignment (score: 77)
+    - Relevant professional experience (score: 75)
+
+  ----------------------------------------
+
+  CANDIDATE #3 — c16851cd-0dbb-45ad-9bba-493163e3eccf
+  Final Score: 72.1/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Strong technical skill alignment (score: 77)
+    - Relevant professional experience (score: 75)
+
+  ----------------------------------------
+
+  CANDIDATE #4 — 69375bc3-4b89-4568-8380-0c679fe4eb63
+  Final Score: 71.8/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Strong technical skill alignment (score: 76)
+    - Relevant professional experience (score: 75)
+
+  [!] Missing Requirements:
+    - machine learning
+    - data analysis
+
+  ----------------------------------------
+
+  CANDIDATE #5 — b75bfe16-902a-4e47-8d1b-f4fc90535a86
+  Final Score: 71.3/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Relevant professional experience (score: 76)
+
+  [!] Missing Requirements:
+    - machine learning
+    - data analysis
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

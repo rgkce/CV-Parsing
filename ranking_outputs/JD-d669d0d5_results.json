@@ -1,0 +1,144 @@
+{
+  "job_id": "JD-d669d0d5",
+  "job_description": "Python developer with machine learning and data analysis experience",
+  "parsed_jd": {
+    "required_skills": [
+      "machine learning",
+      "data analysis",
+      "python"
+    ],
+    "preferred_skills": [],
+    "required_experience": [],
+    "education_requirements": [],
+    "soft_skills": []
+  },
+  "timestamp": "2026-06-22T22:27:29.717970",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_id": "f28bb141-c3fa-4a3d-9295-80d20367f5e3",
+      "final_score": 72.6,
+      "section_scores": {
+        "skills_score": 75.0,
+        "experience_score": 78.9,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "f28bb141-c3fa-4a3d-9295-80d20367f5e3",
+        "llm_score": 73,
+        "strengths": [
+          "Strong technical skill alignment (score: 75)",
+          "Relevant professional experience (score: 79)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "machine learning",
+          "data analysis"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_id": "018ef800-076c-4a00-8afe-eec0d52c30c8",
+      "final_score": 72.2,
+      "section_scores": {
+        "skills_score": 76.9,
+        "experience_score": 75.4,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "018ef800-076c-4a00-8afe-eec0d52c30c8",
+        "llm_score": 72,
+        "strengths": [
+          "Strong technical skill alignment (score: 77)",
+          "Relevant professional experience (score: 75)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_id": "c16851cd-0dbb-45ad-9bba-493163e3eccf",
+      "final_score": 72.1,
+      "section_scores": {
+        "skills_score": 76.8,
+        "experience_score": 75.4,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "c16851cd-0dbb-45ad-9bba-493163e3eccf",
+        "llm_score": 72,
+        "strengths": [
+          "Strong technical skill alignment (score: 77)",
+          "Relevant professional experience (score: 75)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_id": "69375bc3-4b89-4568-8380-0c679fe4eb63",
+      "final_score": 71.8,
+      "section_scores": {
+        "skills_score": 76.1,
+        "experience_score": 75.4,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "69375bc3-4b89-4568-8380-0c679fe4eb63",
+        "llm_score": 72,
+        "strengths": [
+          "Strong technical skill alignment (score: 76)",
+          "Relevant professional experience (score: 75)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "machine learning",
+          "data analysis"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_id": "b75bfe16-902a-4e47-8d1b-f4fc90535a86",
+      "final_score": 71.3,
+      "section_scores": {
+        "skills_score": 73.8,
+        "experience_score": 76.5,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "b75bfe16-902a-4e47-8d1b-f4fc90535a86",
+        "llm_score": 71,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Relevant professional experience (score: 76)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "machine learning",
+          "data analysis"
+        ],
+        "recommendation": "Good Match"
+      }
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "job_id": "JD-243e7d11",
+  "job_description": "AutoCAD ve SAP2000 bilen, santiye deneyimi olan insaat muhendisi",
+  "parsed_jd": {
+    "required_skills": [
+      "autocad",
+      "sap2000"
+    ],
+    "preferred_skills": [],
+    "required_experience": [],
+    "education_requirements": [],
+    "soft_skills": []
+  },
+  "timestamp": "2026-06-22T22:28:47.581102",
+  "total_candidates_evaluated": 2,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_id": "7fb4d4ee-79d2-4ca2-8921-ccc41dc084c0",
+      "final_score": 69.9,
+      "section_scores": {
+        "skills_score": 79.4,
+        "experience_score": 66.2,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "7fb4d4ee-79d2-4ca2-8921-ccc41dc084c0",
+        "llm_score": 70,
+        "strengths": [
+          "Strong technical skill alignment (score: 79)",
+          "Some relevant experience found (score: 66)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_id": "4029e938-5660-402d-ac04-98acf9fa517b",
+      "final_score": 68.3,
+      "section_scores": {
+        "skills_score": 74.5,
+        "experience_score": 67.2,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "4029e938-5660-402d-ac04-98acf9fa517b",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Some relevant experience found (score: 67)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "sap2000"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    }
+  ]
+}
