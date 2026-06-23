@@ -57,7 +57,7 @@ DEFAULT_WEIGHTS = {
 #  RETRIEVAL
 # ─────────────────────────────────────────────
 
-TOP_K = 5
+TOP_K = 10
 
 # RRF (Reciprocal Rank Fusion) constant. Industry standard is 60.
 RRF_K = 60
@@ -76,7 +76,7 @@ MIN_SCORE_THRESHOLD = 0.79
 # is more than this value below the top score are filtered out.
 # This implements "relative relevance" — only return results that
 # are close to the best match.
-MAX_SCORE_DROP = 0.02
+MAX_SCORE_DROP = 0.04
 
 # Batch size for sentence-transformer encoding
 ENCODE_BATCH_SIZE = 32

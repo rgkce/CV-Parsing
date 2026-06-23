@@ -8223,10 +8223,31 @@ def process_cv(file_path: Path) -> dict:
         contact["email"] = "cetinyy@gmail.com"
         contact["phone"] = "+90 536 380 64 10"
 
+    # ── Step 8f: Extract candidate name ───────────────────────────────────────
+    def extract_candidate_name(raw: str, stem: str) -> str:
+        # First check filename
+        name_from_file = stem.replace("_", " ").replace("-", " ").strip().title()
+        # If it looks like a valid name (2-4 words, no digits), use it
+        if 2 <= len(name_from_file.split()) <= 4 and not any(c.isdigit() for c in name_from_file):
+            return name_from_file
+            
+        # Fallback to first few lines of text
+        for line in raw.split('\n')[:5]:
+            line = line.strip()
+            if 4 < len(line) < 30:
+                words = line.split()
+                if 2 <= len(words) <= 4 and all(w.isalpha() for w in words):
+                    return line.title()
+                    
+        return name_from_file if name_from_file else "Bilinmeyen Aday"
+        
+    candidate_name = extract_candidate_name(original_raw, file_path.stem)
+
     # ── Step 9: assemble record ───────────────────────────────────────────────
     # We enforce a strict key order for the output JSON
     record = {
         "resume_id": resume_id,
+        "name": candidate_name,
         "file_path": file_path_str,
         "raw_text": original_raw,
         "sections": {

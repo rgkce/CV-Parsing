@@ -1,0 +1,11 @@
+================================================================================
+  QUERY: Python developer
+  WEIGHTS: {'title': 0.15, 'skills': 0.35, 'experience': 0.25, 'education': 0.05, 'summary': 0.1, 'projects': 0.1}
+================================================================================
+  Rank  Name                          Resume ID                               Score     Matched Sections
+  ----------------------------------------------------------------------------------------------------------
+  1     RUMEYSA DiLAN GOKGCE  Flutte  cc55109a-e5e7-480b-bc2d-bcc0a274f49b    0.8200    experience, projects, skills, summary, title
+          +-- section scores: education=0.783, experience=0.803, projects=0.800, skills=0.830, summary=0.849, title=0.832
+  2     BERKAY SENGUL  SOFTWARE ENGI  9c1250c9-fea8-4b95-91f2-c72a5dcd061f    0.8278    experience, projects, skills, summary, title
+          +-- section scores: education=0.791, experience=0.820, projects=0.827, skills=0.834, summary=0.845, title=0.828
+================================================================================

@@ -67,15 +67,16 @@ def print_results(
     print(f"  WEIGHTS: {weights}")
     print("=" * 80)
     print(
-        f"  {'Rank':<6}{'Resume ID':<40}{'Score':<10}{'Matched Sections'}"
+        f"  {'Rank':<6}{'Name':<30}{'Resume ID':<40}{'Score':<10}{'Matched Sections'}"
     )
-    print("  " + "-" * 76)
+    print("  " + "-" * 106)
 
     for i, result in enumerate(results, 1):
         rid = result["resume_id"]
+        name = result.get("name", "Bilinmeyen Aday")[:28]
         score = result["score"]
         matched = ", ".join(result["matched_sections"]) or "-"
-        print(f"  {i:<6}{rid:<40}{score:<10.4f}{matched}")
+        print(f"  {i:<6}{name:<30}{rid:<40}{score:<10.4f}{matched}")
 
         # Show per-section breakdown
         if result.get("section_scores"):
@@ -182,6 +183,13 @@ def main() -> None:
     # ── Run queries ───────────────────────────
     queries = [args.query] if args.query else SAMPLE_QUERIES
 
+    import os
+    import hashlib
+    from pathlib import Path
+    
+    out_dir = Path("search_outputs")
+    out_dir.mkdir(parents=True, exist_ok=True)
+
     all_results = []
     for query in queries:
         results = run_single_query(
@@ -191,10 +199,45 @@ def main() -> None:
             bm25=bm25,
             resume_ids_bm25=resume_ids_bm25
         )
-        all_results.append({"query": query, "results": results})
+        
+        # Generate query ID
+        h = hashlib.md5(query.encode("utf-8")).hexdigest()[:8]
+        query_id = f"Q-{h}"
+        
+        all_results.append({"query_id": query_id, "query": query, "results": results})
 
         if not args.json_output:
             print_results(query, results, weights)
+            
+        # Save Text Report
+        report_path = out_dir / f"{query_id}_report.txt"
+        with open(report_path, "w", encoding="utf-8") as f:
+            f.write("=" * 80 + "\n")
+            f.write(f"  QUERY: {query}\n")
+            f.write(f"  WEIGHTS: {weights}\n")
+            f.write("=" * 80 + "\n")
+            f.write(f"  {'Rank':<6}{'Name':<30}{'Resume ID':<40}{'Score':<10}{'Matched Sections'}\n")
+            f.write("  " + "-" * 106 + "\n")
+            for i, result in enumerate(results, 1):
+                rid = result["resume_id"]
+                name = result.get("name", "Bilinmeyen Aday")[:28]
+                score = result["score"]
+                matched = ", ".join(result["matched_sections"]) or "-"
+                f.write(f"  {i:<6}{name:<30}{rid:<40}{score:<10.4f}{matched}\n")
+                
+                if result.get("section_scores"):
+                    parts = [f"{s}={v:.3f}" for s, v in sorted(result["section_scores"].items())]
+                    f.write(f"  {'':>6}  +-- section scores: {', '.join(parts)}\n")
+            f.write("=" * 80 + "\n")
+            
+        logger.info("Saved text report -> %s", report_path)
+            
+        # Save JSON Report
+        json_path = out_dir / f"{query_id}_results.json"
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump({"query_id": query_id, "query": query, "weights": weights, "results": results}, f, ensure_ascii=False, indent=2)
+            
+        logger.info("Saved JSON results -> %s", json_path)
 
     if args.json_output:
         print(json.dumps(all_results, ensure_ascii=False, indent=2))

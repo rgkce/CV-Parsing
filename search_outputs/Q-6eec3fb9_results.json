@@ -1,0 +1,243 @@
+{
+  "query_id": "Q-6eec3fb9",
+  "query": "software engineer",
+  "weights": {
+    "title": 0.15,
+    "skills": 0.35,
+    "experience": 0.25,
+    "education": 0.05,
+    "summary": 0.1,
+    "projects": 0.1
+  },
+  "results": [
+    {
+      "resume_id": "b4395367-fe25-4f38-b76a-e8937c78368a",
+      "name": "Berkay Sengul",
+      "score": 0.8363,
+      "matched_sections": [
+        "education",
+        "experience",
+        "projects",
+        "skills",
+        "summary",
+        "title"
+      ],
+      "section_scores": {
+        "skills": 0.8236,
+        "education": 0.8344,
+        "title": 0.8894,
+        "experience": 0.8144,
+        "summary": 0.8862,
+        "projects": 0.807
+      },
+      "dense_rank": 1,
+      "bm25_score": 7.998974051856408,
+      "sparse_rank": 1,
+      "rrf_score": 0.03279
+    },
+    {
+      "resume_id": "acb2d112-4005-4291-bd29-2294e24322d6",
+      "name": "Rumeysa Dilan Gokgce",
+      "score": 0.8241,
+      "matched_sections": [
+        "education",
+        "experience",
+        "skills",
+        "summary",
+        "title"
+      ],
+      "section_scores": {
+        "skills": 0.8198,
+        "education": 0.8185,
+        "title": 0.8555,
+        "experience": 0.8169,
+        "summary": 0.8462,
+        "projects": 0.7902
+      },
+      "dense_rank": 4,
+      "bm25_score": 6.334127807489068,
+      "sparse_rank": 2,
+      "rrf_score": 0.03175
+    },
+    {
+      "resume_id": "3af97c1f-a2a1-4b34-bc96-3f3fd356f7af",
+      "name": "Yuksel Cosgun Resume",
+      "score": 0.8332,
+      "matched_sections": [
+        "education",
+        "experience",
+        "skills",
+        "summary",
+        "title"
+      ],
+      "section_scores": {
+        "skills": 0.8368,
+        "education": 0.8094,
+        "title": 0.9083,
+        "experience": 0.8045,
+        "summary": 0.8403,
+        "projects": 0.7848
+      },
+      "dense_rank": 2,
+      "bm25_score": 3.968441307371085,
+      "sparse_rank": 7,
+      "rrf_score": 0.03105
+    },
+    {
+      "resume_id": "23b956e1-e054-4851-9e04-3a7ff2dc2e34",
+      "name": "Rumeysa Dilan Gokge",
+      "score": 0.8215,
+      "matched_sections": [
+        "education",
+        "experience",
+        "skills",
+        "summary",
+        "title"
+      ],
+      "section_scores": {
+        "skills": 0.8093,
+        "education": 0.8018,
+        "title": 0.8484,
+        "experience": 0.8201,
+        "summary": 0.8682,
+        "projects": 0.79
+      },
+      "dense_rank": 6,
+      "bm25_score": 5.878588249729647,
+      "sparse_rank": 3,
+      "rrf_score": 0.03102
+    },
+    {
+      "resume_id": "cc94d591-f61a-4746-a5a9-9fb4e0cfa5b9",
+      "name": "Tugba Zengin",
+      "score": 0.8225,
+      "matched_sections": [
+        "experience",
+        "summary",
+        "title"
+      ],
+      "section_scores": {
+        "skills": 0.7938,
+        "education": 0.7745,
+        "title": 0.8741,
+        "experience": 0.8566,
+        "summary": 0.8265,
+        "projects": 0.7807
+      },
+      "dense_rank": 5,
+      "bm25_score": 4.276035396762776,
+      "sparse_rank": 5,
+      "rrf_score": 0.03077
+    },
+    {
+      "resume_id": "c6cdeb78-28f5-4a3c-82e0-7ba6be60d841",
+      "name": "Irem Sude Uslu",
+      "score": 0.8317,
+      "matched_sections": [
+        "education",
+        "experience",
+        "skills",
+        "title"
+      ],
+      "section_scores": {
+        "skills": 0.8191,
+        "education": 0.813,
+        "title": 0.8466,
+        "experience": 0.8589,
+        "projects": 0.7944
+      },
+      "dense_rank": 3,
+      "bm25_score": 1.4304654944974635,
+      "sparse_rank": 14,
+      "rrf_score": 0.02939
+    },
+    {
+      "resume_id": "023ba152-a722-41c6-a523-9f84a259a3a2",
+      "name": "Muhammed Fatih Ulasli",
+      "score": 0.807,
+      "matched_sections": [
+        "education",
+        "projects",
+        "skills",
+        "title"
+      ],
+      "section_scores": {
+        "skills": 0.812,
+        "education": 0.8253,
+        "title": 0.8325,
+        "experience": 0.784,
+        "summary": 0.7975,
+        "projects": 0.8095
+      },
+      "dense_rank": 17,
+      "bm25_score": 5.300778616913765,
+      "sparse_rank": 4,
+      "rrf_score": 0.02861
+    },
+    {
+      "resume_id": "3701a915-28b3-4b60-af97-65a4d6fa0bfc",
+      "name": "Vedat Acat",
+      "score": 0.814,
+      "matched_sections": [
+        "skills",
+        "title"
+      ],
+      "section_scores": {
+        "skills": 0.8221,
+        "education": 0.7861,
+        "title": 0.8401,
+        "summary": 0.797,
+        "projects": 0.777
+      },
+      "dense_rank": 13,
+      "bm25_score": 2.9374271012651443,
+      "sparse_rank": 8,
+      "rrf_score": 0.0284
+    },
+    {
+      "resume_id": "07e27baf-b4ef-4e08-9b06-4e4e63adf709",
+      "name": "Ufuk Yuceyurt",
+      "score": 0.8173,
+      "matched_sections": [
+        "experience",
+        "skills",
+        "title"
+      ],
+      "section_scores": {
+        "skills": 0.8217,
+        "education": 0.7845,
+        "title": 0.8409,
+        "experience": 0.8163,
+        "summary": 0.786
+      },
+      "dense_rank": 11,
+      "bm25_score": 2.5132095637065484,
+      "sparse_rank": 10,
+      "rrf_score": 0.02837
+    },
+    {
+      "resume_id": "e476b282-9265-419f-86ee-d4642f77436b",
+      "name": "Cem Tatlıdil",
+      "score": 0.8074,
+      "matched_sections": [
+        "education",
+        "projects",
+        "skills",
+        "summary",
+        "title"
+      ],
+      "section_scores": {
+        "skills": 0.8097,
+        "education": 0.8075,
+        "title": 0.8741,
+        "experience": 0.7535,
+        "summary": 0.8364,
+        "projects": 0.805
+      },
+      "dense_rank": 16,
+      "bm25_score": 4.088417395750738,
+      "sparse_rank": 6,
+      "rrf_score": 0.02831
+    }
+  ]
+}

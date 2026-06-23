@@ -231,9 +231,13 @@ def rank_candidates(
 
     # Clean up candidate data before report (remove large raw data)
     report_candidates = []
+    import os
     for cand in scored_candidates:
+        candidate_name = cand["candidate_data"].get("name", "Bilinmeyen Aday")
+
         report_candidates.append({
             "candidate_id": cand["candidate_id"],
+            "candidate_name": candidate_name,
             "final_score": cand["final_score"],
             "section_scores": cand["section_scores"],
             "llm_explanation": cand["llm_explanation"],

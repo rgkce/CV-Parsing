@@ -25,11 +25,36 @@ def tokenize_text(text: str) -> List[str]:
     # Split by non-alphanumeric
     tokens = re.findall(r'\w+', text)
     
+    # English-Turkish Synonym Expansion Mapping
+    SYNONYMS = {
+        "yazılım": ["yazılım", "software"],
+        "software": ["yazılım", "software"],
+        "geliştirici": ["geliştirici", "developer"],
+        "developer": ["geliştirici", "developer"],
+        "mühendis": ["mühendis", "engineer"],
+        "engineer": ["mühendis", "engineer"],
+        "veri": ["veri", "data"],
+        "data": ["veri", "data"],
+        "ağ": ["ağ", "network"],
+        "network": ["ağ", "network"],
+        "güvenlik": ["güvenlik", "security"],
+        "security": ["güvenlik", "security"],
+        "tasarım": ["tasarım", "design"],
+        "design": ["tasarım", "design"],
+    }
+    
+    expanded_tokens = []
+    for t in tokens:
+        if t in SYNONYMS:
+            expanded_tokens.extend(SYNONYMS[t])
+        else:
+            expanded_tokens.append(t)
+            
     # Remove extremely common generic titles that ruin keyword matching
     stopwords = {"mühendisi", "mühendis", "mühendisliği", "uzmanı", "öğrencisi", "geliştirici"}
-    tokens = [t for t in tokens if t not in stopwords]
+    expanded_tokens = [t for t in expanded_tokens if t not in stopwords]
     
-    return tokens
+    return expanded_tokens
 
 def build_bm25_index(dataset: List[Dict[str, Any]]) -> Tuple[BM25Okapi, List[str]]:
     """

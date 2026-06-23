@@ -1,0 +1,27 @@
+================================================================================
+  QUERY: software engineer
+  WEIGHTS: {'title': 0.15, 'skills': 0.35, 'experience': 0.25, 'education': 0.05, 'summary': 0.1, 'projects': 0.1}
+================================================================================
+  Rank  Name                          Resume ID                               Score     Matched Sections
+  ----------------------------------------------------------------------------------------------------------
+  1     Berkay Sengul                 b4395367-fe25-4f38-b76a-e8937c78368a    0.8363    education, experience, projects, skills, summary, title
+          +-- section scores: education=0.834, experience=0.814, projects=0.807, skills=0.824, summary=0.886, title=0.889
+  2     Rumeysa Dilan Gokgce          acb2d112-4005-4291-bd29-2294e24322d6    0.8241    education, experience, skills, summary, title
+          +-- section scores: education=0.819, experience=0.817, projects=0.790, skills=0.820, summary=0.846, title=0.856
+  3     Yuksel Cosgun Resume          3af97c1f-a2a1-4b34-bc96-3f3fd356f7af    0.8332    education, experience, skills, summary, title
+          +-- section scores: education=0.809, experience=0.804, projects=0.785, skills=0.837, summary=0.840, title=0.908
+  4     Rumeysa Dilan Gokge           23b956e1-e054-4851-9e04-3a7ff2dc2e34    0.8215    education, experience, skills, summary, title
+          +-- section scores: education=0.802, experience=0.820, projects=0.790, skills=0.809, summary=0.868, title=0.848
+  5     Tugba Zengin                  cc94d591-f61a-4746-a5a9-9fb4e0cfa5b9    0.8225    experience, summary, title
+          +-- section scores: education=0.774, experience=0.857, projects=0.781, skills=0.794, summary=0.827, title=0.874
+  6     Irem Sude Uslu                c6cdeb78-28f5-4a3c-82e0-7ba6be60d841    0.8317    education, experience, skills, title
+          +-- section scores: education=0.813, experience=0.859, projects=0.794, skills=0.819, title=0.847
+  7     Muhammed Fatih Ulasli         023ba152-a722-41c6-a523-9f84a259a3a2    0.8070    education, projects, skills, title
+          +-- section scores: education=0.825, experience=0.784, projects=0.809, skills=0.812, summary=0.797, title=0.833
+  8     Vedat Acat                    3701a915-28b3-4b60-af97-65a4d6fa0bfc    0.8140    skills, title
+          +-- section scores: education=0.786, projects=0.777, skills=0.822, summary=0.797, title=0.840
+  9     Ufuk Yuceyurt                 07e27baf-b4ef-4e08-9b06-4e4e63adf709    0.8173    experience, skills, title
+          +-- section scores: education=0.784, experience=0.816, skills=0.822, summary=0.786, title=0.841
+  10    Cem Tatlıdil                  e476b282-9265-419f-86ee-d4642f77436b    0.8074    education, projects, skills, summary, title
+          +-- section scores: education=0.807, experience=0.753, projects=0.805, skills=0.810, summary=0.836, title=0.874
+================================================================================

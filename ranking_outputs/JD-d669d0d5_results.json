@@ -12,7 +12,7 @@
     "education_requirements": [],
     "soft_skills": []
   },
-  "timestamp": "2026-06-22T22:27:29.717970",
+  "timestamp": "2026-06-23T23:37:13.085377",
   "total_candidates_evaluated": 5,
   "scoring_weights": {
     "skills": 0.4,
@@ -23,6 +23,7 @@
   "top_candidates": [
     {
       "rank": 1,
+      "candidate_name": "Yuksel Cosgun Backend",
       "candidate_id": "f28bb141-c3fa-4a3d-9295-80d20367f5e3",
       "final_score": 72.6,
       "section_scores": {
@@ -48,6 +49,7 @@
     },
     {
       "rank": 2,
+      "candidate_name": "Yuksel Cosgun Ml Data",
       "candidate_id": "018ef800-076c-4a00-8afe-eec0d52c30c8",
       "final_score": 72.2,
       "section_scores": {
@@ -70,6 +72,7 @@
     },
     {
       "rank": 3,
+      "candidate_name": "Yuksel Cosgun Resume",
       "candidate_id": "c16851cd-0dbb-45ad-9bba-493163e3eccf",
       "final_score": 72.1,
       "section_scores": {
@@ -92,6 +95,7 @@
     },
     {
       "rank": 4,
+      "candidate_name": "Yuksel Cosgun Qa Automation",
       "candidate_id": "69375bc3-4b89-4568-8380-0c679fe4eb63",
       "final_score": 71.8,
       "section_scores": {
@@ -117,27 +121,28 @@
     },
     {
       "rank": 5,
-      "candidate_id": "b75bfe16-902a-4e47-8d1b-f4fc90535a86",
-      "final_score": 71.3,
+      "candidate_name": "Rumeysa Gokce 2",
+      "candidate_id": "b5d57129-b464-43bb-a001-ee279a6304a3",
+      "final_score": 69.7,
       "section_scores": {
-        "skills_score": 73.8,
-        "experience_score": 76.5,
+        "skills_score": 73.2,
+        "experience_score": 72.6,
         "education_score": 60.0,
         "soft_skill_score": 60.0
       },
       "llm_explanation": {
-        "candidate_id": "b75bfe16-902a-4e47-8d1b-f4fc90535a86",
-        "llm_score": 71,
+        "candidate_id": "b5d57129-b464-43bb-a001-ee279a6304a3",
+        "llm_score": 70,
         "strengths": [
-          "Moderate technical skill match (score: 74)",
-          "Relevant professional experience (score: 76)"
+          "Moderate technical skill match (score: 73)",
+          "Some relevant experience found (score: 73)"
         ],
         "weaknesses": [],
         "missing_requirements": [
           "machine learning",
           "data analysis"
         ],
-        "recommendation": "Good Match"
+        "recommendation": "Moderate Match"
       }
     }
   ]

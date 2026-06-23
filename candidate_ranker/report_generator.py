@@ -54,22 +54,24 @@ def _generate_text_report(
     lines.append("")
 
     # Ranking table
-    lines.append("-" * 80)
+    lines.append("-" * 105)
     header = (
-        f"  {'Rank':<6}{'Candidate ID':<40}"
+        f"  {'Rank':<6}{'Candidate Name':<25}{'Candidate ID':<38}"
         f"{'Skills':<9}{'Exp':<9}{'Edu':<9}{'Soft':<9}{'Total':<8}"
     )
     lines.append(header)
-    lines.append("  " + "-" * 76)
+    lines.append("  " + "-" * 101)
 
     for i, cand in enumerate(ranked_candidates, 1):
         scores = cand.get("section_scores", {})
         rid = cand.get("candidate_id", "?")
+        name = cand.get("candidate_name", "Unknown")
         # Truncate long IDs for table display
-        rid_display = rid[:36] + ".." if len(rid) > 38 else rid
+        rid_display = rid[:34] + ".." if len(rid) > 36 else rid
+        name_display = name[:22] + ".." if len(name) > 24 else name
 
         row = (
-            f"  {i:<6}{rid_display:<40}"
+            f"  {i:<6}{name_display:<25}{rid_display:<38}"
             f"{scores.get('skills_score', 0):>6.1f}  "
             f"{scores.get('experience_score', 0):>6.1f}  "
             f"{scores.get('education_score', 0):>6.1f}  "
@@ -78,12 +80,13 @@ def _generate_text_report(
         )
         lines.append(row)
 
-    lines.append("-" * 80)
+    lines.append("-" * 105)
     lines.append("")
 
     # Per-candidate details
     for i, cand in enumerate(ranked_candidates, 1):
-        lines.append(f"  CANDIDATE #{i} — {cand.get('candidate_id', '?')}")
+        name = cand.get("candidate_name", "Unknown")
+        lines.append(f"  CANDIDATE #{i} — {name} ({cand.get('candidate_id', '?')})")
         lines.append(f"  Final Score: {cand.get('final_score', 0):.1f}/100")
 
         explanation = cand.get("llm_explanation", {})
@@ -158,6 +161,7 @@ def _generate_json_output(
         "top_candidates": [
             {
                 "rank": i + 1,
+                "candidate_name": cand.get("candidate_name", "Unknown"),
                 "candidate_id": cand.get("candidate_id", "?"),
                 "final_score": cand.get("final_score", 0),
                 "section_scores": cand.get("section_scores", {}),

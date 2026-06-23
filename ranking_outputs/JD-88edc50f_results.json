@@ -1,0 +1,140 @@
+{
+  "job_id": "JD-88edc50f",
+  "job_description": "Python developer with ML experience",
+  "parsed_jd": {
+    "required_skills": [
+      "python"
+    ],
+    "preferred_skills": [],
+    "required_experience": [],
+    "education_requirements": [],
+    "soft_skills": []
+  },
+  "timestamp": "2026-06-24T00:17:49.121223",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "Yuksel Cosgun Backend",
+      "candidate_id": "1547065e-1180-4a19-878b-55ef4099f9a0",
+      "final_score": 72.3,
+      "section_scores": {
+        "skills_score": 77.7,
+        "experience_score": 75.0,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "1547065e-1180-4a19-878b-55ef4099f9a0",
+        "llm_score": 72,
+        "strengths": [
+          "Strong technical skill alignment (score: 78)",
+          "Relevant professional experience (score: 75)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "Yuksel Cosgun Resume",
+      "candidate_id": "3af97c1f-a2a1-4b34-bc96-3f3fd356f7af",
+      "final_score": 71.1,
+      "section_scores": {
+        "skills_score": 77.9,
+        "experience_score": 71.2,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "3af97c1f-a2a1-4b34-bc96-3f3fd356f7af",
+        "llm_score": 71,
+        "strengths": [
+          "Strong technical skill alignment (score: 78)",
+          "Some relevant experience found (score: 71)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "Rumeysa Dilan Gokgce",
+      "candidate_id": "acb2d112-4005-4291-bd29-2294e24322d6",
+      "final_score": 70.9,
+      "section_scores": {
+        "skills_score": 77.3,
+        "experience_score": 71.3,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "acb2d112-4005-4291-bd29-2294e24322d6",
+        "llm_score": 71,
+        "strengths": [
+          "Strong technical skill alignment (score: 77)",
+          "Some relevant experience found (score: 71)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "Yuksel Cosgun Ml Data",
+      "candidate_id": "3989e9ed-d0cd-4de3-9145-3974d30df5a6",
+      "final_score": 70.5,
+      "section_scores": {
+        "skills_score": 76.5,
+        "experience_score": 71.2,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "3989e9ed-d0cd-4de3-9145-3974d30df5a6",
+        "llm_score": 70,
+        "strengths": [
+          "Strong technical skill alignment (score: 76)",
+          "Some relevant experience found (score: 71)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "Yuksel Cosgun Mobile",
+      "candidate_id": "a62d60d9-0cfd-4c83-aa53-a54172e253c5",
+      "final_score": 68.4,
+      "section_scores": {
+        "skills_score": 71.8,
+        "experience_score": 70.5,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "a62d60d9-0cfd-4c83-aa53-a54172e253c5",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Some relevant experience found (score: 70)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "python"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    }
+  ]
+}

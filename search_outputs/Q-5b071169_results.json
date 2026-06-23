@@ -1,0 +1,62 @@
+{
+  "query_id": "Q-5b071169",
+  "query": "Python developer",
+  "weights": {
+    "title": 0.15,
+    "skills": 0.35,
+    "experience": 0.25,
+    "education": 0.05,
+    "summary": 0.1,
+    "projects": 0.1
+  },
+  "results": [
+    {
+      "resume_id": "cc55109a-e5e7-480b-bc2d-bcc0a274f49b",
+      "name": "RUMEYSA DiLAN GOKGCE  Flutter Developer | Junior S",
+      "score": 0.82,
+      "matched_sections": [
+        "experience",
+        "projects",
+        "skills",
+        "summary",
+        "title"
+      ],
+      "section_scores": {
+        "experience": 0.803,
+        "title": 0.832,
+        "education": 0.7834,
+        "summary": 0.8485,
+        "skills": 0.8299,
+        "projects": 0.8
+      },
+      "dense_rank": 4,
+      "bm25_score": 4.344419229736216,
+      "sparse_rank": 1,
+      "rrf_score": 0.03202
+    },
+    {
+      "resume_id": "9c1250c9-fea8-4b95-91f2-c72a5dcd061f",
+      "name": "BERKAY SENGUL  SOFTWARE ENGINEER  bberkaysengul0O@",
+      "score": 0.8278,
+      "matched_sections": [
+        "experience",
+        "projects",
+        "skills",
+        "summary",
+        "title"
+      ],
+      "section_scores": {
+        "experience": 0.8198,
+        "title": 0.8283,
+        "education": 0.7914,
+        "summary": 0.8454,
+        "skills": 0.8335,
+        "projects": 0.8272
+      },
+      "dense_rank": 1,
+      "bm25_score": 1.302483360070278,
+      "sparse_rank": 11,
+      "rrf_score": 0.03048
+    }
+  ]
+}

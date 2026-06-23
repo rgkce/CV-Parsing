@@ -2,23 +2,23 @@
   CANDIDATE RANKING REPORT
 ================================================================================
   Job ID     : JD-d669d0d5
-  Date       : 2026-06-22 22:27
+  Date       : 2026-06-23 23:37
   Candidates : 5
 
   Job Description:
   Python developer with machine learning and data analysis experience
 
---------------------------------------------------------------------------------
-  Rank  Candidate ID                            Skills   Exp      Edu      Soft     Total   
-  ----------------------------------------------------------------------------
-  1     f28bb141-c3fa-4a3d-9295-80d20367f5e3      75.0    78.9    60.0    60.0    72.6
-  2     018ef800-076c-4a00-8afe-eec0d52c30c8      76.9    75.4    60.0    60.0    72.2
-  3     c16851cd-0dbb-45ad-9bba-493163e3eccf      76.8    75.4    60.0    60.0    72.1
-  4     69375bc3-4b89-4568-8380-0c679fe4eb63      76.1    75.4    60.0    60.0    71.8
-  5     b75bfe16-902a-4e47-8d1b-f4fc90535a86      73.8    76.5    60.0    60.0    71.3
---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     Yuksel Cosgun Backend    f28bb141-c3fa-4a3d-9295-80d20367f5e3    75.0    78.9    60.0    60.0    72.6
+  2     Yuksel Cosgun Ml Data    018ef800-076c-4a00-8afe-eec0d52c30c8    76.9    75.4    60.0    60.0    72.2
+  3     Yuksel Cosgun Resume     c16851cd-0dbb-45ad-9bba-493163e3eccf    76.8    75.4    60.0    60.0    72.1
+  4     Yuksel Cosgun Qa Autom.. 69375bc3-4b89-4568-8380-0c679fe4eb63    76.1    75.4    60.0    60.0    71.8
+  5     Rumeysa Gokce 2          b5d57129-b464-43bb-a001-ee279a6304a3    73.2    72.6    60.0    60.0    69.7
+---------------------------------------------------------------------------------------------------------
 
-  CANDIDATE #1 — f28bb141-c3fa-4a3d-9295-80d20367f5e3
+  CANDIDATE #1 — Yuksel Cosgun Backend (f28bb141-c3fa-4a3d-9295-80d20367f5e3)
   Final Score: 72.6/100
   Recommendation: Good Match
 
@@ -32,7 +32,7 @@
 
   ----------------------------------------
 
-  CANDIDATE #2 — 018ef800-076c-4a00-8afe-eec0d52c30c8
+  CANDIDATE #2 — Yuksel Cosgun Ml Data (018ef800-076c-4a00-8afe-eec0d52c30c8)
   Final Score: 72.2/100
   Recommendation: Good Match
 
@@ -42,7 +42,7 @@
 
   ----------------------------------------
 
-  CANDIDATE #3 — c16851cd-0dbb-45ad-9bba-493163e3eccf
+  CANDIDATE #3 — Yuksel Cosgun Resume (c16851cd-0dbb-45ad-9bba-493163e3eccf)
   Final Score: 72.1/100
   Recommendation: Good Match
 
@@ -52,7 +52,7 @@
 
   ----------------------------------------
 
-  CANDIDATE #4 — 69375bc3-4b89-4568-8380-0c679fe4eb63
+  CANDIDATE #4 — Yuksel Cosgun Qa Automation (69375bc3-4b89-4568-8380-0c679fe4eb63)
   Final Score: 71.8/100
   Recommendation: Good Match
 
@@ -66,13 +66,13 @@
 
   ----------------------------------------
 
-  CANDIDATE #5 — b75bfe16-902a-4e47-8d1b-f4fc90535a86
-  Final Score: 71.3/100
-  Recommendation: Good Match
+  CANDIDATE #5 — Rumeysa Gokce 2 (b5d57129-b464-43bb-a001-ee279a6304a3)
+  Final Score: 69.7/100
+  Recommendation: Moderate Match
 
   [+] Strengths:
-    - Moderate technical skill match (score: 74)
-    - Relevant professional experience (score: 76)
+    - Moderate technical skill match (score: 73)
+    - Some relevant experience found (score: 73)
 
   [!] Missing Requirements:
     - machine learning

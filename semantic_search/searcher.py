@@ -225,8 +225,21 @@ def combine_scores(
             if sim >= match_threshold:
                 matched.append(s)
 
+        # Extract name if dataset is provided
+        candidate_name = "Bilinmeyen Aday"
+        if dataset:
+            for item in dataset:
+                if item.get("resume_id") == resume_ids[idx]:
+                    candidate_name = item.get("name")
+                    if not candidate_name and "raw_text" in item:
+                        candidate_name = item["raw_text"][:50].replace('\n', ' ').strip()
+                    if not candidate_name:
+                        candidate_name = "Bilinmeyen Aday"
+                    break
+
         scored.append({
             "resume_id": resume_ids[idx],
+            "name": candidate_name,
             "score": round(final_score, 4),
             "matched_sections": sorted(matched),
             "section_scores": section_scores,
