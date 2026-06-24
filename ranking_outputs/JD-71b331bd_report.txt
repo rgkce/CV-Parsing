@@ -1,0 +1,541 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-71b331bd
+  Date       : 2026-06-24 23:15
+  Candidates : 32
+
+  Job Description:
+  We are looking for a Software Engineer with experience in Python, Django, Docker, and PostgreSQL. At least 2 years of experience required.
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     Yuksel Cosgun Backend    1547065e-1180-4a19-878b-55ef4099f9a0    75.2    70.8    60.0    60.0    69.9
+  2     Muhammed Fatih Ulasli    023ba152-a722-41c6-a523-9f84a259a3a2    74.2    71.7    60.0    60.0    69.8
+  3     Rumeysa Dilan Gokgce     acb2d112-4005-4291-bd29-2294e24322d6    74.2    70.1    60.0    60.0    69.2
+  4     Yuksel Cosgun Resume     3af97c1f-a2a1-4b34-bc96-3f3fd356f7af    74.2    69.2    60.0    60.0    68.9
+  5     Yuksel Cosgun Ml Data    3989e9ed-d0cd-4de3-9145-3974d30df5a6    74.0    69.2    60.0    60.0    68.8
+  6     Berkay Sengul            b4395367-fe25-4f38-b76a-e8937c78368a    74.1    68.6    60.0    60.0    68.7
+  7     Tugba Zengin             cc94d591-f61a-4746-a5a9-9fb4e0cfa5b9    71.5    71.8    60.0    60.0    68.7
+  8     Yuksel Cosgun Qa Autom.. 65b95051-426d-4b66-b2e1-1ec12b2d8970    73.8    69.2    60.0    60.0    68.7
+  9     Irem Sude Uslu           c6cdeb78-28f5-4a3c-82e0-7ba6be60d841    72.4    69.9    60.0    60.0    68.4
+  10    Mehmet Emre Arican       efedbd21-6247-409b-a20c-9ecfe03469bf    73.1    69.0    60.0    60.0    68.4
+  11    Rumeysa Dilan Gokge      23b956e1-e054-4851-9e04-3a7ff2dc2e34    72.0    69.7    60.0    60.0    68.2
+  12    Yuksel Cosgun Devops C.. 7cadd970-c621-4e1c-a25a-7da80b861c38    72.7    68.8    60.0    60.0    68.2
+  13    Kaan Olmez               080299a1-a1fc-45a4-ac99-b245a0fedd88    69.3    72.9    60.0    60.0    68.2
+  14    Muhammed Furkan Ozcan .. 78493c38-13a0-42a5-88e9-e883763461c5    73.7    67.5    60.0    60.0    68.1
+  15    Rumeysa Gokce 3          6eb97064-fdf7-44eb-a8e0-a157febf35fe    73.5    67.6    60.0    60.0    68.1
+  16    Ufuk Yuceyurt            07e27baf-b4ef-4e08-9b06-4e4e63adf709    71.8    69.1    60.0    60.0    67.9
+  17    Vedat Acat               3701a915-28b3-4b60-af97-65a4d6fa0bfc    74.7    65.9    60.0    60.0    67.9
+  18    Irem Celik               3ccedef7-d071-46e2-a862-b9f104068a0a    71.9    68.2    60.0    60.0    67.6
+  19    Sena Nur Morbel          9f43bd01-3c6f-4301-b20e-2b9fece43038    74.7    64.1    60.0    60.0    67.3
+  20    Muhammed Furkan Ozcan    4fb6072d-1099-43e9-a176-24db04aecabd    71.8    67.0    60.0    60.0    67.2
+  21    Emre Celik               ff7b6c10-36ec-46d0-9e33-9cfce44abcba    71.5    66.9    60.0    60.0    67.0
+  22    Yuksel Cosgun Mobile     a62d60d9-0cfd-4c83-aa53-a54172e253c5    69.8    67.3    60.0    60.0    66.5
+  23    Furkan Guner             77f8ed3f-a08e-4974-b930-6d9dec5478cc    68.2    68.4    60.0    60.0    66.2
+  24    Gizem Kilinc             b98f1b29-adb1-4334-b7ca-f73cf3eeb661    68.4    67.9    60.0    60.0    66.1
+  25    Muhammet Dogan           06502f78-727d-491f-9910-9f8fa385308b    69.8    65.9    60.0    60.0    66.0
+  26    Aziz Ekren               714da500-056d-4941-8bc5-cee6ab632a50    70.4    65.0    60.0    60.0    65.9
+  27    Nilsu Ak                 02967342-84ea-45fa-bc98-95952fe416b7    67.7    67.1    60.0    60.0    65.6
+  28    Omer Bugra Karakoc       66fdf306-b606-4a54-b5d7-e9d4a5ef9699    69.8    64.2    60.0    60.0    65.4
+  29    Ahmet Berat Bulduk       b9cceca1-6c30-480c-8b41-029071492fee    68.6    64.2    60.0    60.0    64.9
+  30    Beyza Aktas              f6410d34-fbf0-46ea-aee5-d7492447c06b    66.7     0.0    60.0    60.0    41.7
+  31    Zeliha Ayca Aydemir      cf004a59-18ce-4820-ae91-2c865327cb11     0.0    69.0    60.0    60.0    39.1
+  32    Nilsu Ak 2               98255169-c328-41d1-b502-5ab389d4e122     0.0    64.0    60.0    60.0    37.4
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — Yuksel Cosgun Backend (1547065e-1180-4a19-878b-55ef4099f9a0)
+  Final Score: 69.9/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Strong technical skill alignment (score: 75)
+    - Some relevant experience found (score: 71)
+
+  [!] Missing Requirements:
+    - django
+
+  ----------------------------------------
+
+  CANDIDATE #2 — Muhammed Fatih Ulasli (023ba152-a722-41c6-a523-9f84a259a3a2)
+  Final Score: 69.8/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Some relevant experience found (score: 72)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #3 — Rumeysa Dilan Gokgce (acb2d112-4005-4291-bd29-2294e24322d6)
+  Final Score: 69.2/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Some relevant experience found (score: 70)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #4 — Yuksel Cosgun Resume (3af97c1f-a2a1-4b34-bc96-3f3fd356f7af)
+  Final Score: 68.9/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Some relevant experience found (score: 69)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+
+  ----------------------------------------
+
+  CANDIDATE #5 — Yuksel Cosgun Ml Data (3989e9ed-d0cd-4de3-9145-3974d30df5a6)
+  Final Score: 68.8/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Some relevant experience found (score: 69)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+
+  ----------------------------------------
+
+  CANDIDATE #6 — Berkay Sengul (b4395367-fe25-4f38-b76a-e8937c78368a)
+  Final Score: 68.7/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Some relevant experience found (score: 69)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #7 — Tugba Zengin (cc94d591-f61a-4746-a5a9-9fb4e0cfa5b9)
+  Final Score: 68.7/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Some relevant experience found (score: 72)
+
+  [!] Missing Requirements:
+    - django
+    - python
+
+  ----------------------------------------
+
+  CANDIDATE #8 — Yuksel Cosgun Qa Automation (65b95051-426d-4b66-b2e1-1ec12b2d8970)
+  Final Score: 68.7/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Some relevant experience found (score: 69)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+
+  ----------------------------------------
+
+  CANDIDATE #9 — Irem Sude Uslu (c6cdeb78-28f5-4a3c-82e0-7ba6be60d841)
+  Final Score: 68.4/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Some relevant experience found (score: 70)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #10 — Mehmet Emre Arican (efedbd21-6247-409b-a20c-9ecfe03469bf)
+  Final Score: 68.4/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 73)
+    - Some relevant experience found (score: 69)
+
+  [!] Missing Requirements:
+    - django
+    - python
+
+  ----------------------------------------
+
+  CANDIDATE #11 — Rumeysa Dilan Gokge (23b956e1-e054-4851-9e04-3a7ff2dc2e34)
+  Final Score: 68.2/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Some relevant experience found (score: 70)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #12 — Yuksel Cosgun Devops Cloud (7cadd970-c621-4e1c-a25a-7da80b861c38)
+  Final Score: 68.2/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 73)
+    - Some relevant experience found (score: 69)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+
+  ----------------------------------------
+
+  CANDIDATE #13 — Kaan Olmez (080299a1-a1fc-45a4-ac99-b245a0fedd88)
+  Final Score: 68.2/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 69)
+    - Some relevant experience found (score: 73)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #14 — Muhammed Furkan Ozcan Mekatronik (78493c38-13a0-42a5-88e9-e883763461c5)
+  Final Score: 68.1/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Some relevant experience found (score: 68)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #15 — Rumeysa Gokce 3 (6eb97064-fdf7-44eb-a8e0-a157febf35fe)
+  Final Score: 68.1/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Some relevant experience found (score: 68)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #16 — Ufuk Yuceyurt (07e27baf-b4ef-4e08-9b06-4e4e63adf709)
+  Final Score: 67.9/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Some relevant experience found (score: 69)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #17 — Vedat Acat (3701a915-28b3-4b60-af97-65a4d6fa0bfc)
+  Final Score: 67.9/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 75)
+    - Some relevant experience found (score: 66)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #18 — Irem Celik (3ccedef7-d071-46e2-a862-b9f104068a0a)
+  Final Score: 67.6/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Some relevant experience found (score: 68)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #19 — Sena Nur Morbel (9f43bd01-3c6f-4301-b20e-2b9fece43038)
+  Final Score: 67.3/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 75)
+    - Some relevant experience found (score: 64)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #20 — Muhammed Furkan Ozcan (4fb6072d-1099-43e9-a176-24db04aecabd)
+  Final Score: 67.2/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Some relevant experience found (score: 67)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #21 — Emre Celik (ff7b6c10-36ec-46d0-9e33-9cfce44abcba)
+  Final Score: 67.0/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Some relevant experience found (score: 67)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #22 — Yuksel Cosgun Mobile (a62d60d9-0cfd-4c83-aa53-a54172e253c5)
+  Final Score: 66.5/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Some relevant experience found (score: 67)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #23 — Furkan Guner (77f8ed3f-a08e-4974-b930-6d9dec5478cc)
+  Final Score: 66.2/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 68)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #24 — Gizem Kilinc (b98f1b29-adb1-4334-b7ca-f73cf3eeb661)
+  Final Score: 66.1/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 68)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #25 — Muhammet Dogan (06502f78-727d-491f-9910-9f8fa385308b)
+  Final Score: 66.0/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Some relevant experience found (score: 66)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #26 — Aziz Ekren (714da500-056d-4941-8bc5-cee6ab632a50)
+  Final Score: 65.9/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Some relevant experience found (score: 65)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #27 — Nilsu Ak (02967342-84ea-45fa-bc98-95952fe416b7)
+  Final Score: 65.6/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 67)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #28 — Omer Bugra Karakoc (66fdf306-b606-4a54-b5d7-e9d4a5ef9699)
+  Final Score: 65.4/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Some relevant experience found (score: 64)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #29 — Ahmet Berat Bulduk (b9cceca1-6c30-480c-8b41-029071492fee)
+  Final Score: 64.9/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 69)
+    - Some relevant experience found (score: 64)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #30 — Beyza Aktas (f6410d34-fbf0-46ea-aee5-d7492447c06b)
+  Final Score: 41.7/100
+  Recommendation: Weak Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 67)
+
+  [-] Weaknesses:
+    - Limited relevant experience (score: 0)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #31 — Zeliha Ayca Aydemir (cf004a59-18ce-4820-ae91-2c865327cb11)
+  Final Score: 39.1/100
+  Recommendation: Not Recommended
+
+  [+] Strengths:
+    - Some relevant experience found (score: 69)
+
+  [-] Weaknesses:
+    - Low technical skill alignment (score: 0)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+  CANDIDATE #32 — Nilsu Ak 2 (98255169-c328-41d1-b502-5ab389d4e122)
+  Final Score: 37.4/100
+  Recommendation: Not Recommended
+
+  [+] Strengths:
+    - Some relevant experience found (score: 64)
+
+  [-] Weaknesses:
+    - Low technical skill alignment (score: 0)
+
+  [!] Missing Requirements:
+    - postgresql
+    - django
+    - python
+    - docker
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

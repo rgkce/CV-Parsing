@@ -38,7 +38,8 @@ LLM_MAX_TOKENS = 1024
 #  RETRIEVAL (how many candidates to rank)
 # ─────────────────────────────────────────────
 
-DEFAULT_TOP_K = 5
+DEFAULT_TOP_K = 30
+MIN_M3_RETRIEVAL_SCORE = 0.40  # Threshold to filter M3 results before passing to M4
 
 # ─────────────────────────────────────────────
 #  BILINGUAL KEYWORD DICTIONARIES

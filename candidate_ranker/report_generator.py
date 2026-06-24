@@ -31,6 +31,7 @@ def _generate_text_report(
     job_id: str,
     jd_text: str,
     ranked_candidates: List[Dict[str, Any]],
+    other_candidates: Optional[List[Dict[str, Any]]] = None,
 ) -> str:
     """
     Generate a recruiter-friendly text report with ranking table
@@ -124,6 +125,23 @@ def _generate_text_report(
     lines.append("=" * 80)
     lines.append("  END OF REPORT")
     lines.append("=" * 80)
+    
+    # Other / Rejected candidates (below threshold)
+    if other_candidates:
+        lines.append("")
+        lines.append("=" * 80)
+        lines.append("  OTHER EVALUATED CANDIDATES (DID NOT MEET MINIMUM RETRIEVAL THRESHOLD)")
+        lines.append("=" * 80)
+        lines.append("-" * 105)
+        lines.append(f"  {'Candidate Name':<30}{'Candidate ID':<45}{'Retrieval Score':<15}")
+        lines.append("  " + "-" * 101)
+        for cand in other_candidates:
+            c_name = cand.get("candidate_name", "Unknown")[:28]
+            c_id = cand.get("candidate_id", "?")[:42]
+            c_score = cand.get("retrieval_score", 0.0)
+            lines.append(f"  {c_name:<30}{c_id:<45}{c_score:.4f}")
+        lines.append("-" * 105)
+        lines.append("")
 
     return "\n".join(lines)
 
@@ -138,6 +156,7 @@ def _generate_json_output(
     jd_text: str,
     ranked_candidates: List[Dict[str, Any]],
     parsed_jd: Dict[str, Any],
+    other_candidates: Optional[List[Dict[str, Any]]] = None,
 ) -> Dict[str, Any]:
     """Build the structured JSON output."""
     return {
@@ -169,6 +188,7 @@ def _generate_json_output(
             }
             for i, cand in enumerate(ranked_candidates)
         ],
+        "other_candidates": other_candidates or []
     }
 
 
@@ -182,6 +202,7 @@ def generate_candidate_report(
     jd_text: str,
     ranked_candidates: List[Dict[str, Any]],
     parsed_jd: Dict[str, Any],
+    other_candidates: Optional[List[Dict[str, Any]]] = None,
     output_dir: Optional[str | Path] = None,
 ) -> Dict[str, Any]:
     """
@@ -203,6 +224,8 @@ def generate_candidate_report(
         ``section_scores``, ``llm_explanation``.
     parsed_jd : dict
         Parsed JD from ``parse_job_description()``.
+    other_candidates : list[dict], optional
+        Candidates that did not meet the minimum retrieval threshold.
     output_dir : str or Path, optional
         Where to save outputs. Defaults to ``ranking_outputs/``.
 
@@ -215,7 +238,7 @@ def generate_candidate_report(
     out_dir.mkdir(parents=True, exist_ok=True)
 
     # Generate JSON
-    json_output = _generate_json_output(job_id, jd_text, ranked_candidates, parsed_jd)
+    json_output = _generate_json_output(job_id, jd_text, ranked_candidates, parsed_jd, other_candidates)
 
     # Save JSON
     json_path = out_dir / f"{job_id}_results.json"
@@ -224,7 +247,7 @@ def generate_candidate_report(
     logger.info("Saved JSON results → %s", json_path)
 
     # Generate and save text report
-    text_report = _generate_text_report(job_id, jd_text, ranked_candidates)
+    text_report = _generate_text_report(job_id, jd_text, ranked_candidates, other_candidates)
 
     report_path = out_dir / f"{job_id}_report.txt"
     with open(report_path, "w", encoding="utf-8") as f:

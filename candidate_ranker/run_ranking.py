@@ -125,8 +125,9 @@ def rank_candidates(
 
     from semantic_search.run_query import run_single_query
     from semantic_search.config import DEFAULT_WEIGHTS as M3_WEIGHTS
+    from .config import MIN_M3_RETRIEVAL_SCORE
 
-    retrieval_results = run_single_query(
+    raw_retrieval_results = run_single_query(
         model, indexes, resume_ids, jd_text,
         weights=M3_WEIGHTS, top_k=top_k,
         dataset=dataset,
@@ -134,13 +135,29 @@ def rank_candidates(
         resume_ids_bm25=resume_ids_bm25,
     )
 
-    logger.info("  Retrieved %d candidates", len(retrieval_results))
+    # Filter out candidates below the dynamic threshold
+    retrieval_results = []
+    rejected_candidates = []
+    
+    for r in raw_retrieval_results:
+        if r["score"] >= MIN_M3_RETRIEVAL_SCORE:
+            retrieval_results.append(r)
+        else:
+            c_name = candidate_lookup.get(r["resume_id"], {}).get("name", "Bilinmeyen Aday")
+            rejected_candidates.append({
+                "candidate_id": r["resume_id"],
+                "candidate_name": c_name,
+                "retrieval_score": r["score"]
+            })
+
+    logger.info("  Retrieved %d candidates total, %d passed the score threshold (>= %.2f)", 
+                len(raw_retrieval_results), len(retrieval_results), MIN_M3_RETRIEVAL_SCORE)
     for r in retrieval_results:
         logger.info("    → %s (retrieval score: %.4f)", r["resume_id"], r["score"])
 
     if not retrieval_results:
-        logger.warning("No candidates retrieved — check query or dataset")
-        return {"job_id": job_id, "top_candidates": [], "error": "No candidates retrieved"}
+        logger.warning("No candidates retrieved (or none passed the threshold) — check query or dataset")
+        return {"job_id": job_id, "top_candidates": [], "other_candidates": rejected_candidates, "error": "No candidates passed retrieval threshold"}
 
     # ── Step 3: Parse job description ──
     logger.info("=" * 60)
@@ -244,7 +261,7 @@ def rank_candidates(
         })
 
     json_output = generate_candidate_report(
-        job_id, jd_text, report_candidates, parsed_jd,
+        job_id, jd_text, report_candidates, parsed_jd, other_candidates=rejected_candidates
     )
 
     elapsed = time.perf_counter() - t_start

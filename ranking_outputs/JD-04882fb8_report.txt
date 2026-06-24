@@ -1,0 +1,40 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-04882fb8
+  Date       : 2026-06-24 23:12
+  Candidates : 2
+
+  Job Description:
+  We are looking for an extremely specific candidate who has 15 years of experience in Cobol and Mainframe.
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     Muhammed Furkan Ozcan .. 78493c38-13a0-42a5-88e9-e883763461c5    76.0    66.3    60.0    60.0    68.6
+  2     Irem Celik               3ccedef7-d071-46e2-a862-b9f104068a0a    75.1    66.7    60.0    60.0    68.4
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — Muhammed Furkan Ozcan Mekatronik (78493c38-13a0-42a5-88e9-e883763461c5)
+  Final Score: 68.6/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Strong technical skill alignment (score: 76)
+    - Some relevant experience found (score: 66)
+
+  ----------------------------------------
+
+  CANDIDATE #2 — Irem Celik (3ccedef7-d071-46e2-a862-b9f104068a0a)
+  Final Score: 68.4/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Strong technical skill alignment (score: 75)
+    - Some relevant experience found (score: 67)
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

@@ -1,0 +1,70 @@
+{
+  "job_id": "JD-04882fb8",
+  "job_description": "We are looking for an extremely specific candidate who has 15 years of experience in Cobol and Mainframe.",
+  "parsed_jd": {
+    "required_skills": [],
+    "preferred_skills": [],
+    "required_experience": [
+      "15 years of experience"
+    ],
+    "education_requirements": [],
+    "soft_skills": []
+  },
+  "timestamp": "2026-06-24T23:12:11.831116",
+  "total_candidates_evaluated": 2,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "Muhammed Furkan Ozcan Mekatronik",
+      "candidate_id": "78493c38-13a0-42a5-88e9-e883763461c5",
+      "final_score": 68.6,
+      "section_scores": {
+        "skills_score": 76.0,
+        "experience_score": 66.3,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "78493c38-13a0-42a5-88e9-e883763461c5",
+        "llm_score": 69,
+        "strengths": [
+          "Strong technical skill alignment (score: 76)",
+          "Some relevant experience found (score: 66)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "Irem Celik",
+      "candidate_id": "3ccedef7-d071-46e2-a862-b9f104068a0a",
+      "final_score": 68.4,
+      "section_scores": {
+        "skills_score": 75.1,
+        "experience_score": 66.7,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "3ccedef7-d071-46e2-a862-b9f104068a0a",
+        "llm_score": 68,
+        "strengths": [
+          "Strong technical skill alignment (score: 75)",
+          "Some relevant experience found (score: 67)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Moderate Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

@@ -1,0 +1,902 @@
+{
+  "job_id": "JD-71b331bd",
+  "job_description": "We are looking for a Software Engineer with experience in Python, Django, Docker, and PostgreSQL. At least 2 years of experience required.",
+  "parsed_jd": {
+    "required_skills": [
+      "postgresql",
+      "django",
+      "python",
+      "docker"
+    ],
+    "preferred_skills": [],
+    "required_experience": [
+      "2 years of experience",
+      "at least 2 years"
+    ],
+    "education_requirements": [],
+    "soft_skills": []
+  },
+  "timestamp": "2026-06-24T23:15:36.656179",
+  "total_candidates_evaluated": 32,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "Yuksel Cosgun Backend",
+      "candidate_id": "1547065e-1180-4a19-878b-55ef4099f9a0",
+      "final_score": 69.9,
+      "section_scores": {
+        "skills_score": 75.2,
+        "experience_score": 70.8,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "1547065e-1180-4a19-878b-55ef4099f9a0",
+        "llm_score": 70,
+        "strengths": [
+          "Strong technical skill alignment (score: 75)",
+          "Some relevant experience found (score: 71)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "django"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "Muhammed Fatih Ulasli",
+      "candidate_id": "023ba152-a722-41c6-a523-9f84a259a3a2",
+      "final_score": 69.8,
+      "section_scores": {
+        "skills_score": 74.2,
+        "experience_score": 71.7,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "023ba152-a722-41c6-a523-9f84a259a3a2",
+        "llm_score": 70,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Some relevant experience found (score: 72)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "Rumeysa Dilan Gokgce",
+      "candidate_id": "acb2d112-4005-4291-bd29-2294e24322d6",
+      "final_score": 69.2,
+      "section_scores": {
+        "skills_score": 74.2,
+        "experience_score": 70.1,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "acb2d112-4005-4291-bd29-2294e24322d6",
+        "llm_score": 69,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Some relevant experience found (score: 70)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "Yuksel Cosgun Resume",
+      "candidate_id": "3af97c1f-a2a1-4b34-bc96-3f3fd356f7af",
+      "final_score": 68.9,
+      "section_scores": {
+        "skills_score": 74.2,
+        "experience_score": 69.2,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "3af97c1f-a2a1-4b34-bc96-3f3fd356f7af",
+        "llm_score": 69,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Some relevant experience found (score: 69)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "Yuksel Cosgun Ml Data",
+      "candidate_id": "3989e9ed-d0cd-4de3-9145-3974d30df5a6",
+      "final_score": 68.8,
+      "section_scores": {
+        "skills_score": 74.0,
+        "experience_score": 69.2,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "3989e9ed-d0cd-4de3-9145-3974d30df5a6",
+        "llm_score": 69,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Some relevant experience found (score: 69)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 6,
+      "candidate_name": "Berkay Sengul",
+      "candidate_id": "b4395367-fe25-4f38-b76a-e8937c78368a",
+      "final_score": 68.7,
+      "section_scores": {
+        "skills_score": 74.1,
+        "experience_score": 68.6,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "b4395367-fe25-4f38-b76a-e8937c78368a",
+        "llm_score": 69,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Some relevant experience found (score: 69)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 7,
+      "candidate_name": "Tugba Zengin",
+      "candidate_id": "cc94d591-f61a-4746-a5a9-9fb4e0cfa5b9",
+      "final_score": 68.7,
+      "section_scores": {
+        "skills_score": 71.5,
+        "experience_score": 71.8,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "cc94d591-f61a-4746-a5a9-9fb4e0cfa5b9",
+        "llm_score": 69,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Some relevant experience found (score: 72)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "django",
+          "python"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 8,
+      "candidate_name": "Yuksel Cosgun Qa Automation",
+      "candidate_id": "65b95051-426d-4b66-b2e1-1ec12b2d8970",
+      "final_score": 68.7,
+      "section_scores": {
+        "skills_score": 73.8,
+        "experience_score": 69.2,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "65b95051-426d-4b66-b2e1-1ec12b2d8970",
+        "llm_score": 69,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Some relevant experience found (score: 69)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 9,
+      "candidate_name": "Irem Sude Uslu",
+      "candidate_id": "c6cdeb78-28f5-4a3c-82e0-7ba6be60d841",
+      "final_score": 68.4,
+      "section_scores": {
+        "skills_score": 72.4,
+        "experience_score": 69.9,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "c6cdeb78-28f5-4a3c-82e0-7ba6be60d841",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Some relevant experience found (score: 70)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 10,
+      "candidate_name": "Mehmet Emre Arican",
+      "candidate_id": "efedbd21-6247-409b-a20c-9ecfe03469bf",
+      "final_score": 68.4,
+      "section_scores": {
+        "skills_score": 73.1,
+        "experience_score": 69.0,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "efedbd21-6247-409b-a20c-9ecfe03469bf",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 73)",
+          "Some relevant experience found (score: 69)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "django",
+          "python"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 11,
+      "candidate_name": "Rumeysa Dilan Gokge",
+      "candidate_id": "23b956e1-e054-4851-9e04-3a7ff2dc2e34",
+      "final_score": 68.2,
+      "section_scores": {
+        "skills_score": 72.0,
+        "experience_score": 69.7,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "23b956e1-e054-4851-9e04-3a7ff2dc2e34",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Some relevant experience found (score: 70)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 12,
+      "candidate_name": "Yuksel Cosgun Devops Cloud",
+      "candidate_id": "7cadd970-c621-4e1c-a25a-7da80b861c38",
+      "final_score": 68.2,
+      "section_scores": {
+        "skills_score": 72.7,
+        "experience_score": 68.8,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "7cadd970-c621-4e1c-a25a-7da80b861c38",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 73)",
+          "Some relevant experience found (score: 69)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 13,
+      "candidate_name": "Kaan Olmez",
+      "candidate_id": "080299a1-a1fc-45a4-ac99-b245a0fedd88",
+      "final_score": 68.2,
+      "section_scores": {
+        "skills_score": 69.3,
+        "experience_score": 72.9,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "080299a1-a1fc-45a4-ac99-b245a0fedd88",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 69)",
+          "Some relevant experience found (score: 73)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 14,
+      "candidate_name": "Muhammed Furkan Ozcan Mekatronik",
+      "candidate_id": "78493c38-13a0-42a5-88e9-e883763461c5",
+      "final_score": 68.1,
+      "section_scores": {
+        "skills_score": 73.7,
+        "experience_score": 67.5,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "78493c38-13a0-42a5-88e9-e883763461c5",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Some relevant experience found (score: 68)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 15,
+      "candidate_name": "Rumeysa Gokce 3",
+      "candidate_id": "6eb97064-fdf7-44eb-a8e0-a157febf35fe",
+      "final_score": 68.1,
+      "section_scores": {
+        "skills_score": 73.5,
+        "experience_score": 67.6,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "6eb97064-fdf7-44eb-a8e0-a157febf35fe",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Some relevant experience found (score: 68)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 16,
+      "candidate_name": "Ufuk Yuceyurt",
+      "candidate_id": "07e27baf-b4ef-4e08-9b06-4e4e63adf709",
+      "final_score": 67.9,
+      "section_scores": {
+        "skills_score": 71.8,
+        "experience_score": 69.1,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "07e27baf-b4ef-4e08-9b06-4e4e63adf709",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Some relevant experience found (score: 69)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 17,
+      "candidate_name": "Vedat Acat",
+      "candidate_id": "3701a915-28b3-4b60-af97-65a4d6fa0bfc",
+      "final_score": 67.9,
+      "section_scores": {
+        "skills_score": 74.7,
+        "experience_score": 65.9,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "3701a915-28b3-4b60-af97-65a4d6fa0bfc",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 75)",
+          "Some relevant experience found (score: 66)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 18,
+      "candidate_name": "Irem Celik",
+      "candidate_id": "3ccedef7-d071-46e2-a862-b9f104068a0a",
+      "final_score": 67.6,
+      "section_scores": {
+        "skills_score": 71.9,
+        "experience_score": 68.2,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "3ccedef7-d071-46e2-a862-b9f104068a0a",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Some relevant experience found (score: 68)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 19,
+      "candidate_name": "Sena Nur Morbel",
+      "candidate_id": "9f43bd01-3c6f-4301-b20e-2b9fece43038",
+      "final_score": 67.3,
+      "section_scores": {
+        "skills_score": 74.7,
+        "experience_score": 64.1,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "9f43bd01-3c6f-4301-b20e-2b9fece43038",
+        "llm_score": 67,
+        "strengths": [
+          "Moderate technical skill match (score: 75)",
+          "Some relevant experience found (score: 64)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 20,
+      "candidate_name": "Muhammed Furkan Ozcan",
+      "candidate_id": "4fb6072d-1099-43e9-a176-24db04aecabd",
+      "final_score": 67.2,
+      "section_scores": {
+        "skills_score": 71.8,
+        "experience_score": 67.0,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "4fb6072d-1099-43e9-a176-24db04aecabd",
+        "llm_score": 67,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Some relevant experience found (score: 67)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 21,
+      "candidate_name": "Emre Celik",
+      "candidate_id": "ff7b6c10-36ec-46d0-9e33-9cfce44abcba",
+      "final_score": 67.0,
+      "section_scores": {
+        "skills_score": 71.5,
+        "experience_score": 66.9,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "ff7b6c10-36ec-46d0-9e33-9cfce44abcba",
+        "llm_score": 67,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Some relevant experience found (score: 67)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 22,
+      "candidate_name": "Yuksel Cosgun Mobile",
+      "candidate_id": "a62d60d9-0cfd-4c83-aa53-a54172e253c5",
+      "final_score": 66.5,
+      "section_scores": {
+        "skills_score": 69.8,
+        "experience_score": 67.3,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "a62d60d9-0cfd-4c83-aa53-a54172e253c5",
+        "llm_score": 66,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Some relevant experience found (score: 67)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 23,
+      "candidate_name": "Furkan Guner",
+      "candidate_id": "77f8ed3f-a08e-4974-b930-6d9dec5478cc",
+      "final_score": 66.2,
+      "section_scores": {
+        "skills_score": 68.2,
+        "experience_score": 68.4,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "77f8ed3f-a08e-4974-b930-6d9dec5478cc",
+        "llm_score": 66,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 68)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 24,
+      "candidate_name": "Gizem Kilinc",
+      "candidate_id": "b98f1b29-adb1-4334-b7ca-f73cf3eeb661",
+      "final_score": 66.1,
+      "section_scores": {
+        "skills_score": 68.4,
+        "experience_score": 67.9,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "b98f1b29-adb1-4334-b7ca-f73cf3eeb661",
+        "llm_score": 66,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 68)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 25,
+      "candidate_name": "Muhammet Dogan",
+      "candidate_id": "06502f78-727d-491f-9910-9f8fa385308b",
+      "final_score": 66.0,
+      "section_scores": {
+        "skills_score": 69.8,
+        "experience_score": 65.9,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "06502f78-727d-491f-9910-9f8fa385308b",
+        "llm_score": 66,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Some relevant experience found (score: 66)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 26,
+      "candidate_name": "Aziz Ekren",
+      "candidate_id": "714da500-056d-4941-8bc5-cee6ab632a50",
+      "final_score": 65.9,
+      "section_scores": {
+        "skills_score": 70.4,
+        "experience_score": 65.0,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "714da500-056d-4941-8bc5-cee6ab632a50",
+        "llm_score": 66,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Some relevant experience found (score: 65)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 27,
+      "candidate_name": "Nilsu Ak",
+      "candidate_id": "02967342-84ea-45fa-bc98-95952fe416b7",
+      "final_score": 65.6,
+      "section_scores": {
+        "skills_score": 67.7,
+        "experience_score": 67.1,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "02967342-84ea-45fa-bc98-95952fe416b7",
+        "llm_score": 66,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 67)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 28,
+      "candidate_name": "Omer Bugra Karakoc",
+      "candidate_id": "66fdf306-b606-4a54-b5d7-e9d4a5ef9699",
+      "final_score": 65.4,
+      "section_scores": {
+        "skills_score": 69.8,
+        "experience_score": 64.2,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "66fdf306-b606-4a54-b5d7-e9d4a5ef9699",
+        "llm_score": 65,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Some relevant experience found (score: 64)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 29,
+      "candidate_name": "Ahmet Berat Bulduk",
+      "candidate_id": "b9cceca1-6c30-480c-8b41-029071492fee",
+      "final_score": 64.9,
+      "section_scores": {
+        "skills_score": 68.6,
+        "experience_score": 64.2,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "b9cceca1-6c30-480c-8b41-029071492fee",
+        "llm_score": 65,
+        "strengths": [
+          "Moderate technical skill match (score: 69)",
+          "Some relevant experience found (score: 64)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 30,
+      "candidate_name": "Beyza Aktas",
+      "candidate_id": "f6410d34-fbf0-46ea-aee5-d7492447c06b",
+      "final_score": 41.7,
+      "section_scores": {
+        "skills_score": 66.7,
+        "experience_score": 0.0,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "f6410d34-fbf0-46ea-aee5-d7492447c06b",
+        "llm_score": 42,
+        "strengths": [
+          "Moderate technical skill match (score: 67)"
+        ],
+        "weaknesses": [
+          "Limited relevant experience (score: 0)"
+        ],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Weak Match"
+      }
+    },
+    {
+      "rank": 31,
+      "candidate_name": "Zeliha Ayca Aydemir",
+      "candidate_id": "cf004a59-18ce-4820-ae91-2c865327cb11",
+      "final_score": 39.1,
+      "section_scores": {
+        "skills_score": 0.0,
+        "experience_score": 69.0,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "cf004a59-18ce-4820-ae91-2c865327cb11",
+        "llm_score": 39,
+        "strengths": [
+          "Some relevant experience found (score: 69)"
+        ],
+        "weaknesses": [
+          "Low technical skill alignment (score: 0)"
+        ],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Not Recommended"
+      }
+    },
+    {
+      "rank": 32,
+      "candidate_name": "Nilsu Ak 2",
+      "candidate_id": "98255169-c328-41d1-b502-5ab389d4e122",
+      "final_score": 37.4,
+      "section_scores": {
+        "skills_score": 0.0,
+        "experience_score": 64.0,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "98255169-c328-41d1-b502-5ab389d4e122",
+        "llm_score": 37,
+        "strengths": [
+          "Some relevant experience found (score: 64)"
+        ],
+        "weaknesses": [
+          "Low technical skill alignment (score: 0)"
+        ],
+        "missing_requirements": [
+          "postgresql",
+          "django",
+          "python",
+          "docker"
+        ],
+        "recommendation": "Not Recommended"
+      }
+    }
+  ],
+  "other_candidates": []
+}
