@@ -3892,6 +3892,35 @@ def _extract_multi_column(page, words: list[dict]) -> str:
 # ── 1e. Main PDF extraction orchestrator ─────────────────────────────────────
 
 
+
+def validate_and_refine_extracted_fields(rec: dict) -> dict:
+    # Prevent truncated one-word universities
+    edu = rec["sections"].get("education", "")
+    if edu:
+        lines = edu.split("\n")
+        refined_lines = []
+        for i, line in enumerate(lines):
+            if len(line.split()) == 1 and line.isalpha() and i > 0:
+                refined_lines[-1] += " " + line
+            else:
+                refined_lines.append(line)
+        rec["sections"]["education"] = "\n".join(refined_lines)
+        
+    # Deduplicate skills
+    skills = rec["sections"].get("skills", "")
+    if skills:
+        skill_list = [s.strip() for s in skills.split("\n") if s.strip()]
+        seen = set()
+        dedup = []
+        for s in skill_list:
+            s_lower = s.lower()
+            if s_lower not in seen:
+                seen.add(s_lower)
+                dedup.append(s)
+        rec["sections"]["skills"] = "\n".join(dedup)
+        
+    return rec
+
 def extract_text_pdf(file_path: str) -> tuple[str, str]:
     """
     Extract text from a PDF file using layout-aware column reconstruction.
@@ -4193,11 +4222,7 @@ def clean_text(text: str, language: str = "tr") -> str:
     # Strip all other http/https/www URLs — they are almost always noise in CVs
     # (portfolio links, job board footers, PDF metadata artifacts).
     def _filter_url(m: re.Match) -> str:
-        url = m.group(0)
-        url_lower = url.lower()
-        if "linkedin.com" in url_lower or "github.com" in url_lower:
-            return url
-        return ""  # drop noise URL
+        return m.group(0)
 
     text = re.sub(
         r"https?://[^\s]+|www\.[^\s]+", _filter_url, text, flags=re.IGNORECASE
@@ -4276,6 +4301,58 @@ def clean_text(text: str, language: str = "tr") -> str:
 _EXP_HEADER_YEAR = re.compile(r"\b(20\d{2}|19\d{2})\b")
 _EXP_HEADER_DASH = re.compile(r"\s*[-–—]\s*")
 
+
+
+def group_education_blocks(education_text: str) -> str:
+    if not education_text: return education_text
+    lines = [l.strip() for l in education_text.splitlines() if l.strip()]
+    if not lines: return education_text
+    
+    blocks = []
+    current_block = []
+    _YEAR = re.compile(r"\b(?:19|20)\d{2}\b")
+    for line in lines:
+        if _YEAR.search(line):
+            if current_block:
+                blocks.append(current_block)
+            current_block = [line]
+        else:
+            current_block.append(line)
+    if current_block:
+        blocks.append(current_block)
+        
+    merged_blocks = []
+    for block in blocks:
+        merged_blocks.append(", ".join(block))
+    return "\n".join(merged_blocks)
+
+def group_project_blocks(projects_text: str) -> str:
+    if not projects_text: return projects_text
+    lines = [l.strip() for l in projects_text.splitlines() if l.strip()]
+    if not lines: return projects_text
+    
+    blocks = []
+    current_block = []
+    for line in lines:
+        if len(line) < 60 and not line[0].islower() and "http" not in line and not line.startswith("-"):
+            if current_block:
+                blocks.append(current_block)
+            current_block = [line]
+        else:
+            current_block.append(line)
+    if current_block:
+        blocks.append(current_block)
+        
+    merged_blocks = []
+    for block in blocks:
+        if not block: continue
+        title = block[0]
+        desc = " ".join(block[1:])
+        if desc:
+            merged_blocks.append(f"{title} | {desc}")
+        else:
+            merged_blocks.append(title)
+    return "\n".join(merged_blocks)
 
 def group_experience_blocks(experience_text: str) -> str:
     """
@@ -6224,6 +6301,7 @@ def extract_contact_info(text: str) -> dict[str, str]:
         "phone": "",
         "linkedin": "",
         "github": "",
+        "website": "",
     }
 
     # ── FIX 7: Strip references section to avoid reference contact false positives ──
@@ -6362,6 +6440,18 @@ def extract_contact_info(text: str) -> dict[str, str]:
             full = "https://" + full
         contact["github"] = full
 
+        # Extract website
+    website_match = re.search(r"https?://[^\s]+|www\.[^\s]+", contact_search_text, re.IGNORECASE)
+    if website_match:
+        urls = re.findall(r"https?://[^\s]+|www\.[^\s]+", contact_search_text, re.IGNORECASE)
+        for u in urls:
+            u_lower = u.lower()
+            if "linkedin.com" not in u_lower and "github.com" not in u_lower:
+                full_w = u
+                if not full_w.startswith("http"):
+                    full_w = "https://" + full_w
+                contact["website"] = full_w.strip().rstrip(".,;?!():\"'{}|-–")
+                break
     return contact
 
 
@@ -6672,7 +6762,11 @@ def process_cv(file_path: Path) -> dict:
             if not _kw_val and _st_val:
                 sections[_sec] = _st_val
             elif _kw_val and _st_val and len(_st_val) < len(_kw_val) * 0.75 and _sec != "summary":
-                sections[_sec] = _st_val
+                # Only override if the new structured value is sufficiently detailed.
+                # This prevents replacing a correctly grouped multi-line section with 
+                # a single fragmented line (e.g. just "Üniversitesi") due to bad heuristics.
+                if len(_st_val.split("\n")) > 1 or len(_st_val.split()) > 3:
+                    sections[_sec] = _st_val
     except Exception as _e:
         logger.debug(f"  [structured_pipeline] skipped: {_e}")
 
@@ -6723,6 +6817,10 @@ def process_cv(file_path: Path) -> dict:
     # blocks: "Company - City - Year | Job Title Description".
     if sections.get("experience"):
         sections["experience"] = group_experience_blocks(sections["experience"])
+    if sections.get("education"):
+        sections["education"] = group_education_blocks(sections["education"])
+    if sections.get("projects"):
+        sections["projects"] = group_project_blocks(sections["projects"])
 
     # ── Step 7: photo detection ───────────────────────────────────────────────
     has_photo = False
@@ -8266,7 +8364,7 @@ def process_cv(file_path: Path) -> dict:
         },
         "section_confidence": section_confidence,
         "contact": contact,
-        "has_photo": has_photo,
+        "profile_photo": has_photo,
         "language": language, # Using the value detected earlier
         "source_format": source_format,
     }
@@ -8276,6 +8374,7 @@ def process_cv(file_path: Path) -> dict:
         f"format={source_format}, lang={language}, "
         f"photo={has_photo}, chars={len(cleaned_text)}"
     )
+    record = validate_and_refine_extracted_fields(record)
     return record
 
 
