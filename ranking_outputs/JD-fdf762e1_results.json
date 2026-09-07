@@ -1,0 +1,111 @@
+{
+  "job_id": "JD-fdf762e1",
+  "job_description": "We are looking for a Python Developer with experience in Django, REST APIs, and PostgreSQL. Familiarity with Docker and AWS is a plus.",
+  "parsed_jd": {
+    "required_skills": [
+      "postgresql",
+      "rest api",
+      "django",
+      "python"
+    ],
+    "preferred_skills": [
+      "docker",
+      "aws"
+    ],
+    "required_experience": [],
+    "education_requirements": [],
+    "soft_skills": []
+  },
+  "timestamp": "2026-09-07T21:50:11.851414",
+  "total_candidates_evaluated": 3,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "Ozan Ahmet Dede",
+      "candidate_id": "ef08a2ef-aa32-4a2e-99ec-83d54537afd0",
+      "final_score": 69.9,
+      "section_scores": {
+        "skills_score": 69.8,
+        "experience_score": 77.0,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "ef08a2ef-aa32-4a2e-99ec-83d54537afd0",
+        "llm_score": 70,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Relevant professional experience (score: 77)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "rest api",
+          "django"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "Rumeysa Gokce",
+      "candidate_id": "1da0663f-e331-4463-9fca-d8cc287c0780",
+      "final_score": 68.7,
+      "section_scores": {
+        "skills_score": 73.1,
+        "experience_score": 69.9,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "1da0663f-e331-4463-9fca-d8cc287c0780",
+        "llm_score": 69,
+        "strengths": [
+          "Moderate technical skill match (score: 73)",
+          "Some relevant experience found (score: 70)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "django"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "Irem Sude Uslu",
+      "candidate_id": "cf102e06-4092-4e59-a173-3cea91523027",
+      "final_score": 67.7,
+      "section_scores": {
+        "skills_score": 71.1,
+        "experience_score": 69.2,
+        "education_score": 60.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "cf102e06-4092-4e59-a173-3cea91523027",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 71)",
+          "Some relevant experience found (score: 69)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "rest api",
+          "django",
+          "python"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

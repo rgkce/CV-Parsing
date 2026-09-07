@@ -1,0 +1,13 @@
+================================================================================
+  QUERY: Python Developer
+  WEIGHTS: {'title': 0.15, 'skills': 0.35, 'experience': 0.25, 'education': 0.05, 'summary': 0.1, 'projects': 0.1}
+================================================================================
+  Rank  Name                          Resume ID                               Score     Matched Sections
+  ----------------------------------------------------------------------------------------------------------
+  1     Bilinmeyen Aday               acb2d112-4005-4291-bd29-2294e24322d6    0.8235    experience, projects, skills, summary, title
+          +-- section scores: education=0.790, experience=0.810, projects=0.804, skills=0.827, summary=0.850, title=0.844
+  2     Bilinmeyen Aday               23b956e1-e054-4851-9e04-3a7ff2dc2e34    0.8197    experience, skills, summary, title
+          +-- section scores: education=0.794, experience=0.812, projects=0.798, skills=0.822, summary=0.838, title=0.837
+  3     Bilinmeyen Aday               b4395367-fe25-4f38-b76a-e8937c78368a    0.8313    experience, projects, skills, summary, title
+          +-- section scores: education=0.797, experience=0.827, projects=0.827, skills=0.833, summary=0.851, title=0.835
+================================================================================
