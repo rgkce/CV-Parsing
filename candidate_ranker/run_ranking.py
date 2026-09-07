@@ -45,6 +45,9 @@ import time
 import hashlib
 from typing import Dict, List
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from .config import DEFAULT_SCORING_WEIGHTS, DEFAULT_TOP_K
 from .jd_parser import parse_job_description
 from .matcher import calculate_section_similarity

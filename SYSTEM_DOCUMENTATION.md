@@ -681,7 +681,7 @@ python -m candidate_ranker.run_ranking --jd "..." --skip-llm
 
 ```powershell
 # Gemini API key ayarla (PowerShell)
-$env:GOOGLE_API_KEY = "AIzaSy..."
+$env:GOOGLE_API_KEY = "..."
 
 # Artık LLM açıklamaları otomatik aktif
 python -m candidate_ranker.run_ranking --jd "..."

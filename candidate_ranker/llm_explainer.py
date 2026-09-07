@@ -29,6 +29,9 @@ import logging
 import os
 from typing import Any, Dict, List
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from .config import LLM_MAX_TOKENS, LLM_MODEL, LLM_TEMPERATURE
 
 logger = logging.getLogger(__name__)

@@ -2301,6 +2301,19 @@ _HEADING_DICT: Dict[str, List[str]] = {
         "uzmanlik alanlari",
         "uzmanlık alanları",
         "bilgi birikimi",
+        "araclar",
+        "araçlar",
+        "isletim sistemleri",
+        "işletim sistemleri",
+        "metodolojiler",
+        "veritabanlart",
+        "veritabanlari",
+        "veritabanları",
+        "beceri ve ilgi alanlari",
+        "beceri ve ilgi alanları",
+        "beceri ve ilgi alanlarim",
+        "beceriler ve ilgi alanlari",
+        "beceriler ve ilgi alanları",
     ],
     "projects": [
         "projects",
@@ -4585,6 +4598,23 @@ def _is_section_heading(line: str) -> Optional[str]:
     if not norm:
         return None
 
+    # Sub-headers that should switch section context
+    sub_headers = {
+        "araclar": "skills",
+        "araçlar": "skills",
+        "isletim sistemleri": "skills",
+        "işletim sistemleri": "skills",
+        "metodolojiler": "skills",
+        "veritabanlart": "skills",
+        "veritabanlari": "skills",
+        "veritabanları": "skills",
+        "teknik beceriler": "skills",
+        "programlama dilleri": "skills"
+    }
+    
+    if norm in sub_headers:
+        return sub_headers[norm]
+
     # Rule 3 — exact match on fully-normalised line
     if norm in _KW_NORM_MAP:
         return _KW_NORM_MAP[norm]
@@ -4728,6 +4758,14 @@ for _sd_heading, _sd_bucket in {
     "frameworks and tools": "skills",
     "frameworks & tools": "skills",
     "it skills": "skills",
+    "araclar": "skills",
+    "araçlar": "skills",
+    "isletim sistemleri": "skills",
+    "işletim sistemleri": "skills",
+    "metodolojiler": "skills",
+    "veritabanlart": "skills",
+    "veritabanlari": "skills",
+    "veritabanları": "skills",
     # ======================
     # SKILLS — DİL YETKİNLİKLERİ
     # ======================
@@ -6761,12 +6799,17 @@ def process_cv(file_path: Path) -> dict:
             # whereas parse_cv might truncate it via safety rules.
             if not _kw_val and _st_val:
                 sections[_sec] = _st_val
-            elif _kw_val and _st_val and len(_st_val) < len(_kw_val) * 0.75 and _sec != "summary":
-                # Only override if the new structured value is sufficiently detailed.
-                # This prevents replacing a correctly grouped multi-line section with 
-                # a single fragmented line (e.g. just "Üniversitesi") due to bad heuristics.
-                if len(_st_val.split("\n")) > 1 or len(_st_val.split()) > 3:
-                    sections[_sec] = _st_val
+            elif _kw_val and _st_val and _sec != "summary":
+                # Override if structured output is significantly shorter (fixed over-merging)
+                # OR if it is significantly longer (fixed under-merging / better capture)
+                is_shorter = len(_st_val) < len(_kw_val) * 0.75
+                is_longer = len(_st_val) > len(_kw_val) * 1.25
+                if is_shorter or is_longer:
+                    # Only override if the new structured value is sufficiently detailed.
+                    # This prevents replacing a correctly grouped multi-line section with 
+                    # a single fragmented line (e.g. just "Üniversitesi") due to bad heuristics.
+                    if len(_st_val.split("\n")) > 1 or len(_st_val.split()) > 3:
+                        sections[_sec] = _st_val
     except Exception as _e:
         logger.debug(f"  [structured_pipeline] skipped: {_e}")
 

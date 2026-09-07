@@ -117,3 +117,5 @@ ranking_outputs/JD-71b331bd_results.json
 
 ### Kapanış Cümlesi Önerisi:
 "Sonuç olarak hocam, bu proje PDF'in içindeki ham, karmaşık metinden başlayıp; otonom olarak aday puanlamaya, eksik becerilerin tespitine kadar giden tam teşekküllü bir AI ürünü haline gelmiştir."
+
+
