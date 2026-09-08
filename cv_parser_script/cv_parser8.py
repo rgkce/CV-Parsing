@@ -510,7 +510,10 @@ SECTION_KEYWORDS: dict[str, list[str]] = {
         "jobs",
         "my experience",
         "my work",
-    ],
+        "deneyimler",
+        "stajlar",
+        "staj deneyimleri",
+],
     "education": [
         # ======================
         # CORE
@@ -669,7 +672,11 @@ SECTION_KEYWORDS: dict[str, list[str]] = {
         "education info",
         "academic",
         "studies",
-    ],
+        "egitimler",
+        "eğitimler",
+        "akademik geçmiş",
+        "akademik gecmis",
+],
     "skills": [
         # ======================
         # CORE
@@ -832,7 +839,8 @@ SECTION_KEYWORDS: dict[str, list[str]] = {
         "expertise",
         "tools",
         "stack",
-    ],
+        "yeteneklerim",
+],
     "projects": [
         # ======================
         # CORE
@@ -955,7 +963,9 @@ SECTION_KEYWORDS: dict[str, list[str]] = {
         "portfolio projects",
         "work samples",
         "my projects",
-    ],
+        "projelerim",
+        "projelerimiz",
+],
 }
 
 # Turkish word list used for quick language heuristic
@@ -1887,7 +1897,7 @@ def repair_broken_emails(text: str, debug: bool = False) -> str:
         parts = original.split()
         if len(parts) > 1:
             first_token = parts[0].strip().rstrip("_:;.,-|")
-            if first_token.lower() in {"sj", "lo", "q", "e", "o"}:
+            if len(first_token) <= 2 or first_token.lower() in {"sj", "lo", "q", "e", "o", "ba", "s", "m", "mm", "mmee", "mmee."}:
                 # Find the start index of the actual email part
                 actual_start = original.find(parts[1])
                 if actual_start != -1:
@@ -2229,7 +2239,10 @@ _HEADING_DICT: Dict[str, List[str]] = {
         "tecrübe",
         "staj",
         "staj deneyimi",
-    ],
+        "deneyimler",
+        "stajlar",
+        "staj deneyimleri",
+],
     "education": [
         "education",
         "academic background",
@@ -2263,7 +2276,11 @@ _HEADING_DICT: Dict[str, List[str]] = {
         "yuksek lisans",
         "yüksek lisans",
         "doktora",
-    ],
+        "egitimler",
+        "eğitimler",
+        "akademik geçmiş",
+        "akademik gecmis",
+],
     "skills": [
         "skills",
         "technical skills",
@@ -2314,7 +2331,8 @@ _HEADING_DICT: Dict[str, List[str]] = {
         "beceri ve ilgi alanlarim",
         "beceriler ve ilgi alanlari",
         "beceriler ve ilgi alanları",
-    ],
+        "yeteneklerim",
+],
     "projects": [
         "projects",
         "personal projects",
@@ -2335,7 +2353,9 @@ _HEADING_DICT: Dict[str, List[str]] = {
         "proje çalışması",
         "projeler ve başarımlar",
         "projeler ve başarimlar",
-    ],
+        "projelerim",
+        "projelerimiz",
+],
     "languages": [
         "languages",
         "language skills",
@@ -4041,8 +4061,8 @@ def _is_text_broken(text: str) -> bool:
         return False
     
     # 1. Check for the replacement character (garbage)
-    if text.count('\ufffd') > 0:
-        logger.info("  [broken_check] Detected too many replacement characters.")
+    if text.count('\ufffd') > 0 or text.count('\u01ec') > 0 or 'Ǭ' in text or '' in text:
+        logger.info("  [broken_check] Detected too many replacement/mojibake characters.")
         return True
 
     # 2. Broken Turkish/Common Keywords
@@ -5513,7 +5533,10 @@ def _apply_safety_rules(sections: dict[str, list[str]]) -> dict[str, list[str]]:
         if _AS_PARA_RE.search(line) and _AS_SENTENCE_END.search(line.strip()):
             spill_to_summary.append(line)
         else:
-            clean_skills.append(line)
+            # Strip rating patterns like "* * * * x" or "o o o o +"
+            cleaned_skill = re.sub(r'^(?:[\*xXoO\-+]\s*){3,}', '', line).strip()
+            if cleaned_skill:
+                clean_skills.append(cleaned_skill)
     result["skills"] = clean_skills
     if spill_to_summary and len(result.get("summary", [])) < _SUMMARY_MAX_LINES:
         result.setdefault("summary", []).extend(spill_to_summary)
@@ -6404,13 +6427,15 @@ def extract_contact_info(text: str) -> dict[str, str]:
         # FIX 13a: Truncate merged text after TLD.
         # Catches "gmail.comwww.linkedin.co" → "gmail.com"
         # and "icloud.comYabancıDil1.Ana" → "icloud.com"
-        # Strategy: Find the FIRST valid TLD and cut everything after it.
+        # Strategy: Find the FIRST valid TLD in the DOMAIN PART and cut everything after it.
+        _at_idx = email_addr.find('@')
+        _domain_part = email_addr[_at_idx:] if _at_idx != -1 else email_addr
         _tld_trunc = re.search(
             r'\.(com|net|org|edu|gov|io|me|co\.uk|co\.in|co\.jp|co\.kr|info|biz|tr|app|dev)',
-            email_addr, re.I
+            _domain_part, re.I
         )
         if _tld_trunc:
-            _end_pos = _tld_trunc.end()
+            _end_pos = (_at_idx if _at_idx != -1 else 0) + _tld_trunc.end()
             # Check if there's trailing text after the TLD that shouldn't be there
             _trailing = email_addr[_end_pos:]
             if _trailing and not re.match(r'^(\.[a-z]{2})?$', _trailing, re.I):
