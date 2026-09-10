@@ -1,0 +1,115 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-d213c58e
+  Date       : 2026-09-10 13:39
+  Candidates : 5
+
+  Job Description:
+  Software Engineer - New Grad
+
+What you'll be doing
+We are looking for a passionate Backend Developer who is excited to architect and implement technology, tools and infrastructure that empower Y!
+•	Bu...
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     candidate_41             c2a36287-58ae-4503-a0ae-1bc271c23224    68.2    71.5    85.5    60.0    71.1
+  2     candidate_51             d9953ac4-3bb5-4868-929e-7eff2971bccf    67.5    71.9    86.2    60.0    71.1
+  3     candidate_40             067a9958-f281-40a3-9b38-8314ca66d1e5    67.8    70.0    85.8    60.0    70.5
+  4     candidate_06             a2f7d078-4307-4339-958c-7d946e391d25    69.4    67.3    84.7    60.0    70.0
+  5     candidate_22             db7b4dfc-218b-4fa0-a589-77fb3e0067d5    66.3    67.5    84.8    60.0    68.9
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — candidate_41 (c2a36287-58ae-4503-a0ae-1bc271c23224)
+  Final Score: 71.1/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 72)
+    - Education requirements satisfied (score: 86)
+
+  [!] Missing Requirements:
+    - data analysis
+    - devops
+    - ci/cd
+    - aws
+
+  ----------------------------------------
+
+  CANDIDATE #2 — candidate_51 (d9953ac4-3bb5-4868-929e-7eff2971bccf)
+  Final Score: 71.1/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 72)
+    - Education requirements satisfied (score: 86)
+
+  [!] Missing Requirements:
+    - data analysis
+    - devops
+    - ci/cd
+    - aws
+    - go
+
+  ----------------------------------------
+
+  CANDIDATE #3 — candidate_40 (067a9958-f281-40a3-9b38-8314ca66d1e5)
+  Final Score: 70.5/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 70)
+    - Education requirements satisfied (score: 86)
+
+  [!] Missing Requirements:
+    - data analysis
+    - devops
+    - ci/cd
+    - aws
+    - go
+
+  ----------------------------------------
+
+  CANDIDATE #4 — candidate_06 (a2f7d078-4307-4339-958c-7d946e391d25)
+  Final Score: 70.0/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 69)
+    - Some relevant experience found (score: 67)
+    - Education requirements satisfied (score: 85)
+
+  [!] Missing Requirements:
+    - data analysis
+    - devops
+    - ci/cd
+    - aws
+    - go
+
+  ----------------------------------------
+
+  CANDIDATE #5 — candidate_22 (db7b4dfc-218b-4fa0-a589-77fb3e0067d5)
+  Final Score: 68.9/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 66)
+    - Some relevant experience found (score: 68)
+    - Education requirements satisfied (score: 85)
+
+  [!] Missing Requirements:
+    - data analysis
+    - devops
+    - ci/cd
+    - aws
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

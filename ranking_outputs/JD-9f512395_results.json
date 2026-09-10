@@ -1,0 +1,145 @@
+{
+  "job_id": "JD-9f512395",
+  "job_description": "Game Developer (Remote) Full-Time\n\nCode the Next Hit: Bring Gameplay Ideas to Millions of Players.\nWe are a fully remote, passionate team of 40+ people, and we need a brilliant Unity Developer to help us build high-quality games that capture the attention of millions of mobile players worldwide. If you thrive in rapid development cycles and are obsessed with code quality and \"game juiciness,\" this role is for you!\nWhat You Will Do (Responsibilities)\nYou will be a core contributor to our casual game titles, focusing on speed, quality, and player experience:\n•\tGame Development: Building high-quality games for the millions of mobile players.\n•\tJuice & Polish Implementation: Translating gameplay mechanics into deeply satisfying player experiences by mastering game feel, particle effects, animations, screen shakes, haptics, and sound sync.\n•\tCode Quality: Designing and writing high quality and reliable code for our games.\n•\tPrototyping: Produce prototypes of gameplay ideas and features in short sprints.\n•\tImplementation: Designing and developing Unity UIs and implementing necessary APIs.\nWhat We Are Looking For (Skills & Experience)\nWe need a proactive, detail-oriented developer ready to jump into our fast-paced environment:\n•\tUnity Expertise: Experience in mobile game development on Unity3D.\n•\tDevelopment Speed: Experience in short and rapid development periods.\n•\tObsession with Game Feel & Juice: Deep understanding of visual/auditory feedback, game juice, timing, easing, screen juice, and tactile feedback (haptics) that elevate a good game into a great one.\n•\tCode Mastery: Ability to write clean, reusable, optimized code.\n•\tGame Sense: Strong grasp of game feeling and juiciness concepts.\n•\tPhysics Knowledge: Knowledge of physics-based game development.\n•\tPassion: Passion for playing mobile games and discovering their core loop.\n•\tCommunication: Excellent communication and organizational skills.\n•\tPortfolio: Having a portfolio of games developed so far is a big plus.\n•\tAttitude: Being proactive, a strong team worker, meticulous, and detail-oriented.\nWhy Join Us?\n•\tFinancial Advantage: Benefit from a Competitive USD-based salary, a Transparent bonus model, and a Stock Option Plan—you share directly in our success.\n•\t100% Remote Freedom: Work from the comfort of your home, no matter where you are in the world!\n•\tDirect Impact: You will shape the AI journey of a dynamic 40-person team from the ground up. Everything you develop will directly influence how the entire company operates and the quality of our games.\n•\tInnovative Culture: An environment where you are encouraged to play with and test the newest technologies.\nPerks & Benefits\nWe provide a comprehensive package to support your life and learning:\n•\tGenerous remote work compensation package.\n•\tHealth insurance coverage.\n•\tEducation budget for books and online training, supporting your continuous learning.\n•\tFlexible holiday arrangements (Unlimited vacation approach is available).\n•\tTechnical equipment support.\nAbout Us: Z Vibe\nWe are a fully remote mobile game studio with a strong engineering-first mindset, specializing in the casual genre. Our success (with hits like Fashion Battle achieving 120M+ Downloads) stems from our dedication to finding unique, in-house solutions to difficult problems.\nWe are a bootstrapped, transparent company where everyone contributes—from game ideas to internal tools. We seek fast learners, open communicators, and self-leading co-workers ready to jump in and make an immediate impact.\nReady to infuse our problem-solving culture with the power of cutting-edge AI?\nLet's build the future together.",
+  "parsed_jd": {
+    "required_skills": [],
+    "preferred_skills": [],
+    "required_experience": [],
+    "education_requirements": [
+      {
+        "level": "",
+        "field": "physics"
+      }
+    ],
+    "soft_skills": [
+      "organizational skills",
+      "communication"
+    ]
+  },
+  "timestamp": "2026-09-10T13:39:44.550904",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "candidate_41",
+      "candidate_id": "c2a36287-58ae-4503-a0ae-1bc271c23224",
+      "final_score": 73.6,
+      "section_scores": {
+        "skills_score": 73.5,
+        "experience_score": 76.2,
+        "education_score": 69.9,
+        "soft_skill_score": 70.8
+      },
+      "llm_explanation": {
+        "candidate_id": "c2a36287-58ae-4503-a0ae-1bc271c23224",
+        "llm_score": 74,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Relevant professional experience (score: 76)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "candidate_30",
+      "candidate_id": "071d383d-0ce2-4435-b54b-9e3c2193333f",
+      "final_score": 73.2,
+      "section_scores": {
+        "skills_score": 71.7,
+        "experience_score": 77.0,
+        "education_score": 71.0,
+        "soft_skill_score": 69.3
+      },
+      "llm_explanation": {
+        "candidate_id": "071d383d-0ce2-4435-b54b-9e3c2193333f",
+        "llm_score": 73,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Relevant professional experience (score: 77)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "candidate_51",
+      "candidate_id": "d9953ac4-3bb5-4868-929e-7eff2971bccf",
+      "final_score": 73.2,
+      "section_scores": {
+        "skills_score": 73.0,
+        "experience_score": 75.6,
+        "education_score": 69.7,
+        "soft_skill_score": 71.3
+      },
+      "llm_explanation": {
+        "candidate_id": "d9953ac4-3bb5-4868-929e-7eff2971bccf",
+        "llm_score": 73,
+        "strengths": [
+          "Moderate technical skill match (score: 73)",
+          "Relevant professional experience (score: 76)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "candidate_32",
+      "candidate_id": "5affde60-6d95-4ee8-bf5b-5cd83c300af0",
+      "final_score": 72.6,
+      "section_scores": {
+        "skills_score": 72.2,
+        "experience_score": 75.2,
+        "education_score": 69.5,
+        "soft_skill_score": 69.4
+      },
+      "llm_explanation": {
+        "candidate_id": "5affde60-6d95-4ee8-bf5b-5cd83c300af0",
+        "llm_score": 73,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Relevant professional experience (score: 75)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "candidate_22",
+      "candidate_id": "db7b4dfc-218b-4fa0-a589-77fb3e0067d5",
+      "final_score": 70.4,
+      "section_scores": {
+        "skills_score": 72.1,
+        "experience_score": 70.6,
+        "education_score": 67.5,
+        "soft_skill_score": 67.0
+      },
+      "llm_explanation": {
+        "candidate_id": "db7b4dfc-218b-4fa0-a589-77fb3e0067d5",
+        "llm_score": 70,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Some relevant experience found (score: 71)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [],
+        "recommendation": "Good Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

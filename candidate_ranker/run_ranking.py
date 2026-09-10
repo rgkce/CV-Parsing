@@ -75,6 +75,7 @@ def rank_candidates(
     weights: Dict[str, float] | None = None,
     json_only: bool = False,
     skip_llm: bool = False,
+    dataset_path: str | None = None,
 ) -> Dict:
     """
     Full Milestone 4 pipeline: parse JD → retrieve → score → explain → report.
@@ -91,6 +92,8 @@ def rank_candidates(
         If True, suppress text report to console.
     skip_llm : bool
         If True, skip LLM explanation (use template only).
+    dataset_path : str, optional
+        Custom path to the dataset JSON file (e.g. 'test_dataset.json').
 
     Returns
     -------
@@ -115,7 +118,12 @@ def rank_candidates(
     model = load_model()
     indexes = load_indexes()
     _, resume_ids = load_embeddings()
-    dataset = load_dataset()
+    # Default to test_dataset.json if exists, else dataset_path or final_dataset.json
+    import os
+    if dataset_path is None:
+        if os.path.exists("test_dataset.json"):
+            dataset_path = "test_dataset.json"
+    dataset = load_dataset(dataset_path)
     bm25, resume_ids_bm25 = load_bm25_index()
 
     # Build resume_id → candidate lookup
@@ -146,7 +154,15 @@ def rank_candidates(
         if r["score"] >= MIN_M3_RETRIEVAL_SCORE:
             retrieval_results.append(r)
         else:
-            c_name = candidate_lookup.get(r["resume_id"], {}).get("name", "Bilinmeyen Aday")
+            c_info = candidate_lookup.get(r["resume_id"], {})
+            c_name = c_info.get("name")
+            if not c_name or c_name == "Bilinmeyen Aday":
+                fp = c_info.get("file_path", "")
+                if fp:
+                    import os
+                    c_name = os.path.splitext(os.path.basename(fp))[0]
+                else:
+                    c_name = r["resume_id"][:12]
             rejected_candidates.append({
                 "candidate_id": r["resume_id"],
                 "candidate_name": c_name,
@@ -253,7 +269,14 @@ def rank_candidates(
     report_candidates = []
     import os
     for cand in scored_candidates:
-        candidate_name = cand["candidate_data"].get("name", "Bilinmeyen Aday")
+        cdata = cand["candidate_data"]
+        candidate_name = cdata.get("name")
+        if not candidate_name or candidate_name == "Bilinmeyen Aday":
+            fp = cdata.get("file_path", "")
+            if fp:
+                candidate_name = os.path.splitext(os.path.basename(fp))[0]
+            else:
+                candidate_name = cand["candidate_id"][:12]
 
         report_candidates.append({
             "candidate_id": cand["candidate_id"],
@@ -287,8 +310,20 @@ def main() -> None:
     parser.add_argument(
         "--jd", "-j",
         type=str,
-        required=True,
+        default=None,
         help="Job description text (English or Turkish)",
+    )
+    parser.add_argument(
+        "--job",
+        type=int,
+        default=None,
+        help="Job ID to select from job_postings.json (1 to 11)",
+    )
+    parser.add_argument(
+        "--job-file",
+        type=str,
+        default="job_postings.json",
+        help="Path to job postings JSON file (default: job_postings.json)",
     )
     parser.add_argument("--top-k", type=int, default=DEFAULT_TOP_K)
     parser.add_argument("--weight-skills", type=float, default=None)
@@ -304,6 +339,26 @@ def main() -> None:
         help="Skip LLM calls — use template-based explanations only",
     )
     args = parser.parse_args()
+
+    # Determine JD text
+    jd_text = args.jd
+    if args.job is not None:
+        import os
+        if not os.path.exists(args.job_file):
+            print(f"Error: Job file '{args.job_file}' not found.")
+            sys.exit(1)
+        with open(args.job_file, "r", encoding="utf-8") as f:
+            jobs_list = json.load(f)
+        matched_job = next((j for j in jobs_list if j.get("id") == args.job), None)
+        if not matched_job:
+            print(f"Error: Job ID {args.job} not found in {args.job_file}. Available IDs: {[j.get('id') for j in jobs_list]}")
+            sys.exit(1)
+        jd_text = matched_job.get("raw_text") or matched_job.get("description", "")
+        logger.info(f"Loaded Job #{matched_job.get('id')}: {matched_job.get('title')} ({matched_job.get('language')})")
+
+    if not jd_text:
+        print("Error: Either --jd <text> or --job <id> must be provided.")
+        sys.exit(1)
 
     # Build weights
     weights = dict(DEFAULT_SCORING_WEIGHTS)
@@ -326,7 +381,7 @@ def main() -> None:
         logger.info("Custom weights (normalised): %s", weights)
 
     result = rank_candidates(
-        jd_text=args.jd,
+        jd_text=jd_text,
         top_k=args.top_k,
         weights=weights,
         json_only=args.json_only,

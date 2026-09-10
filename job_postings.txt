@@ -1,0 +1,353 @@
+İş İlanları
+1.	Yapay Zekâ (AI) Yazılım Uzmanı
+Pozisyonun Amacı
+Bu pozisyonda görev alacak ekip arkadaşı; kurumsal yapay zekâ çözümlerinin geliştirilmesi, ERP sistemleriyle entegrasyonu, kurumsal bilgi yönetimi ve AI agent mimarilerinin oluşturulmasında aktif rol alacaktır. Pozisyon yeni mezun ve uzman adaylara açıktır; potansiyel ve öğrenme isteği, deneyim kadar önemlidir.
+ERP, BI ve diğer kurumsal veri kaynaklarından yararlanarak iş birimlerine ölçülebilir fayda sağlayacak yapay zekâ fırsatlarını belirlemek, stratejik içgörüler üretmek ve prototip çözümler geliştirmek bu rolün önemli hedeflerinden biridir.
+Görev ve Sorumluluklar
+•	Açık kaynak LLM'lerin lokal veya bulut ortamlarda devreye alınması, entegrasyonu ve performans optimizasyonu
+•	Kurumsal veri üzerinde RAG mimarileri tasarlamak ve geliştirmek
+•	RAG, embedding, vektör arama ve gerektiğinde model özelleştirme (fine-tuning) çözümlerinin geliştirilmesi
+•	Azure AI Foundry, Azure OpenAI ve benzeri platformlarda model yayınlama (deployment) ve agent geliştir
+•	Mevcut AI uygulamalarımızın devralınması ve sürdürülebilir hale getirilmesi
+•	D365 FO ve diğer ERP sistemleriyle AI entegrasyonları
+•	GitHub Actions ile CI/CD ve modern DevOps pratiklerinin uygulanması
+•	Multi-agent ve MCP tabanlı mimarilerin tasarımı
+•	Kullanıcı ihtiyaçlarını analiz etmek ve uygun AI çözümleri tasarlamak
+Aradığımız Nitelikler
+•	Mühendislik, Matematik, Fizik veya İstatistik bölümlerinden mezun (yeni mezunlar dahil) Python ile proje geliştirme deneyimi
+•	LLM'lerin nasıl çalıştığına dair temel anlayış
+•	Git/GitHub kullanım alışkanlığı
+•	SQL, REST API ve sistem entegrasyonları konusunda temel bilgi
+•	MCP (Model Context Protocol) hakkında bilgi sahibi olmak tercih sebebidir
+•	Prompt engineering konusunda temel bilgi
+•	İngilizce teknik dokümantasyon okuyabilecek seviye
+•	Öğrenmeye açık, kendi kendine çözüm üretebilen
+Tercih Sebepleri
+•	Hugging Face, LangChain veya benzeri kütüphanelerle deneyim
+•	RAG veya fine-tuning denemesi
+•	Azure AI / Azure OpenAI deneyimi
+•	GitHub Actions ile pipeline yazmış olmak
+•	Anthropic Claude, OpenAI vb. API'lerle prototip geliştirmiş olmak
+•	LLM veya ML tabanlı analitik/karar destek uygulamaları geliştirmiş olmak
+•	Veri güvenliği ve gizlilik konularında temel bilgi sahibi olmak
+•	Agile çalışma disiplinine yatkınlık
+•	Açık kaynak proje, blog veya teknik içerik üretimi
+•	D365 veya benzeri ERP sistemlerine aşinalık
+•	Gıda / tarım sektörü deneyimi
+
+2.	Android Developer
+About the Role
+At X, we are building mobile experiences used by millions of users. We are looking for Android Engineers who can develop reliable, high-performance, maintainable native Android applications.
+This role is for engineers who care about product quality, user experience, architecture, performance, and long-term maintainability. Kotlin, Jetpack Compose, XML, and Android tools are important, but we care most about engineering judgment and ownership.
+What You Will Do
+•	Develop and maintain native Android applications.
+•	Build user experiences that are fast, stable, and easy to use.
+•	Design reusable UI components and maintainable application architecture.
+•	Collaborate with product, design, backend, QA, data, and iOS teams.
+•	Diagnose crashes, performance problems, UI issues, and data-related bugs.
+•	Use analytics, crash reports, and user feedback to improve the application.
+•	Participate in code reviews and architectural discussions.
+•	Write tests where they create real confidence.
+•	Support the full application lifecycle from planning to release and post-launch improvement.
+•	Keep the Android application healthy as the product and platform evolve.
+What We Look For
+•	Strong software engineering fundamentals.
+•	Strong understanding of native Android development.
+•	Ability to reason about application architecture, state management, API integration, persistence, performance, and failure cases.
+•	Strong debugging and problem-solving skills.
+•	Understanding of mobile constraints such as memory, battery, network reliability, lifecycle, and devicedifferences.
+•	Ability to build maintainable UI and business logic.
+•	Ownership mindset and strong collaboration skills.
+•	Clear communication with technical and non-technical teammates.
+•	Ability to learn and apply new Android platform capabilities pragmatically.
+•	Current Technologies We Use.
+Experience with these technologies is useful:
+•	Kotlin
+•	XML layouts
+•	Jetpack Compose
+•	Android Jetpack components
+•	Coroutines
+•	Hilt
+•	Retrofit
+•	Room
+•	DataStore
+•	JUnit / Mockito
+•	Git
+•	CI/CD pipelines
+Nice to Have
+•	Experience with high-traffic consumer mobile applications.
+•	Experience with crash analysis and performance profiling.
+•	Experience with offline-first or data-heavy mobile applications.
+•	Experience improving existing app architecture.
+•	Experience with both XML-based and Compose-based UI migration.
+
+3.	Business Analyst
+Location: Remote
+Employment Type: Full-Time
+Are you passionate about shaping next-generation SaaS products and intelligent chat experiences? Our client is seeking a Business Analyst, where technology, design, and AI come together to redefine how users interact with digital platforms.
+About the Role
+As a Business Analyst, you will bridge the gap between product strategy, user experience, and technical execution. You’ll collaborate with UX/UI designers, AI engineers, and stakeholders across multiple teams to design and refine intuitive, data-driven chat interfaces.
+Key Responsibilities
+Product & AI Chat Experience
+•	Partner with UX/UI designers and AI engineers to craft intelligent, user-friendly conversational experiences.
+•	Define and optimize chat flows, intents, and user journeys for AI-driven interactions.
+•	Monitor and analyze chat performance metrics to continuously enhance engagement and efficiency.
+Stakeholder Engagement
+•	Act as a liaison between Product Management, Engineering, Data Science, and Customer Success teams.
+•	Lead workshops, demos, and feedback sessions to align priorities and validate solutions.
+Data-Driven Decision Making
+•	Leverage analytics and user feedback to guide product improvements and roadmap planning.
+•	Support A/B testing and experimentation for AI chat features.
+Documentation & Process Improvement
+•	Maintain clear documentation of requirements, workflows, and system interactions.
+•	Identify process gaps and recommend improvements to streamline delivery and boost user satisfaction.
+Qualifications
+•	Proven experience as a Business Analyst within SaaS environments.
+•	Experience with AI chat systems, conversational design, or NLP-driven applications is a strong plus.
+•	Strong analytical, communication, and stakeholder management skills.
+•	Familiarity with agile development methodologies and modern product management tools.
+Why Join
+•	Opportunity to work on cutting-edge AI-enabled SaaS solutions.
+•	Collaborative, innovative, and growth-focused team culture.
+•	Competitive compensation and flexible work environment.
+
+4.	Software Engineer - New Grad
+What you'll be doing
+We are looking for a passionate Backend Developer who is excited to architect and implement technology, tools and infrastructure that empower Y!
+•	Building distributed, high-performance shared game services
+•	Developing internal tools for operations, data analysis and automation
+•	Supporting and empowering teams across Y.
+•	Learning, teaching and growing within a strong engineering culture
+Desired skills and experiences
+•	Bachelor's degree in Computer Science or other engineering departments
+•	Understanding distributed, highly scalable, low latency, fault tolerant backend architecture fundamentals
+•	Knowledge of the Go programming language at an entry-level, including experience with basic Go syntax and concepts such as goroutines and channels
+•	Strong engineering, design and architecture skills
+•	Familiarity with AWS, NoSQL/in-memory databases, DevOps practices and CI/CD tools
+•	Passion for Match Villains and mobile puzzle games in general
+What makes our team so unique
+•	Feedback and transparency are at the heart of everything we do
+•	Exceptional and passionate people/team members
+•	Every idea counts
+•	Never-ending learning
+•	We never stop asking the questions “why” and “how”
+Our Perks
+•	Team events and trips
+•	Great food
+•	On-site gym
+•	Full health benefits
+•	Compensation for paid military service
+•	Relocation support
+•	Y that lets you have unforgettable experiences (e.g. Going on a cruise trip to Norway or seeing the Northern Lights)
+This is an on-site role in Istanbul, Sarıyer. We do not offer a fully-remote working option.
+
+5.	Game Developer (Remote) Full-Time
+Code the Next Hit: Bring Gameplay Ideas to Millions of Players.
+We are a fully remote, passionate team of 40+ people, and we need a brilliant Unity Developer to help us build high-quality games that capture the attention of millions of mobile players worldwide. If you thrive in rapid development cycles and are obsessed with code quality and "game juiciness," this role is for you!
+What You Will Do (Responsibilities)
+You will be a core contributor to our casual game titles, focusing on speed, quality, and player experience:
+•	Game Development: Building high-quality games for the millions of mobile players.
+•	Juice & Polish Implementation: Translating gameplay mechanics into deeply satisfying player experiences by mastering game feel, particle effects, animations, screen shakes, haptics, and sound sync.
+•	Code Quality: Designing and writing high quality and reliable code for our games.
+•	Prototyping: Produce prototypes of gameplay ideas and features in short sprints.
+•	Implementation: Designing and developing Unity UIs and implementing necessary APIs.
+What We Are Looking For (Skills & Experience)
+We need a proactive, detail-oriented developer ready to jump into our fast-paced environment:
+•	Unity Expertise: Experience in mobile game development on Unity3D.
+•	Development Speed: Experience in short and rapid development periods.
+•	Obsession with Game Feel & Juice: Deep understanding of visual/auditory feedback, game juice, timing, easing, screen juice, and tactile feedback (haptics) that elevate a good game into a great one.
+•	Code Mastery: Ability to write clean, reusable, optimized code.
+•	Game Sense: Strong grasp of game feeling and juiciness concepts.
+•	Physics Knowledge: Knowledge of physics-based game development.
+•	Passion: Passion for playing mobile games and discovering their core loop.
+•	Communication: Excellent communication and organizational skills.
+•	Portfolio: Having a portfolio of games developed so far is a big plus.
+•	Attitude: Being proactive, a strong team worker, meticulous, and detail-oriented.
+Why Join Us?
+•	Financial Advantage: Benefit from a Competitive USD-based salary, a Transparent bonus model, and a Stock Option Plan—you share directly in our success.
+•	100% Remote Freedom: Work from the comfort of your home, no matter where you are in the world!
+•	Direct Impact: You will shape the AI journey of a dynamic 40-person team from the ground up. Everything you develop will directly influence how the entire company operates and the quality of our games.
+•	Innovative Culture: An environment where you are encouraged to play with and test the newest technologies.
+Perks & Benefits
+We provide a comprehensive package to support your life and learning:
+•	Generous remote work compensation package.
+•	Health insurance coverage.
+•	Education budget for books and online training, supporting your continuous learning.
+•	Flexible holiday arrangements (Unlimited vacation approach is available).
+•	Technical equipment support.
+About Us: Z Vibe
+We are a fully remote mobile game studio with a strong engineering-first mindset, specializing in the casual genre. Our success (with hits like Fashion Battle achieving 120M+ Downloads) stems from our dedication to finding unique, in-house solutions to difficult problems.
+We are a bootstrapped, transparent company where everyone contributes—from game ideas to internal tools. We seek fast learners, open communicators, and self-leading co-workers ready to jump in and make an immediate impact.
+Ready to infuse our problem-solving culture with the power of cutting-edge AI?
+Let's build the future together.
+
+6.	Machine Learning Engineer – Privacy-Preserving AI
+Company Description
+Q is a high-technology cryptographic engineering company founded to address the most complex security challenges of the digital world. The company builds on strong academic foundations and cutting-edge research. It specializes in secure and high-performance implementation of cryptographic algorithms. Q Labs develops solutions across a wide range of platforms, from embedded systems and hardware accelerators to GPU architectures. It designs IP cores for cryptographic functions and standards and possesses extensive expertise across modern cryptographic systems. With a strong focus on next-generation security technologies, Q Labs develops solutions for advanced cryptographic algorithms, including Post-Quantum Cryptography (PQC) and Fully Homomorphic Encryption (FHE), enabling robust and future-proof protection for digital infrastructures.
+Role Description
+This is a full-time remote opportunity for a Machine Learning Engineer. In this role, you will work at the intersection of our GPU-accelerated FHE compute engine and machine learning, translating standard ML models and pipelines into privacy-preserving equivalents that run under encryption. Your day-to-day tasks will include adapting and re-implementing ML building blocks (linear layers, activations, convolutions, etc.) to run over FHE primitives, benchmarking accuracy/performance trade-offs of encrypted inference, developing Python-based tooling to bridge our FHE engine with common ML frameworks, writing technical documentation, and collaborating with the core cryptography team to identify bottlenecks and optimization opportunities.
+Qualifications
+Required
+•	Degree in Computer Science/Engineering, Mathematics, or a related field
+•	Proven experience building and deploying ML models in Python (research, industry, or strong personal/open-source projects)
+•	Proficiency in Python; hands-on experience with PyTorch, TensorFlow, or scikit-learn
+•	Solid grasp of core ML concepts (neural network layers, activation functions, model training/inference pipelines)
+•	Solid foundation in linear algebra, probability, and mathematical reasoning
+•	Strong interest in cryptography and privacy-preserving technologies (PETs)
+•	Ability to analyze and optimize algorithms for efficiency and numerical accuracy under encryption
+•	Proficient with Git and collaborative version control workflows (branching, PRs, code review)
+•	Comfortable working in a Linux/Unix development environment and using the command line
+•	Experience with testing frameworks (e.g., pytest) and writing maintainable, well-documented code
+•	Understanding of basic software engineering principles (modularity, testing, debugging)
+•	Comfort working with low-level systems and performance-critical code
+Nice to Have
+•	Willingness to learn FHE fundamentals (CKKS/BGV/BFV schemes) and how they constrain ML computation (e.g., polynomial approximations of nonlinear functions)
+•	Experience with CI/CD pipelines (e.g., GitHub Actions) for automated testing and deployment
+•	Familiarity with containerization tools (Docker) for reproducible development and deployment environments
+•	Prior exposure to FHE/PETs libraries (e.g., TenSEAL, Concrete-ML, OpenFHE)
+7.	İş Analisti
+Şirket Hakkında;
+Şirketimiz TCMB'ye tabii ödeme ve elektronik para hizmetleri üzerine faaliyet göstermektedir. 6493 Sayılı Kanunun 12.maddesinin 1.fıkrasında belirtilen a, b, c, ç, e bentlerinde faaliyet izinlerinin tamamına sahiptir.
+Sorumluluklar
+•	POS, Sanal POS ve Wallet süreçlerine ilişkin iş gereksinimlerini analiz etmek ve dokümante etmek
+•	Banka ve hizmet sağlayıcılar ile yapılan entegrasyonlarda iş analizi ve süreç akışlarını hazırlamak
+•	Yazılım ekipleri ile iş birimleri arasında köprü görevi görmek, gereksinimleri teknik ekiplere aktarmak
+•	API entegrasyon süreçlerinde test senaryolarının hazırlanması ve Postman üzerinden doğrulanması
+•	Jira üzerinden proje/iş takibi yapmak, backlog ve sprint süreçlerine katkı sağlamak
+•	Süreç akış şemalarını ve iş analizi dokümanlarını hazırlamak
+•	Veri analizleri için SQL sorguları yazmak, işlem verilerini incelemek
+•	Test süreçlerinde yer almak ve koordine etmek
+•	İş birimlerinden gelen operasyonel işlerin koordinasyonunu sağlamak
+•	Performans ve süreç iyileştirme raporları hazırlamak
+Aranan Nitelikler
+•	Üniversitelerin ilgili bölümlerinden mezun (Bilgisayar Mühendisliği, Endüstri Mühendisliği, Yönetim Bilişim Sistemleri vb.)
+•	Ödeme sistemleri, bankacılık veya fintech sektöründe iş analisti olarak en az 2 yıl deneyim (POS, Sanal POS, Wallet deneyimi tercih sebebidir)
+•	SQL ile veri sorgulama ve analiz yapabilme
+•	Postman ile API test ve doğrulama deneyimi
+•	Jira üzerinde proje/iş takibi deneyimi
+•	MS Visio ile süreç/akış diyagramı hazırlama becerisi
+•	İyi seviyede MS Office kullanımı
+•	Analitik düşünme, detaylara dikkat ve güçlü dokümantasyon becerisi
+Ekip arkadaşları arıyoruz.
+
+8.	AI Agent ve Yapay Zekâ Yazılım Uzmanı
+B firması olarak yapay zekâ destekli yazılım sistemleri geliştiriyor, yüzlerce mikro ajanla çalışan yeni nesil AI operasyon altyapıları kuruyoruz.
+Şimdi ekibimize; yalnızca kod yazan değil, yapay zekâ modellerini anlayan, AI agent sistemleri geliştirmekten heyecan duyan ve geleceğin yazılım dünyasında yer almak isteyen bir ekip arkadaşı arıyoruz.
+Aradığımız Profil
+•	Yapay zekâ ve büyük dil modellerine (LLM) yüksek ilgi duyan
+•	AI Agent, Workflow Automation ve Agentic AI kavramlarına hakim veya öğrenmeye istekli
+•	Yeni teknolojileri hızlı öğrenebilen
+•	Problem çözme ve sistem geliştirme konusunda güçlü
+•	Takım çalışmasına yatkın
+•	Ankara Akyurt ofisimizde yerinde çalışabilecek
+Tercih Sebepleri
+•	TypeScript, JavaScript veya Python deneyimi
+•	Next.js, React veya Node.js bilgisi
+•	OpenAI, Anthropic, Gemini, Grok gibi modellerle çalışma deneyimi
+•	Prompt Engineering, RAG, Tool Calling veya AI Workflow geliştirme tecrübesi
+•	Firebase, PostgreSQL veya benzeri veri tabanı deneyimi
+•	API entegrasyonları konusunda deneyim
+Görevler
+•	AI Agent sistemlerinin geliştirilmesi ve iyileştirilmesi
+•	Yeni yapay zekâ özelliklerinin araştırılması ve uygulanması
+•	LLM tabanlı iş akışlarının tasarlanması
+•	Otomasyon sistemlerinin geliştirilmesi
+•	Ürün ekibiyle birlikte yeni AI çözümlerinin hayata geçirilmesi
+Sana Ne Sunuyoruz?
+•	Türkiye'nin en iddialı AI girişimlerinden birinde çalışma fırsatı
+•	Gerçek kullanıcıya ulaşan ürünlerde doğrudan etki oluşturma imkânı
+•	En güncel yapay zekâ modelleri ve teknolojileriyle çalışma ortamı
+•	Hızlı karar alan ve bürokrasiye boğulmayan ekip kültürü
+•	Kariyerini AI ve Agent teknolojileri üzerine inşa etme fırsatı
+Eğer yapay zekânın geleceğinin AI Agent'lar olduğuna inanıyor ve bu dönüşümün içinde yer almak istiyorsan başvurunu bekliyoruz.
+
+9.	Yazılım Mühendisi
+C firması, yazılım yaşam döngüsünün her aşamasında uzmanlık gerektiren roller için teknoloji hizmetleri sunan bir IT danışmanlık şirketidir.
+Bankacılık, e-ticaret ve ödeme sistemleri gibi alanlarda sektöre özel, ölçeklenebilir ve güvenli çözümler üreterek müşterilerine katma değerli IT danışmanlık hizmetleri sağlamaktadır.
+Sektör tecrübemizle, müşteriye özel ihtiyaçlara uygun çözümler geliştiriyor; güncel teknolojilerle sürdürülebilir, esnek ve kaliteli yazılımlar tasarlıyoruz.
+Pozisyon Hakkında
+Yazılım geliştirme ekibimize katılacak, modern teknolojilerle çözüm üretebilecek, öğrenmeye ve gelişmeye açık takım arkadaşları arıyoruz.
+Aranan Nitelikler
+•	Üniversitelerin Bilgisayar, Yazılım veya Bilişim Mühendisliği bölümlerinden mezun,
+•	Java 11+ veya tercihen Java 17+ ile yazılım geliştirme konusunda deneyimli veya kendini geliştirmeye istekli,
+•	Spring Boot, Spring Data JPA, REST API teknolojilerinde bilgi sahibi,
+•	SQL (PostgreSQL, MySQL) veya NoSQL (MongoDB) veritabanlarıyla çalışmış,
+•	Tercihen Docker, Git, CI/CD süreçleri hakkında temel bilgi sahibi,
+•	React, Angular veya Vue.js gibi modern frontend teknolojilerinden en az biriyle çalışmaya istekli,
+•	Yazılım geliştirme ilkeleri (OOP, Clean Code, Design Patterns, Unit Testing) hakkında farkındalığı olan,
+•	İyi derecede İngilizce teknik doküman okuma ve araştırma becerisine sahip,
+•	Problem çözme, analiz ve iletişim yönü güçlü,
+•	Öğrenmeye ve sürekli gelişime açık.
+Tercihen
+•	Microservice mimarisi,
+•	Cloud (AWS, Azure) teknolojileri,
+•	Test otomasyonu (JUnit, Mockito) konularında deneyim sahibi olmak avantajdır.
+
+10.	IT Analisti
+2026 yılında K Holding bünyesinde hayata geçirdiğimiz L Gaming; dijital eğlence ve şans oyunları alanında faaliyet gösteren güçlü markaları ortak bir vizyonla bir araya getiren, yeni nesil bir grup yapısıdır.
+Bu yapıyı; daha bütüncül, sürdürülebilir ve birlikte daha güçlü ilerleyen bir ekosistem anlayışıyla kurguladık.
+Sen de hayat dolu bu takımın vazgeçilmez oyuncusu olabilirsin!
+Yaratıcı projelerinle yepyeni bir oyun evreni yaratabilir, iz bırakacak koşular yapabilirsin!
+Rakiplerini stratejik çalımlarla şaşırtabilir, hızınla herkese ilham verebilir, takım arkadaşlarınla paslaşabilirsin!
+Sürekli atak yapan, herkesi şaşırtan, her anı heyecan ve şans dolu teknolojik bir kariyer arıyorsan "en" doğru yerdesin.
+Hayat dolu L Gaming’e katıl, oyunu baştan yaz!
+Hayat Dolu Nitelikler
+•	Üniversitelerin ilgili lisans bölümlerinden mezun (Bilgisayar Mühendisliği, Matematik Mühendisliği, Yönetim Bilişim Sistemleri vb. bölümler tercih sebebidir),
+•	Yazılım projelerinde IT Analisti olarak en az 3 yıl deneyim sahibi,
+•	Yazılım geliştirme süreçlerine hâkim, kodlama bilgisi olan (.NET tercih edilir),
+•	İş akışları ve süreç modelleme araçlarında (Visio, UML vb.) deneyimli,
+•	Web servisleri, mikroservisler, REST API ve SQL konularında deneyimli,
+•	Arayüz tasarımı ve kullanıcı deneyimi konularında bilgi sahibi,
+•	Sözlü ve yazılı İngilizce iletişimi iyi düzeyde olan,
+•	Problem çözme, analiz, planlama, takip, organizasyon ve yönlendirme becerileri gelişmiş,
+•	Ekip çalışmasına yatkın, iletişime açık, analitik düşünce yapısına sahip, çözüm ve sonuç odaklı.
+İş Tanımına Dolu Dolu Bi’Bakış
+•	İş geliştirme ekiplerinden gelen talepleri teknik fizibilite, kapsam ve mevcut sistem mimarisine uyumluluk açısından değerlendirerek gereksinimlerin olgunlaştırılmasını ve geliştirmeye hazır hâle getirilmesini sağlamak,
+•	Gereksinimler netleştikten sonra proje aktarım sürecini organize ederek Backend, Frontend ve Client ekipleriyle koordineli biçimde aktarımı yürütmek; ekiplerden gelen teknik geri bildirimleri yönetmek ve çözüme kavuşturmak,
+•	Sistem tasarımı kapsamında endpoint yapılarını, request/response modellerini, veri akışlarını ve iş kurallarını tanımlamak,
+•	Backend ve Client ekipleri için teknik geliştirme maddelerini oluşturmak; her ekibin sorumluluk alanını net biçimde ortaya koyan analiz çıktıları üretmek,
+•	Uygulamaların geliştirilmesi sürecinde ortaya çıkan farklı ihtiyaçlara göre öneriler geliştirerek, çözüm ortaya koyabilmek,
+•	Yazılım geliştirme süreçlerinde ekiplere teknik destek sağlamak; geliştirme boyunca ortaya çıkan soru ve belirsizlikleri analiz perspektifiyle yönlendirmek,
+•	Projelere ilişkin teknik riskleri, kapsam değişikliklerini ve statü güncellemelerini takip ederek ilgili paydaşlara raporlamak.
+Hayat Dolu Yan Haklarımız:
+“Yan hak” diye yazılır, L Gaming “Hayat Dolu Haklarımız” diye okunur🙂
+•	Eş ve çocuk kapsamlı limitsiz özel sağlık sigortası,
+•	Multinet yemek kartı,
+•	Ofisten çalışılan günlerde ulaşım desteği,
+•	Yıllık izinlerimize ek olarak, istediğin zaman kullanabileceğin +3 gün Bugün Aranızda Yokum 🙂 izni ( biz kısaca BAY diyoruz 🙂)
+•	Doğum gününün olduğu hafta kullanabileceğin +1 gün doğum günü izni,
+•	Bayram hediye çekleri,
+•	Evlenmek ve çocuk sahibi olmak gibi mutlu anlarda özel gün hediyeleri,
+•	Dijital Cüzdan'a yapılan hediye yüklemeler ile yıl boyunca dilediğince alışveriş!
+
+11.	Mobil Yazılım Uzmanı
+H Yazılım A.Ş. bünyesinde, Ankara lokasyonumuzdaki projelerimizde görev almak üzere, modern mobil teknolojilere hakim ve dinamik ekibimize değer katacak bir Mobil Yazılım Uzmanı arıyoruz.
+Aranan Nitelikler ve Yeterlilikler
+Genel Deneyim ve Yetkinlikler:
+•	Mobil uygulama geliştirme alanında en az 3 yıl tecrübe,
+•	React Native, Flutter veya Dart teknolojilerinden en az biriyle uygulama geliştirmede en az 2 yıl deneyim,
+•	Store’larda (App Store veya Google Play Store) yayınlanmış ya da mülakat sırasında cihaz üzerinden gösterilebilecek en az bir canlı uygulama referansı,
+•	UI/UX standartlarına ve tasarımlarına birebir sadık kalarak arayüz dökebilme becerisi,
+•	Git branch yönetimi ve versiyon kontrol sistemleri konusunda yetkinlik,
+•	RESTful API entegrasyonu ve yönetimi konusunda deneyim.
+Eko-Sistem ve Mimari Beceriler
+React Native Tarafı:
+•	Redux / Redux-Toolkit tecrübesi
+•	React Query veya RTK Query kullanımı
+•	TypeScript ile proje geliştirme deneyimi (Tercih sebebidir.)
+Flutter / Dart tarafı
+•	Dart dilinin Null Safety prensiplerine ve nesne yönelimli (OOP) yapısına ileri düzeyde hakimiyet (Tercih sebebidir.)
+•	State Management mimarilerinden (Bloc, Riverpod, Provider) en az birine hakimiyet
+•	Veri yönetimi ve ağ istekleri için Dio, Retrofit gibi kütüphanelerle çalışma deneyimi.
+Platform ve Araç Bilgisi
+•	Xcode, Android Studio ve Gradle gibi native platform araçlarında deneyim.
+Tercih Sebebi Sayılacak Artı Nitelikler
+•	Agile / SCRUM metodolojileriyle proje geliştirmiş olmak
+•	Object-Oriented Programming (OOP) ve SOLID prensiplerine hakimiyet
+•	CI/CD süreçleri ve mobil otomasyon araçları hakkında bilgi sahibi olmak
+•	Test Süreçleri:Jest, Jasmine, Cypress gibi test kütüphanelerinde tecrübe
+veya Flutter Unit Test, Widget Test, Integration Test süreçlerinde deneyim.
+İş ilanını yayınlayan kişi tarafından eklenen gereksinimler
+•	TypeScript ile 2 yılın üzerinde çalışma deneyimi
+•	Mobil Uygulamalar ile 3 yılın üzerinde çalışma deneyimi
+

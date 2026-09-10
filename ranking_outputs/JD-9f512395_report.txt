@@ -1,0 +1,76 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-9f512395
+  Date       : 2026-09-10 13:39
+  Candidates : 5
+
+  Job Description:
+  Game Developer (Remote) Full-Time
+
+Code the Next Hit: Bring Gameplay Ideas to Millions of Players.
+We are a fully remote, passionate team of 40+ people, and we need a brilliant Unity Developer to help...
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     candidate_41             c2a36287-58ae-4503-a0ae-1bc271c23224    73.5    76.2    69.9    70.8    73.6
+  2     candidate_30             071d383d-0ce2-4435-b54b-9e3c2193333f    71.7    77.0    71.0    69.3    73.2
+  3     candidate_51             d9953ac4-3bb5-4868-929e-7eff2971bccf    73.0    75.6    69.7    71.3    73.2
+  4     candidate_32             5affde60-6d95-4ee8-bf5b-5cd83c300af0    72.2    75.2    69.5    69.4    72.6
+  5     candidate_22             db7b4dfc-218b-4fa0-a589-77fb3e0067d5    72.1    70.6    67.5    67.0    70.4
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — candidate_41 (c2a36287-58ae-4503-a0ae-1bc271c23224)
+  Final Score: 73.6/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Relevant professional experience (score: 76)
+
+  ----------------------------------------
+
+  CANDIDATE #2 — candidate_30 (071d383d-0ce2-4435-b54b-9e3c2193333f)
+  Final Score: 73.2/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Relevant professional experience (score: 77)
+
+  ----------------------------------------
+
+  CANDIDATE #3 — candidate_51 (d9953ac4-3bb5-4868-929e-7eff2971bccf)
+  Final Score: 73.2/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 73)
+    - Relevant professional experience (score: 76)
+
+  ----------------------------------------
+
+  CANDIDATE #4 — candidate_32 (5affde60-6d95-4ee8-bf5b-5cd83c300af0)
+  Final Score: 72.6/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Relevant professional experience (score: 75)
+
+  ----------------------------------------
+
+  CANDIDATE #5 — candidate_22 (db7b4dfc-218b-4fa0-a589-77fb3e0067d5)
+  Final Score: 70.4/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Some relevant experience found (score: 71)
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

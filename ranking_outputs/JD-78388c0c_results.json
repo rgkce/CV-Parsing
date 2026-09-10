@@ -1,0 +1,200 @@
+{
+  "job_id": "JD-78388c0c",
+  "job_description": "Mobil Yazılım Uzmanı\n\nH Yazılım A.Ş. bünyesinde, Ankara lokasyonumuzdaki projelerimizde görev almak üzere, modern mobil teknolojilere hakim ve dinamik ekibimize değer katacak bir Mobil Yazılım Uzmanı arıyoruz.\nAranan Nitelikler ve Yeterlilikler\nGenel Deneyim ve Yetkinlikler:\n•\tMobil uygulama geliştirme alanında en az 3 yıl tecrübe,\n•\tReact Native, Flutter veya Dart teknolojilerinden en az biriyle uygulama geliştirmede en az 2 yıl deneyim,\n•\tStore’larda (App Store veya Google Play Store) yayınlanmış ya da mülakat sırasında cihaz üzerinden gösterilebilecek en az bir canlı uygulama referansı,\n•\tUI/UX standartlarına ve tasarımlarına birebir sadık kalarak arayüz dökebilme becerisi,\n•\tGit branch yönetimi ve versiyon kontrol sistemleri konusunda yetkinlik,\n•\tRESTful API entegrasyonu ve yönetimi konusunda deneyim.\nEko-Sistem ve Mimari Beceriler\nReact Native Tarafı:\n•\tRedux / Redux-Toolkit tecrübesi\n•\tReact Query veya RTK Query kullanımı\n•\tTypeScript ile proje geliştirme deneyimi (Tercih sebebidir.)\nFlutter / Dart tarafı\n•\tDart dilinin Null Safety prensiplerine ve nesne yönelimli (OOP) yapısına ileri düzeyde hakimiyet (Tercih sebebidir.)\n•\tState Management mimarilerinden (Bloc, Riverpod, Provider) en az birine hakimiyet\n•\tVeri yönetimi ve ağ istekleri için Dio, Retrofit gibi kütüphanelerle çalışma deneyimi.\nPlatform ve Araç Bilgisi\n•\tXcode, Android Studio ve Gradle gibi native platform araçlarında deneyim.\nTercih Sebebi Sayılacak Artı Nitelikler\n•\tAgile / SCRUM metodolojileriyle proje geliştirmiş olmak\n•\tObject-Oriented Programming (OOP) ve SOLID prensiplerine hakimiyet\n•\tCI/CD süreçleri ve mobil otomasyon araçları hakkında bilgi sahibi olmak\n•\tTest Süreçleri:Jest, Jasmine, Cypress gibi test kütüphanelerinde tecrübe\nveya Flutter Unit Test, Widget Test, Integration Test süreçlerinde deneyim.\nİş ilanını yayınlayan kişi tarafından eklenen gereksinimler\n•\tTypeScript ile 2 yılın üzerinde çalışma deneyimi\n•\tMobil Uygulamalar ile 3 yılın üzerinde çalışma deneyimi",
+  "parsed_jd": {
+    "required_skills": [
+      "react native",
+      "android",
+      "flutter",
+      "agile",
+      "ci/cd",
+      "scrum",
+      "react",
+      "git"
+    ],
+    "preferred_skills": [
+      "typescript",
+      "dart"
+    ],
+    "required_experience": [
+      "3 yıl tecrübe",
+      "2 yıl deneyim",
+      "2 yıl",
+      "3 yıl",
+      "en az 3 yıl",
+      "en az 2 yıl"
+    ],
+    "education_requirements": [
+      {
+        "level": "",
+        "field": "management"
+      },
+      {
+        "level": "",
+        "field": "yönetim"
+      }
+    ],
+    "soft_skills": []
+  },
+  "timestamp": "2026-09-10T13:40:32.333779",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "candidate_47",
+      "candidate_id": "7aee250f-e95d-4f21-8bb2-a816f120d5d8",
+      "final_score": 70.0,
+      "section_scores": {
+        "skills_score": 70.0,
+        "experience_score": 72.6,
+        "education_score": 70.4,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "7aee250f-e95d-4f21-8bb2-a816f120d5d8",
+        "llm_score": 70,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Some relevant experience found (score: 73)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "react native",
+          "android",
+          "agile",
+          "ci/cd",
+          "scrum",
+          "react"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "candidate_27",
+      "candidate_id": "0ef08b6d-5871-482a-a1d2-b3a63817f11e",
+      "final_score": 69.8,
+      "section_scores": {
+        "skills_score": 69.7,
+        "experience_score": 72.4,
+        "education_score": 70.2,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "0ef08b6d-5871-482a-a1d2-b3a63817f11e",
+        "llm_score": 70,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Some relevant experience found (score: 72)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "react native",
+          "android",
+          "flutter",
+          "agile",
+          "ci/cd",
+          "scrum"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "candidate_36",
+      "candidate_id": "e56fedc8-8683-4031-b7f9-946f6df1a6de",
+      "final_score": 69.0,
+      "section_scores": {
+        "skills_score": 66.9,
+        "experience_score": 73.0,
+        "education_score": 71.1,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "e56fedc8-8683-4031-b7f9-946f6df1a6de",
+        "llm_score": 69,
+        "strengths": [
+          "Moderate technical skill match (score: 67)",
+          "Some relevant experience found (score: 73)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "react native",
+          "android",
+          "flutter",
+          "ci/cd",
+          "scrum",
+          "react",
+          "git"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "candidate_42",
+      "candidate_id": "df2cdbed-2c36-4d7a-be80-17d2e6af978c",
+      "final_score": 68.1,
+      "section_scores": {
+        "skills_score": 67.6,
+        "experience_score": 71.4,
+        "education_score": 67.2,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "df2cdbed-2c36-4d7a-be80-17d2e6af978c",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 71)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "react native",
+          "android",
+          "flutter",
+          "agile",
+          "scrum"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "candidate_09",
+      "candidate_id": "4249d53a-56e3-42b6-89a2-4068ffe599a9",
+      "final_score": 59.1,
+      "section_scores": {
+        "skills_score": 68.5,
+        "experience_score": 73.4,
+        "education_score": 0.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "4249d53a-56e3-42b6-89a2-4068ffe599a9",
+        "llm_score": 59,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 73)"
+        ],
+        "weaknesses": [
+          "Education requirements may not be fully met (score: 0)"
+        ],
+        "missing_requirements": [
+          "flutter",
+          "agile",
+          "ci/cd",
+          "scrum"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

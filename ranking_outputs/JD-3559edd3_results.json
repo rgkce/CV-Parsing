@@ -1,0 +1,188 @@
+{
+  "job_id": "JD-3559edd3",
+  "job_description": "AI Agent ve Yapay Zekâ Yazılım Uzmanı\n\nB firması olarak yapay zekâ destekli yazılım sistemleri geliştiriyor, yüzlerce mikro ajanla çalışan yeni nesil AI operasyon altyapıları kuruyoruz.\nŞimdi ekibimize; yalnızca kod yazan değil, yapay zekâ modellerini anlayan, AI agent sistemleri geliştirmekten heyecan duyan ve geleceğin yazılım dünyasında yer almak isteyen bir ekip arkadaşı arıyoruz.\nAradığımız Profil\n•\tYapay zekâ ve büyük dil modellerine (LLM) yüksek ilgi duyan\n•\tAI Agent, Workflow Automation ve Agentic AI kavramlarına hakim veya öğrenmeye istekli\n•\tYeni teknolojileri hızlı öğrenebilen\n•\tProblem çözme ve sistem geliştirme konusunda güçlü\n•\tTakım çalışmasına yatkın\n•\tAnkara Akyurt ofisimizde yerinde çalışabilecek\nTercih Sebepleri\n•\tTypeScript, JavaScript veya Python deneyimi\n•\tNext.js, React veya Node.js bilgisi\n•\tOpenAI, Anthropic, Gemini, Grok gibi modellerle çalışma deneyimi\n•\tPrompt Engineering, RAG, Tool Calling veya AI Workflow geliştirme tecrübesi\n•\tFirebase, PostgreSQL veya benzeri veri tabanı deneyimi\n•\tAPI entegrasyonları konusunda deneyim\nGörevler\n•\tAI Agent sistemlerinin geliştirilmesi ve iyileştirilmesi\n•\tYeni yapay zekâ özelliklerinin araştırılması ve uygulanması\n•\tLLM tabanlı iş akışlarının tasarlanması\n•\tOtomasyon sistemlerinin geliştirilmesi\n•\tÜrün ekibiyle birlikte yeni AI çözümlerinin hayata geçirilmesi\nSana Ne Sunuyoruz?\n•\tTürkiye'nin en iddialı AI girişimlerinden birinde çalışma fırsatı\n•\tGerçek kullanıcıya ulaşan ürünlerde doğrudan etki oluşturma imkânı\n•\tEn güncel yapay zekâ modelleri ve teknolojileriyle çalışma ortamı\n•\tHızlı karar alan ve bürokrasiye boğulmayan ekip kültürü\n•\tKariyerini AI ve Agent teknolojileri üzerine inşa etme fırsatı\nEğer yapay zekânın geleceğinin AI Agent'lar olduğuna inanıyor ve bu dönüşümün içinde yer almak istiyorsan başvurunu bekliyoruz.",
+  "parsed_jd": {
+    "required_skills": [
+      "postgresql",
+      "javascript",
+      "typescript",
+      "firebase",
+      "node.js",
+      "next.js",
+      "python",
+      "react",
+      "llm"
+    ],
+    "preferred_skills": [],
+    "required_experience": [],
+    "education_requirements": [],
+    "soft_skills": [
+      "takım çalışması",
+      "problem çözme"
+    ]
+  },
+  "timestamp": "2026-09-10T13:40:07.761586",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "candidate_27",
+      "candidate_id": "0ef08b6d-5871-482a-a1d2-b3a63817f11e",
+      "final_score": 71.2,
+      "section_scores": {
+        "skills_score": 71.4,
+        "experience_score": 74.7,
+        "education_score": 60.0,
+        "soft_skill_score": 74.5
+      },
+      "llm_explanation": {
+        "candidate_id": "0ef08b6d-5871-482a-a1d2-b3a63817f11e",
+        "llm_score": 71,
+        "strengths": [
+          "Moderate technical skill match (score: 71)",
+          "Some relevant experience found (score: 75)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "javascript",
+          "typescript",
+          "firebase",
+          "node.js",
+          "next.js",
+          "python",
+          "llm"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "candidate_45",
+      "candidate_id": "5c8509f5-beb2-413b-8fbd-72ec61bef610",
+      "final_score": 70.6,
+      "section_scores": {
+        "skills_score": 74.1,
+        "experience_score": 70.2,
+        "education_score": 60.0,
+        "soft_skill_score": 74.2
+      },
+      "llm_explanation": {
+        "candidate_id": "5c8509f5-beb2-413b-8fbd-72ec61bef610",
+        "llm_score": 71,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Some relevant experience found (score: 70)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "typescript",
+          "firebase",
+          "node.js",
+          "next.js",
+          "llm"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "candidate_42",
+      "candidate_id": "df2cdbed-2c36-4d7a-be80-17d2e6af978c",
+      "final_score": 70.3,
+      "section_scores": {
+        "skills_score": 69.8,
+        "experience_score": 74.7,
+        "education_score": 60.0,
+        "soft_skill_score": 72.2
+      },
+      "llm_explanation": {
+        "candidate_id": "df2cdbed-2c36-4d7a-be80-17d2e6af978c",
+        "llm_score": 70,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Some relevant experience found (score: 75)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "typescript",
+          "firebase",
+          "next.js",
+          "python",
+          "llm"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "candidate_36",
+      "candidate_id": "e56fedc8-8683-4031-b7f9-946f6df1a6de",
+      "final_score": 68.5,
+      "section_scores": {
+        "skills_score": 66.7,
+        "experience_score": 72.8,
+        "education_score": 60.0,
+        "soft_skill_score": 73.5
+      },
+      "llm_explanation": {
+        "candidate_id": "e56fedc8-8683-4031-b7f9-946f6df1a6de",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 67)",
+          "Some relevant experience found (score: 73)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "javascript",
+          "typescript",
+          "firebase",
+          "node.js",
+          "next.js",
+          "python",
+          "react",
+          "llm"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "candidate_24",
+      "candidate_id": "a3ace023-40ae-4eab-ab0d-996ab7687aad",
+      "final_score": 68.4,
+      "section_scores": {
+        "skills_score": 67.8,
+        "experience_score": 71.7,
+        "education_score": 60.0,
+        "soft_skill_score": 72.0
+      },
+      "llm_explanation": {
+        "candidate_id": "a3ace023-40ae-4eab-ab0d-996ab7687aad",
+        "llm_score": 68,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 72)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "postgresql",
+          "javascript",
+          "typescript",
+          "firebase",
+          "node.js",
+          "next.js"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

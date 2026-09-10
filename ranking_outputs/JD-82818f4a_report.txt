@@ -1,0 +1,95 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-82818f4a
+  Date       : 2026-09-10 13:39
+  Candidates : 5
+
+  Job Description:
+  Business Analyst
+
+Location: Remote
+Employment Type: Full-Time
+Are you passionate about shaping next-generation SaaS products and intelligent chat experiences? Our client is seeking a Business Analyst,...
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     candidate_51             d9953ac4-3bb5-4868-929e-7eff2971bccf    70.5    72.3    70.0    70.9    71.1
+  2     candidate_50             3d6e15fc-c174-4659-82da-2fce1d36312d    71.3    71.1    68.2    71.3    70.8
+  3     candidate_14             2e933d0a-9a6d-4f4b-8299-da5ff4264d66    70.4    70.1    70.5    71.3    70.4
+  4     candidate_41             c2a36287-58ae-4503-a0ae-1bc271c23224    68.6    72.4    69.5    71.1    70.3
+  5     candidate_40             067a9958-f281-40a3-9b38-8314ca66d1e5    68.3    71.8    69.9    68.1    69.7
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — candidate_51 (d9953ac4-3bb5-4868-929e-7eff2971bccf)
+  Final Score: 71.1/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Some relevant experience found (score: 72)
+
+  [!] Missing Requirements:
+    - data science
+    - agile
+
+  ----------------------------------------
+
+  CANDIDATE #2 — candidate_50 (3d6e15fc-c174-4659-82da-2fce1d36312d)
+  Final Score: 70.8/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 71)
+    - Some relevant experience found (score: 71)
+
+  [!] Missing Requirements:
+    - data science
+
+  ----------------------------------------
+
+  CANDIDATE #3 — candidate_14 (2e933d0a-9a6d-4f4b-8299-da5ff4264d66)
+  Final Score: 70.4/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Some relevant experience found (score: 70)
+
+  [!] Missing Requirements:
+    - data science
+    - agile
+
+  ----------------------------------------
+
+  CANDIDATE #4 — candidate_41 (c2a36287-58ae-4503-a0ae-1bc271c23224)
+  Final Score: 70.3/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 69)
+    - Some relevant experience found (score: 72)
+
+  [!] Missing Requirements:
+    - data science
+
+  ----------------------------------------
+
+  CANDIDATE #5 — candidate_40 (067a9958-f281-40a3-9b38-8314ca66d1e5)
+  Final Score: 69.7/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 72)
+
+  [!] Missing Requirements:
+    - data science
+    - agile
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

@@ -1,0 +1,187 @@
+{
+  "job_id": "JD-d213c58e",
+  "job_description": "Software Engineer - New Grad\n\nWhat you'll be doing\nWe are looking for a passionate Backend Developer who is excited to architect and implement technology, tools and infrastructure that empower Y!\n•\tBuilding distributed, high-performance shared game services\n•\tDeveloping internal tools for operations, data analysis and automation\n•\tSupporting and empowering teams across Y.\n•\tLearning, teaching and growing within a strong engineering culture\nDesired skills and experiences\n•\tBachelor's degree in Computer Science or other engineering departments\n•\tUnderstanding distributed, highly scalable, low latency, fault tolerant backend architecture fundamentals\n•\tKnowledge of the Go programming language at an entry-level, including experience with basic Go syntax and concepts such as goroutines and channels\n•\tStrong engineering, design and architecture skills\n•\tFamiliarity with AWS, NoSQL/in-memory databases, DevOps practices and CI/CD tools\n•\tPassion for Match Villains and mobile puzzle games in general\nWhat makes our team so unique\n•\tFeedback and transparency are at the heart of everything we do\n•\tExceptional and passionate people/team members\n•\tEvery idea counts\n•\tNever-ending learning\n•\tWe never stop asking the questions “why” and “how”\nOur Perks\n•\tTeam events and trips\n•\tGreat food\n•\tOn-site gym\n•\tFull health benefits\n•\tCompensation for paid military service\n•\tRelocation support\n•\tY that lets you have unforgettable experiences (e.g. Going on a cruise trip to Norway or seeing the Northern Lights)\nThis is an on-site role in Istanbul, Sarıyer. We do not offer a fully-remote working option.",
+  "parsed_jd": {
+    "required_skills": [
+      "data analysis",
+      "devops",
+      "ci/cd",
+      "aws",
+      "go"
+    ],
+    "preferred_skills": [],
+    "required_experience": [
+      "entry-level"
+    ],
+    "education_requirements": [
+      {
+        "level": "bachelor",
+        "field": "computer science"
+      },
+      {
+        "level": "bachelor",
+        "field": "architecture"
+      }
+    ],
+    "soft_skills": []
+  },
+  "timestamp": "2026-09-10T13:39:35.110769",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "candidate_41",
+      "candidate_id": "c2a36287-58ae-4503-a0ae-1bc271c23224",
+      "final_score": 71.1,
+      "section_scores": {
+        "skills_score": 68.2,
+        "experience_score": 71.5,
+        "education_score": 85.5,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "c2a36287-58ae-4503-a0ae-1bc271c23224",
+        "llm_score": 71,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 72)",
+          "Education requirements satisfied (score: 86)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "data analysis",
+          "devops",
+          "ci/cd",
+          "aws"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "candidate_51",
+      "candidate_id": "d9953ac4-3bb5-4868-929e-7eff2971bccf",
+      "final_score": 71.1,
+      "section_scores": {
+        "skills_score": 67.5,
+        "experience_score": 71.9,
+        "education_score": 86.2,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "d9953ac4-3bb5-4868-929e-7eff2971bccf",
+        "llm_score": 71,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 72)",
+          "Education requirements satisfied (score: 86)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "data analysis",
+          "devops",
+          "ci/cd",
+          "aws",
+          "go"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "candidate_40",
+      "candidate_id": "067a9958-f281-40a3-9b38-8314ca66d1e5",
+      "final_score": 70.5,
+      "section_scores": {
+        "skills_score": 67.8,
+        "experience_score": 70.0,
+        "education_score": 85.8,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "067a9958-f281-40a3-9b38-8314ca66d1e5",
+        "llm_score": 70,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 70)",
+          "Education requirements satisfied (score: 86)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "data analysis",
+          "devops",
+          "ci/cd",
+          "aws",
+          "go"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "candidate_06",
+      "candidate_id": "a2f7d078-4307-4339-958c-7d946e391d25",
+      "final_score": 70.0,
+      "section_scores": {
+        "skills_score": 69.4,
+        "experience_score": 67.3,
+        "education_score": 84.7,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "a2f7d078-4307-4339-958c-7d946e391d25",
+        "llm_score": 70,
+        "strengths": [
+          "Moderate technical skill match (score: 69)",
+          "Some relevant experience found (score: 67)",
+          "Education requirements satisfied (score: 85)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "data analysis",
+          "devops",
+          "ci/cd",
+          "aws",
+          "go"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "candidate_22",
+      "candidate_id": "db7b4dfc-218b-4fa0-a589-77fb3e0067d5",
+      "final_score": 68.9,
+      "section_scores": {
+        "skills_score": 66.3,
+        "experience_score": 67.5,
+        "education_score": 84.8,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "db7b4dfc-218b-4fa0-a589-77fb3e0067d5",
+        "llm_score": 69,
+        "strengths": [
+          "Moderate technical skill match (score: 66)",
+          "Some relevant experience found (score: 68)",
+          "Education requirements satisfied (score: 85)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "data analysis",
+          "devops",
+          "ci/cd",
+          "aws"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

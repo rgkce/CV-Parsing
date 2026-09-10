@@ -1,0 +1,206 @@
+{
+  "job_id": "JD-a81cd9d7",
+  "job_description": "Yapay Zekâ (AI) Yazılım Uzmanı\n\nPozisyonun Amacı\nBu pozisyonda görev alacak ekip arkadaşı; kurumsal yapay zekâ çözümlerinin geliştirilmesi, ERP sistemleriyle entegrasyonu, kurumsal bilgi yönetimi ve AI agent mimarilerinin oluşturulmasında aktif rol alacaktır. Pozisyon yeni mezun ve uzman adaylara açıktır; potansiyel ve öğrenme isteği, deneyim kadar önemlidir.\nERP, BI ve diğer kurumsal veri kaynaklarından yararlanarak iş birimlerine ölçülebilir fayda sağlayacak yapay zekâ fırsatlarını belirlemek, stratejik içgörüler üretmek ve prototip çözümler geliştirmek bu rolün önemli hedeflerinden biridir.\nGörev ve Sorumluluklar\n•\tAçık kaynak LLM'lerin lokal veya bulut ortamlarda devreye alınması, entegrasyonu ve performans optimizasyonu\n•\tKurumsal veri üzerinde RAG mimarileri tasarlamak ve geliştirmek\n•\tRAG, embedding, vektör arama ve gerektiğinde model özelleştirme (fine-tuning) çözümlerinin geliştirilmesi\n•\tAzure AI Foundry, Azure OpenAI ve benzeri platformlarda model yayınlama (deployment) ve agent geliştir\n•\tMevcut AI uygulamalarımızın devralınması ve sürdürülebilir hale getirilmesi\n•\tD365 FO ve diğer ERP sistemleriyle AI entegrasyonları\n•\tGitHub Actions ile CI/CD ve modern DevOps pratiklerinin uygulanması\n•\tMulti-agent ve MCP tabanlı mimarilerin tasarımı\n•\tKullanıcı ihtiyaçlarını analiz etmek ve uygun AI çözümleri tasarlamak\nAradığımız Nitelikler\n•\tMühendislik, Matematik, Fizik veya İstatistik bölümlerinden mezun (yeni mezunlar dahil) Python ile proje geliştirme deneyimi\n•\tLLM'lerin nasıl çalıştığına dair temel anlayış\n•\tGit/GitHub kullanım alışkanlığı\n•\tSQL, REST API ve sistem entegrasyonları konusunda temel bilgi\n•\tMCP (Model Context Protocol) hakkında bilgi sahibi olmak tercih sebebidir\n•\tPrompt engineering konusunda temel bilgi\n•\tİngilizce teknik dokümantasyon okuyabilecek seviye\n•\tÖğrenmeye açık, kendi kendine çözüm üretebilen\nTercih Sebepleri\n•\tHugging Face, LangChain veya benzeri kütüphanelerle deneyim\n•\tRAG veya fine-tuning denemesi\n•\tAzure AI / Azure OpenAI deneyimi\n•\tGitHub Actions ile pipeline yazmış olmak\n•\tAnthropic Claude, OpenAI vb. API'lerle prototip geliştirmiş olmak\n•\tLLM veya ML tabanlı analitik/karar destek uygulamaları geliştirmiş olmak\n•\tVeri güvenliği ve gizlilik konularında temel bilgi sahibi olmak\n•\tAgile çalışma disiplinine yatkınlık\n•\tAçık kaynak proje, blog veya teknik içerik üretimi\n•\tD365 veya benzeri ERP sistemlerine aşinalık\n•\tGıda / tarım sektörü deneyimi",
+  "parsed_jd": {
+    "required_skills": [
+      "rest api",
+      "github",
+      "python",
+      "devops",
+      "agile",
+      "azure",
+      "ci/cd",
+      "llm",
+      "git",
+      "sql"
+    ],
+    "preferred_skills": [],
+    "required_experience": [],
+    "education_requirements": [
+      {
+        "level": "bachelor",
+        "field": "matematik"
+      },
+      {
+        "level": "bachelor",
+        "field": "yönetim"
+      },
+      {
+        "level": "bachelor",
+        "field": "fizik"
+      }
+    ],
+    "soft_skills": []
+  },
+  "timestamp": "2026-09-10T13:39:10.401727",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "candidate_38",
+      "candidate_id": "11ef11f3-c0e6-41f9-ad8d-29b790ab568b",
+      "final_score": 74.5,
+      "section_scores": {
+        "skills_score": 72.5,
+        "experience_score": 76.2,
+        "education_score": 85.5,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "11ef11f3-c0e6-41f9-ad8d-29b790ab568b",
+        "llm_score": 74,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Relevant professional experience (score: 76)",
+          "Education requirements satisfied (score: 86)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "rest api",
+          "github",
+          "agile",
+          "ci/cd",
+          "llm",
+          "git"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "candidate_36",
+      "candidate_id": "e56fedc8-8683-4031-b7f9-946f6df1a6de",
+      "final_score": 72.7,
+      "section_scores": {
+        "skills_score": 68.0,
+        "experience_score": 75.9,
+        "education_score": 86.5,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "e56fedc8-8683-4031-b7f9-946f6df1a6de",
+        "llm_score": 73,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Relevant professional experience (score: 76)",
+          "Education requirements satisfied (score: 86)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "rest api",
+          "github",
+          "python",
+          "devops",
+          "azure",
+          "ci/cd",
+          "llm",
+          "git",
+          "sql"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "candidate_08",
+      "candidate_id": "6d8a278f-1d7f-42eb-b9a4-8b5350b2ddc0",
+      "final_score": 72.7,
+      "section_scores": {
+        "skills_score": 71.2,
+        "experience_score": 73.0,
+        "education_score": 84.3,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "6d8a278f-1d7f-42eb-b9a4-8b5350b2ddc0",
+        "llm_score": 73,
+        "strengths": [
+          "Moderate technical skill match (score: 71)",
+          "Some relevant experience found (score: 73)",
+          "Education requirements satisfied (score: 84)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "rest api",
+          "github",
+          "devops",
+          "agile",
+          "azure",
+          "ci/cd",
+          "llm"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "candidate_27",
+      "candidate_id": "0ef08b6d-5871-482a-a1d2-b3a63817f11e",
+      "final_score": 72.4,
+      "section_scores": {
+        "skills_score": 70.2,
+        "experience_score": 72.6,
+        "education_score": 86.1,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "0ef08b6d-5871-482a-a1d2-b3a63817f11e",
+        "llm_score": 72,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Some relevant experience found (score: 73)",
+          "Education requirements satisfied (score: 86)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "rest api",
+          "python",
+          "devops",
+          "agile",
+          "azure",
+          "ci/cd",
+          "llm"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "candidate_24",
+      "candidate_id": "a3ace023-40ae-4eab-ab0d-996ab7687aad",
+      "final_score": 70.4,
+      "section_scores": {
+        "skills_score": 68.5,
+        "experience_score": 69.9,
+        "education_score": 83.3,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "a3ace023-40ae-4eab-ab0d-996ab7687aad",
+        "llm_score": 70,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 70)",
+          "Education requirements satisfied (score: 83)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "rest api",
+          "github",
+          "devops",
+          "agile",
+          "azure",
+          "ci/cd"
+        ],
+        "recommendation": "Good Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

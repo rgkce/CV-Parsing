@@ -1,0 +1,255 @@
+[
+  {
+    "job_id": 1,
+    "job_title": "Yapay Zekâ (AI) Yazılım Uzmanı",
+    "language": "tr",
+    "total_matched": 5,
+    "top_3": [
+      {
+        "rank": 1,
+        "name": "candidate_38",
+        "score": 74.5
+      },
+      {
+        "rank": 2,
+        "name": "candidate_36",
+        "score": 72.7
+      },
+      {
+        "rank": 3,
+        "name": "candidate_08",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "job_id": 2,
+    "job_title": "Android Developer",
+    "language": "en",
+    "total_matched": 5,
+    "top_3": [
+      {
+        "rank": 1,
+        "name": "candidate_30",
+        "score": 72.8
+      },
+      {
+        "rank": 2,
+        "name": "candidate_18",
+        "score": 72.2
+      },
+      {
+        "rank": 3,
+        "name": "candidate_41",
+        "score": 72.0
+      }
+    ]
+  },
+  {
+    "job_id": 3,
+    "job_title": "Business Analyst",
+    "language": "en",
+    "total_matched": 5,
+    "top_3": [
+      {
+        "rank": 1,
+        "name": "candidate_51",
+        "score": 71.1
+      },
+      {
+        "rank": 2,
+        "name": "candidate_50",
+        "score": 70.8
+      },
+      {
+        "rank": 3,
+        "name": "candidate_14",
+        "score": 70.4
+      }
+    ]
+  },
+  {
+    "job_id": 4,
+    "job_title": "Software Engineer - New Grad",
+    "language": "en",
+    "total_matched": 5,
+    "top_3": [
+      {
+        "rank": 1,
+        "name": "candidate_41",
+        "score": 71.1
+      },
+      {
+        "rank": 2,
+        "name": "candidate_51",
+        "score": 71.1
+      },
+      {
+        "rank": 3,
+        "name": "candidate_40",
+        "score": 70.5
+      }
+    ]
+  },
+  {
+    "job_id": 5,
+    "job_title": "Game Developer (Remote) Full-Time",
+    "language": "en",
+    "total_matched": 5,
+    "top_3": [
+      {
+        "rank": 1,
+        "name": "candidate_41",
+        "score": 73.6
+      },
+      {
+        "rank": 2,
+        "name": "candidate_30",
+        "score": 73.2
+      },
+      {
+        "rank": 3,
+        "name": "candidate_51",
+        "score": 73.2
+      }
+    ]
+  },
+  {
+    "job_id": 6,
+    "job_title": "Machine Learning Engineer – Privacy-Preserving AI",
+    "language": "en",
+    "total_matched": 5,
+    "top_3": [
+      {
+        "rank": 1,
+        "name": "candidate_01",
+        "score": 72.3
+      },
+      {
+        "rank": 2,
+        "name": "candidate_50",
+        "score": 71.7
+      },
+      {
+        "rank": 3,
+        "name": "candidate_06",
+        "score": 71.2
+      }
+    ]
+  },
+  {
+    "job_id": 7,
+    "job_title": "İş Analisti",
+    "language": "tr",
+    "total_matched": 5,
+    "top_3": [
+      {
+        "rank": 1,
+        "name": "candidate_36",
+        "score": 73.2
+      },
+      {
+        "rank": 2,
+        "name": "candidate_04",
+        "score": 72.6
+      },
+      {
+        "rank": 3,
+        "name": "candidate_20",
+        "score": 71.1
+      }
+    ]
+  },
+  {
+    "job_id": 8,
+    "job_title": "AI Agent ve Yapay Zekâ Yazılım Uzmanı",
+    "language": "tr",
+    "total_matched": 5,
+    "top_3": [
+      {
+        "rank": 1,
+        "name": "candidate_27",
+        "score": 71.2
+      },
+      {
+        "rank": 2,
+        "name": "candidate_45",
+        "score": 70.6
+      },
+      {
+        "rank": 3,
+        "name": "candidate_42",
+        "score": 70.3
+      }
+    ]
+  },
+  {
+    "job_id": 9,
+    "job_title": "Yazılım Mühendisi",
+    "language": "tr",
+    "total_matched": 5,
+    "top_3": [
+      {
+        "rank": 1,
+        "name": "candidate_27",
+        "score": 75.4
+      },
+      {
+        "rank": 2,
+        "name": "candidate_38",
+        "score": 74.4
+      },
+      {
+        "rank": 3,
+        "name": "candidate_45",
+        "score": 73.7
+      }
+    ]
+  },
+  {
+    "job_id": 10,
+    "job_title": "IT Analisti",
+    "language": "tr",
+    "total_matched": 5,
+    "top_3": [
+      {
+        "rank": 1,
+        "name": "candidate_27",
+        "score": 73.9
+      },
+      {
+        "rank": 2,
+        "name": "candidate_42",
+        "score": 72.9
+      },
+      {
+        "rank": 3,
+        "name": "candidate_36",
+        "score": 72.3
+      }
+    ]
+  },
+  {
+    "job_id": 11,
+    "job_title": "Mobil Yazılım Uzmanı",
+    "language": "tr",
+    "total_matched": 5,
+    "top_3": [
+      {
+        "rank": 1,
+        "name": "candidate_47",
+        "score": 70.0
+      },
+      {
+        "rank": 2,
+        "name": "candidate_27",
+        "score": 69.8
+      },
+      {
+        "rank": 3,
+        "name": "candidate_36",
+        "score": 69.0
+      }
+    ]
+  }
+]

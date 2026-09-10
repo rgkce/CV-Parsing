@@ -1,0 +1,100 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-27b52dbc
+  Date       : 2026-09-10 13:39
+  Candidates : 5
+
+  Job Description:
+  Android Developer
+
+About the Role
+At X, we are building mobile experiences used by millions of users. We are looking for Android Engineers who can develop reliable, high-performance, maintainable nati...
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     candidate_30             071d383d-0ce2-4435-b54b-9e3c2193333f    71.7    75.1    71.2    71.5    72.8
+  2     candidate_18             2606c715-1200-4019-b480-f19edd19bfb4    71.4    75.1    70.4    67.5    72.2
+  3     candidate_41             c2a36287-58ae-4503-a0ae-1bc271c23224    70.5    75.1    69.5    71.4    72.0
+  4     candidate_44             8d17b95c-7841-4e09-afb9-39c6e721c1ca    70.0    75.7    69.5    70.2    71.9
+  5     candidate_51             d9953ac4-3bb5-4868-929e-7eff2971bccf    72.2    70.3    70.3    71.5    71.2
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — candidate_30 (071d383d-0ce2-4435-b54b-9e3c2193333f)
+  Final Score: 72.8/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Relevant professional experience (score: 75)
+
+  [!] Missing Requirements:
+    - kotlin
+    - ci/cd
+
+  ----------------------------------------
+
+  CANDIDATE #2 — candidate_18 (2606c715-1200-4019-b480-f19edd19bfb4)
+  Final Score: 72.2/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 71)
+    - Relevant professional experience (score: 75)
+
+  [!] Missing Requirements:
+    - ci/cd
+    - ios
+    - git
+
+  ----------------------------------------
+
+  CANDIDATE #3 — candidate_41 (c2a36287-58ae-4503-a0ae-1bc271c23224)
+  Final Score: 72.0/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Relevant professional experience (score: 75)
+
+  [!] Missing Requirements:
+    - android
+    - kotlin
+    - ci/cd
+    - ios
+
+  ----------------------------------------
+
+  CANDIDATE #4 — candidate_44 (8d17b95c-7841-4e09-afb9-39c6e721c1ca)
+  Final Score: 71.9/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Relevant professional experience (score: 76)
+
+  [!] Missing Requirements:
+    - android
+    - kotlin
+    - ios
+
+  ----------------------------------------
+
+  CANDIDATE #5 — candidate_51 (d9953ac4-3bb5-4868-929e-7eff2971bccf)
+  Final Score: 71.2/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Some relevant experience found (score: 70)
+
+  [!] Missing Requirements:
+    - ci/cd
+    - ios
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

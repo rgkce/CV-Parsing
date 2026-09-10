@@ -1,0 +1,98 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-6c5e9de5
+  Date       : 2026-09-10 13:40
+  Candidates : 5
+
+  Job Description:
+  IT Analisti
+
+2026 yılında K Holding bünyesinde hayata geçirdiğimiz L Gaming; dijital eğlence ve şans oyunları alanında faaliyet gösteren güçlü markaları ortak bir vizyonla bir araya getiren, yeni nesi...
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     candidate_27             0ef08b6d-5871-482a-a1d2-b3a63817f11e    71.1    71.7    87.0    73.0    73.9
+  2     candidate_42             df2cdbed-2c36-4d7a-be80-17d2e6af978c    70.3    71.1    85.0    71.6    72.9
+  3     candidate_36             e56fedc8-8683-4031-b7f9-946f6df1a6de    66.7    71.9    87.8    73.2    72.3
+  4     candidate_04             a5535b45-e7c5-4935-b48b-925f294bec0f    67.5    70.2    87.3    73.4    72.0
+  5     candidate_11             dcf80205-6fef-4264-85c9-c90818620181    71.2    72.7     0.0    70.9    61.0
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — candidate_27 (0ef08b6d-5871-482a-a1d2-b3a63817f11e)
+  Final Score: 73.9/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 71)
+    - Some relevant experience found (score: 72)
+    - Education requirements satisfied (score: 87)
+
+  [!] Missing Requirements:
+    - rest api
+
+  ----------------------------------------
+
+  CANDIDATE #2 — candidate_42 (df2cdbed-2c36-4d7a-be80-17d2e6af978c)
+  Final Score: 72.9/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Some relevant experience found (score: 71)
+    - Education requirements satisfied (score: 85)
+
+  [!] Missing Requirements:
+    - rest api
+
+  ----------------------------------------
+
+  CANDIDATE #3 — candidate_36 (e56fedc8-8683-4031-b7f9-946f6df1a6de)
+  Final Score: 72.3/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 67)
+    - Some relevant experience found (score: 72)
+    - Education requirements satisfied (score: 88)
+
+  [!] Missing Requirements:
+    - rest api
+    - sql
+
+  ----------------------------------------
+
+  CANDIDATE #4 — candidate_04 (a5535b45-e7c5-4935-b48b-925f294bec0f)
+  Final Score: 72.0/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 70)
+    - Education requirements satisfied (score: 87)
+
+  [!] Missing Requirements:
+    - rest api
+
+  ----------------------------------------
+
+  CANDIDATE #5 — candidate_11 (dcf80205-6fef-4264-85c9-c90818620181)
+  Final Score: 61.0/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 71)
+    - Some relevant experience found (score: 73)
+
+  [-] Weaknesses:
+    - Education requirements may not be fully met (score: 0)
+
+  [!] Missing Requirements:
+    - rest api
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

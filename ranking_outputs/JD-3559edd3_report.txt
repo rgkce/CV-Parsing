@@ -1,0 +1,119 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-3559edd3
+  Date       : 2026-09-10 13:40
+  Candidates : 5
+
+  Job Description:
+  AI Agent ve Yapay Zekâ Yazılım Uzmanı
+
+B firması olarak yapay zekâ destekli yazılım sistemleri geliştiriyor, yüzlerce mikro ajanla çalışan yeni nesil AI operasyon altyapıları kuruyoruz.
+Şimdi ekibimiz...
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     candidate_27             0ef08b6d-5871-482a-a1d2-b3a63817f11e    71.4    74.7    60.0    74.5    71.2
+  2     candidate_45             5c8509f5-beb2-413b-8fbd-72ec61bef610    74.1    70.2    60.0    74.2    70.6
+  3     candidate_42             df2cdbed-2c36-4d7a-be80-17d2e6af978c    69.8    74.7    60.0    72.2    70.3
+  4     candidate_36             e56fedc8-8683-4031-b7f9-946f6df1a6de    66.7    72.8    60.0    73.5    68.5
+  5     candidate_24             a3ace023-40ae-4eab-ab0d-996ab7687aad    67.8    71.7    60.0    72.0    68.4
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — candidate_27 (0ef08b6d-5871-482a-a1d2-b3a63817f11e)
+  Final Score: 71.2/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 71)
+    - Some relevant experience found (score: 75)
+
+  [!] Missing Requirements:
+    - javascript
+    - typescript
+    - firebase
+    - node.js
+    - next.js
+    - python
+    - llm
+
+  ----------------------------------------
+
+  CANDIDATE #2 — candidate_45 (5c8509f5-beb2-413b-8fbd-72ec61bef610)
+  Final Score: 70.6/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Some relevant experience found (score: 70)
+
+  [!] Missing Requirements:
+    - postgresql
+    - typescript
+    - firebase
+    - node.js
+    - next.js
+    - llm
+
+  ----------------------------------------
+
+  CANDIDATE #3 — candidate_42 (df2cdbed-2c36-4d7a-be80-17d2e6af978c)
+  Final Score: 70.3/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Some relevant experience found (score: 75)
+
+  [!] Missing Requirements:
+    - typescript
+    - firebase
+    - next.js
+    - python
+    - llm
+
+  ----------------------------------------
+
+  CANDIDATE #4 — candidate_36 (e56fedc8-8683-4031-b7f9-946f6df1a6de)
+  Final Score: 68.5/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 67)
+    - Some relevant experience found (score: 73)
+
+  [!] Missing Requirements:
+    - postgresql
+    - javascript
+    - typescript
+    - firebase
+    - node.js
+    - next.js
+    - python
+    - react
+    - llm
+
+  ----------------------------------------
+
+  CANDIDATE #5 — candidate_24 (a3ace023-40ae-4eab-ab0d-996ab7687aad)
+  Final Score: 68.4/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 72)
+
+  [!] Missing Requirements:
+    - postgresql
+    - javascript
+    - typescript
+    - firebase
+    - node.js
+    - next.js
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

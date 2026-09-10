@@ -1,0 +1,181 @@
+{
+  "job_id": "JD-6c5e9de5",
+  "job_description": "IT Analisti\n\n2026 yılında K Holding bünyesinde hayata geçirdiğimiz L Gaming; dijital eğlence ve şans oyunları alanında faaliyet gösteren güçlü markaları ortak bir vizyonla bir araya getiren, yeni nesil bir grup yapısıdır.\nBu yapıyı; daha bütüncül, sürdürülebilir ve birlikte daha güçlü ilerleyen bir ekosistem anlayışıyla kurguladık.\nSen de hayat dolu bu takımın vazgeçilmez oyuncusu olabilirsin!\nYaratıcı projelerinle yepyeni bir oyun evreni yaratabilir, iz bırakacak koşular yapabilirsin!\nRakiplerini stratejik çalımlarla şaşırtabilir, hızınla herkese ilham verebilir, takım arkadaşlarınla paslaşabilirsin!\nSürekli atak yapan, herkesi şaşırtan, her anı heyecan ve şans dolu teknolojik bir kariyer arıyorsan \"en\" doğru yerdesin.\nHayat dolu L Gaming’e katıl, oyunu baştan yaz!\nHayat Dolu Nitelikler\n•\tÜniversitelerin ilgili lisans bölümlerinden mezun (Bilgisayar Mühendisliği, Matematik Mühendisliği, Yönetim Bilişim Sistemleri vb. bölümler tercih sebebidir),\n•\tYazılım projelerinde IT Analisti olarak en az 3 yıl deneyim sahibi,\n•\tYazılım geliştirme süreçlerine hâkim, kodlama bilgisi olan (.NET tercih edilir),\n•\tİş akışları ve süreç modelleme araçlarında (Visio, UML vb.) deneyimli,\n•\tWeb servisleri, mikroservisler, REST API ve SQL konularında deneyimli,\n•\tArayüz tasarımı ve kullanıcı deneyimi konularında bilgi sahibi,\n•\tSözlü ve yazılı İngilizce iletişimi iyi düzeyde olan,\n•\tProblem çözme, analiz, planlama, takip, organizasyon ve yönlendirme becerileri gelişmiş,\n•\tEkip çalışmasına yatkın, iletişime açık, analitik düşünce yapısına sahip, çözüm ve sonuç odaklı.\nİş Tanımına Dolu Dolu Bi’Bakış\n•\tİş geliştirme ekiplerinden gelen talepleri teknik fizibilite, kapsam ve mevcut sistem mimarisine uyumluluk açısından değerlendirerek gereksinimlerin olgunlaştırılmasını ve geliştirmeye hazır hâle getirilmesini sağlamak,\n•\tGereksinimler netleştikten sonra proje aktarım sürecini organize ederek Backend, Frontend ve Client ekipleriyle koordineli biçimde aktarımı yürütmek; ekiplerden gelen teknik geri bildirimleri yönetmek ve çözüme kavuşturmak,\n•\tSistem tasarımı kapsamında endpoint yapılarını, request/response modellerini, veri akışlarını ve iş kurallarını tanımlamak,\n•\tBackend ve Client ekipleri için teknik geliştirme maddelerini oluşturmak; her ekibin sorumluluk alanını net biçimde ortaya koyan analiz çıktıları üretmek,\n•\tUygulamaların geliştirilmesi sürecinde ortaya çıkan farklı ihtiyaçlara göre öneriler geliştirerek, çözüm ortaya koyabilmek,\n•\tYazılım geliştirme süreçlerinde ekiplere teknik destek sağlamak; geliştirme boyunca ortaya çıkan soru ve belirsizlikleri analiz perspektifiyle yönlendirmek,\n•\tProjelere ilişkin teknik riskleri, kapsam değişikliklerini ve statü güncellemelerini takip ederek ilgili paydaşlara raporlamak.\nHayat Dolu Yan Haklarımız:\n“Yan hak” diye yazılır, L Gaming “Hayat Dolu Haklarımız” diye okunur🙂\n•\tEş ve çocuk kapsamlı limitsiz özel sağlık sigortası,\n•\tMultinet yemek kartı,\n•\tOfisten çalışılan günlerde ulaşım desteği,\n•\tYıllık izinlerimize ek olarak, istediğin zaman kullanabileceğin +3 gün Bugün Aranızda Yokum 🙂 izni ( biz kısaca BAY diyoruz 🙂)\n•\tDoğum gününün olduğu hafta kullanabileceğin +1 gün doğum günü izni,\n•\tBayram hediye çekleri,\n•\tEvlenmek ve çocuk sahibi olmak gibi mutlu anlarda özel gün hediyeleri,\n•\tDijital Cüzdan'a yapılan hediye yüklemeler ile yıl boyunca dilediğince alışveriş!",
+  "parsed_jd": {
+    "required_skills": [
+      "rest api",
+      "sql"
+    ],
+    "preferred_skills": [],
+    "required_experience": [
+      "2026 yıl",
+      "3 yıl deneyim",
+      "en az 3 yıl"
+    ],
+    "education_requirements": [
+      {
+        "level": "bachelor",
+        "field": "bilgisayar mühendisliği"
+      },
+      {
+        "level": "bachelor",
+        "field": "matematik"
+      },
+      {
+        "level": "bachelor",
+        "field": "yönetim"
+      },
+      {
+        "level": "bachelor",
+        "field": "bilişim"
+      }
+    ],
+    "soft_skills": [
+      "problem çözme",
+      "organizasyon"
+    ]
+  },
+  "timestamp": "2026-09-10T13:40:24.334655",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "candidate_27",
+      "candidate_id": "0ef08b6d-5871-482a-a1d2-b3a63817f11e",
+      "final_score": 73.9,
+      "section_scores": {
+        "skills_score": 71.1,
+        "experience_score": 71.7,
+        "education_score": 87.0,
+        "soft_skill_score": 73.0
+      },
+      "llm_explanation": {
+        "candidate_id": "0ef08b6d-5871-482a-a1d2-b3a63817f11e",
+        "llm_score": 74,
+        "strengths": [
+          "Moderate technical skill match (score: 71)",
+          "Some relevant experience found (score: 72)",
+          "Education requirements satisfied (score: 87)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "rest api"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "candidate_42",
+      "candidate_id": "df2cdbed-2c36-4d7a-be80-17d2e6af978c",
+      "final_score": 72.9,
+      "section_scores": {
+        "skills_score": 70.3,
+        "experience_score": 71.1,
+        "education_score": 85.0,
+        "soft_skill_score": 71.6
+      },
+      "llm_explanation": {
+        "candidate_id": "df2cdbed-2c36-4d7a-be80-17d2e6af978c",
+        "llm_score": 73,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Some relevant experience found (score: 71)",
+          "Education requirements satisfied (score: 85)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "rest api"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "candidate_36",
+      "candidate_id": "e56fedc8-8683-4031-b7f9-946f6df1a6de",
+      "final_score": 72.3,
+      "section_scores": {
+        "skills_score": 66.7,
+        "experience_score": 71.9,
+        "education_score": 87.8,
+        "soft_skill_score": 73.2
+      },
+      "llm_explanation": {
+        "candidate_id": "e56fedc8-8683-4031-b7f9-946f6df1a6de",
+        "llm_score": 72,
+        "strengths": [
+          "Moderate technical skill match (score: 67)",
+          "Some relevant experience found (score: 72)",
+          "Education requirements satisfied (score: 88)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "rest api",
+          "sql"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "candidate_04",
+      "candidate_id": "a5535b45-e7c5-4935-b48b-925f294bec0f",
+      "final_score": 72.0,
+      "section_scores": {
+        "skills_score": 67.5,
+        "experience_score": 70.2,
+        "education_score": 87.3,
+        "soft_skill_score": 73.4
+      },
+      "llm_explanation": {
+        "candidate_id": "a5535b45-e7c5-4935-b48b-925f294bec0f",
+        "llm_score": 72,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 70)",
+          "Education requirements satisfied (score: 87)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "rest api"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "candidate_11",
+      "candidate_id": "dcf80205-6fef-4264-85c9-c90818620181",
+      "final_score": 61.0,
+      "section_scores": {
+        "skills_score": 71.2,
+        "experience_score": 72.7,
+        "education_score": 0.0,
+        "soft_skill_score": 70.9
+      },
+      "llm_explanation": {
+        "candidate_id": "dcf80205-6fef-4264-85c9-c90818620181",
+        "llm_score": 61,
+        "strengths": [
+          "Moderate technical skill match (score: 71)",
+          "Some relevant experience found (score: 73)"
+        ],
+        "weaknesses": [
+          "Education requirements may not be fully met (score: 0)"
+        ],
+        "missing_requirements": [
+          "rest api"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

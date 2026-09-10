@@ -1,0 +1,151 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-08ce2f8c
+  Date       : 2026-09-10 13:40
+  Candidates : 5
+
+  Job Description:
+  Yazılım Mühendisi
+
+C firması, yazılım yaşam döngüsünün her aşamasında uzmanlık gerektiren roller için teknoloji hizmetleri sunan bir IT danışmanlık şirketidir.
+Bankacılık, e-ticaret ve ödeme sistemler...
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     candidate_27             0ef08b6d-5871-482a-a1d2-b3a63817f11e    71.3    75.2    88.3    73.1    75.4
+  2     candidate_38             11ef11f3-c0e6-41f9-ad8d-29b790ab568b    71.7    73.1    86.2    72.4    74.4
+  3     candidate_45             5c8509f5-beb2-413b-8fbd-72ec61bef610    72.7    69.0    87.5    73.8    73.7
+  4     candidate_42             df2cdbed-2c36-4d7a-be80-17d2e6af978c    68.9    72.6    85.5    71.8    73.0
+  5     candidate_36             e56fedc8-8683-4031-b7f9-946f6df1a6de    66.7    73.1    89.3    73.1    73.0
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — candidate_27 (0ef08b6d-5871-482a-a1d2-b3a63817f11e)
+  Final Score: 75.4/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 71)
+    - Relevant professional experience (score: 75)
+    - Education requirements satisfied (score: 88)
+
+  [!] Missing Requirements:
+    - rest api
+    - angular
+    - vue.js
+    - mysql
+    - azure
+    - ci/cd
+    - vue
+
+  ----------------------------------------
+
+  CANDIDATE #2 — candidate_38 (11ef11f3-c0e6-41f9-ad8d-29b790ab568b)
+  Final Score: 74.4/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Some relevant experience found (score: 73)
+    - Education requirements satisfied (score: 86)
+
+  [!] Missing Requirements:
+    - spring boot
+    - postgresql
+    - rest api
+    - mongodb
+    - angular
+    - spring
+    - docker
+    - vue.js
+    - mysql
+    - ci/cd
+    - react
+    - java
+    - git
+    - vue
+    - aws
+
+  ----------------------------------------
+
+  CANDIDATE #3 — candidate_45 (5c8509f5-beb2-413b-8fbd-72ec61bef610)
+  Final Score: 73.7/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 73)
+    - Some relevant experience found (score: 69)
+    - Education requirements satisfied (score: 88)
+
+  [!] Missing Requirements:
+    - spring boot
+    - postgresql
+    - rest api
+    - mongodb
+    - angular
+    - spring
+    - docker
+    - vue.js
+    - mysql
+    - azure
+    - ci/cd
+    - git
+    - vue
+    - aws
+
+  ----------------------------------------
+
+  CANDIDATE #4 — candidate_42 (df2cdbed-2c36-4d7a-be80-17d2e6af978c)
+  Final Score: 73.0/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 69)
+    - Some relevant experience found (score: 73)
+    - Education requirements satisfied (score: 86)
+
+  [!] Missing Requirements:
+    - rest api
+    - angular
+    - vue.js
+    - mysql
+    - azure
+    - vue
+    - aws
+
+  ----------------------------------------
+
+  CANDIDATE #5 — candidate_36 (e56fedc8-8683-4031-b7f9-946f6df1a6de)
+  Final Score: 73.0/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 67)
+    - Some relevant experience found (score: 73)
+    - Education requirements satisfied (score: 89)
+
+  [!] Missing Requirements:
+    - spring boot
+    - postgresql
+    - rest api
+    - mongodb
+    - angular
+    - spring
+    - docker
+    - vue.js
+    - mysql
+    - azure
+    - ci/cd
+    - react
+    - java
+    - git
+    - vue
+    - aws
+    - sql
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

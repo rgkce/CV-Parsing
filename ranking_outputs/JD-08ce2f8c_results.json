@@ -1,0 +1,235 @@
+{
+  "job_id": "JD-08ce2f8c",
+  "job_description": "Yazılım Mühendisi\n\nC firması, yazılım yaşam döngüsünün her aşamasında uzmanlık gerektiren roller için teknoloji hizmetleri sunan bir IT danışmanlık şirketidir.\nBankacılık, e-ticaret ve ödeme sistemleri gibi alanlarda sektöre özel, ölçeklenebilir ve güvenli çözümler üreterek müşterilerine katma değerli IT danışmanlık hizmetleri sağlamaktadır.\nSektör tecrübemizle, müşteriye özel ihtiyaçlara uygun çözümler geliştiriyor; güncel teknolojilerle sürdürülebilir, esnek ve kaliteli yazılımlar tasarlıyoruz.\nPozisyon Hakkında\nYazılım geliştirme ekibimize katılacak, modern teknolojilerle çözüm üretebilecek, öğrenmeye ve gelişmeye açık takım arkadaşları arıyoruz.\nAranan Nitelikler\n•\tÜniversitelerin Bilgisayar, Yazılım veya Bilişim Mühendisliği bölümlerinden mezun,\n•\tJava 11+ veya tercihen Java 17+ ile yazılım geliştirme konusunda deneyimli veya kendini geliştirmeye istekli,\n•\tSpring Boot, Spring Data JPA, REST API teknolojilerinde bilgi sahibi,\n•\tSQL (PostgreSQL, MySQL) veya NoSQL (MongoDB) veritabanlarıyla çalışmış,\n•\tTercihen Docker, Git, CI/CD süreçleri hakkında temel bilgi sahibi,\n•\tReact, Angular veya Vue.js gibi modern frontend teknolojilerinden en az biriyle çalışmaya istekli,\n•\tYazılım geliştirme ilkeleri (OOP, Clean Code, Design Patterns, Unit Testing) hakkında farkındalığı olan,\n•\tİyi derecede İngilizce teknik doküman okuma ve araştırma becerisine sahip,\n•\tProblem çözme, analiz ve iletişim yönü güçlü,\n•\tÖğrenmeye ve sürekli gelişime açık.\nTercihen\n•\tMicroservice mimarisi,\n•\tCloud (AWS, Azure) teknolojileri,\n•\tTest otomasyonu (JUnit, Mockito) konularında deneyim sahibi olmak avantajdır.",
+  "parsed_jd": {
+    "required_skills": [
+      "spring boot",
+      "postgresql",
+      "rest api",
+      "mongodb",
+      "angular",
+      "spring",
+      "docker",
+      "vue.js",
+      "mysql",
+      "azure",
+      "ci/cd",
+      "react",
+      "java",
+      "git",
+      "vue",
+      "aws",
+      "sql"
+    ],
+    "preferred_skills": [
+      "c"
+    ],
+    "required_experience": [],
+    "education_requirements": [
+      {
+        "level": "bachelor",
+        "field": "bilişim"
+      }
+    ],
+    "soft_skills": [
+      "problem çözme",
+      "iletişim"
+    ]
+  },
+  "timestamp": "2026-09-10T13:40:16.039200",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "candidate_27",
+      "candidate_id": "0ef08b6d-5871-482a-a1d2-b3a63817f11e",
+      "final_score": 75.4,
+      "section_scores": {
+        "skills_score": 71.3,
+        "experience_score": 75.2,
+        "education_score": 88.3,
+        "soft_skill_score": 73.1
+      },
+      "llm_explanation": {
+        "candidate_id": "0ef08b6d-5871-482a-a1d2-b3a63817f11e",
+        "llm_score": 75,
+        "strengths": [
+          "Moderate technical skill match (score: 71)",
+          "Relevant professional experience (score: 75)",
+          "Education requirements satisfied (score: 88)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "rest api",
+          "angular",
+          "vue.js",
+          "mysql",
+          "azure",
+          "ci/cd",
+          "vue"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "candidate_38",
+      "candidate_id": "11ef11f3-c0e6-41f9-ad8d-29b790ab568b",
+      "final_score": 74.4,
+      "section_scores": {
+        "skills_score": 71.7,
+        "experience_score": 73.1,
+        "education_score": 86.2,
+        "soft_skill_score": 72.4
+      },
+      "llm_explanation": {
+        "candidate_id": "11ef11f3-c0e6-41f9-ad8d-29b790ab568b",
+        "llm_score": 74,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Some relevant experience found (score: 73)",
+          "Education requirements satisfied (score: 86)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "spring boot",
+          "postgresql",
+          "rest api",
+          "mongodb",
+          "angular",
+          "spring",
+          "docker",
+          "vue.js",
+          "mysql",
+          "ci/cd",
+          "react",
+          "java",
+          "git",
+          "vue",
+          "aws"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "candidate_45",
+      "candidate_id": "5c8509f5-beb2-413b-8fbd-72ec61bef610",
+      "final_score": 73.7,
+      "section_scores": {
+        "skills_score": 72.7,
+        "experience_score": 69.0,
+        "education_score": 87.5,
+        "soft_skill_score": 73.8
+      },
+      "llm_explanation": {
+        "candidate_id": "5c8509f5-beb2-413b-8fbd-72ec61bef610",
+        "llm_score": 74,
+        "strengths": [
+          "Moderate technical skill match (score: 73)",
+          "Some relevant experience found (score: 69)",
+          "Education requirements satisfied (score: 88)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "spring boot",
+          "postgresql",
+          "rest api",
+          "mongodb",
+          "angular",
+          "spring",
+          "docker",
+          "vue.js",
+          "mysql",
+          "azure",
+          "ci/cd",
+          "git",
+          "vue",
+          "aws"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "candidate_42",
+      "candidate_id": "df2cdbed-2c36-4d7a-be80-17d2e6af978c",
+      "final_score": 73.0,
+      "section_scores": {
+        "skills_score": 68.9,
+        "experience_score": 72.6,
+        "education_score": 85.5,
+        "soft_skill_score": 71.8
+      },
+      "llm_explanation": {
+        "candidate_id": "df2cdbed-2c36-4d7a-be80-17d2e6af978c",
+        "llm_score": 73,
+        "strengths": [
+          "Moderate technical skill match (score: 69)",
+          "Some relevant experience found (score: 73)",
+          "Education requirements satisfied (score: 86)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "rest api",
+          "angular",
+          "vue.js",
+          "mysql",
+          "azure",
+          "vue",
+          "aws"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "candidate_36",
+      "candidate_id": "e56fedc8-8683-4031-b7f9-946f6df1a6de",
+      "final_score": 73.0,
+      "section_scores": {
+        "skills_score": 66.7,
+        "experience_score": 73.1,
+        "education_score": 89.3,
+        "soft_skill_score": 73.1
+      },
+      "llm_explanation": {
+        "candidate_id": "e56fedc8-8683-4031-b7f9-946f6df1a6de",
+        "llm_score": 73,
+        "strengths": [
+          "Moderate technical skill match (score: 67)",
+          "Some relevant experience found (score: 73)",
+          "Education requirements satisfied (score: 89)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "spring boot",
+          "postgresql",
+          "rest api",
+          "mongodb",
+          "angular",
+          "spring",
+          "docker",
+          "vue.js",
+          "mysql",
+          "azure",
+          "ci/cd",
+          "react",
+          "java",
+          "git",
+          "vue",
+          "aws",
+          "sql"
+        ],
+        "recommendation": "Good Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

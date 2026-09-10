@@ -1,0 +1,178 @@
+{
+  "job_id": "JD-27b52dbc",
+  "job_description": "Android Developer\n\nAbout the Role\nAt X, we are building mobile experiences used by millions of users. We are looking for Android Engineers who can develop reliable, high-performance, maintainable native Android applications.\nThis role is for engineers who care about product quality, user experience, architecture, performance, and long-term maintainability. Kotlin, Jetpack Compose, XML, and Android tools are important, but we care most about engineering judgment and ownership.\nWhat You Will Do\n•\tDevelop and maintain native Android applications.\n•\tBuild user experiences that are fast, stable, and easy to use.\n•\tDesign reusable UI components and maintainable application architecture.\n•\tCollaborate with product, design, backend, QA, data, and iOS teams.\n•\tDiagnose crashes, performance problems, UI issues, and data-related bugs.\n•\tUse analytics, crash reports, and user feedback to improve the application.\n•\tParticipate in code reviews and architectural discussions.\n•\tWrite tests where they create real confidence.\n•\tSupport the full application lifecycle from planning to release and post-launch improvement.\n•\tKeep the Android application healthy as the product and platform evolve.\nWhat We Look For\n•\tStrong software engineering fundamentals.\n•\tStrong understanding of native Android development.\n•\tAbility to reason about application architecture, state management, API integration, persistence, performance, and failure cases.\n•\tStrong debugging and problem-solving skills.\n•\tUnderstanding of mobile constraints such as memory, battery, network reliability, lifecycle, and devicedifferences.\n•\tAbility to build maintainable UI and business logic.\n•\tOwnership mindset and strong collaboration skills.\n•\tClear communication with technical and non-technical teammates.\n•\tAbility to learn and apply new Android platform capabilities pragmatically.\n•\tCurrent Technologies We Use.\nExperience with these technologies is useful:\n•\tKotlin\n•\tXML layouts\n•\tJetpack Compose\n•\tAndroid Jetpack components\n•\tCoroutines\n•\tHilt\n•\tRetrofit\n•\tRoom\n•\tDataStore\n•\tJUnit / Mockito\n•\tGit\n•\tCI/CD pipelines\nNice to Have\n•\tExperience with high-traffic consumer mobile applications.\n•\tExperience with crash analysis and performance profiling.\n•\tExperience with offline-first or data-heavy mobile applications.\n•\tExperience improving existing app architecture.\n•\tExperience with both XML-based and Compose-based UI migration.",
+  "parsed_jd": {
+    "required_skills": [
+      "android",
+      "kotlin",
+      "ci/cd",
+      "ios",
+      "git"
+    ],
+    "preferred_skills": [],
+    "required_experience": [],
+    "education_requirements": [
+      {
+        "level": "",
+        "field": "software engineering"
+      },
+      {
+        "level": "",
+        "field": "architecture"
+      },
+      {
+        "level": "",
+        "field": "management"
+      }
+    ],
+    "soft_skills": [
+      "collaboration",
+      "communication"
+    ]
+  },
+  "timestamp": "2026-09-10T13:39:19.032809",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "candidate_30",
+      "candidate_id": "071d383d-0ce2-4435-b54b-9e3c2193333f",
+      "final_score": 72.8,
+      "section_scores": {
+        "skills_score": 71.7,
+        "experience_score": 75.1,
+        "education_score": 71.2,
+        "soft_skill_score": 71.5
+      },
+      "llm_explanation": {
+        "candidate_id": "071d383d-0ce2-4435-b54b-9e3c2193333f",
+        "llm_score": 73,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Relevant professional experience (score: 75)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "kotlin",
+          "ci/cd"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "candidate_18",
+      "candidate_id": "2606c715-1200-4019-b480-f19edd19bfb4",
+      "final_score": 72.2,
+      "section_scores": {
+        "skills_score": 71.4,
+        "experience_score": 75.1,
+        "education_score": 70.4,
+        "soft_skill_score": 67.5
+      },
+      "llm_explanation": {
+        "candidate_id": "2606c715-1200-4019-b480-f19edd19bfb4",
+        "llm_score": 72,
+        "strengths": [
+          "Moderate technical skill match (score: 71)",
+          "Relevant professional experience (score: 75)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "ci/cd",
+          "ios",
+          "git"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "candidate_41",
+      "candidate_id": "c2a36287-58ae-4503-a0ae-1bc271c23224",
+      "final_score": 72.0,
+      "section_scores": {
+        "skills_score": 70.5,
+        "experience_score": 75.1,
+        "education_score": 69.5,
+        "soft_skill_score": 71.4
+      },
+      "llm_explanation": {
+        "candidate_id": "c2a36287-58ae-4503-a0ae-1bc271c23224",
+        "llm_score": 72,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Relevant professional experience (score: 75)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "android",
+          "kotlin",
+          "ci/cd",
+          "ios"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "candidate_44",
+      "candidate_id": "8d17b95c-7841-4e09-afb9-39c6e721c1ca",
+      "final_score": 71.9,
+      "section_scores": {
+        "skills_score": 70.0,
+        "experience_score": 75.7,
+        "education_score": 69.5,
+        "soft_skill_score": 70.2
+      },
+      "llm_explanation": {
+        "candidate_id": "8d17b95c-7841-4e09-afb9-39c6e721c1ca",
+        "llm_score": 72,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Relevant professional experience (score: 76)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "android",
+          "kotlin",
+          "ios"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "candidate_51",
+      "candidate_id": "d9953ac4-3bb5-4868-929e-7eff2971bccf",
+      "final_score": 71.2,
+      "section_scores": {
+        "skills_score": 72.2,
+        "experience_score": 70.3,
+        "education_score": 70.3,
+        "soft_skill_score": 71.5
+      },
+      "llm_explanation": {
+        "candidate_id": "d9953ac4-3bb5-4868-929e-7eff2971bccf",
+        "llm_score": 71,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Some relevant experience found (score: 70)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "ci/cd",
+          "ios"
+        ],
+        "recommendation": "Good Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

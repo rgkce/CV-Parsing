@@ -16,7 +16,9 @@ Alternatifler:
   Farklı seçeneklerle çalıştırmak için:
   - python -m candidate_ranker.run_ranking --jd "Data Scientist" --top-k 10 (toplam getirilecek aday sayısı için)
   - python -m candidate_ranker.run_ranking --jd "Data Scientist" --skip-llm (LLM açıklama kısmını atlamak için)
+- python -m candidate_ranker.run_ranking --job 2 --top-k 5 --skip-llm (iş ilanı numarası yazarak sonuç almak için)
 
 ## Gemini API aktif etmek için:
 - $env:GOOGLE_API_KEY="API_KEYINIZI_BURAYA_YAZIN" (Windows powershell)
 - set GOOGLE_API_KEY=API_KEYINIZI_BURAYA_YAZIN (Windows CMD)"# CV-Parser-Project" 
+

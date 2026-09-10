@@ -1,0 +1,208 @@
+{
+  "job_id": "JD-11839080",
+  "job_description": "Machine Learning Engineer – Privacy-Preserving AI\n\nCompany Description\nQ is a high-technology cryptographic engineering company founded to address the most complex security challenges of the digital world. The company builds on strong academic foundations and cutting-edge research. It specializes in secure and high-performance implementation of cryptographic algorithms. Q Labs develops solutions across a wide range of platforms, from embedded systems and hardware accelerators to GPU architectures. It designs IP cores for cryptographic functions and standards and possesses extensive expertise across modern cryptographic systems. With a strong focus on next-generation security technologies, Q Labs develops solutions for advanced cryptographic algorithms, including Post-Quantum Cryptography (PQC) and Fully Homomorphic Encryption (FHE), enabling robust and future-proof protection for digital infrastructures.\nRole Description\nThis is a full-time remote opportunity for a Machine Learning Engineer. In this role, you will work at the intersection of our GPU-accelerated FHE compute engine and machine learning, translating standard ML models and pipelines into privacy-preserving equivalents that run under encryption. Your day-to-day tasks will include adapting and re-implementing ML building blocks (linear layers, activations, convolutions, etc.) to run over FHE primitives, benchmarking accuracy/performance trade-offs of encrypted inference, developing Python-based tooling to bridge our FHE engine with common ML frameworks, writing technical documentation, and collaborating with the core cryptography team to identify bottlenecks and optimization opportunities.\nQualifications\nRequired\n•\tDegree in Computer Science/Engineering, Mathematics, or a related field\n•\tProven experience building and deploying ML models in Python (research, industry, or strong personal/open-source projects)\n•\tProficiency in Python; hands-on experience with PyTorch, TensorFlow, or scikit-learn\n•\tSolid grasp of core ML concepts (neural network layers, activation functions, model training/inference pipelines)\n•\tSolid foundation in linear algebra, probability, and mathematical reasoning\n•\tStrong interest in cryptography and privacy-preserving technologies (PETs)\n•\tAbility to analyze and optimize algorithms for efficiency and numerical accuracy under encryption\n•\tProficient with Git and collaborative version control workflows (branching, PRs, code review)\n•\tComfortable working in a Linux/Unix development environment and using the command line\n•\tExperience with testing frameworks (e.g., pytest) and writing maintainable, well-documented code\n•\tUnderstanding of basic software engineering principles (modularity, testing, debugging)\n•\tComfort working with low-level systems and performance-critical code\nNice to Have\n•\tWillingness to learn FHE fundamentals (CKKS/BGV/BFV schemes) and how they constrain ML computation (e.g., polynomial approximations of nonlinear functions)\n•\tExperience with CI/CD pipelines (e.g., GitHub Actions) for automated testing and deployment\n•\tFamiliarity with containerization tools (Docker) for reproducible development and deployment environments\n•\tPrior exposure to FHE/PETs libraries (e.g., TenSEAL, Concrete-ML, OpenFHE)",
+  "parsed_jd": {
+    "required_skills": [
+      "machine learning",
+      "scikit-learn",
+      "tensorflow",
+      "pytorch",
+      "github",
+      "docker",
+      "python",
+      "linux",
+      "ci/cd",
+      "git"
+    ],
+    "preferred_skills": [],
+    "required_experience": [],
+    "education_requirements": [
+      {
+        "level": "",
+        "field": "software engineering"
+      },
+      {
+        "level": "",
+        "field": "computer science"
+      },
+      {
+        "level": "",
+        "field": "architecture"
+      },
+      {
+        "level": "",
+        "field": "mathematics"
+      }
+    ],
+    "soft_skills": []
+  },
+  "timestamp": "2026-09-10T13:39:51.920602",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "candidate_01",
+      "candidate_id": "818444c2-714b-4e6d-8300-82d600c3e3ab",
+      "final_score": 72.3,
+      "section_scores": {
+        "skills_score": 71.8,
+        "experience_score": 77.3,
+        "education_score": 70.5,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "818444c2-714b-4e6d-8300-82d600c3e3ab",
+        "llm_score": 72,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Relevant professional experience (score: 77)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "machine learning",
+          "scikit-learn",
+          "tensorflow",
+          "github",
+          "docker",
+          "linux",
+          "ci/cd",
+          "git"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "candidate_50",
+      "candidate_id": "3d6e15fc-c174-4659-82da-2fce1d36312d",
+      "final_score": 71.7,
+      "section_scores": {
+        "skills_score": 73.1,
+        "experience_score": 74.2,
+        "education_score": 70.1,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "3d6e15fc-c174-4659-82da-2fce1d36312d",
+        "llm_score": 72,
+        "strengths": [
+          "Moderate technical skill match (score: 73)",
+          "Some relevant experience found (score: 74)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "machine learning",
+          "scikit-learn",
+          "tensorflow",
+          "pytorch",
+          "github",
+          "docker",
+          "linux",
+          "ci/cd"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "candidate_06",
+      "candidate_id": "a2f7d078-4307-4339-958c-7d946e391d25",
+      "final_score": 71.2,
+      "section_scores": {
+        "skills_score": 73.8,
+        "experience_score": 71.6,
+        "education_score": 70.5,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "a2f7d078-4307-4339-958c-7d946e391d25",
+        "llm_score": 71,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Some relevant experience found (score: 72)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "machine learning",
+          "scikit-learn",
+          "tensorflow",
+          "pytorch",
+          "github",
+          "docker",
+          "ci/cd"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "candidate_14",
+      "candidate_id": "2e933d0a-9a6d-4f4b-8299-da5ff4264d66",
+      "final_score": 71.0,
+      "section_scores": {
+        "skills_score": 72.0,
+        "experience_score": 73.2,
+        "education_score": 70.7,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "2e933d0a-9a6d-4f4b-8299-da5ff4264d66",
+        "llm_score": 71,
+        "strengths": [
+          "Moderate technical skill match (score: 72)",
+          "Some relevant experience found (score: 73)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "scikit-learn",
+          "tensorflow",
+          "pytorch",
+          "github",
+          "docker",
+          "linux",
+          "ci/cd",
+          "git"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "candidate_22",
+      "candidate_id": "db7b4dfc-218b-4fa0-a589-77fb3e0067d5",
+      "final_score": 69.2,
+      "section_scores": {
+        "skills_score": 70.5,
+        "experience_score": 70.1,
+        "education_score": 70.0,
+        "soft_skill_score": 60.0
+      },
+      "llm_explanation": {
+        "candidate_id": "db7b4dfc-218b-4fa0-a589-77fb3e0067d5",
+        "llm_score": 69,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Some relevant experience found (score: 70)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "machine learning",
+          "scikit-learn",
+          "tensorflow",
+          "pytorch",
+          "python",
+          "linux",
+          "ci/cd"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

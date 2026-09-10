@@ -1,0 +1,196 @@
+{
+  "job_id": "JD-e2a8200f",
+  "job_description": "İş Analisti\n\nŞirket Hakkında;\nŞirketimiz TCMB'ye tabii ödeme ve elektronik para hizmetleri üzerine faaliyet göstermektedir. 6493 Sayılı Kanunun 12.maddesinin 1.fıkrasında belirtilen a, b, c, ç, e bentlerinde faaliyet izinlerinin tamamına sahiptir.\nSorumluluklar\n•\tPOS, Sanal POS ve Wallet süreçlerine ilişkin iş gereksinimlerini analiz etmek ve dokümante etmek\n•\tBanka ve hizmet sağlayıcılar ile yapılan entegrasyonlarda iş analizi ve süreç akışlarını hazırlamak\n•\tYazılım ekipleri ile iş birimleri arasında köprü görevi görmek, gereksinimleri teknik ekiplere aktarmak\n•\tAPI entegrasyon süreçlerinde test senaryolarının hazırlanması ve Postman üzerinden doğrulanması\n•\tJira üzerinden proje/iş takibi yapmak, backlog ve sprint süreçlerine katkı sağlamak\n•\tSüreç akış şemalarını ve iş analizi dokümanlarını hazırlamak\n•\tVeri analizleri için SQL sorguları yazmak, işlem verilerini incelemek\n•\tTest süreçlerinde yer almak ve koordine etmek\n•\tİş birimlerinden gelen operasyonel işlerin koordinasyonunu sağlamak\n•\tPerformans ve süreç iyileştirme raporları hazırlamak\nAranan Nitelikler\n•\tÜniversitelerin ilgili bölümlerinden mezun (Bilgisayar Mühendisliği, Endüstri Mühendisliği, Yönetim Bilişim Sistemleri vb.)\n•\tÖdeme sistemleri, bankacılık veya fintech sektöründe iş analisti olarak en az 2 yıl deneyim (POS, Sanal POS, Wallet deneyimi tercih sebebidir)\n•\tSQL ile veri sorgulama ve analiz yapabilme\n•\tPostman ile API test ve doğrulama deneyimi\n•\tJira üzerinde proje/iş takibi deneyimi\n•\tMS Visio ile süreç/akış diyagramı hazırlama becerisi\n•\tİyi seviyede MS Office kullanımı\n•\tAnalitik düşünme, detaylara dikkat ve güçlü dokümantasyon becerisi\nEkip arkadaşları arıyoruz.",
+  "parsed_jd": {
+    "required_skills": [
+      "jira",
+      "sql"
+    ],
+    "preferred_skills": [
+      "c"
+    ],
+    "required_experience": [
+      "2 yıl deneyim",
+      "en az 2 yıl"
+    ],
+    "education_requirements": [
+      {
+        "level": "bachelor",
+        "field": "bilgisayar mühendisliği"
+      },
+      {
+        "level": "bachelor",
+        "field": "endüstri mühendisliği"
+      },
+      {
+        "level": "bachelor",
+        "field": "yönetim"
+      },
+      {
+        "level": "bachelor",
+        "field": "bilişim"
+      },
+      {
+        "level": "master",
+        "field": "bilgisayar mühendisliği"
+      },
+      {
+        "level": "master",
+        "field": "endüstri mühendisliği"
+      },
+      {
+        "level": "master",
+        "field": "yönetim"
+      },
+      {
+        "level": "master",
+        "field": "bilişim"
+      }
+    ],
+    "soft_skills": [
+      "analitik düşünme",
+      "detaylara dikkat"
+    ]
+  },
+  "timestamp": "2026-09-10T13:39:59.839006",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "candidate_36",
+      "candidate_id": "e56fedc8-8683-4031-b7f9-946f6df1a6de",
+      "final_score": 73.2,
+      "section_scores": {
+        "skills_score": 67.3,
+        "experience_score": 73.9,
+        "education_score": 88.2,
+        "soft_skill_score": 71.8
+      },
+      "llm_explanation": {
+        "candidate_id": "e56fedc8-8683-4031-b7f9-946f6df1a6de",
+        "llm_score": 73,
+        "strengths": [
+          "Moderate technical skill match (score: 67)",
+          "Some relevant experience found (score: 74)",
+          "Education requirements satisfied (score: 88)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "jira",
+          "sql"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "candidate_04",
+      "candidate_id": "a5535b45-e7c5-4935-b48b-925f294bec0f",
+      "final_score": 72.6,
+      "section_scores": {
+        "skills_score": 67.4,
+        "experience_score": 71.5,
+        "education_score": 87.8,
+        "soft_skill_score": 74.0
+      },
+      "llm_explanation": {
+        "candidate_id": "a5535b45-e7c5-4935-b48b-925f294bec0f",
+        "llm_score": 73,
+        "strengths": [
+          "Moderate technical skill match (score: 67)",
+          "Some relevant experience found (score: 72)",
+          "Education requirements satisfied (score: 88)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "jira"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "candidate_20",
+      "candidate_id": "d0f91e2e-8d61-4519-8066-fa5a47b4d893",
+      "final_score": 71.1,
+      "section_scores": {
+        "skills_score": 74.5,
+        "experience_score": 73.3,
+        "education_score": 55.9,
+        "soft_skill_score": 72.9
+      },
+      "llm_explanation": {
+        "candidate_id": "d0f91e2e-8d61-4519-8066-fa5a47b4d893",
+        "llm_score": 71,
+        "strengths": [
+          "Moderate technical skill match (score: 74)",
+          "Some relevant experience found (score: 73)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "jira"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "candidate_08",
+      "candidate_id": "6d8a278f-1d7f-42eb-b9a4-8b5350b2ddc0",
+      "final_score": 68.8,
+      "section_scores": {
+        "skills_score": 70.6,
+        "experience_score": 72.0,
+        "education_score": 54.8,
+        "soft_skill_score": 71.5
+      },
+      "llm_explanation": {
+        "candidate_id": "6d8a278f-1d7f-42eb-b9a4-8b5350b2ddc0",
+        "llm_score": 69,
+        "strengths": [
+          "Moderate technical skill match (score: 71)",
+          "Some relevant experience found (score: 72)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "jira"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "candidate_11",
+      "candidate_id": "dcf80205-6fef-4264-85c9-c90818620181",
+      "final_score": 60.2,
+      "section_scores": {
+        "skills_score": 68.5,
+        "experience_score": 73.2,
+        "education_score": 0.0,
+        "soft_skill_score": 71.3
+      },
+      "llm_explanation": {
+        "candidate_id": "dcf80205-6fef-4264-85c9-c90818620181",
+        "llm_score": 60,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 73)"
+        ],
+        "weaknesses": [
+          "Education requirements may not be fully met (score: 0)"
+        ],
+        "missing_requirements": [
+          "jira"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

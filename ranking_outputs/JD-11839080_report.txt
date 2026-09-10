@@ -1,0 +1,124 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-11839080
+  Date       : 2026-09-10 13:39
+  Candidates : 5
+
+  Job Description:
+  Machine Learning Engineer – Privacy-Preserving AI
+
+Company Description
+Q is a high-technology cryptographic engineering company founded to address the most complex security challenges of the digital w...
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     candidate_01             818444c2-714b-4e6d-8300-82d600c3e3ab    71.8    77.3    70.5    60.0    72.3
+  2     candidate_50             3d6e15fc-c174-4659-82da-2fce1d36312d    73.1    74.2    70.1    60.0    71.7
+  3     candidate_06             a2f7d078-4307-4339-958c-7d946e391d25    73.8    71.6    70.5    60.0    71.2
+  4     candidate_14             2e933d0a-9a6d-4f4b-8299-da5ff4264d66    72.0    73.2    70.7    60.0    71.0
+  5     candidate_22             db7b4dfc-218b-4fa0-a589-77fb3e0067d5    70.5    70.1    70.0    60.0    69.2
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — candidate_01 (818444c2-714b-4e6d-8300-82d600c3e3ab)
+  Final Score: 72.3/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Relevant professional experience (score: 77)
+
+  [!] Missing Requirements:
+    - machine learning
+    - scikit-learn
+    - tensorflow
+    - github
+    - docker
+    - linux
+    - ci/cd
+    - git
+
+  ----------------------------------------
+
+  CANDIDATE #2 — candidate_50 (3d6e15fc-c174-4659-82da-2fce1d36312d)
+  Final Score: 71.7/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 73)
+    - Some relevant experience found (score: 74)
+
+  [!] Missing Requirements:
+    - machine learning
+    - scikit-learn
+    - tensorflow
+    - pytorch
+    - github
+    - docker
+    - linux
+    - ci/cd
+
+  ----------------------------------------
+
+  CANDIDATE #3 — candidate_06 (a2f7d078-4307-4339-958c-7d946e391d25)
+  Final Score: 71.2/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Some relevant experience found (score: 72)
+
+  [!] Missing Requirements:
+    - machine learning
+    - scikit-learn
+    - tensorflow
+    - pytorch
+    - github
+    - docker
+    - ci/cd
+
+  ----------------------------------------
+
+  CANDIDATE #4 — candidate_14 (2e933d0a-9a6d-4f4b-8299-da5ff4264d66)
+  Final Score: 71.0/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Some relevant experience found (score: 73)
+
+  [!] Missing Requirements:
+    - scikit-learn
+    - tensorflow
+    - pytorch
+    - github
+    - docker
+    - linux
+    - ci/cd
+    - git
+
+  ----------------------------------------
+
+  CANDIDATE #5 — candidate_22 (db7b4dfc-218b-4fa0-a589-77fb3e0067d5)
+  Final Score: 69.2/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Some relevant experience found (score: 70)
+
+  [!] Missing Requirements:
+    - machine learning
+    - scikit-learn
+    - tensorflow
+    - pytorch
+    - python
+    - linux
+    - ci/cd
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

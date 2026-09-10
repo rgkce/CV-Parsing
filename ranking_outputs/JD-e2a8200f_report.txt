@@ -1,0 +1,97 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-e2a8200f
+  Date       : 2026-09-10 13:39
+  Candidates : 5
+
+  Job Description:
+  İş Analisti
+
+Şirket Hakkında;
+Şirketimiz TCMB'ye tabii ödeme ve elektronik para hizmetleri üzerine faaliyet göstermektedir. 6493 Sayılı Kanunun 12.maddesinin 1.fıkrasında belirtilen a, b, c, ç, e bent...
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     candidate_36             e56fedc8-8683-4031-b7f9-946f6df1a6de    67.3    73.9    88.2    71.8    73.2
+  2     candidate_04             a5535b45-e7c5-4935-b48b-925f294bec0f    67.4    71.5    87.8    74.0    72.6
+  3     candidate_20             d0f91e2e-8d61-4519-8066-fa5a47b4d893    74.5    73.3    55.9    72.9    71.1
+  4     candidate_08             6d8a278f-1d7f-42eb-b9a4-8b5350b2ddc0    70.6    72.0    54.8    71.5    68.8
+  5     candidate_11             dcf80205-6fef-4264-85c9-c90818620181    68.5    73.2     0.0    71.3    60.2
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — candidate_36 (e56fedc8-8683-4031-b7f9-946f6df1a6de)
+  Final Score: 73.2/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 67)
+    - Some relevant experience found (score: 74)
+    - Education requirements satisfied (score: 88)
+
+  [!] Missing Requirements:
+    - jira
+    - sql
+
+  ----------------------------------------
+
+  CANDIDATE #2 — candidate_04 (a5535b45-e7c5-4935-b48b-925f294bec0f)
+  Final Score: 72.6/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 67)
+    - Some relevant experience found (score: 72)
+    - Education requirements satisfied (score: 88)
+
+  [!] Missing Requirements:
+    - jira
+
+  ----------------------------------------
+
+  CANDIDATE #3 — candidate_20 (d0f91e2e-8d61-4519-8066-fa5a47b4d893)
+  Final Score: 71.1/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 74)
+    - Some relevant experience found (score: 73)
+
+  [!] Missing Requirements:
+    - jira
+
+  ----------------------------------------
+
+  CANDIDATE #4 — candidate_08 (6d8a278f-1d7f-42eb-b9a4-8b5350b2ddc0)
+  Final Score: 68.8/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 71)
+    - Some relevant experience found (score: 72)
+
+  [!] Missing Requirements:
+    - jira
+
+  ----------------------------------------
+
+  CANDIDATE #5 — candidate_11 (dcf80205-6fef-4264-85c9-c90818620181)
+  Final Score: 60.2/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 73)
+
+  [-] Weaknesses:
+    - Education requirements may not be fully met (score: 0)
+
+  [!] Missing Requirements:
+    - jira
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

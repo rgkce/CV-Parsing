@@ -1,0 +1,169 @@
+{
+  "job_id": "JD-82818f4a",
+  "job_description": "Business Analyst\n\nLocation: Remote\nEmployment Type: Full-Time\nAre you passionate about shaping next-generation SaaS products and intelligent chat experiences? Our client is seeking a Business Analyst, where technology, design, and AI come together to redefine how users interact with digital platforms.\nAbout the Role\nAs a Business Analyst, you will bridge the gap between product strategy, user experience, and technical execution. You’ll collaborate with UX/UI designers, AI engineers, and stakeholders across multiple teams to design and refine intuitive, data-driven chat interfaces.\nKey Responsibilities\nProduct & AI Chat Experience\n•\tPartner with UX/UI designers and AI engineers to craft intelligent, user-friendly conversational experiences.\n•\tDefine and optimize chat flows, intents, and user journeys for AI-driven interactions.\n•\tMonitor and analyze chat performance metrics to continuously enhance engagement and efficiency.\nStakeholder Engagement\n•\tAct as a liaison between Product Management, Engineering, Data Science, and Customer Success teams.\n•\tLead workshops, demos, and feedback sessions to align priorities and validate solutions.\nData-Driven Decision Making\n•\tLeverage analytics and user feedback to guide product improvements and roadmap planning.\n•\tSupport A/B testing and experimentation for AI chat features.\nDocumentation & Process Improvement\n•\tMaintain clear documentation of requirements, workflows, and system interactions.\n•\tIdentify process gaps and recommend improvements to streamline delivery and boost user satisfaction.\nQualifications\n•\tProven experience as a Business Analyst within SaaS environments.\n•\tExperience with AI chat systems, conversational design, or NLP-driven applications is a strong plus.\n•\tStrong analytical, communication, and stakeholder management skills.\n•\tFamiliarity with agile development methodologies and modern product management tools.\nWhy Join\n•\tOpportunity to work on cutting-edge AI-enabled SaaS solutions.\n•\tCollaborative, innovative, and growth-focused team culture.\n•\tCompetitive compensation and flexible work environment.",
+  "parsed_jd": {
+    "required_skills": [
+      "data science",
+      "agile"
+    ],
+    "preferred_skills": [
+      "nlp"
+    ],
+    "required_experience": [
+      "lead"
+    ],
+    "education_requirements": [
+      {
+        "level": "",
+        "field": "data science"
+      },
+      {
+        "level": "",
+        "field": "management"
+      }
+    ],
+    "soft_skills": [
+      "decision making",
+      "communication"
+    ]
+  },
+  "timestamp": "2026-09-10T13:39:27.401130",
+  "total_candidates_evaluated": 5,
+  "scoring_weights": {
+    "skills": 0.4,
+    "experience": 0.35,
+    "education": 0.15,
+    "soft_skill": 0.1
+  },
+  "top_candidates": [
+    {
+      "rank": 1,
+      "candidate_name": "candidate_51",
+      "candidate_id": "d9953ac4-3bb5-4868-929e-7eff2971bccf",
+      "final_score": 71.1,
+      "section_scores": {
+        "skills_score": 70.5,
+        "experience_score": 72.3,
+        "education_score": 70.0,
+        "soft_skill_score": 70.9
+      },
+      "llm_explanation": {
+        "candidate_id": "d9953ac4-3bb5-4868-929e-7eff2971bccf",
+        "llm_score": 71,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Some relevant experience found (score: 72)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "data science",
+          "agile"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 2,
+      "candidate_name": "candidate_50",
+      "candidate_id": "3d6e15fc-c174-4659-82da-2fce1d36312d",
+      "final_score": 70.8,
+      "section_scores": {
+        "skills_score": 71.3,
+        "experience_score": 71.1,
+        "education_score": 68.2,
+        "soft_skill_score": 71.3
+      },
+      "llm_explanation": {
+        "candidate_id": "3d6e15fc-c174-4659-82da-2fce1d36312d",
+        "llm_score": 71,
+        "strengths": [
+          "Moderate technical skill match (score: 71)",
+          "Some relevant experience found (score: 71)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "data science"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 3,
+      "candidate_name": "candidate_14",
+      "candidate_id": "2e933d0a-9a6d-4f4b-8299-da5ff4264d66",
+      "final_score": 70.4,
+      "section_scores": {
+        "skills_score": 70.4,
+        "experience_score": 70.1,
+        "education_score": 70.5,
+        "soft_skill_score": 71.3
+      },
+      "llm_explanation": {
+        "candidate_id": "2e933d0a-9a6d-4f4b-8299-da5ff4264d66",
+        "llm_score": 70,
+        "strengths": [
+          "Moderate technical skill match (score: 70)",
+          "Some relevant experience found (score: 70)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "data science",
+          "agile"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 4,
+      "candidate_name": "candidate_41",
+      "candidate_id": "c2a36287-58ae-4503-a0ae-1bc271c23224",
+      "final_score": 70.3,
+      "section_scores": {
+        "skills_score": 68.6,
+        "experience_score": 72.4,
+        "education_score": 69.5,
+        "soft_skill_score": 71.1
+      },
+      "llm_explanation": {
+        "candidate_id": "c2a36287-58ae-4503-a0ae-1bc271c23224",
+        "llm_score": 70,
+        "strengths": [
+          "Moderate technical skill match (score: 69)",
+          "Some relevant experience found (score: 72)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "data science"
+        ],
+        "recommendation": "Good Match"
+      }
+    },
+    {
+      "rank": 5,
+      "candidate_name": "candidate_40",
+      "candidate_id": "067a9958-f281-40a3-9b38-8314ca66d1e5",
+      "final_score": 69.7,
+      "section_scores": {
+        "skills_score": 68.3,
+        "experience_score": 71.8,
+        "education_score": 69.9,
+        "soft_skill_score": 68.1
+      },
+      "llm_explanation": {
+        "candidate_id": "067a9958-f281-40a3-9b38-8314ca66d1e5",
+        "llm_score": 70,
+        "strengths": [
+          "Moderate technical skill match (score: 68)",
+          "Some relevant experience found (score: 72)"
+        ],
+        "weaknesses": [],
+        "missing_requirements": [
+          "data science",
+          "agile"
+        ],
+        "recommendation": "Moderate Match"
+      }
+    }
+  ],
+  "other_candidates": []
+}

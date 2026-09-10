@@ -1,0 +1,126 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-a81cd9d7
+  Date       : 2026-09-10 13:39
+  Candidates : 5
+
+  Job Description:
+  Yapay Zekâ (AI) Yazılım Uzmanı
+
+Pozisyonun Amacı
+Bu pozisyonda görev alacak ekip arkadaşı; kurumsal yapay zekâ çözümlerinin geliştirilmesi, ERP sistemleriyle entegrasyonu, kurumsal bilgi yönetimi ve A...
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     candidate_38             11ef11f3-c0e6-41f9-ad8d-29b790ab568b    72.5    76.2    85.5    60.0    74.5
+  2     candidate_36             e56fedc8-8683-4031-b7f9-946f6df1a6de    68.0    75.9    86.5    60.0    72.7
+  3     candidate_08             6d8a278f-1d7f-42eb-b9a4-8b5350b2ddc0    71.2    73.0    84.3    60.0    72.7
+  4     candidate_27             0ef08b6d-5871-482a-a1d2-b3a63817f11e    70.2    72.6    86.1    60.0    72.4
+  5     candidate_24             a3ace023-40ae-4eab-ab0d-996ab7687aad    68.5    69.9    83.3    60.0    70.4
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — candidate_38 (11ef11f3-c0e6-41f9-ad8d-29b790ab568b)
+  Final Score: 74.5/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 72)
+    - Relevant professional experience (score: 76)
+    - Education requirements satisfied (score: 86)
+
+  [!] Missing Requirements:
+    - rest api
+    - github
+    - agile
+    - ci/cd
+    - llm
+    - git
+
+  ----------------------------------------
+
+  CANDIDATE #2 — candidate_36 (e56fedc8-8683-4031-b7f9-946f6df1a6de)
+  Final Score: 72.7/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Relevant professional experience (score: 76)
+    - Education requirements satisfied (score: 86)
+
+  [!] Missing Requirements:
+    - rest api
+    - github
+    - python
+    - devops
+    - azure
+    - ci/cd
+    - llm
+    - git
+    - sql
+
+  ----------------------------------------
+
+  CANDIDATE #3 — candidate_08 (6d8a278f-1d7f-42eb-b9a4-8b5350b2ddc0)
+  Final Score: 72.7/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 71)
+    - Some relevant experience found (score: 73)
+    - Education requirements satisfied (score: 84)
+
+  [!] Missing Requirements:
+    - rest api
+    - github
+    - devops
+    - agile
+    - azure
+    - ci/cd
+    - llm
+
+  ----------------------------------------
+
+  CANDIDATE #4 — candidate_27 (0ef08b6d-5871-482a-a1d2-b3a63817f11e)
+  Final Score: 72.4/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Some relevant experience found (score: 73)
+    - Education requirements satisfied (score: 86)
+
+  [!] Missing Requirements:
+    - rest api
+    - python
+    - devops
+    - agile
+    - azure
+    - ci/cd
+    - llm
+
+  ----------------------------------------
+
+  CANDIDATE #5 — candidate_24 (a3ace023-40ae-4eab-ab0d-996ab7687aad)
+  Final Score: 70.4/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 70)
+    - Education requirements satisfied (score: 83)
+
+  [!] Missing Requirements:
+    - rest api
+    - github
+    - devops
+    - agile
+    - azure
+    - ci/cd
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================

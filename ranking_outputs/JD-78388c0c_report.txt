@@ -1,0 +1,116 @@
+================================================================================
+  CANDIDATE RANKING REPORT
+================================================================================
+  Job ID     : JD-78388c0c
+  Date       : 2026-09-10 13:40
+  Candidates : 5
+
+  Job Description:
+  Mobil Yazılım Uzmanı
+
+H Yazılım A.Ş. bünyesinde, Ankara lokasyonumuzdaki projelerimizde görev almak üzere, modern mobil teknolojilere hakim ve dinamik ekibimize değer katacak bir Mobil Yazılım Uzmanı ...
+
+---------------------------------------------------------------------------------------------------------
+  Rank  Candidate Name           Candidate ID                          Skills   Exp      Edu      Soft     Total   
+  -----------------------------------------------------------------------------------------------------
+  1     candidate_47             7aee250f-e95d-4f21-8bb2-a816f120d5d8    70.0    72.6    70.4    60.0    70.0
+  2     candidate_27             0ef08b6d-5871-482a-a1d2-b3a63817f11e    69.7    72.4    70.2    60.0    69.8
+  3     candidate_36             e56fedc8-8683-4031-b7f9-946f6df1a6de    66.9    73.0    71.1    60.0    69.0
+  4     candidate_42             df2cdbed-2c36-4d7a-be80-17d2e6af978c    67.6    71.4    67.2    60.0    68.1
+  5     candidate_09             4249d53a-56e3-42b6-89a2-4068ffe599a9    68.5    73.4     0.0    60.0    59.1
+---------------------------------------------------------------------------------------------------------
+
+  CANDIDATE #1 — candidate_47 (7aee250f-e95d-4f21-8bb2-a816f120d5d8)
+  Final Score: 70.0/100
+  Recommendation: Good Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Some relevant experience found (score: 73)
+
+  [!] Missing Requirements:
+    - react native
+    - android
+    - agile
+    - ci/cd
+    - scrum
+    - react
+
+  ----------------------------------------
+
+  CANDIDATE #2 — candidate_27 (0ef08b6d-5871-482a-a1d2-b3a63817f11e)
+  Final Score: 69.8/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 70)
+    - Some relevant experience found (score: 72)
+
+  [!] Missing Requirements:
+    - react native
+    - android
+    - flutter
+    - agile
+    - ci/cd
+    - scrum
+
+  ----------------------------------------
+
+  CANDIDATE #3 — candidate_36 (e56fedc8-8683-4031-b7f9-946f6df1a6de)
+  Final Score: 69.0/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 67)
+    - Some relevant experience found (score: 73)
+
+  [!] Missing Requirements:
+    - react native
+    - android
+    - flutter
+    - ci/cd
+    - scrum
+    - react
+    - git
+
+  ----------------------------------------
+
+  CANDIDATE #4 — candidate_42 (df2cdbed-2c36-4d7a-be80-17d2e6af978c)
+  Final Score: 68.1/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 71)
+
+  [!] Missing Requirements:
+    - react native
+    - android
+    - flutter
+    - agile
+    - scrum
+
+  ----------------------------------------
+
+  CANDIDATE #5 — candidate_09 (4249d53a-56e3-42b6-89a2-4068ffe599a9)
+  Final Score: 59.1/100
+  Recommendation: Moderate Match
+
+  [+] Strengths:
+    - Moderate technical skill match (score: 68)
+    - Some relevant experience found (score: 73)
+
+  [-] Weaknesses:
+    - Education requirements may not be fully met (score: 0)
+
+  [!] Missing Requirements:
+    - flutter
+    - agile
+    - ci/cd
+    - scrum
+
+  ----------------------------------------
+
+================================================================================
+  END OF REPORT
+================================================================================
